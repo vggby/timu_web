@@ -523,6 +523,9 @@
                         <option value="choice">选择题</option>
                         <option value="answer">问答题</option>
                     </select>
+                    <select id="modelConfig" class="btn btn-secondary" style="padding: 0 20px;">
+                        <option value="">默认模型</option>
+                    </select>
                     <button class="btn btn-primary" id="generateBtn" onclick="generate()">生成题库</button>
                     <button class="btn btn-secondary" onclick="demo()">试用示例</button>
                 </div>
@@ -563,6 +566,26 @@
 
     <script>
         let currentTaskId = null;
+
+        // 加载模型列表
+        async function loadModels() {
+            try {
+                const res = await fetch('/api/models');
+                const data = await res.json();
+                const select = document.getElementById('modelConfig');
+                select.innerHTML = '<option value="">默认模型</option>';
+                if (data.models && data.models.length > 0) {
+                    data.models.forEach(m => {
+                        const opt = document.createElement('option');
+                        opt.value = m.name;
+                        opt.textContent = m.model || m.name;
+                        select.appendChild(opt);
+                    });
+                }
+            } catch (e) {
+                console.error('加载模型失败:', e);
+            }
+        }
 
         // 加载历史任务
         async function loadTasks() {
@@ -649,6 +672,7 @@
         async function generate() {
             const url = document.getElementById('urlInput').value.trim();
             const questionType = document.getElementById('questionType').value;
+            const modelConfig = document.getElementById('modelConfig').value;
             const btn = document.getElementById('generateBtn');
             if (!url) { showStatus('请输入URL', 'error'); return; }
             
@@ -660,7 +684,7 @@
                 const res = await fetch('/api/generate', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({url, question_type: questionType})
+                    body: JSON.stringify({url, question_type: questionType, model_config: modelConfig})
                 });
                 const data = await res.json();
                 if (data.success) {
@@ -711,7 +735,7 @@
             currentTaskId = taskId;
             const res = await fetch(`/api/task/${taskId}`);
             const task = await res.json();
-            document.getElementById('modalTitle').textContent = task.url;
+            document.getElementById('modalTitle').textContent = task.title || task.url;
             const fileList = document.getElementById('fileList');
             const files = (task.files || []);
             if (files.length === 0) {
@@ -794,6 +818,7 @@
         });
 
         // 初始化
+        loadModels();
         loadTasks();
     </script>
 </body>
