@@ -14,12 +14,12 @@ from flask import Flask, render_template, request, jsonify, send_from_directory
 
 app = Flask(__name__)
 
-BASE_DIR = Path("/root/timu")
+BASE_DIR = Path("/root/projects/timu")
 DATA_DIR = Path("/root/.openclaw/workspace/data/timu")
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def run_task(task_id: str, url: str, html_path: Path, question_type: str = 'choice'):
+def run_task(task_id: str, url: str, html_path: Path, question_type: str = 'choice', model_config: str = None):
     """后台线程：运行 builder"""
     task_dir = DATA_DIR / task_id
     fetcher_config = BASE_DIR / "config" / "cheko_fetcher_config.json"
@@ -32,12 +32,16 @@ def run_task(task_id: str, url: str, html_path: Path, question_type: str = 'choi
         prompt_file = BASE_DIR / "prompts" / "question.md"
 
     def save_info(status, error=''):
-        info = {
-            'id': task_id, 'url': url,
-            'created_at': datetime.now().isoformat(),
-            'status': status, 'error': error
-        }
-        (task_dir / 'info.json').write_text(
+        info_file = task_dir / 'info.json'
+        # 保留已有字段（如 title），只更新 status 和 error
+        if info_file.exists():
+            info = json.loads(info_file.read_text(encoding='utf-8'))
+        else:
+            info = {'id': task_id, 'url': url, 'created_at': datetime.now().isoformat()}
+        info['status'] = status
+        if error:
+            info['error'] = error
+        info_file.write_text(
             json.dumps(info, ensure_ascii=False, indent=2), encoding='utf-8')
 
     def save_progress(stage, current, total, message=''):
@@ -62,6 +66,10 @@ def run_task(task_id: str, url: str, html_path: Path, question_type: str = 'choi
         "--prompt-file", str(prompt_file),
         "--knowledge-prompt-file", str(BASE_DIR / "prompts" / "knowledge.md")
     ]
+    
+    # 添加模型配置参数
+    if model_config:
+        build_cmd.extend(["--model-config", model_config])
 
     try:
         # 使用 Popen 以便实时读取输出
@@ -122,11 +130,35 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/api/models', methods=['GET'])
+def get_models():
+    """获取可用的模型配置列表"""
+    try:
+        fetcher_config = BASE_DIR / "config" / "cheko_fetcher_config.json"
+        with open(fetcher_config, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+        
+        models = config.get('models', {})
+        # 构建模型列表
+        model_list = []
+        for name, model_config in models.items():
+            model_list.append({
+                'name': name,
+                'model': model_config.get('model', ''),
+                'base_url': model_config.get('base_url', '')
+            })
+        
+        return jsonify({'success': True, 'models': model_list})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e), 'models': []})
+
+
 @app.route('/api/generate', methods=['POST'])
 def generate():
     data = request.get_json()
     url = data.get('url', '').strip()
     question_type = data.get('question_type', 'choice')  # choice or answer
+    model_config = data.get('model_config', None)  # 模型配置名称
     if not url:
         return jsonify({'success': False, 'error': '请输入URL'})
 
@@ -163,32 +195,56 @@ def generate():
         try:
             html_content = html_files[0].read_text(encoding='utf-8')
             import re
-            title_match = re.search(r'<title>([^<]+)</title>', html_content, re.IGNORECASE)
-            if title_match:
-                full_title = title_match.group(1).strip()
-            else:
-                og_match = re.search(r'property=["\']og:title["\']\s+content=["\']([^"\']+)["\']', html_content)
-                if og_match:
-                    full_title = og_match.group(1).strip()
-                else:
-                    full_title = ""
             
-            # 提取中间部分：例如 "系统架构设计师综合知识题 - 学习模式模式 - 系统可靠性 | 芝士架构" -> "系统可靠性"
-            if full_title:
-                parts = full_title.split(' - ')
-                if len(parts) >= 3:
-                    page_title = parts[-2].strip()  # 取倒数第二部分
-                elif len(parts) == 2:
-                    page_title = parts[0].strip()
+            # 优先从 __NEXT_DATA__ 提取更精确的标题
+            next_data_match = re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', html_content, re.DOTALL)
+            if next_data_match:
+                next_data = json.loads(next_data_match.group(1))
+                page_props = next_data.get("props", {}).get("pageProps", {})
+                test_meta = page_props.get("test", {})
+                source_list = test_meta.get("selects") or test_meta.get("cases") or []
+                if source_list:
+                    first_item = source_list[0] or {}
+                    paper_name = (first_item.get("paper") or {}).get("name") or test_meta.get("paperName") or ""
+                    kp_name = first_item.get("kpName") or ""
+                    if paper_name and kp_name:
+                        page_title = f"{paper_name} - {kp_name}"
+                    elif paper_name:
+                        page_title = paper_name
+                    elif kp_name:
+                        page_title = kp_name
+            
+            # 回退：从 <title> 标签提取
+            if not page_title:
+                title_match = re.search(r'<title>([^<]+)</title>', html_content, re.IGNORECASE)
+                if title_match:
+                    full_title = title_match.group(1).strip()
+                else:
+                    og_match = re.search(r'property=["\']og:title["\']\s+content=["\']([^"\']+)["\']', html_content)
+                    if og_match:
+                        full_title = og_match.group(1).strip()
+                    else:
+                        full_title = ""
+                
+                if full_title:
+                    # 去掉网站名后缀
+                    full_title = re.sub(r'\s*[|｜]\s*芝士架构$', '', full_title)
+                    parts = full_title.split(' - ')
+                    if len(parts) >= 3:
+                        page_title = f"{parts[0].strip()} - {parts[-2].strip()}"
+                    elif len(parts) == 2:
+                        page_title = full_title
+                    else:
+                        page_title = full_title
         except Exception:
             pass
 
         # 保存初始状态
-        info = {'id': task_id, 'url': url, 'title': page_title, 'question_type': question_type, 'created_at': datetime.now().isoformat(), 'status': 'building'}
+        info = {'id': task_id, 'url': url, 'title': page_title, 'question_type': question_type, 'model_config': model_config, 'created_at': datetime.now().isoformat(), 'status': 'building'}
         (task_dir / 'info.json').write_text(json.dumps(info, ensure_ascii=False, indent=2), encoding='utf-8')
 
         # 后台运行 builder
-        t = threading.Thread(target=run_task, args=(task_id, url, html_files[0], question_type), daemon=True)
+        t = threading.Thread(target=run_task, args=(task_id, url, html_files[0], question_type, model_config), daemon=True)
         t.start()
 
         return jsonify({'success': True, 'task_id': task_id, 'status': 'building'})
@@ -261,7 +317,7 @@ def demo():
     info = {'id': task_id, 'url': 'demo', 'created_at': datetime.now().isoformat(), 'status': 'building'}
     (task_dir / 'info.json').write_text(json.dumps(info, ensure_ascii=False, indent=2), encoding='utf-8')
 
-    t = threading.Thread(target=run_task, args=(task_id, 'demo', dest), daemon=True)
+    t = threading.Thread(target=run_task, args=(task_id, 'demo', dest, 'choice', None), daemon=True)
     t.start()
 
     return jsonify({'success': True, 'task_id': task_id, 'status': 'building'})
