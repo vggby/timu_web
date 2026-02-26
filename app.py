@@ -1,39 +1,41 @@
 #!/usr/bin/env python3
 """
 题库生成网站 - Flask后端（异步任务版）
+直接调用 lib.fetcher 和 lib.builder 模块，不再使用 subprocess。
 """
 import json
 import os
+import re
 import shutil
-import subprocess
 import threading
 import uuid
 from datetime import datetime
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify, send_from_directory
 
+from lib.fetcher import fetch_and_parse, extract_next_data, build_headers_from_config, fetch_html
+from lib.builder import build_quiz_site
+
 app = Flask(__name__)
 
-BASE_DIR = Path("/root/projects/timu")
+PROJECT_DIR = Path(__file__).resolve().parent
+CONFIG_FILE = PROJECT_DIR / "config.json"
 DATA_DIR = Path("/root/.openclaw/workspace/data/timu")
 DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def load_config() -> dict:
+    if CONFIG_FILE.is_file():
+        return json.loads(CONFIG_FILE.read_text(encoding='utf-8-sig'))
+    return {}
 
 
 def run_task(task_id: str, url: str, html_path: Path, question_type: str = 'choice', model_config: str = None):
     """后台线程：运行 builder"""
     task_dir = DATA_DIR / task_id
-    fetcher_config = BASE_DIR / "config" / "cheko_fetcher_config.json"
-    builder_script = BASE_DIR / "scripts" / "quiz_site_builder.py"
-    
-    # 根据题目类型选择提示词文件
-    if question_type == 'answer':
-        prompt_file = BASE_DIR / "prompts" / "answer.md"
-    else:
-        prompt_file = BASE_DIR / "prompts" / "question.md"
 
     def save_info(status, error=''):
         info_file = task_dir / 'info.json'
-        # 保留已有字段（如 title），只更新 status 和 error
         if info_file.exists():
             info = json.loads(info_file.read_text(encoding='utf-8'))
         else:
@@ -58,70 +60,24 @@ def run_task(task_id: str, url: str, html_path: Path, question_type: str = 'choi
     save_info('building')
     save_progress('初始化', 0, 100, '正在启动...')
 
-    build_cmd = [
-        "python3", str(builder_script),
-        "--html", str(html_path),
-        "--output-dir", str(task_dir / "site"),
-        "--config", str(fetcher_config),
-        "--prompt-file", str(prompt_file),
-        "--knowledge-prompt-file", str(BASE_DIR / "prompts" / "knowledge.md")
-    ]
-    
-    # 添加模型配置参数
-    if model_config:
-        build_cmd.extend(["--model-config", model_config])
-
     try:
-        # 使用 Popen 以便实时读取输出
-        process = subprocess.Popen(
-            build_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-            text=True, bufsize=1
+        html_content = html_path.read_text(encoding='utf-8')
+        config = load_config()
+
+        build_quiz_site(
+            html_content=html_content,
+            output_dir=str(task_dir / "site"),
+            config=config,
+            question_type=question_type,
+            model_config_name=model_config,
+            progress_callback=save_progress,
         )
-        
-        # 解析输出中的进度
-        import re
-        question_total = 0
-        question_done = 0
-        knowledge_total = 0
-        knowledge_done = 0
-        
-        for line in process.stdout:
-            # 解析题目处理进度: [######------] 题目处理 5/10
-            q_match = re.search(r'题目处理\s+(\d+)/(\d+)', line)
-            if q_match:
-                question_done = int(q_match.group(1))
-                question_total = int(q_match.group(2))
-                save_progress('生成题目解析', question_done, question_total, 
-                            f'AI 解析题目中... {question_done}/{question_total}')
-                continue
-                
-            # 解析知识点处理进度
-            kp_match = re.search(r'知识点处理\s+(\d+)/(\d+)', line)
-            if kp_match:
-                knowledge_done = int(kp_match.group(1))
-                knowledge_total = int(kp_match.group(2))
-                save_progress('生成知识点总结', knowledge_done, knowledge_total,
-                            f'AI 总结知识点中... {knowledge_done}/{knowledge_total}')
-                continue
-                
-            # 检测是否开始新阶段
-            if '开始处理' in line and '知识点' in line:
-                save_progress('分析知识点', 0, 1, '正在分析知识点...')
-        
-        process.wait(timeout=1800)
-        
-        if process.returncode == 0:
-            save_info('completed')
-            save_progress('完成', 1, 1, '生成完成！')
-        else:
-            save_info('failed', process.stderr.read()[-500:] if process.stderr else '')
-            save_progress('失败', 0, 1, '生成失败')
-            
-    except subprocess.TimeoutExpired:
-        save_info('failed', '处理超时（30分钟）')
-        save_progress('失败', 0, 1, '处理超时')
+
+        save_info('completed')
+        save_progress('完成', 1, 1, '生成完成！')
+
     except Exception as e:
-        save_info('failed', str(e))
+        save_info('failed', str(e)[-500:])
         save_progress('失败', 0, 1, str(e))
 
 
@@ -134,12 +90,8 @@ def index():
 def get_models():
     """获取可用的模型配置列表"""
     try:
-        fetcher_config = BASE_DIR / "config" / "cheko_fetcher_config.json"
-        with open(fetcher_config, 'r', encoding='utf-8') as f:
-            config = json.load(f)
-        
+        config = load_config()
         models = config.get('models', {})
-        # 构建模型列表
         model_list = []
         for name, model_config in models.items():
             model_list.append({
@@ -147,7 +99,6 @@ def get_models():
                 'model': model_config.get('model', ''),
                 'base_url': model_config.get('base_url', '')
             })
-        
         return jsonify({'success': True, 'models': model_list})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e), 'models': []})
@@ -157,8 +108,8 @@ def get_models():
 def generate():
     data = request.get_json()
     url = data.get('url', '').strip()
-    question_type = data.get('question_type', 'choice')  # choice or answer
-    model_config = data.get('model_config', None)  # 模型配置名称
+    question_type = data.get('question_type', 'choice')
+    model_config = data.get('model_config', None)
     if not url:
         return jsonify({'success': False, 'error': '请输入URL'})
 
@@ -166,38 +117,24 @@ def generate():
     task_dir = DATA_DIR / task_id
     task_dir.mkdir(exist_ok=True)
 
-    fetcher_config = BASE_DIR / "config" / "cheko_fetcher_config.json"
-    fetcher_script = BASE_DIR / "scripts" / "cheko_fetcher.py"
-
     try:
-        with open(fetcher_config, 'r', encoding='utf-8') as f:
-            config = json.load(f)
+        config = load_config()
 
-        fetch_cmd = [
-            "python3", str(fetcher_script),
-            "-o", str(task_dir / "output.txt"),
-            url
-        ]
-        cookie = config.get('cookie', '')
-        if cookie:
-            fetch_cmd = fetch_cmd[:2] + ["--cookie", cookie] + fetch_cmd[2:]
+        # 直接用 Python 抓取，不再 subprocess
+        headers = build_headers_from_config(config)
+        html_text, _ = fetch_html(url, headers)
 
-        result = subprocess.run(fetch_cmd, capture_output=True, text=True, timeout=120)
-        if result.returncode != 0:
-            return jsonify({'success': False, 'error': f'抓取失败: {result.stderr[:300]}'})
-
-        html_files = list(task_dir.glob("*.html"))
-        if not html_files:
-            return jsonify({'success': False, 'error': '未能抓取到内容，请检查URL或Cookie'})
+        # 保存原始 HTML
+        html_file = task_dir / "input.html"
+        html_file.write_text(html_text, encoding='utf-8')
 
         # 提取页面标题
         page_title = ""
         try:
-            html_content = html_files[0].read_text(encoding='utf-8')
-            import re
-            
-            # 优先从 __NEXT_DATA__ 提取更精确的标题
-            next_data_match = re.search(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', html_content, re.DOTALL)
+            next_data_match = re.search(
+                r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>',
+                html_text, re.DOTALL
+            )
             if next_data_match:
                 next_data = json.loads(next_data_match.group(1))
                 page_props = next_data.get("props", {}).get("pageProps", {})
@@ -213,21 +150,16 @@ def generate():
                         page_title = paper_name
                     elif kp_name:
                         page_title = kp_name
-            
-            # 回退：从 <title> 标签提取
+
             if not page_title:
-                title_match = re.search(r'<title>([^<]+)</title>', html_content, re.IGNORECASE)
+                title_match = re.search(r'<title>([^<]+)</title>', html_text, re.IGNORECASE)
                 if title_match:
                     full_title = title_match.group(1).strip()
                 else:
-                    og_match = re.search(r'property=["\']og:title["\']\s+content=["\']([^"\']+)["\']', html_content)
-                    if og_match:
-                        full_title = og_match.group(1).strip()
-                    else:
-                        full_title = ""
-                
+                    og_match = re.search(r'property=["\']og:title["\']\s+content=["\']([^"\']+)["\']', html_text)
+                    full_title = og_match.group(1).strip() if og_match else ""
+
                 if full_title:
-                    # 去掉网站名后缀
                     full_title = re.sub(r'\s*[|｜]\s*芝士架构$', '', full_title)
                     parts = full_title.split(' - ')
                     if len(parts) >= 3:
@@ -240,17 +172,24 @@ def generate():
             pass
 
         # 保存初始状态
-        info = {'id': task_id, 'url': url, 'title': page_title, 'question_type': question_type, 'model_config': model_config, 'created_at': datetime.now().isoformat(), 'status': 'building'}
-        (task_dir / 'info.json').write_text(json.dumps(info, ensure_ascii=False, indent=2), encoding='utf-8')
+        info = {
+            'id': task_id, 'url': url, 'title': page_title,
+            'question_type': question_type, 'model_config': model_config,
+            'created_at': datetime.now().isoformat(), 'status': 'building'
+        }
+        (task_dir / 'info.json').write_text(
+            json.dumps(info, ensure_ascii=False, indent=2), encoding='utf-8')
 
         # 后台运行 builder
-        t = threading.Thread(target=run_task, args=(task_id, url, html_files[0], question_type, model_config), daemon=True)
+        t = threading.Thread(
+            target=run_task,
+            args=(task_id, url, html_file, question_type, model_config),
+            daemon=True
+        )
         t.start()
 
         return jsonify({'success': True, 'task_id': task_id, 'status': 'building'})
 
-    except subprocess.TimeoutExpired:
-        return jsonify({'success': False, 'error': '抓取超时'})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
@@ -264,22 +203,19 @@ def get_task(task_id):
 
     info = json.loads(info_file.read_text(encoding='utf-8'))
 
-    # 读取进度信息
     progress_file = task_dir / 'progress.json'
     if progress_file.exists():
         info['progress'] = json.loads(progress_file.read_text(encoding='utf-8'))
 
-    # 读取题库标题
     site_dir = task_dir / 'site'
     quiz_data_file = site_dir / 'quiz_data.json'
     if quiz_data_file.exists():
         try:
             quiz_data = json.loads(quiz_data_file.read_text(encoding='utf-8'))
             info['title'] = quiz_data.get('meta', {}).get('paper_name', '')
-        except:
+        except Exception:
             pass
 
-    # 列出生成的文件
     files = []
     if site_dir.exists():
         for f in site_dir.rglob('*'):
@@ -307,17 +243,28 @@ def demo():
     task_dir = DATA_DIR / task_id
     task_dir.mkdir(exist_ok=True)
 
-    sample_html = BASE_DIR / "sample_input" / "cheko_673625.html"
-    if not sample_html.exists():
+    # 查找 data 目录中已有的 HTML 文件作为示例
+    sample_html = None
+    for f in DATA_DIR.glob("*.html"):
+        sample_html = f
+        break
+
+    if not sample_html or not sample_html.exists():
         return jsonify({'success': False, 'error': '示例文件不存在'})
 
     dest = task_dir / "input.html"
     shutil.copy(sample_html, dest)
 
-    info = {'id': task_id, 'url': 'demo', 'created_at': datetime.now().isoformat(), 'status': 'building'}
-    (task_dir / 'info.json').write_text(json.dumps(info, ensure_ascii=False, indent=2), encoding='utf-8')
+    info = {
+        'id': task_id, 'url': 'demo',
+        'created_at': datetime.now().isoformat(), 'status': 'building'
+    }
+    (task_dir / 'info.json').write_text(
+        json.dumps(info, ensure_ascii=False, indent=2), encoding='utf-8')
 
-    t = threading.Thread(target=run_task, args=(task_id, 'demo', dest, 'choice', None), daemon=True)
+    t = threading.Thread(
+        target=run_task, args=(task_id, 'demo', dest, 'choice', None), daemon=True
+    )
     t.start()
 
     return jsonify({'success': True, 'task_id': task_id, 'status': 'building'})
