@@ -748,6 +748,16 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       background: var(--accent-bg);
       color: var(--accent);
     }}
+    .kp-count-btn {{
+      cursor: pointer;
+      transition: background 0.18s, transform 0.15s;
+      user-select: none;
+    }}
+    .kp-count-btn:hover {{
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.06);
+    }}
     .badge-green {{
       background: var(--green-bg);
       color: var(--green);
@@ -1487,12 +1497,44 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         card.innerHTML = `
           <div class="knowledge-header">
             <h3>${{name}}</h3>
-            <span class="badge badge-accent">共 ${{count}} 题</span>
+            <span class="badge badge-accent kp-count-btn" data-kp="${{name}}" title="点击刷此知识点题库">共 ${{count}} 题 ▶</span>
           </div>
           ${{summaryBlock}}
         `;
+        // 整张卡片点击切换知识点
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {{
+          // 如果点击的是 details/summary 展开操作，不干预
+          if (e.target.closest('details') || e.target.closest('summary')) return;
+          jumpToKnowledge(name);
+        }});
+        // badge 单独处理（阻止冒泡避免双触发）
+        const badge = card.querySelector('.kp-count-btn');
+        if (badge) {{
+          badge.addEventListener('click', (e) => {{
+            e.stopPropagation();
+            jumpToKnowledge(name);
+          }});
+        }}
         container.append(card);
       }});
+    }}
+
+    function jumpToKnowledge(name) {{
+      state.knowledge = name;
+      state.currentQuestionIndex = 0;
+      saveState();
+      // 同步下拉框
+      const sel = document.getElementById('knowledgeFilter');
+      if (sel) sel.value = name;
+      renderKnowledge();
+      renderQuestions();
+      // 滚动到题目区
+      const qSection = document.getElementById('questionsContainer');
+      if (qSection) {{
+        setTimeout(() => qSection.scrollIntoView({{ behavior: 'smooth', block: 'start' }}), 80);
+      }}
+      showToast(`已切换到：${{name}}`, 'info');
     }}
 
     function filterQuestions() {{
