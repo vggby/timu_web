@@ -316,6 +316,18 @@ def generate_html(site_data: dict, output_path: Path) -> None:
                 html_parts.append(f'<li>{format_inline(content)}</li>')
                 idx += 1
                 continue
+            heading_match = re.match(r'^(#{1,4})\s+(.+)$', stripped)
+            if heading_match:
+                close_lists()
+                level = min(len(heading_match.group(1)) + 1, 5)
+                html_parts.append(f'<h{level} class="md-heading">{format_inline(heading_match.group(2))}</h{level}>')
+                idx += 1
+                continue
+            if stripped in ('---', '***', '___'):
+                close_lists()
+                html_parts.append('<hr class="md-hr" />')
+                idx += 1
+                continue
             close_lists()
             html_parts.append(f'<p>{format_inline(stripped)}</p>')
             idx += 1
