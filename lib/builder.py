@@ -467,30 +467,34 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     *, *::before, *::after {{ box-sizing: border-box; }}
     :root {{
       --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --bg: #f0f2f5;
-      --bg-subtle: #f8f9fb;
-      --card: #ffffff;
-      --accent: #4f46e5;
-      --accent-light: #818cf8;
-      --accent-bg: rgba(79, 70, 229, 0.08);
-      --accent-bg-hover: rgba(79, 70, 229, 0.14);
-      --green: #10b981;
-      --green-bg: rgba(16, 185, 129, 0.1);
-      --green-border: rgba(16, 185, 129, 0.3);
-      --red: #ef4444;
-      --red-bg: rgba(239, 68, 68, 0.08);
-      --red-border: rgba(239, 68, 68, 0.3);
-      --orange: #f59e0b;
-      --text: #1e293b;
-      --text-secondary: #64748b;
-      --text-muted: #94a3b8;
-      --border: #e2e8f0;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
-      --shadow-lg: 0 10px 30px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
+      --bg: #0a0a0f;
+      --bg-subtle: #111118;
+      --card: #16161f;
+      --card-hover: #1c1c28;
+      --accent: #7c6ff7;
+      --accent-light: #a89cf8;
+      --accent-bg: rgba(124, 111, 247, 0.12);
+      --accent-bg-hover: rgba(124, 111, 247, 0.2);
+      --green: #34d399;
+      --green-bg: rgba(52, 211, 153, 0.12);
+      --green-border: rgba(52, 211, 153, 0.35);
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.12);
+      --red-border: rgba(248, 113, 113, 0.35);
+      --orange: #fbbf24;
+      --text: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3);
       --radius: 16px;
       --radius-sm: 10px;
       --radius-xs: 6px;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
     }}
     body {{
       margin: 0;
@@ -572,6 +576,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       color: var(--text);
       transition: border-color 0.2s, box-shadow 0.2s;
       box-shadow: var(--shadow-sm);
+      -webkit-appearance: none;
     }}
     .controls-bar select:focus,
     .controls-bar input:focus {{
@@ -638,7 +643,8 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       min-width: 200px;
     }}
     .sn-item {{
-      background: var(--bg-subtle);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 14px 16px;
       text-align: center;
@@ -744,11 +750,12 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     }}
     .badge-green {{
       background: var(--green-bg);
-      color: #059669;
+      color: var(--green);
     }}
     .knowledge-details {{
       margin-top: 12px;
-      background: var(--bg-subtle);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 10px 14px;
     }}
@@ -790,7 +797,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     }}
     .question-prompt {{
       margin: 0 0 16px;
-      color: #334155;
+      color: var(--text);
       line-height: 1.7;
     }}
     .sub-question {{
@@ -806,7 +813,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     }}
     .sub-question-text {{
       margin-bottom: 12px;
-      color: #475569;
+      color: var(--text-secondary);
     }}
 
     /* ===== Options ===== */
@@ -819,12 +826,14 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       margin-bottom: 8px;
       border-radius: var(--radius-sm);
       border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.03);
       transition: all 0.2s ease;
       overflow: hidden;
     }}
     .option-item:hover {{
       border-color: var(--accent-light);
       background: var(--accent-bg);
+      transform: translateX(2px);
     }}
     .option-label {{
       display: flex;
@@ -903,7 +912,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       box-shadow: 0 2px 6px rgba(79,70,229,0.3);
     }}
     .btn-primary:hover {{
-      background: #4338ca;
+      background: #6d62e0;
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(79,70,229,0.35);
     }}
@@ -919,7 +928,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       box-shadow: 0 2px 6px rgba(245,158,11,0.3);
     }}
     .btn-warning:hover {{
-      background: #d97706;
+      background: #e4a320;
       transform: translateY(-1px);
     }}
     .btn-success {{
@@ -928,7 +937,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       box-shadow: 0 2px 6px rgba(16,185,129,0.3);
     }}
     .btn-success:hover {{
-      background: #059669;
+      background: #2ab77f;
       transform: translateY(-1px);
     }}
     .btn-outline {{
@@ -957,12 +966,12 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     }}
     .answer-feedback.correct {{
       background: var(--green-bg);
-      color: #059669;
+      color: var(--green);
       border: 1px solid var(--green-border);
     }}
     .answer-feedback.incorrect {{
       background: var(--red-bg);
-      color: #dc2626;
+      color: var(--red);
       border: 1px solid var(--red-border);
     }}
     .correct-answer {{
@@ -1026,7 +1035,8 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 
     /* ===== Details / Panels ===== */
     .rich-details {{
-      background: var(--bg-subtle);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 10px 14px;
       margin-top: 10px;
@@ -1035,8 +1045,12 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       cursor: pointer;
       font-weight: 600;
       font-size: 0.88rem;
-      color: var(--accent);
+      color: var(--accent-light);
       user-select: none;
+      transition: color 0.2s;
+    }}
+    .rich-details summary:hover {{
+      color: var(--accent);
     }}
     .rich-details .markdown {{
       margin-top: 8px;
@@ -1082,8 +1096,9 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       font-size: 0.88em;
     }}
     .markdown pre {{
-      background: #1e293b;
+      background: #0d0d14;
       color: #e2e8f0;
+      border: 1px solid var(--border);
       padding: 16px;
       border-radius: var(--radius-sm);
       overflow-x: auto;
@@ -1105,9 +1120,10 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     .mermaid {{
       text-align: center;
       margin: 1rem 0;
-      background: #fff;
+      background: var(--card);
       border-radius: var(--radius-sm);
       padding: 16px;
+      border: 1px solid var(--border);
       border: 1px solid var(--border);
     }}
 
@@ -1205,7 +1221,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         <div class="stats-layout">
           <div class="ring-container">
             <svg width="120" height="120" viewBox="0 0 120 120">
-              <circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="10"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#2d2d3f" stroke-width="10"/>
               <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="10"
                 stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round" id="ringProgress"/>
             </svg>
@@ -1604,14 +1620,17 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       if (window.mermaid) {{
         mermaid.initialize({{
           startOnLoad: false,
-          theme: 'default',
+          theme: 'dark',
           themeVariables: {{
-            primaryColor: '#4f46e5',
-            primaryTextColor: '#1e293b',
-            primaryBorderColor: '#818cf8',
-            lineColor: '#6b7280',
-            secondaryColor: '#f3f4f6',
-            tertiaryColor: '#ffffff'
+            primaryColor: '#7c6ff7',
+            primaryTextColor: '#e2e8f0',
+            primaryBorderColor: '#a89cf8',
+            lineColor: '#94a3b8',
+            secondaryColor: '#1c1c28',
+            tertiaryColor: '#16161f',
+            background: '#0a0a0f',
+            mainBkg: '#16161f',
+            nodeBorder: '#7c6ff7'
           }}
         }});
       }}
