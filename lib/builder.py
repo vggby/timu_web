@@ -799,8 +799,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       transition: grid-column 0s;
     }}
     .knowledge-card.expanded .knowledge-details {{
-      max-height: 60vh;
-      overflow-y: auto;
+      max-height: none;
     }}
     .knowledge-header {{
       display: flex;
