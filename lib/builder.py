@@ -835,9 +835,27 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       font-size: 0.88rem;
       color: var(--accent);
       user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }}
+    .knowledge-details summary::before {{
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }}
+    .knowledge-details[open] summary::before {{
+      transform: rotate(90deg);
     }}
     .knowledge-details .markdown {{
       margin-top: 10px;
+    }}
+    .knowledge-details[open] summary {{
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
     }}
 
     /* ===== Question Cards ===== */
@@ -1168,13 +1186,32 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       color: var(--accent-light);
       user-select: none;
       transition: color 0.2s;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }}
+    .rich-details summary::before {{
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }}
+    .rich-details[open] summary::before {{
+      transform: rotate(90deg);
     }}
     .rich-details summary:hover {{
       color: var(--accent);
     }}
+    .rich-details[open] summary {{
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }}
     .rich-details .markdown {{
       margin-top: 8px;
     }}
+    details summary::-webkit-details-marker {{ display: none; }}
     .answer-analysis {{
       margin-top: 10px;
     }}
@@ -1188,9 +1225,11 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       margin: 1em 0 0.5em;
       font-weight: 700;
     }}
-    .markdown h1 {{ font-size: 1.3rem; }}
-    .markdown h2 {{ font-size: 1.15rem; }}
+    .markdown h1, .md-heading.h2-equiv {{ font-size: 1.3rem; color: var(--text); }}
+    .markdown h2, .md-heading {{ font-size: 1.15rem; color: var(--text); }}
     .markdown h3 {{ font-size: 1.05rem; }}
+    .md-heading {{ margin: 1em 0 0.4em; font-weight: 700; }}
+    .md-hr {{ border: none; border-top: 1px solid var(--border); margin: 1em 0; }}
     .markdown p {{ margin: 0.5em 0; }}
     .markdown ul, .markdown ol {{ padding-left: 1.5em; margin: 0.5em 0; }}
     .markdown li {{ margin-bottom: 0.3em; }}
@@ -1456,6 +1495,19 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       for (let i = 0; i < lines.length; i += 1) {{
         const trimmed = lines[i].trim();
         if (!trimmed) {{ closeLists(); continue; }}
+        const headingMatch = trimmed.match(/^(#{1,4})\s+(.+)$/);
+        if (headingMatch) {{
+          closeLists();
+          const level = headingMatch[1].length + 1; // h2-h5 (h1 reserved for page)
+          const tag = 'h' + Math.min(level, 5);
+          htmlParts.push(`<${{tag}} class="md-heading">${{formatInline(headingMatch[2])}}</${{tag}}>`);
+          continue;
+        }}
+        if (trimmed === '---' || trimmed === '***' || trimmed === '___') {{
+          closeLists();
+          htmlParts.push('<hr class="md-hr" />');
+          continue;
+        }}
         if (/^\|.+\|$/.test(trimmed)) {{
           closeLists();
           const tableRows = [];
