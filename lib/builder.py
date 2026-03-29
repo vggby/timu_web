@@ -339,10 +339,10 @@ def generate_html(site_data: dict, output_path: Path) -> None:
             summary_block = "<div class='markdown empty'><p>（尚未生成，稍后重试）</p></div>"
         knowledge_cards.append(
             f"""
-            <article class='card knowledge-card'>
+            <article class='card knowledge-card' style='cursor:pointer' onclick="jumpToKnowledge('{name}')">
               <div class='knowledge-header'>
                 <h3>{name}</h3>
-                <span class='badge'>共 {count} 题</span>
+                <span class='badge badge-accent kp-count-btn' title='点击刷此知识点题库' onclick="event.stopPropagation();jumpToKnowledge('{name}')">共 {count} 题 ▶</span>
               </div>
               {summary_block}
             </article>
