@@ -457,505 +457,784 @@ def generate_html(site_data: dict, output_path: Path) -> None:
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{site_data['meta'].get('paper_name', '刷题笔记')}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@13/dist/markdown-it.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
   <style>
+    *, *::before, *::after {{ box-sizing: border-box; }}
     :root {{
-      color-scheme: light dark;
-      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-      --bg: #f5f7fb;
+      --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --bg: #f0f2f5;
+      --bg-subtle: #f8f9fb;
       --card: #ffffff;
-      --accent: #2563eb;
-      --shadow: 0 12px 30px -20px rgba(15, 23, 42, 0.4);
-      --border: rgba(148, 163, 184, 0.25);
+      --accent: #4f46e5;
+      --accent-light: #818cf8;
+      --accent-bg: rgba(79, 70, 229, 0.08);
+      --accent-bg-hover: rgba(79, 70, 229, 0.14);
+      --green: #10b981;
+      --green-bg: rgba(16, 185, 129, 0.1);
+      --green-border: rgba(16, 185, 129, 0.3);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.08);
+      --red-border: rgba(239, 68, 68, 0.3);
+      --orange: #f59e0b;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
     }}
     body {{
       margin: 0;
       background: var(--bg);
-      color: #0f172a;
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }}
     main {{
-      max-width: 1100px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 4vw, 2rem);
-      box-sizing: border-box;
+      padding: 24px 20px 60px;
     }}
-    section {{
-      margin-bottom: clamp(1.8rem, 4vw, 2.8rem);
-    }}
-    h1, h2 {{
-      margin: 0;
-      font-weight: 700;
-    }}
-    h1 {{
-      font-size: clamp(1.4rem, 2.4vw, 2.4rem);
-      color: #1e293b;
-    }}
-    h2 {{
-      font-size: clamp(1.2rem, 1.8vw, 1.6rem);
-      color: #1f2937;
-      margin-bottom: 1rem;
-    }}
-    .page-head {{
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
-    }}
-    .stats-container {{
-      background: var(--card);
-      border-radius: 18px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow);
-    }}
-    .stats-grid {{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }}
-    .stat-item {{
-      text-align: center;
-      padding: 0.8rem;
-      background: rgba(37, 99, 235, 0.05);
-      border-radius: 12px;
-    }}
-    .stat-number {{
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 0.2rem;
-    }}
-    .stat-label {{
-      font-size: 0.85rem;
-      color: #64748b;
-      font-weight: 500;
-    }}
-    .progress-bar {{
-      width: 100%;
-      height: 8px;
-      background: rgba(148, 163, 184, 0.2);
-      border-radius: 4px;
+
+    /* ===== Header ===== */
+    .page-header {{
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      color: #fff;
+      box-shadow: var(--shadow-lg);
+      position: relative;
       overflow: hidden;
     }}
-    .progress-fill {{
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), #3b82f6);
-      border-radius: 4px;
-      transition: width 0.3s ease;
+    .page-header::before {{
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
     }}
-    .quiz-progress {{
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 1.2rem;
-      margin-bottom: 1.5rem;
+    .page-header::after {{
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
     }}
-    .progress-info {{
-      text-align: center;
+    .page-header h1 {{
+      margin: 0 0 8px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
     }}
-    .progress-info span {{
-      font-weight: 600;
-      color: #475569;
-      margin-bottom: 8px;
-      display: block;
-      font-size: 1rem;
+    .page-header .meta-line {{
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      position: relative;
+      z-index: 1;
     }}
-    .quiz-navigation {{
+
+    /* ===== Controls ===== */
+    .controls-bar {{
       display: flex;
-      justify-content: center;
       gap: 12px;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid #e2e8f0;
-    }}
-    .nav-btn {{
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }}
-    .nav-btn:hover:not(:disabled) {{
-      background: #2563eb;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }}
-    .nav-btn:disabled {{
-      background: #94a3b8;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }}
-    .toggle-mode-btn {{
-      background: #059669;
-    }}
-    .toggle-mode-btn:hover {{
-      background: #047857;
-    }}
-    .quiz-mode-toggle {{
-      text-align: center;
       margin-bottom: 20px;
-    }}
-    .meta-line {{
-      color: #64748b;
-      font-size: 0.95rem;
-    }}
-    .controls {{
-      display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
     }}
-    .controls select,
-    .controls input {{
-      flex: 1 1 240px;
-      min-width: 160px;
-      padding: 0.65rem 0.8rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #ffffff;
-      font-size: 0.95rem;
-      box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
-    }}
-    .card {{
+    .controls-bar select,
+    .controls-bar input {{
+      flex: 1 1 200px;
+      min-width: 0;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
       background: var(--card);
-      border-radius: 18px;
-      padding: clamp(1rem, 3vw, 1.4rem);
-      margin-bottom: 1rem;
-      box-shadow: var(--shadow);
-      border: 1px solid transparent;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+    }}
+    .controls-bar select:focus,
+    .controls-bar input:focus {{
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }}
+
+    /* ===== Stats Ring ===== */
+    .stats-card {{
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+    }}
+    .stats-card h2 {{
+      margin: 0 0 20px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }}
+    .stats-layout {{
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }}
+    .ring-container {{
+      flex-shrink: 0;
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }}
+    .ring-container svg {{
+      transform: rotate(-90deg);
+    }}
+    .ring-container .ring-label {{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }}
+    .ring-container .ring-pct {{
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1.2;
+    }}
+    .ring-container .ring-text {{
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }}
+    .stats-numbers {{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      flex: 1;
+      min-width: 200px;
+    }}
+    .sn-item {{
+      background: var(--bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      text-align: center;
+    }}
+    .sn-val {{
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }}
+    .sn-val.green {{ color: var(--green); }}
+    .sn-val.red {{ color: var(--red); }}
+    .sn-val.accent {{ color: var(--accent); }}
+    .sn-val.orange {{ color: var(--orange); }}
+    .sn-lbl {{
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }}
+    .stats-progress {{
+      margin-top: 16px;
+    }}
+    .stats-progress-bar {{
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }}
+    .stats-progress-fill {{
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }}
+    .stats-progress-text {{
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      text-align: right;
+    }}
+
+    /* ===== Knowledge Section ===== */
+    .section-title {{
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }}
     .knowledge-grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
     }}
     .knowledge-card {{
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      border-left: 4px solid rgba(37, 99, 235, 0.35);
-      padding-left: clamp(0.9rem, 2vw, 1.2rem);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--accent-light);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: default;
+    }}
+    .knowledge-card:nth-child(3n+1) {{ border-left-color: #4f46e5; }}
+    .knowledge-card:nth-child(3n+2) {{ border-left-color: #0ea5e9; }}
+    .knowledge-card:nth-child(3n+3) {{ border-left-color: #8b5cf6; }}
+    .knowledge-card:hover {{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }}
     .knowledge-card.active {{
-      border-color: var(--accent);
-      box-shadow: 0 18px 30px -22px rgba(37, 99, 235, 0.6);
+      border-left-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(79,70,229,0.2), var(--shadow-md);
     }}
     .knowledge-header {{
       display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
       justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
       flex-wrap: wrap;
     }}
+    .knowledge-header h3 {{
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }}
     .badge {{
-      background: rgba(37, 99, 235, 0.12);
-      color: var(--accent);
-      padding: 0.25rem 0.65rem;
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
       border-radius: 999px;
       font-size: 0.75rem;
+      font-weight: 600;
       white-space: nowrap;
     }}
+    .badge-accent {{
+      background: var(--accent-bg);
+      color: var(--accent);
+    }}
+    .badge-green {{
+      background: var(--green-bg);
+      color: #059669;
+    }}
     .knowledge-details {{
-      background: rgba(148, 163, 184, 0.12);
-      border-radius: 12px;
-      padding: 1rem 1.2rem;
-      margin-top: 0.8rem;
+      margin-top: 12px;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+    }}
+    .knowledge-details summary {{
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent);
+      user-select: none;
     }}
     .knowledge-details .markdown {{
-      margin-top: 0.8rem;
-      min-height: 200px;
-      max-height: none;
-      overflow: visible;
+      margin-top: 10px;
     }}
-    .knowledge-details[open] .markdown {{
-      padding: 0.5rem 0;
-    }}
+
+    /* ===== Question Cards ===== */
     .question-card {{
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+    }}
+    .question-card:hover {{
+      box-shadow: var(--shadow-md);
     }}
     .question-header {{
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem 1rem;
+      gap: 8px;
       align-items: center;
+      margin-bottom: 12px;
     }}
     .question-header h3 {{
       margin: 0;
-      font-size: clamp(1.05rem, 2vw, 1.2rem);
-      color: #1f2937;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
     }}
-    .question-card p {{
-      margin: 0;
+    .question-prompt {{
+      margin: 0 0 16px;
       color: #334155;
-      line-height: 1.65;
+      line-height: 1.7;
     }}
     .sub-question {{
-      margin-top: 0.4rem;
-      padding-top: 0.75rem;
-      border-top: 1px dashed rgba(148, 163, 184, 0.35);
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
     }}
     .sub-question h4 {{
-      margin: 0 0 0.4rem;
-      font-size: 0.95rem;
-      color: #0f172a;
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
     }}
+    .sub-question-text {{
+      margin-bottom: 12px;
+      color: #475569;
+    }}
+
+    /* ===== Options ===== */
     ul.options {{
       list-style: none;
       padding: 0;
-      margin: 0.5rem 0;
-      color: #1e293b;
-    }}
-    ul.options li {{
-      margin-bottom: 0.35rem;
-    }}
-    ul.interactive-options {{
-      list-style: none;
-      padding: 0;
-      margin: 0.5rem 0;
+      margin: 0 0 12px;
     }}
     .option-item {{
-      margin-bottom: 0.5rem;
-      border-radius: 8px;
-      transition: background-color 0.2s ease;
+      margin-bottom: 8px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      transition: all 0.2s ease;
+      overflow: hidden;
     }}
     .option-item:hover {{
-      background-color: rgba(37, 99, 235, 0.05);
+      border-color: var(--accent-light);
+      background: var(--accent-bg);
     }}
     .option-label {{
       display: flex;
       align-items: center;
-      padding: 0.6rem 0.8rem;
+      padding: 12px 16px;
       cursor: pointer;
-      border-radius: 8px;
-      transition: all 0.2s ease;
+      gap: 12px;
     }}
     .option-input {{
-      margin-right: 0.8rem;
-      transform: scale(1.1);
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
     }}
     .option-text {{
       flex: 1;
-      color: #1e293b;
+      color: var(--text);
       line-height: 1.5;
+      font-size: 0.95rem;
     }}
     .option-item.selected {{
-      background-color: rgba(37, 99, 235, 0.1);
-      border: 1px solid rgba(37, 99, 235, 0.3);
+      border-color: var(--accent);
+      background: var(--accent-bg);
     }}
     .option-item.correct {{
-      background-color: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-color: var(--green);
+      background: var(--green-bg);
+      animation: correctPulse 0.5s ease;
     }}
     .option-item.incorrect {{
-      background-color: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-color: var(--red);
+      background: var(--red-bg);
+      animation: shake 0.4s ease;
     }}
+    @keyframes shake {{
+      0%, 100% {{ transform: translateX(0); }}
+      20% {{ transform: translateX(-6px); }}
+      40% {{ transform: translateX(6px); }}
+      60% {{ transform: translateX(-4px); }}
+      80% {{ transform: translateX(4px); }}
+    }}
+    @keyframes correctPulse {{
+      0% {{ transform: scale(1); }}
+      50% {{ transform: scale(1.01); }}
+      100% {{ transform: scale(1); }}
+    }}
+    @keyframes bounceIn {{
+      0% {{ opacity: 0; transform: scale(0.9); }}
+      60% {{ transform: scale(1.02); }}
+      100% {{ opacity: 1; transform: scale(1); }}
+    }}
+
+    /* ===== Buttons ===== */
     .question-actions {{
-      margin: 1rem 0;
+      margin: 16px 0;
       display: flex;
-      gap: 0.8rem;
+      gap: 10px;
       flex-wrap: wrap;
     }}
-    .submit-btn, .show-answer-btn {{
-      padding: 0.6rem 1.2rem;
+    .btn {{
+      padding: 10px 22px;
       border: none;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       font-size: 0.9rem;
       font-weight: 600;
+      font-family: var(--font-sans);
       cursor: pointer;
       transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }}
-    .submit-btn {{
+    .btn-primary {{
       background: var(--accent);
-      color: white;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(79,70,229,0.3);
     }}
-    .submit-btn:hover {{
-      background: #1d4ed8;
+    .btn-primary:hover {{
+      background: #4338ca;
       transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79,70,229,0.35);
     }}
-    .submit-btn:disabled {{
-      background: #94a3b8;
+    .btn-primary:disabled {{
+      background: var(--text-muted);
       cursor: not-allowed;
       transform: none;
+      box-shadow: none;
     }}
-    .show-answer-btn {{
-      background: #f59e0b;
-      color: white;
+    .btn-warning {{
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(245,158,11,0.3);
     }}
-    .show-answer-btn:hover {{
+    .btn-warning:hover {{
       background: #d97706;
       transform: translateY(-1px);
     }}
+    .btn-success {{
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(16,185,129,0.3);
+    }}
+    .btn-success:hover {{
+      background: #059669;
+      transform: translateY(-1px);
+    }}
+    .btn-outline {{
+      background: var(--card);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }}
+    .btn-outline:hover {{
+      background: var(--accent-bg);
+    }}
+    .btn-outline:disabled {{
+      color: var(--text-muted);
+      border-color: var(--border);
+      background: var(--bg-subtle);
+      cursor: not-allowed;
+    }}
+
+    /* ===== Feedback ===== */
     .answer-feedback {{
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      margin: 0.5rem 0;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin: 10px 0;
       font-weight: 600;
+      font-size: 0.95rem;
+      animation: bounceIn 0.35s ease;
     }}
     .answer-feedback.correct {{
-      background: rgba(34, 197, 94, 0.1);
+      background: var(--green-bg);
       color: #059669;
-      border: 1px solid rgba(34, 197, 94, 0.3);
+      border: 1px solid var(--green-border);
     }}
     .answer-feedback.incorrect {{
-      background: rgba(239, 68, 68, 0.1);
+      background: var(--red-bg);
       color: #dc2626;
-      border: 1px solid rgba(239, 68, 68, 0.3);
+      border: 1px solid var(--red-border);
     }}
     .correct-answer {{
-      background: rgba(34, 197, 94, 0.1);
-      padding: 0.6rem 0.8rem;
-      border-radius: 8px;
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      margin: 0.5rem 0;
+      background: var(--green-bg);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--green-border);
+      margin: 8px 0;
+      font-size: 0.95rem;
     }}
-    .answer-analysis {{
-      margin-top: 0.8rem;
+
+    /* ===== Quiz Navigation ===== */
+    .quiz-progress-bar {{
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
     }}
+    .qp-top {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }}
+    .qp-label {{
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }}
+    .qp-count {{
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }}
+    .qp-bar {{
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }}
+    .qp-fill {{
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }}
+    .quiz-nav {{
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }}
+    .quiz-mode-toggle {{
+      text-align: center;
+      margin-bottom: 16px;
+    }}
+
+    /* ===== Details / Panels ===== */
     .rich-details {{
-      background: rgba(148, 163, 184, 0.12);
-      border-radius: 12px;
-      padding: 0.6rem 0.85rem;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-top: 10px;
     }}
     .rich-details summary {{
       cursor: pointer;
       font-weight: 600;
+      font-size: 0.88rem;
       color: var(--accent);
+      user-select: none;
     }}
     .rich-details .markdown {{
-      margin-top: 0.6rem;
+      margin-top: 8px;
     }}
+    .answer-analysis {{
+      margin-top: 10px;
+    }}
+    /* ===== Markdown ===== */
     .markdown {{
-      line-height: 1.68;
+      line-height: 1.7;
       color: inherit;
+      font-size: 0.95rem;
     }}
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4 {{
+      margin: 1em 0 0.5em;
+      font-weight: 700;
+    }}
+    .markdown h1 {{ font-size: 1.3rem; }}
+    .markdown h2 {{ font-size: 1.15rem; }}
+    .markdown h3 {{ font-size: 1.05rem; }}
+    .markdown p {{ margin: 0.5em 0; }}
+    .markdown ul, .markdown ol {{ padding-left: 1.5em; margin: 0.5em 0; }}
+    .markdown li {{ margin-bottom: 0.3em; }}
     .markdown table {{
       width: 100%;
       border-collapse: collapse;
       margin: 0.75rem 0;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }}
-    .markdown th,
-    .markdown td {{
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 0.5rem 0.65rem;
+    .markdown th, .markdown td {{
+      border: 1px solid var(--border);
+      padding: 8px 12px;
     }}
     .markdown th {{
-      background: rgba(37, 99, 235, 0.06);
+      background: var(--accent-bg);
       font-weight: 600;
     }}
     .markdown code {{
-      background: rgba(148, 163, 184, 0.2);
-      border-radius: 6px;
-      padding: 0.15rem 0.3rem;
+      background: rgba(99,102,241,0.1);
+      border-radius: 4px;
+      padding: 2px 6px;
       font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      font-size: 0.88em;
     }}
     .markdown pre {{
-      background: rgba(15, 23, 42, 0.85);
+      background: #1e293b;
       color: #e2e8f0;
-      padding: 0.9rem;
-      border-radius: 12px;
+      padding: 16px;
+      border-radius: var(--radius-sm);
       overflow-x: auto;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+    }}
+    .markdown pre code {{
+      background: none;
+      padding: 0;
+      color: inherit;
+    }}
+    .markdown img {{
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-xs);
     }}
     .markdown.empty {{
-      color: #94a3b8;
+      color: var(--text-muted);
     }}
     .mermaid {{
       text-align: center;
       margin: 1rem 0;
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 1rem;
-      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: #fff;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      border: 1px solid var(--border);
     }}
-    @media (max-width: 720px) {{
+
+    /* ===== Empty State ===== */
+    .empty-state {{
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+    }}
+    .empty-state-icon {{
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }}
+    .empty-state-text {{
+      font-size: 1rem;
+    }}
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {{
       main {{
-        padding: 1rem 0.9rem 1.4rem;
+        padding: 16px 12px 48px;
       }}
-      .controls select,
-      .controls input {{
+      .page-header {{
+        padding: 24px 20px;
+        border-radius: var(--radius-sm);
+      }}
+      .page-header h1 {{
+        font-size: 1.35rem;
+      }}
+      .controls-bar {{
+        flex-direction: column;
+      }}
+      .controls-bar select,
+      .controls-bar input {{
         flex: 1 1 100%;
-        min-width: 100%;
+      }}
+      .stats-layout {{
+        flex-direction: column;
+        align-items: stretch;
+      }}
+      .ring-container {{
+        margin: 0 auto;
+      }}
+      .stats-numbers {{
+        grid-template-columns: repeat(2, 1fr);
       }}
       .knowledge-grid {{
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1rem;
+        grid-template-columns: 1fr;
+      }}
+      .question-card {{
+        padding: 18px 16px;
       }}
       .question-header {{
         flex-direction: column;
         align-items: flex-start;
       }}
-      .question-header h3 {{
-        font-size: 1.05rem;
+      .option-label {{
+        padding: 14px 16px;
+      }}
+      .btn {{
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
+      }}
+      .quiz-nav {{
+        flex-direction: column;
+      }}
+      .quiz-nav .btn {{
+        width: 100%;
+      }}
+    }}
+    @media (min-width: 769px) and (max-width: 1024px) {{
+      .knowledge-grid {{
+        grid-template-columns: repeat(2, 1fr);
       }}
     }}
   </style>
 </head>
 <body>
   <main>
-    <section class="page-head">
-      <h1>{site_data['meta'].get('paper_name', '刷题笔记')}</h1>
-      <p class="meta-line">题目总数：{site_data['meta'].get('item_count')} ｜ 生成时间：{site_data['generated_at']}</p>
-      <div class="controls">
-        <select id="knowledgeFilter"></select>
-        <input id="searchInput" type="search" placeholder="搜索题干 / 解析 / AI 笔记" />
-      </div>
-    </section>
-    
-    <section class="stats-section">
-      <div class="stats-container">
-        <h2>答题统计</h2>
-        <div id="statsContainer">
-          <div class="stats-grid">
-            <div class="stat-item">
-              <div class="stat-number">0</div>
-              <div class="stat-label">总题数</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">0</div>
-              <div class="stat-label">已答题</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">0</div>
-              <div class="stat-label">答对</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">0</div>
-              <div class="stat-label">答错</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">0%</div>
-              <div class="stat-label">正确率</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number">0%</div>
-              <div class="stat-label">进度</div>
+    <header class="page-header">
+      <h1>📝 {site_data['meta'].get('paper_name', '刷题笔记')}</h1>
+      <p class="meta-line">共 {site_data['meta'].get('item_count')} 题 · 生成于 {site_data['generated_at']}</p>
+    </header>
+
+    <div class="controls-bar">
+      <select id="knowledgeFilter" aria-label="筛选知识点"></select>
+      <input id="searchInput" type="search" placeholder="🔍 搜索题干 / 解析 / AI 笔记" aria-label="搜索题目" />
+    </div>
+
+    <section class="stats-card" aria-label="答题统计">
+      <h2>📊 答题统计</h2>
+      <div id="statsContainer">
+        <div class="stats-layout">
+          <div class="ring-container">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#e2e8f0" stroke-width="10"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="10"
+                stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round" id="ringProgress"/>
+            </svg>
+            <div class="ring-label">
+              <span class="ring-pct" id="ringPct">0%</span>
+              <span class="ring-text">正确率</span>
             </div>
           </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 0%"></div>
+          <div class="stats-numbers">
+            <div class="sn-item"><div class="sn-val accent" id="snTotal">0</div><div class="sn-lbl">总题数</div></div>
+            <div class="sn-item"><div class="sn-val accent" id="snAnswered">0</div><div class="sn-lbl">已答题</div></div>
+            <div class="sn-item"><div class="sn-val green" id="snCorrect">0</div><div class="sn-lbl">答对</div></div>
+            <div class="sn-item"><div class="sn-val red" id="snIncorrect">0</div><div class="sn-lbl">答错</div></div>
           </div>
+        </div>
+        <div class="stats-progress">
+          <div class="stats-progress-bar"><div class="stats-progress-fill" id="statsProgressFill" style="width:0%"></div></div>
+          <div class="stats-progress-text" id="statsProgressText">进度 0%</div>
         </div>
       </div>
     </section>
-    <section class="knowledge-section">
-      <h2>知识点总结</h2>
+
+    <section aria-label="知识点总结">
+      <h2 class="section-title">💡 知识点总结</h2>
       <div id="knowledgeContainer" class="knowledge-grid">{knowledge_initial}</div>
     </section>
-    <section class="question-section">
-      <h2>题目列表</h2>
+
+    <section aria-label="题目列表">
+      <h2 class="section-title">📋 题目列表</h2>
       <div id="questionsContainer">{questions_initial}</div>
     </section>
   </main>
@@ -975,16 +1254,9 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       }};
       const formatInline = (text) => {{
         const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        if (text.includes('!http')) {{
-          console.log('Processing image text:', text);
-        }}
-        const result = escaped
+        return escaped
           .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;" />')
-          .replace(/!(https?:\/\/[^\s<>"\'\\[\]]+(?:\.[a-zA-Z]{{2,}}|\/[^\s<>"\'\\[\]]*)?)/g, '<img src="$1" alt="图片" style="max-width: 100%; height: auto;" />');
-        if (text.includes('!http') && result !== escaped) {{
-          console.log('Image conversion result:', result);
-        }}
-        return result
+          .replace(/!(https?:\/\/[^\s<>"\'\\[\]]+(?:\.[a-zA-Z]{{2,}}|\/[^\s<>"\'\\[\]]*)?)/g, '<img src="$1" alt="图片" style="max-width: 100%; height: auto;" />')
           .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
           .replace(/__(.+?)__/g, '<strong>$1</strong>')
           .replace(/`([^`]+)`/g, '<code>$1</code>')
@@ -1067,25 +1339,19 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       search: '',
       currentQuestionIndex: 0,
       quizMode: true,
-      stats: {{
-        total: 0,
-        answered: 0,
-        correct: 0,
-        incorrect: 0
-      }},
+      stats: {{ total: 0, answered: 0, correct: 0, incorrect: 0 }},
       answeredQuestions: {{}}
     }};
 
     function saveState() {{
       try {{
-        const toSave = {{
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({{
           currentQuestionIndex: state.currentQuestionIndex,
           quizMode: state.quizMode,
           knowledge: state.knowledge,
           answeredQuestions: state.answeredQuestions,
           scrollY: window.scrollY
-        }};
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+        }}));
       }} catch(e) {{}}
     }}
 
@@ -1093,12 +1359,12 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       try {{
         const saved = localStorage.getItem(STORAGE_KEY);
         if (!saved) return;
-        const parsed = JSON.parse(saved);
-        if (typeof parsed.currentQuestionIndex === 'number') state.currentQuestionIndex = parsed.currentQuestionIndex;
-        if (typeof parsed.quizMode === 'boolean') state.quizMode = parsed.quizMode;
-        if (parsed.knowledge) state.knowledge = parsed.knowledge;
-        if (parsed.answeredQuestions) state.answeredQuestions = parsed.answeredQuestions;
-        if (typeof parsed.scrollY === 'number') state._savedScrollY = parsed.scrollY;
+        const p = JSON.parse(saved);
+        if (typeof p.currentQuestionIndex === 'number') state.currentQuestionIndex = p.currentQuestionIndex;
+        if (typeof p.quizMode === 'boolean') state.quizMode = p.quizMode;
+        if (p.knowledge) state.knowledge = p.knowledge;
+        if (p.answeredQuestions) state.answeredQuestions = p.answeredQuestions;
+        if (typeof p.scrollY === 'number') state._savedScrollY = p.scrollY;
       }} catch(e) {{}}
     }}
 
@@ -1133,21 +1399,29 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       }}
     }}
 
+    function renderMarkdownWithMermaid(content) {{
+      if (!content) return '<p>（尚未生成，稍后重试）</p>';
+      const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
+      let processed = content.replace(mermaidRegex, (match, graphDef) => `<div class="mermaid">${{graphDef.trim()}}</div>`);
+      return md.render ? md.render(processed) : renderBasicMarkdown(processed);
+    }}
     function renderKnowledge() {{
       const container = document.getElementById('knowledgeContainer');
       container.innerHTML = '';
-      DATA.knowledge_points.forEach(({{name, summary_markdown, related_questions}}) => {{
+      DATA.knowledge_points.forEach((kp) => {{
+        const name = kp.name;
+        const count = (kp.related_questions || []).length;
+        const summaryMd = typeof kp.summary_markdown === 'object' ? (kp.summary_markdown.response || '') : (kp.summary_markdown || '');
         const card = document.createElement('article');
-        card.className = 'card knowledge-card' + (state.knowledge === name ? ' active' : '');
-        const totalText = `<span class="badge">共 ${{related_questions.length}} 题</span>`;
-        const summaryHTML = summary_markdown && typeof summary_markdown === 'string' ? renderMarkdownWithMermaid(summary_markdown) : '<p class="empty-text">（尚未生成，稍后重试）</p>';
-        const summaryBlock = summary_markdown
+        card.className = 'knowledge-card' + (state.knowledge === name ? ' active' : '');
+        const summaryHTML = summaryMd && summaryMd.trim() ? renderMarkdownWithMermaid(summaryMd) : '<p class="empty-text" style="color:var(--text-muted)">（尚未生成，稍后重试）</p>';
+        const summaryBlock = summaryMd && summaryMd.trim()
           ? `<details class="knowledge-details"><summary>查看大模型总结</summary><div class="markdown">${{summaryHTML}}</div></details>`
           : `<div class="markdown empty">${{summaryHTML}}</div>`;
         card.innerHTML = `
-          <div class='knowledge-header'>
+          <div class="knowledge-header">
             <h3>${{name}}</h3>
-            ${{totalText}}
+            <span class="badge badge-accent">共 ${{count}} 题</span>
           </div>
           ${{summaryBlock}}
         `;
@@ -1157,20 +1431,60 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 
     function filterQuestions() {{
       return DATA.questions.filter((q) => {{
-        const matchKnowledge = state.knowledge === 'all' || q.knowledge_point === state.knowledge;
-        if (!matchKnowledge) return false;
+        const matchKP = state.knowledge === 'all' || q.knowledge_point === state.knowledge;
+        if (!matchKP) return false;
         if (!state.search) return true;
         const haystack = [
-          q.prompt,
-          q.knowledge_point,
-          q.model_response || '',
-          ...(q.sub_questions || []).map((sub) => [
-            sub.official_analysis || '',
-            (sub.options || []).map((opt) => opt.text).join(' ')
-          ].join(' '))
+          q.prompt, q.knowledge_point, q.model_response || '',
+          ...(q.sub_questions || []).map((sub) => [sub.official_analysis || '', (sub.options || []).map((o) => o.text).join(' ')].join(' '))
         ].join(' ').toLowerCase();
         return haystack.includes(state.search.toLowerCase());
       }});
+    }}
+
+    function buildSubQuestionHTML(sub, subIdx, q) {{
+      const correctCount = (sub.options || []).filter(o => o.is_correct).length;
+      const isMultiple = correctCount > 1;
+      const inputType = isMultiple ? 'checkbox' : 'radio';
+      const questionId = `q${{q.id || q.index}}_${{subIdx}}`;
+      const answers = sub.correct_letters || [];
+      const options = (sub.options || []).map((opt) => {{
+        const optionId = `${{questionId}}_${{opt.label}}`;
+        return `<li class="option-item"><label for="${{optionId}}" class="option-label"><input type="${{inputType}}" id="${{optionId}}" name="${{questionId}}" value="${{opt.label}}" class="option-input" /><span class="option-text">${{opt.label}}. ${{opt.text}}</span></label></li>`;
+      }}).join('');
+      const subQuestionText = sub.question ? `<div class="sub-question-text">${{md.render(sub.question)}}</div>` : '';
+      const correctAnswerDetail = sub.correct_answer
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>参考答案</summary><div class="markdown">${{md.render(sub.correct_answer)}}</div></details>` : '';
+      const answersP = answers.length ? `<p class="correct-answer" style="display:none;"><strong>参考答案：</strong>${{answers.join('、')}}</p>` : '';
+      const official = sub.official_analysis
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>官方解析</summary><div class="markdown">${{md.render(sub.official_analysis)}}</div></details>` : '';
+      const hasOptions = sub.options && sub.options.length > 0;
+      const interaction = hasOptions
+        ? `<ul class="options interactive-options">${{options}}</ul>
+           <div class="question-actions">
+             <button class="btn btn-primary submit-btn" onclick="submitAnswer('${{questionId}}')">提交答案</button>
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${{questionId}}')" style="display:none;">查看答案</button>
+           </div>`
+        : `<div class="question-actions">
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${{questionId}}')" style="display:inline-flex;">查看答案</button>
+           </div>`;
+      return `<div class="sub-question" data-question-id="${{questionId}}" data-correct-answers="${{answers.join(',')}}" data-is-multiple="${{isMultiple}}">
+        <h4>子题${{sub.label}}</h4>
+        ${{subQuestionText}}
+        ${{interaction}}
+        <div class="answer-feedback" style="display:none;"></div>
+        ${{answersP}}
+        ${{correctAnswerDetail}}
+        ${{official}}
+      </div>`;
+    }}
+
+    function buildAiNote(q) {{
+      const resp = typeof q.model_response === 'object' ? (q.model_response.response || '') : (q.model_response || '');
+      if (resp && resp.trim()) {{
+        return `<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown">${{renderMarkdownWithMermaid(resp)}}</div></details>`;
+      }}
+      return '<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown empty">暂无内容</div></details>';
     }}
 
     function renderQuestions() {{
@@ -1178,7 +1492,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       container.innerHTML = '';
       const results = filterQuestions();
       if (!results.length) {{
-        container.innerHTML = '<p>未找到匹配的题目。</p>';
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-text">未找到匹配的题目，试试其他关键词？</div></div>';
         return;
       }}
       updateStats(results);
@@ -1193,173 +1507,69 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 
     function renderSingleQuestion(questions) {{
       const container = document.getElementById('questionsContainer');
-      const currentQuestion = questions[state.currentQuestionIndex];
-      if (!currentQuestion) {{
-        container.innerHTML = '<p>没有更多题目了。</p>';
+      const cur = questions[state.currentQuestionIndex];
+      if (!cur) {{
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎉</div><div class="empty-state-text">没有更多题目了</div></div>';
         return;
       }}
-      const card = document.createElement('article');
-      card.className = 'card question-card';
-      const difficultyBadge = currentQuestion.difficulty ? `<span class="badge">难度：${{currentQuestion.difficulty}}</span>` : '';
-      const progressIndicator = `
-        <div class="quiz-progress">
-          <div class="progress-info">
-            <span>第 ${{state.currentQuestionIndex + 1}} 题 / 共 ${{questions.length}} 题</span>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: ${{((state.currentQuestionIndex + 1) / questions.length * 100).toFixed(1)}}%"></div>
-            </div>
-          </div>
+      const pct = ((state.currentQuestionIndex + 1) / questions.length * 100).toFixed(1);
+      const progressBar = `<div class="quiz-progress-bar">
+        <div class="qp-top">
+          <span class="qp-label">第 ${{state.currentQuestionIndex + 1}} 题 / 共 ${{questions.length}} 题</span>
+          <span class="qp-count">${{pct}}%</span>
         </div>
-      `;
-      const header = `
-        ${{progressIndicator}}
-        <div class='question-header'>
-          <h3>第${{currentQuestion.index}}题（题号：${{currentQuestion.sort || currentQuestion.index}}）</h3>
-          <span class='badge'>${{currentQuestion.knowledge_point}}</span>
-          ${{difficultyBadge}}
+        <div class="qp-bar"><div class="qp-fill" style="width:${{pct}}%"></div></div>
+      </div>`;
+      const diffBadge = cur.difficulty ? `<span class="badge badge-green">难度 ${{cur.difficulty}}</span>` : '';
+      const card = document.createElement('div');
+      card.innerHTML = progressBar;
+      const qCard = document.createElement('article');
+      qCard.className = 'question-card';
+      const subs = (cur.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, cur)).join('');
+      const nav = `<div class="quiz-nav">
+        <button class="btn btn-outline" onclick="previousQuestion()" ${{state.currentQuestionIndex === 0 ? 'disabled' : ''}}>← 上一题</button>
+        <button class="btn btn-success" onclick="toggleQuizMode()">📋 显示全部</button>
+        <button class="btn btn-outline" onclick="nextQuestion()" ${{state.currentQuestionIndex >= questions.length - 1 ? 'disabled' : ''}}>下一题 →</button>
+      </div>`;
+      qCard.innerHTML = `
+        <div class="question-header">
+          <h3>第${{cur.index}}题（题号：${{cur.sort || cur.index}}）</h3>
+          <span class="badge badge-accent">${{cur.knowledge_point}}</span>
+          ${{diffBadge}}
         </div>
-        <p>${{currentQuestion.prompt}}</p>
+        <p class="question-prompt">${{cur.prompt}}</p>
+        ${{subs}}
+        ${{nav}}
+        ${{buildAiNote(cur)}}
       `;
-      const subs = (currentQuestion.sub_questions || []).map((sub, subIdx) => {{
-        const correctCount = (sub.options || []).filter(opt => opt.is_correct).length;
-        const isMultiple = correctCount > 1;
-        const inputType = isMultiple ? 'checkbox' : 'radio';
-        const questionId = `q${{currentQuestion.id || currentQuestion.index}}_${{subIdx}}`;
-        const options = (sub.options || []).map((opt) => {{
-          const optionId = `${{questionId}}_${{opt.label}}`;
-          return `
-            <li class="option-item">
-              <label for="${{optionId}}" class="option-label">
-                <input type="${{inputType}}" id="${{optionId}}" name="${{questionId}}" value="${{opt.label}}" class="option-input" />
-                <span class="option-text">${{opt.label}}. ${{opt.text}}</span>
-              </label>
-            </li>
-          `;
-        }}).join('');
-        const answers = sub.correct_letters && sub.correct_letters.length
-          ? `<p class="correct-answer" style="display: none;"><strong>参考答案：</strong>${{sub.correct_letters.join('、')}}</p>`
-          : '';
-        const official = sub.official_analysis
-          ? `<details class="rich-details answer-analysis" style="display: none;"><summary>官方解析</summary><div class="markdown">${{md.render(sub.official_analysis)}}</div></details>`
-          : '';
-        const subQuestionText = sub.question
-          ? `<div class="sub-question-text">${{md.render(sub.question)}}</div>`
-          : '';
-        const correctAnswerDetail = sub.correct_answer
-          ? `<details class="rich-details answer-analysis" style="display: none;"><summary>参考答案</summary><div class="markdown">${{md.render(sub.correct_answer)}}</div></details>`
-          : '';
-        const hasOptions = sub.options && sub.options.length > 0;
-        const interactionHtml = hasOptions
-          ? `<ul class='options interactive-options'>${{options}}</ul>
-             <div class="question-actions">
-               <button class="submit-btn" onclick="submitAnswer('${{questionId}}')">提交答案</button>
-               <button class="show-answer-btn" onclick="showAnswer('${{questionId}}')" style="display: none;">查看答案</button>
-             </div>`
-          : `<div class="question-actions">
-               <button class="show-answer-btn" onclick="showAnswer('${{questionId}}')" style="display: inline-block;">查看答案</button>
-             </div>`;
-        return `
-          <div class='sub-question' data-question-id="${{questionId}}" data-correct-answers="${{(sub.correct_letters || []).join(',')}}" data-is-multiple="${{isMultiple}}">
-            <h4>子题${{sub.label}}</h4>
-            ${{subQuestionText}}
-            ${{interactionHtml}}
-            <div class="answer-feedback" style="display: none;"></div>
-            ${{answers}}
-            ${{correctAnswerDetail}}
-            ${{official}}
-          </div>
-        `;
-      }}).join('');
-      const navigation = `
-        <div class="quiz-navigation">
-          <button class="nav-btn" onclick="previousQuestion()" ${{state.currentQuestionIndex === 0 ? 'disabled' : ''}}>上一题</button>
-          <button class="nav-btn" onclick="nextQuestion()" ${{state.currentQuestionIndex >= questions.length - 1 ? 'disabled' : ''}}>下一题</button>
-          <button class="nav-btn toggle-mode-btn" onclick="toggleQuizMode()">显示所有题目</button>
-        </div>
-      `;
-      const aiNote = currentQuestion.model_response
-        ? `<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown">${{md.render(currentQuestion.model_response)}}</div></details>`
-        : '<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown empty">暂无内容</div></details>';
-      card.innerHTML = header + subs + navigation + aiNote;
-      container.append(card);
+      card.appendChild(qCard);
+      container.appendChild(card);
     }}
 
     function renderAllQuestions(results) {{
       const container = document.getElementById('questionsContainer');
-      const toggleButton = document.createElement('div');
-      toggleButton.className = 'quiz-mode-toggle';
-      toggleButton.innerHTML = '<button class="nav-btn toggle-mode-btn" onclick="toggleQuizMode()">单题模式</button>';
-      container.appendChild(toggleButton);
+      const toggle = document.createElement('div');
+      toggle.className = 'quiz-mode-toggle';
+      toggle.innerHTML = '<button class="btn btn-success" onclick="toggleQuizMode()">🎯 单题模式</button>';
+      container.appendChild(toggle);
       results.forEach((q) => {{
         const card = document.createElement('article');
-        card.className = 'card question-card';
-        const difficultyBadge = q.difficulty ? `<span class="badge">难度：${{q.difficulty}}</span>` : '';
-        const header = `
-          <div class='question-header'>
+        card.className = 'question-card';
+        const diffBadge = q.difficulty ? `<span class="badge badge-green">难度 ${{q.difficulty}}</span>` : '';
+        const subs = (q.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, q)).join('');
+        card.innerHTML = `
+          <div class="question-header">
             <h3>第${{q.index}}题（题号：${{q.sort || q.index}}）</h3>
-            <span class='badge'>${{q.knowledge_point}}</span>
-            ${{difficultyBadge}}
+            <span class="badge badge-accent">${{q.knowledge_point}}</span>
+            ${{diffBadge}}
           </div>
-          <p>${{q.prompt}}</p>
+          <p class="question-prompt">${{q.prompt}}</p>
+          ${{subs}}
+          ${{buildAiNote(q)}}
         `;
-        const subs = (q.sub_questions || []).map((sub, subIdx) => {{
-          const correctCount = (sub.options || []).filter(opt => opt.is_correct).length;
-          const isMultiple = correctCount > 1;
-          const inputType = isMultiple ? 'checkbox' : 'radio';
-          const questionId = `q${{q.id || q.index}}_${{subIdx}}`;
-          const options = (sub.options || []).map((opt) => {{
-            const optionId = `${{questionId}}_${{opt.label}}`;
-            return `
-              <li class="option-item">
-                <label for="${{optionId}}" class="option-label">
-                  <input type="${{inputType}}" id="${{optionId}}" name="${{questionId}}" value="${{opt.label}}" class="option-input" />
-                  <span class="option-text">${{opt.label}}. ${{opt.text}}</span>
-                </label>
-              </li>
-            `;
-          }}).join('');
-          const answers = sub.correct_letters && sub.correct_letters.length
-            ? `<p class="correct-answer" style="display: none;"><strong>参考答案：</strong>${{sub.correct_letters.join('、')}}</p>`
-            : '';
-          const official = sub.official_analysis
-            ? `<details class="rich-details answer-analysis" style="display: none;"><summary>官方解析</summary><div class="markdown">${{md.render(sub.official_analysis)}}</div></details>`
-            : '';
-          const subQuestionText = sub.question
-            ? `<div class="sub-question-text">${{md.render(sub.question)}}</div>`
-            : '';
-          const correctAnswerDetail = sub.correct_answer
-            ? `<details class="rich-details answer-analysis" style="display: none;"><summary>参考答案</summary><div class="markdown">${{md.render(sub.correct_answer)}}</div></details>`
-            : '';
-          const hasOptions = sub.options && sub.options.length > 0;
-          const interactionHtml = hasOptions
-            ? `<ul class='options interactive-options'>${{options}}</ul>
-               <div class="question-actions">
-                 <button class="submit-btn" onclick="submitAnswer('${{questionId}}')">提交答案</button>
-                 <button class="show-answer-btn" onclick="showAnswer('${{questionId}}')" style="display: none;">查看答案</button>
-               </div>`
-            : `<div class="question-actions">
-                 <button class="show-answer-btn" onclick="showAnswer('${{questionId}}')" style="display: inline-block;">查看答案</button>
-               </div>`;
-          return `
-            <div class='sub-question' data-question-id="${{questionId}}" data-correct-answers="${{(sub.correct_letters || []).join(',')}}" data-is-multiple="${{isMultiple}}">
-              <h4>子题${{sub.label}}</h4>
-              ${{subQuestionText}}
-              ${{interactionHtml}}
-              <div class="answer-feedback" style="display: none;"></div>
-              ${{answers}}
-              ${{correctAnswerDetail}}
-              ${{official}}
-            </div>
-          `;
-        }}).join('');
-        const aiNote = q.model_response
-          ? `<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown">${{md.render(q.model_response)}}</div></details>`
-          : '<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown empty">暂无内容</div></details>';
-        card.innerHTML = header + subs + aiNote;
-        container.append(card);
+        container.appendChild(card);
       }});
     }}
-
     function populateFilter() {{
       const select = document.getElementById('knowledgeFilter');
       const options = ['<option value="all">全部知识点</option>'];
@@ -1368,8 +1578,8 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       }});
       select.innerHTML = options.join('');
       if (state.knowledge !== 'all') select.value = state.knowledge;
-      select.addEventListener('change', (event) => {{
-        state.knowledge = event.target.value;
+      select.addEventListener('change', (e) => {{
+        state.knowledge = e.target.value;
         state.currentQuestionIndex = 0;
         saveState();
         renderKnowledge();
@@ -1379,9 +1589,14 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 
     function registerSearch() {{
       const input = document.getElementById('searchInput');
-      input.addEventListener('input', (event) => {{
-        state.search = event.target.value.trim();
-        renderQuestions();
+      let timer;
+      input.addEventListener('input', (e) => {{
+        clearTimeout(timer);
+        timer = setTimeout(() => {{
+          state.search = e.target.value.trim();
+          state.currentQuestionIndex = 0;
+          renderQuestions();
+        }}, 200);
       }});
     }}
 
@@ -1391,9 +1606,9 @@ def generate_html(site_data: dict, output_path: Path) -> None:
           startOnLoad: false,
           theme: 'default',
           themeVariables: {{
-            primaryColor: '#2563eb',
-            primaryTextColor: '#1f2937',
-            primaryBorderColor: '#3b82f6',
+            primaryColor: '#4f46e5',
+            primaryTextColor: '#1e293b',
+            primaryBorderColor: '#818cf8',
             lineColor: '#6b7280',
             secondaryColor: '#f3f4f6',
             tertiaryColor: '#ffffff'
@@ -1404,123 +1619,90 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 
     function renderMermaidCharts() {{
       if (window.mermaid) {{
-        const mermaidElements = document.querySelectorAll('.mermaid');
-        mermaidElements.forEach((element, index) => {{
-          const graphDefinition = element.textContent;
+        const els = document.querySelectorAll('.mermaid');
+        els.forEach((el, index) => {{
+          const def = el.textContent;
           const id = `mermaid-${{Date.now()}}-${{index}}`;
-          element.id = id;
-          mermaid.render(id + '-svg', graphDefinition).then((result) => {{
-            element.innerHTML = result.svg;
-          }}).catch((error) => {{
-            console.error('Mermaid rendering error:', error);
-            element.innerHTML = '<p style="color: #ef4444;">图表渲染失败</p>';
+          el.id = id;
+          mermaid.render(id + '-svg', def).then((result) => {{
+            el.innerHTML = result.svg;
+          }}).catch(() => {{
+            el.innerHTML = '<p style="color:var(--red);">图表渲染失败</p>';
           }});
         }});
       }}
     }}
 
-    function renderMarkdownWithMermaid(content) {{
-      if (!content) return '<p>（尚未生成，稍后重试）</p>';
-      const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
-      let processedContent = content.replace(mermaidRegex, (match, graphDef) => {{
-        const cleanGraphDef = graphDef.trim();
-        return `<div class="mermaid">${{cleanGraphDef}}</div>`;
-      }});
-      const htmlContent = md.render ? md.render(processedContent) : renderBasicMarkdown(processedContent);
-      return htmlContent;
-    }}
-
     function updateStats(questions) {{
-      const totalSubQuestions = questions.reduce((sum, q) => sum + (q.sub_questions || []).length, 0);
+      const totalSub = questions.reduce((s, q) => s + (q.sub_questions || []).length, 0);
       const answered = Object.keys(state.answeredQuestions).length;
       const correct = Object.values(state.answeredQuestions).filter(a => a.isCorrect).length;
       const incorrect = answered - correct;
-      state.stats = {{
-        total: totalSubQuestions,
-        answered: answered,
-        correct: correct,
-        incorrect: incorrect
-      }};
+      state.stats = {{ total: totalSub, answered, correct, incorrect }};
       renderStatsDisplay();
     }}
 
     function renderStatsDisplay() {{
-      const statsContainer = document.getElementById('statsContainer');
-      if (!statsContainer) return;
       const {{ total, answered, correct, incorrect }} = state.stats;
       const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
       const progress = total > 0 ? Math.round((answered / total) * 100) : 0;
-      statsContainer.innerHTML = `
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-number">${{total}}</div>
-            <div class="stat-label">总题数</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">${{answered}}</div>
-            <div class="stat-label">已答题</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">${{correct}}</div>
-            <div class="stat-label">答对</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">${{incorrect}}</div>
-            <div class="stat-label">答错</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">${{accuracy}}%</div>
-            <div class="stat-label">正确率</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">${{progress}}%</div>
-            <div class="stat-label">进度</div>
-          </div>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${{progress}}%"></div>
-        </div>
-      `;
+      const circumference = 2 * Math.PI * 52;
+      const offset = circumference - (accuracy / 100) * circumference;
+
+      const ring = document.getElementById('ringProgress');
+      if (ring) {{
+        ring.style.strokeDasharray = circumference;
+        ring.style.strokeDashoffset = offset;
+        ring.style.transition = 'stroke-dashoffset 0.6s ease';
+      }}
+      const ringPct = document.getElementById('ringPct');
+      if (ringPct) ringPct.textContent = accuracy + '%';
+
+      const snTotal = document.getElementById('snTotal');
+      const snAnswered = document.getElementById('snAnswered');
+      const snCorrect = document.getElementById('snCorrect');
+      const snIncorrect = document.getElementById('snIncorrect');
+      if (snTotal) snTotal.textContent = total;
+      if (snAnswered) snAnswered.textContent = answered;
+      if (snCorrect) snCorrect.textContent = correct;
+      if (snIncorrect) snIncorrect.textContent = incorrect;
+
+      const fill = document.getElementById('statsProgressFill');
+      const txt = document.getElementById('statsProgressText');
+      if (fill) fill.style.width = progress + '%';
+      if (txt) txt.textContent = `进度 ${{progress}}%（${{answered}}/${{total}}）`;
     }}
 
     function submitAnswer(questionId) {{
       const questionDiv = document.querySelector(`[data-question-id="${{questionId}}"]`);
       if (!questionDiv) return;
-      const isMultiple = questionDiv.dataset.isMultiple === 'true';
       const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
       const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
-      const selectedAnswers = Array.from(inputs).filter(input => input.checked).map(input => input.value);
+      const selectedAnswers = Array.from(inputs).filter(i => i.checked).map(i => i.value);
       if (selectedAnswers.length === 0) {{
         alert('请选择答案后再提交！');
         return;
       }}
       inputs.forEach(input => input.disabled = true);
-      const isCorrect = correctAnswers.length === selectedAnswers.length && 
-                       correctAnswers.every(answer => selectedAnswers.includes(answer));
+      const isCorrect = correctAnswers.length === selectedAnswers.length &&
+                       correctAnswers.every(a => selectedAnswers.includes(a));
       const feedbackDiv = questionDiv.querySelector('.answer-feedback');
       feedbackDiv.style.display = 'block';
       feedbackDiv.className = `answer-feedback ${{isCorrect ? 'correct' : 'incorrect'}}`;
       feedbackDiv.textContent = isCorrect ? '✓ 回答正确！' : '✗ 回答错误';
       inputs.forEach(input => {{
         const optionItem = input.closest('.option-item');
-        if (input.checked) {{
-          optionItem.classList.add('selected');
-        }}
-        if (correctAnswers.includes(input.value)) {{
-          optionItem.classList.add('correct');
-        }} else if (input.checked) {{
-          optionItem.classList.add('incorrect');
-        }}
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
       }});
       const submitBtn = questionDiv.querySelector('.submit-btn');
       const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
       submitBtn.style.display = 'none';
-      showAnswerBtn.style.display = 'inline-block';
+      showAnswerBtn.style.display = 'inline-flex';
       state.answeredQuestions[questionId] = {{ selected: selectedAnswers, isCorrect }};
       saveState();
-      if (!isCorrect) {{
-        showAnswer(questionId);
-      }}
+      if (!isCorrect) showAnswer(questionId);
       const results = filterQuestions();
       updateStats(results);
     }}
@@ -1529,14 +1711,9 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       const questionDiv = document.querySelector(`[data-question-id="${{questionId}}"]`);
       if (!questionDiv) return;
       const correctAnswerP = questionDiv.querySelector('.correct-answer');
-      if (correctAnswerP) {{
-        correctAnswerP.style.display = 'block';
-      }}
+      if (correctAnswerP) correctAnswerP.style.display = 'block';
       const analysisDetailsList = questionDiv.querySelectorAll('.answer-analysis');
-      analysisDetailsList.forEach(details => {{
-        details.style.display = 'block';
-        details.open = true;
-      }});
+      analysisDetailsList.forEach(d => {{ d.style.display = 'block'; d.open = true; }});
       const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
       if (showAnswerBtn) showAnswerBtn.style.display = 'none';
     }}
@@ -1546,6 +1723,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         state.currentQuestionIndex--;
         saveState();
         renderQuestions();
+        window.scrollTo({{ top: 0, behavior: 'smooth' }});
       }}
     }}
 
@@ -1555,14 +1733,13 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         state.currentQuestionIndex++;
         saveState();
         renderQuestions();
+        window.scrollTo({{ top: 0, behavior: 'smooth' }});
       }}
     }}
 
     function toggleQuizMode() {{
       state.quizMode = !state.quizMode;
-      if (state.quizMode) {{
-        state.currentQuestionIndex = 0;
-      }}
+      if (state.quizMode) state.currentQuestionIndex = 0;
       saveState();
       renderQuestions();
     }}
@@ -1570,8 +1747,6 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     document.addEventListener('DOMContentLoaded', () => {{
       initMermaid();
       loadState();
-      const filterSelect = document.getElementById('knowledgeFilter');
-      if (filterSelect && state.knowledge !== 'all') filterSelect.value = state.knowledge;
       populateFilter();
       registerSearch();
       renderKnowledge();
@@ -1588,14 +1763,13 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         scrollTimer = setTimeout(() => saveState(), 300);
       }});
       window.addEventListener('beforeunload', () => saveState());
-      setTimeout(() => {{
-        renderMermaidCharts();
-      }}, 100);
+      setTimeout(() => renderMermaidCharts(), 100);
     }});
   </script>
 </body>
 </html>
 """
+
 
     output_path.write_text(html, encoding='utf-8')
 
