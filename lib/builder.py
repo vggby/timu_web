@@ -794,6 +794,14 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       border-left-color: var(--accent);
       box-shadow: 0 0 0 2px rgba(79,70,229,0.2), var(--shadow-md);
     }}
+    .knowledge-card.expanded {{
+      grid-column: 1 / -1;
+      transition: grid-column 0s;
+    }}
+    .knowledge-card.expanded .knowledge-details {{
+      max-height: 60vh;
+      overflow-y: auto;
+    }}
     .knowledge-header {{
       display: flex;
       justify-content: space-between;
@@ -2060,6 +2068,13 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       registerSearch();
       renderKnowledge();
       renderQuestions();
+      // Expand knowledge card to full width when details opens
+      document.getElementById('knowledgeContainer').addEventListener('toggle', (e) => {{
+        if (e.target.classList.contains('knowledge-details')) {{
+          const card = e.target.closest('.knowledge-card');
+          if (card) card.classList.toggle('expanded', e.target.open);
+        }}
+      }}, true);
       Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
       const results = filterQuestions();
       updateStats(results);
