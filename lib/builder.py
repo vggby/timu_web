@@ -1924,12 +1924,17 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       if (showAnswerBtn) showAnswerBtn.style.display = 'none';
     }}
 
+    function scrollToQuestion() {{
+      const el = document.getElementById('questionsContainer') || document.querySelector('.question-card');
+      if (el) el.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+    }}
+
     function previousQuestion() {{
       if (state.currentQuestionIndex > 0) {{
         state.currentQuestionIndex--;
         saveState();
         renderQuestions();
-        window.scrollTo({{ top: 0, behavior: 'smooth' }});
+        scrollToQuestion();
         animateCardIn();
       }}
     }}
@@ -1940,7 +1945,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         state.currentQuestionIndex++;
         saveState();
         renderQuestions();
-        window.scrollTo({{ top: 0, behavior: 'smooth' }});
+        scrollToQuestion();
         animateCardIn();
       }}
     }}
