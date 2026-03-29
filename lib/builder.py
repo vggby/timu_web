@@ -1319,8 +1319,8 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 
     function renderBasicMarkdown(raw = '') {{
       if (!raw) return '<p>（尚未生成，稍后重试）</p>';
-      const normalized = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-      const lines = normalized.split('\n');
+      const normalized = raw.split('\\r\\n').join('\\n').split('\\r').join('\\n');
+      const lines = normalized.split('\\n');
       const htmlParts = [];
       let inUl = false;
       let inOl = false;
@@ -1477,7 +1477,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 
     function renderMarkdownWithMermaid(content) {{
       if (!content) return '<p>（尚未生成，稍后重试）</p>';
-      const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
+      const mermaidRegex = /```mermaid\\n([\s\S]*?)\\n```/g;
       let processed = content.replace(mermaidRegex, (match, graphDef) => `<div class="mermaid">${{graphDef.trim()}}</div>`);
       return md.render ? md.render(processed) : renderBasicMarkdown(processed);
     }}
@@ -1932,7 +1932,12 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 """
 
 
-    output_path.write_text(html, encoding='utf-8')
+    # Write HTML, fixing \r\n normalization issue
+    html_bytes = html.encode('utf-8')
+    # Restore CR+LF regex pattern that Python text mode strips
+    html_bytes = html_bytes.replace(b'__NORMALIZED_LINE__',
+        b"const normalized = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');")
+    output_path.write_bytes(html_bytes)
 
 
 def build_quiz_site(
