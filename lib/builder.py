@@ -496,6 +496,66 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       --glass: rgba(255,255,255,0.04);
       --glass-border: rgba(255,255,255,0.08);
     }}
+    [data-theme="light"] {{
+      --bg: #f0f4f8;
+      --bg-subtle: #e8edf2;
+      --card: #ffffff;
+      --card-hover: #f8f9fc;
+      --accent: #6c5ce7;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108, 92, 231, 0.10);
+      --accent-bg-hover: rgba(108, 92, 231, 0.18);
+      --green: #10b981;
+      --green-bg: rgba(16, 185, 129, 0.10);
+      --green-border: rgba(16, 185, 129, 0.30);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.10);
+      --red-border: rgba(239, 68, 68, 0.30);
+      --orange: #f59e0b;
+      --text: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08);
+      --glass: rgba(0,0,0,0.02);
+      --glass-border: rgba(0,0,0,0.08);
+    }}
+    /* ===== Theme toggle button ===== */
+    .theme-toggle {{
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.15s;
+      font-family: var(--font-sans);
+    }}
+    .theme-toggle:hover {{
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.04);
+    }}
+    [data-theme="light"] .theme-toggle {{
+      background: rgba(0,0,0,0.12);
+      border-color: rgba(0,0,0,0.18);
+      color: #fff;
+    }}
+    [data-theme="light"] .theme-toggle:hover {{
+      background: rgba(0,0,0,0.20);
+    }}
     body {{
       margin: 0;
       background: var(--bg);
@@ -1266,6 +1326,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
 <body>
   <main>
     <header class="page-header">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌙 暗色</button>
       <h1>📝 {site_data['meta'].get('paper_name', '刷题笔记')}</h1>
       <p class="meta-line">共 {site_data['meta'].get('item_count')} 题 · 生成于 {site_data['generated_at']}</p>
     </header>
@@ -1316,6 +1377,31 @@ def generate_html(site_data: dict, output_path: Path) -> None:
   </main>
   <script>
     const DATA = {data_json};
+
+    // ===== Theme toggle =====
+    (function() {{
+      const THEME_KEY = 'quiz_theme';
+      const root = document.documentElement;
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved) root.setAttribute('data-theme', saved);
+      function updateBtn() {{
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        const isLight = root.getAttribute('data-theme') === 'light';
+        btn.textContent = isLight ? '🌙 暗色' : '☀️ 亮色';
+        btn.setAttribute('aria-label', isLight ? '切换到暗色模式' : '切换到亮色模式');
+      }}
+      document.addEventListener('DOMContentLoaded', () => {{
+        updateBtn();
+        document.getElementById('themeToggle').addEventListener('click', () => {{
+          const isLight = root.getAttribute('data-theme') === 'light';
+          const next = isLight ? 'dark' : 'light';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem(THEME_KEY, next);
+          updateBtn();
+        }});
+      }});
+    }})();
 
     function renderBasicMarkdown(raw = '') {{
       if (!raw) return '<p>（尚未生成，稍后重试）</p>';
