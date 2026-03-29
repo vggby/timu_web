@@ -885,6 +885,52 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       60% {{ transform: scale(1.02); }}
       100% {{ opacity: 1; transform: scale(1); }}
     }}
+    @keyframes toastIn {{
+      from {{ opacity: 0; transform: translateX(-50%) translateY(12px); }}
+      to   {{ opacity: 1; transform: translateX(-50%) translateY(0); }}
+    }}
+    @keyframes fadeSlideUp {{
+      from {{ opacity: 0; transform: translateY(8px); }}
+      to   {{ opacity: 1; transform: translateY(0); }}
+    }}
+
+    /* ===== Toast ===== */
+    #_toast {{
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 9999;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }}
+    #_toast._toast-show {{
+      animation: toastIn 0.25s ease forwards;
+    }}
+    #_toast._toast-info  {{ background: var(--accent);  color: #fff; }}
+    #_toast._toast-warn  {{ background: var(--orange);  color: #000; }}
+    #_toast._toast-ok    {{ background: var(--green);   color: #000; }}
+    #_toast._toast-err   {{ background: var(--red);     color: #fff; }}
+
+    /* ===== Answer Feedback ===== */
+    .answer-feedback {{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: fadeSlideUp 0.3s ease;
+    }}
+    .feedback-icon {{ font-size: 1.1rem; }}
+    .feedback-msg {{ flex: 1; }}
 
     /* ===== Buttons ===== */
     .question-actions {{
@@ -951,19 +997,23 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     .btn-outline:disabled {{
       color: var(--text-muted);
       border-color: var(--border);
-      background: var(--bg-subtle);
+      background: transparent;
       cursor: not-allowed;
+      opacity: 0.4;
+    }}
+    .btn-ghost {{
+      background: transparent;
+      border: 1.5px solid transparent;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }}
+    .btn-ghost:hover {{
+      color: var(--text);
+      background: var(--glass);
+      border-color: var(--border);
     }}
 
     /* ===== Feedback ===== */
-    .answer-feedback {{
-      padding: 12px 16px;
-      border-radius: var(--radius-sm);
-      margin: 10px 0;
-      font-weight: 600;
-      font-size: 0.95rem;
-      animation: bounceIn 0.35s ease;
-    }}
     .answer-feedback.correct {{
       background: var(--green-bg);
       color: var(--green);
@@ -1542,10 +1592,11 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       const qCard = document.createElement('article');
       qCard.className = 'question-card';
       const subs = (cur.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, cur)).join('');
+      const isAnswered = Object.keys(state.answeredQuestions).some(k => k.startsWith(`q${{cur.id || cur.index}}_`));
       const nav = `<div class="quiz-nav">
-        <button class="btn btn-outline" onclick="previousQuestion()" ${{state.currentQuestionIndex === 0 ? 'disabled' : ''}}>← 上一题</button>
-        <button class="btn btn-success" onclick="toggleQuizMode()">📋 显示全部</button>
-        <button class="btn btn-outline" onclick="nextQuestion()" ${{state.currentQuestionIndex >= questions.length - 1 ? 'disabled' : ''}}>下一题 →</button>
+        <button class="btn btn-outline" onclick="previousQuestion()" ${{state.currentQuestionIndex === 0 ? 'disabled' : ''}} title="快捷键 ←">← 上一题</button>
+        <button class="btn btn-ghost" onclick="toggleQuizMode()">📋 全部题目</button>
+        <button class="btn btn-outline" onclick="nextQuestion()" ${{state.currentQuestionIndex >= questions.length - 1 ? 'disabled' : ''}} title="快捷键 →">下一题 →</button>
       </div>`;
       qCard.innerHTML = `
         <div class="question-header">
@@ -1699,7 +1750,9 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
       const selectedAnswers = Array.from(inputs).filter(i => i.checked).map(i => i.value);
       if (selectedAnswers.length === 0) {{
-        alert('请选择答案后再提交！');
+        showToast('请先选择答案', 'warn');
+        const ul = questionDiv.querySelector('.options');
+        if (ul) {{ ul.style.animation = 'shake 0.4s ease'; setTimeout(() => ul.style.animation = '', 500); }}
         return;
       }}
       inputs.forEach(input => input.disabled = true);
@@ -1708,7 +1761,9 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       const feedbackDiv = questionDiv.querySelector('.answer-feedback');
       feedbackDiv.style.display = 'block';
       feedbackDiv.className = `answer-feedback ${{isCorrect ? 'correct' : 'incorrect'}}`;
-      feedbackDiv.textContent = isCorrect ? '✓ 回答正确！' : '✗ 回答错误';
+      feedbackDiv.innerHTML = isCorrect
+        ? '<span class="feedback-icon">✓</span><span class="feedback-msg">回答正确！继续加油</span>'
+        : '<span class="feedback-icon">✗</span><span class="feedback-msg">回答错误，看看解析吧</span>';
       inputs.forEach(input => {{
         const optionItem = input.closest('.option-item');
         if (input.checked) optionItem.classList.add('selected');
@@ -1724,6 +1779,10 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       if (!isCorrect) showAnswer(questionId);
       const results = filterQuestions();
       updateStats(results);
+      // 平滑滚动到反馈区
+      setTimeout(() => {{
+        feedbackDiv.scrollIntoView({{ behavior: 'smooth', block: 'nearest' }});
+      }}, 100);
     }}
 
     function showAnswer(questionId) {{
@@ -1743,6 +1802,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         saveState();
         renderQuestions();
         window.scrollTo({{ top: 0, behavior: 'smooth' }});
+        animateCardIn();
       }}
     }}
 
@@ -1753,7 +1813,40 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         saveState();
         renderQuestions();
         window.scrollTo({{ top: 0, behavior: 'smooth' }});
+        animateCardIn();
       }}
+    }}
+
+    function animateCardIn() {{
+      setTimeout(() => {{
+        const card = document.querySelector('.question-card');
+        if (card) {{
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(12px)';
+          card.style.transition = 'none';
+          requestAnimationFrame(() => {{
+            requestAnimationFrame(() => {{
+              card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }});
+          }});
+        }}
+      }}, 10);
+    }}
+
+    let _toastTimer;
+    function showToast(msg, type = 'info') {{
+      let toast = document.getElementById('_toast');
+      if (!toast) {{
+        toast = document.createElement('div');
+        toast.id = '_toast';
+        document.body.appendChild(toast);
+      }}
+      toast.textContent = msg;
+      toast.className = '_toast-show _toast-' + type;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => {{ toast.className = ''; }}, 2200);
     }}
 
     function toggleQuizMode() {{
@@ -1782,6 +1875,13 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         scrollTimer = setTimeout(() => saveState(), 300);
       }});
       window.addEventListener('beforeunload', () => saveState());
+      // 键盘左右键翻页
+      document.addEventListener('keydown', (e) => {{
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (!state.quizMode) return;
+        if (e.key === 'ArrowRight' || e.key === 'l') nextQuestion();
+        if (e.key === 'ArrowLeft'  || e.key === 'h') previousQuestion();
+      }});
       setTimeout(() => renderMermaidCharts(), 100);
     }});
   </script>
