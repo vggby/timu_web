@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2013年11月系统架构真题</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@13/dist/markdown-it.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --bg: #0a0a0f;
+      --bg-subtle: #111118;
+      --card: #16161f;
+      --card-hover: #1c1c28;
+      --accent: #7c6ff7;
+      --accent-light: #a89cf8;
+      --accent-bg: rgba(124, 111, 247, 0.12);
+      --accent-bg-hover: rgba(124, 111, 247, 0.2);
+      --green: #34d399;
+      --green-bg: rgba(52, 211, 153, 0.12);
+      --green-border: rgba(52, 211, 153, 0.35);
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.12);
+      --red-border: rgba(248, 113, 113, 0.35);
+      --orange: #fbbf24;
+      --text: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+    [data-theme="light"] {
+      --bg: #f0f4f8;
+      --bg-subtle: #e8edf2;
+      --card: #ffffff;
+      --card-hover: #f8f9fc;
+      --accent: #6c5ce7;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108, 92, 231, 0.10);
+      --accent-bg-hover: rgba(108, 92, 231, 0.18);
+      --green: #10b981;
+      --green-bg: rgba(16, 185, 129, 0.10);
+      --green-border: rgba(16, 185, 129, 0.30);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.10);
+      --red-border: rgba(239, 68, 68, 0.30);
+      --orange: #f59e0b;
+      --text: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08);
+      --glass: rgba(0,0,0,0.02);
+      --glass-border: rgba(0,0,0,0.08);
+    }
+    /* ===== Theme toggle button ===== */
+    .theme-toggle {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.15s;
+      font-family: var(--font-sans);
+    }
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.04);
+    }
+    [data-theme="light"] .theme-toggle {
+      background: rgba(0,0,0,0.12);
+      border-color: rgba(0,0,0,0.18);
+      color: #fff;
+    }
+    [data-theme="light"] .theme-toggle:hover {
+      background: rgba(0,0,0,0.20);
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* ===== Header ===== */
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      color: #fff;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .page-header .meta-line {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Controls ===== */
+    .controls-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .controls-bar select,
+    .controls-bar input {
+      flex: 1 1 200px;
+      min-width: 0;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+      -webkit-appearance: none;
+    }
+    .controls-bar select:focus,
+    .controls-bar input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    /* ===== Stats Ring ===== */
+    .stats-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .stats-card h2 {
+      margin: 0 0 20px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stats-layout {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .ring-container {
+      flex-shrink: 0;
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    .ring-container svg {
+      transform: rotate(-90deg);
+    }
+    .ring-container .ring-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .ring-container .ring-pct {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1.2;
+    }
+    .ring-container .ring-text {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+    .stats-numbers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      flex: 1;
+      min-width: 200px;
+    }
+    .sn-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .sn-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .sn-val.green { color: var(--green); }
+    .sn-val.red { color: var(--red); }
+    .sn-val.accent { color: var(--accent); }
+    .sn-val.orange { color: var(--orange); }
+    .sn-lbl {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .stats-progress {
+      margin-top: 16px;
+    }
+    .stats-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stats-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+    .stats-progress-text {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    /* ===== Knowledge Section ===== */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .knowledge-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--accent-light);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+    .knowledge-card:nth-child(3n+1) { border-left-color: #4f46e5; }
+    .knowledge-card:nth-child(3n+2) { border-left-color: #0ea5e9; }
+    .knowledge-card:nth-child(3n+3) { border-left-color: #8b5cf6; }
+    .knowledge-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .knowledge-card.active {
+      border-left-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(79,70,229,0.2), var(--shadow-md);
+    }
+    .knowledge-card.expanded {
+      grid-column: 1 / -1;
+      transition: grid-column 0s;
+    }
+    .knowledge-card.expanded .knowledge-details {
+      max-height: none;
+    }
+    .knowledge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .knowledge-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-accent {
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+    .kp-count-btn {
+      cursor: pointer;
+      transition: background 0.18s, transform 0.15s;
+      user-select: none;
+    }
+    .kp-count-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.06);
+    }
+    .badge-green {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+    .knowledge-details {
+      margin-top: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+    }
+    .knowledge-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent);
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .knowledge-details summary::before {
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .knowledge-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .knowledge-details .markdown {
+      margin-top: 10px;
+    }
+    .knowledge-details[open] summary {
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    /* ===== Question Cards ===== */
+    .question-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .question-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .question-header h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .question-prompt {
+      margin: 0 0 16px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .sub-question {
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .sub-question h4 {
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .sub-question-text {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Options ===== */
+    ul.options {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+    }
+    .option-item {
+      margin-bottom: 8px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+    .option-item:hover {
+      border-color: var(--accent-light);
+      background: var(--accent-bg);
+      transform: translateX(2px);
+    }
+    .option-label {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      cursor: pointer;
+      gap: 12px;
+    }
+    .option-input {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+    }
+    .option-text {
+      flex: 1;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    .option-item.selected {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+    }
+    .option-item.correct {
+      border-color: var(--green);
+      background: var(--green-bg);
+      animation: correctPulse 0.5s ease;
+    }
+    .option-item.incorrect {
+      border-color: var(--red);
+      background: var(--red-bg);
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+    @keyframes correctPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.01); }
+      100% { transform: scale(1); }
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      60% { transform: scale(1.02); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Toast ===== */
+    #_toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 9999;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
+    #_toast._toast-show {
+      animation: toastIn 0.25s ease forwards;
+    }
+    #_toast._toast-info  { background: var(--accent);  color: #fff; }
+    #_toast._toast-warn  { background: var(--orange);  color: #000; }
+    #_toast._toast-ok    { background: var(--green);   color: #000; }
+    #_toast._toast-err   { background: var(--red);     color: #fff; }
+
+    /* ===== Answer Feedback ===== */
+    .answer-feedback {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: fadeSlideUp 0.3s ease;
+    }
+    .feedback-icon { font-size: 1.1rem; }
+    .feedback-msg { flex: 1; }
+
+    /* ===== Buttons ===== */
+    .question-actions {
+      margin: 16px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 22px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(79,70,229,0.3);
+    }
+    .btn-primary:hover {
+      background: #6d62e0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79,70,229,0.35);
+    }
+    .btn-primary:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-warning {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(245,158,11,0.3);
+    }
+    .btn-warning:hover {
+      background: #e4a320;
+      transform: translateY(-1px);
+    }
+    .btn-success {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(16,185,129,0.3);
+    }
+    .btn-success:hover {
+      background: #2ab77f;
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: var(--card);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+    .btn-outline:hover {
+      background: var(--accent-bg);
+    }
+    .btn-outline:disabled {
+      color: var(--text-muted);
+      border-color: var(--border);
+      background: transparent;
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid transparent;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      background: var(--glass);
+      border-color: var(--border);
+    }
+
+    /* ===== Feedback ===== */
+    .answer-feedback.correct {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-border);
+    }
+    .answer-feedback.incorrect {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+    .correct-answer {
+      background: var(--green-bg);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--green-border);
+      margin: 8px 0;
+      font-size: 0.95rem;
+    }
+
+    /* ===== Quiz Navigation ===== */
+    .quiz-progress-bar {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .qp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .qp-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .qp-count {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .qp-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .qp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .quiz-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .quiz-mode-toggle {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    /* ===== Details / Panels ===== */
+    .rich-details {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-top: 10px;
+    }
+    .rich-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent-light);
+      user-select: none;
+      transition: color 0.2s;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rich-details summary::before {
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .rich-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .rich-details summary:hover {
+      color: var(--accent);
+    }
+    .rich-details[open] summary {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rich-details .markdown {
+      margin-top: 8px;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    .answer-analysis {
+      margin-top: 10px;
+    }
+    /* ===== Markdown ===== */
+    .markdown {
+      line-height: 1.7;
+      color: inherit;
+      font-size: 0.95rem;
+    }
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
+      margin: 1em 0 0.5em;
+      font-weight: 700;
+    }
+    .markdown h1, .md-heading.h2-equiv { font-size: 1.3rem; color: var(--text); }
+    .markdown h2, .md-heading { font-size: 1.15rem; color: var(--text); }
+    .markdown h3 { font-size: 1.05rem; }
+    .md-heading { margin: 1em 0 0.4em; font-weight: 700; }
+    .md-hr { border: none; border-top: 1px solid var(--border); margin: 1em 0; }
+    .markdown p { margin: 0.5em 0; }
+    .markdown ul, .markdown ol { padding-left: 1.5em; margin: 0.5em 0; }
+    .markdown li { margin-bottom: 0.3em; }
+    .markdown table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+    .markdown th, .markdown td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+    }
+    .markdown th {
+      background: var(--accent-bg);
+      font-weight: 600;
+    }
+    .markdown code {
+      background: rgba(99,102,241,0.1);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      font-size: 0.88em;
+    }
+    .markdown pre {
+      background: #0d0d14;
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-size: 0.88rem;
+    }
+    .markdown pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    .markdown img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-xs);
+    }
+    .markdown.empty {
+      color: var(--text-muted);
+    }
+    .mermaid {
+      text-align: center;
+      margin: 1rem 0;
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      border: 1px solid var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* ===== Empty State ===== */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .empty-state-text {
+      font-size: 1rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      main {
+        padding: 16px 12px 48px;
+      }
+      .page-header {
+        padding: 24px 20px;
+        border-radius: var(--radius-sm);
+      }
+      .page-header h1 {
+        font-size: 1.35rem;
+      }
+      .controls-bar {
+        flex-direction: column;
+      }
+      .controls-bar select,
+      .controls-bar input {
+        flex: 1 1 100%;
+      }
+      .stats-layout {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .ring-container {
+        margin: 0 auto;
+      }
+      .stats-numbers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .knowledge-grid {
+        grid-template-columns: 1fr;
+      }
+      .question-card {
+        padding: 18px 16px;
+      }
+      .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .option-label {
+        padding: 14px 16px;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
+      }
+      .quiz-nav {
+        flex-direction: column;
+      }
+      .quiz-nav .btn {
+        width: 100%;
+      }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .knowledge-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌙 暗色</button>
+      <h1>📝 2013年11月系统架构真题</h1>
+      <p class="meta-line">共 1 题 · 生成于 2026-02-25 09:43:56</p>
+    </header>
+
+    <div class="controls-bar">
+      <select id="knowledgeFilter" aria-label="筛选知识点"></select>
+      <input id="searchInput" type="search" placeholder="🔍 搜索题干 / 解析 / AI 笔记" aria-label="搜索题目" />
+    </div>
+
+    <section class="stats-card" aria-label="答题统计">
+      <h2>📊 答题统计</h2>
+      <div id="statsContainer">
+        <div class="stats-layout">
+          <div class="ring-container">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#2d2d3f" stroke-width="10"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="10"
+                stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round" id="ringProgress"/>
+            </svg>
+            <div class="ring-label">
+              <span class="ring-pct" id="ringPct">0%</span>
+              <span class="ring-text">正确率</span>
+            </div>
+          </div>
+          <div class="stats-numbers">
+            <div class="sn-item"><div class="sn-val accent" id="snTotal">0</div><div class="sn-lbl">总题数</div></div>
+            <div class="sn-item"><div class="sn-val accent" id="snAnswered">0</div><div class="sn-lbl">已答题</div></div>
+            <div class="sn-item"><div class="sn-val green" id="snCorrect">0</div><div class="sn-lbl">答对</div></div>
+            <div class="sn-item"><div class="sn-val red" id="snIncorrect">0</div><div class="sn-lbl">答错</div></div>
+          </div>
+        </div>
+        <div class="stats-progress">
+          <div class="stats-progress-bar"><div class="stats-progress-fill" id="statsProgressFill" style="width:0%"></div></div>
+          <div class="stats-progress-text" id="statsProgressText">进度 0%</div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="知识点总结">
+      <h2 class="section-title">💡 知识点总结</h2>
+      <div id="knowledgeContainer" class="knowledge-grid"><article class='card knowledge-card' style='cursor:pointer' onclick="jumpToKnowledge('系统安全')">
+              <div class='knowledge-header'>
+                <h3>系统安全</h3>
+                <span class='badge badge-accent kp-count-btn' title='点击刷此知识点题库' onclick="event.stopPropagation();jumpToKnowledge('系统安全')">共 1 题 ▶</span>
+              </div>
+              <details class='knowledge-details'><summary>查看大模型总结</summary><div class='markdown'><h2 class="md-heading">系统安全知识点结构化要点清单</h2><hr class="md-hr" /><h3 class="md-heading">一、用户身份鉴别机制</h3><p><strong>核心定义/结论</strong></p><ul><li>口令认证：实现简单、成本低，但易遭受暴力破解、字典攻击、社工攻击，口令传输/存储若无加密保护则极易被窃取</li><li>PKI（公钥体系认证）：基于非对称加密，私钥仅存于本地从不传输，可实现身份认证与数据保护一体化，安全性显著高于口令认证</li></ul><p><strong>典型题型与解题要领</strong></p><ul><li>题型：给定业务场景，要求选择并论证身份鉴别方案</li><li>解题要领：从&quot;安全性 vs 效率&quot;两个维度分析，结合用户规模、数据敏感程度、网络环境综合判断。用户规模小（≤100人）时，PKI的计算开销完全可接受，优先推荐PKI</li></ul><p><strong>易错点与注意事项</strong></p><ul><li>不能只说&quot;PKI更安全&quot;就结束，必须说明为什么口令认证在该场景下不够用（传输风险、存储风险、用户行为风险）</li><li>注意PKI的优势不只是&quot;安全&quot;，还有&quot;私钥绑定用户身份&quot;这一特性，可同时支撑后续数据保护需求</li></ul><hr class="md-hr" /><h3 class="md-heading">二、数据加密方式选择（对称加密 + 数字信封）</h3><p><strong>核心定义/结论</strong></p><ul><li>块加密：数据分组处理，安全性高，适合中小规模数据</li><li>流加密：逐位/逐字节与密钥流异或，处理大文件效率高，适合数百兆级别文件</li><li>数字信封：用接收方公钥加密对称密钥（放文件头），用对称密钥流加密数据正文，兼顾密钥传输安全与大数据处理效率</li></ul><p><strong>典型题型与解题要领</strong></p><ul><li>题型：给定文件规模和安全需求，要求设计加密方案并说明加解密流程</li><li>解题要领：</li><li>文件大 → 流加密（性能优先）</li><li>密钥分发问题 → 数字信封（非对称加密保护对称密钥）</li><li>描述流程时要分&quot;加密过程&quot;和&quot;解密过程&quot;两步写清楚</li></ul><p><strong>易错点与注意事项</strong></p><ul><li>不要混淆&quot;非对称加密数据&quot;和&quot;非对称加密密钥&quot;，非对称加密只用于保护密钥，不直接加密大文件</li><li>数字信封中对称密钥是临时生成的，每次加密应使用不同密钥，不要描述成固定密钥</li></ul><hr class="md-hr" /><h3 class="md-heading">三、数据库透明加密 vs 加解密API</h3><p><strong>核心定义/结论</strong></p><ul><li>加解密API：应用层主动调用，灵活但需修改代码，安全职责分散，维护成本高</li><li>透明加密（TDE）：DBMS自动完成加解密，应用层无感知，支持按字段/表/库配置不同强度密钥，安全管理集中，开发负担低</li></ul><p><strong>典型题型与解题要领</strong></p><ul><li>题型：给定&quot;减少应用改造负担&quot;或&quot;分级加密&quot;需求，要求选择数据库加密方案并说明理由</li><li>解题要领：抓住两个关键词——&quot;应用程序是否需要改动&quot;和&quot;安全管理是否集中&quot;，需求中出现&quot;减少负担&quot;或&quot;不同字段不同强度&quot;时，直接指向透明加密</li></ul><p><strong>易错点与注意事项</strong></p><ul><li>不要把透明加密理解为&quot;不安全&quot;，它只是对应用层透明，底层加密强度不低</li><li>加解密API并非一无是处，当需要极细粒度的业务逻辑控制时仍有价值，答题时要客观对比而非直接否定</li></ul><hr class="md-hr" /><h3 class="md-heading">四、推荐复习顺序</h3><ol><li>身份鉴别机制（口令 vs PKI）— 基础概念，贯穿整个安全体系</li><li>对称加密基础（块加密 vs 流加密）— 理解性能与安全的权衡</li><li>非对称加密原理（公钥/私钥用途）— 为数字信封打基础</li><li>数字信封机制（组合应用）— 综合前两点，重点掌握加解密流程</li><li>数据库加密方案（TDE vs API）— 工程落地层面的选型判断</li></ol></div></details>
+            </article></div>
+    </section>
+
+    <section aria-label="题目列表">
+      <h2 class="section-title">📋 题目列表</h2>
+      <div id="questionsContainer"><article class='card question-card'>
+              <div class='question-header'>
+              <h3>第1题（题号：5）</h3>
+              <span class='badge'>系统安全</span>
+              
+            </div>
+            <p>阅读以下有关软件与信息安全方面的说明，在答题纸上回答问题1至问题3。
+【说明】
+某软件公司拟开发一套信息安全支撑平台，为客户的局域网业务环境提供信息安全保护。该支撑平台的主要需求如下：
+（1）为局域网业务环境提供用户身份鉴别与资源访问授权功能；
+（2）为局域网环境中交换的网络数据提供加密保护；
+（3）为服务器和终端机存储的敏感持久数据提供加密保护；
+（4）保护的主要实体对象包括局域网内交换的网络数据包、文件服务器中的敏感数据文件、数据库服务器中的敏感关系数据和终端机用户存储的敏感数据文件；
+（5）服务器中存储的敏感数据按安全管理员配置的权限访问；
+（6）业务系统生成的单个敏感数据文件可能会达到数百兆的规模；
+（7）终端机用户存储的敏感数据为用户私有；
+（8）局域网业务环境的总用户数在100人以内。</p>
+              <div class='sub-question' data-question-id="q112_0" data-correct-answers="" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <div class="question-actions">
+                    <button class="show-answer-btn" onclick="showAnswer('q112_0')" style="display: inline-block;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>在用户身份鉴别机制的选择上，<strong>安全性与效率的平衡</strong>是关键。<strong>口令认证</strong>的优势在于实现简单、成本低，但缺点十分突出：一方面，用户口令可能过于简单、重复使用或未及时更新，极易遭受<strong>暴力破解、字典攻击、社工攻击</strong>；另一方面，口令在传输或存储过程中若缺乏完善的加密保护，容易被窃取或伪造，从而导致身份冒充。在本案例中，用户数量虽不大，但涉及的安全对象涵盖<strong>网络数据、文件、数据库敏感字段</strong>等，一旦口令被攻破，系统将失去防护意义。</p><p>相比之下，<strong>基于公钥体系的认证机制（PKI）</strong> 依托非对称加密技术，客户端通过持有的私钥和公钥对进行认证，私钥仅保存在用户本地，从未在网络中传输，因此可以避免口令传输的脆弱性。同时，系统能够利用用户的私钥为其生成独有的签名，从而绑定用户身份与私有数据，实现<strong>身份认证与数据保护一体化</strong>。虽然其计算代价较大，但考虑到业务环境为局域网、用户规模仅100人以内，性能开销完全可接受。因此，该系统选择基于公钥体系的认证机制，能够兼顾<strong>高安全性与可行性</strong>，是更加合理的架构决策。</p></div></details>
+                </div>
+<div class='sub-question' data-question-id="q112_1" data-correct-answers="" data-is-multiple="false">
+                  <h4>子题2</h4>
+                  
+                  
+                  <div class="question-actions">
+                    <button class="show-answer-btn" onclick="showAnswer('q112_1')" style="display: inline-block;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>在数据加密方式的选择上，核心考虑因素是<strong>性能与安全性</strong>。对称加密通常有两类：<strong>块加密（Block Cipher）</strong>和<strong>流加密（Stream Cipher）</strong>。块加密将数据分成固定大小的块逐一处理，适合中小规模数据的高安全性保护；流加密则将明文与伪随机密钥流逐位或逐字节异或运算，能够快速处理大规模数据文件，效率优势明显。本案例中的文件可能达到<strong>数百兆</strong>，若采用块加密，不仅需要复杂的分组和填充，还可能因文件过大造成<strong>性能下降与存储开销增加</strong>。因此，应采用流加密方式。</p><p><strong>数字信封机制</strong>结合了非对称加密与对称加密的优点。非对称加密（公钥/私钥）安全性高但效率低，适合用于密钥保护；对称加密效率高但密钥分发困难，适合用于大数据加密。在加密过程中，系统先生成一个临时对称密钥，用用户的公钥加密该密钥并放在文件头部，之后利用该对称密钥对文件数据执行流加密，从而实现<strong>高效的数据保护</strong>。在解密过程中，用户使用私钥解密文件头的对称密钥，再用该密钥解密数据正文，恢复原文。此机制确保了<strong>密钥传输的安全性与大数据处理的效率</strong>，完全契合本案例中“文件大、数据敏感”的需求。</p></div></details>
+                </div>
+<div class='sub-question' data-question-id="q112_2" data-correct-answers="" data-is-multiple="false">
+                  <h4>子题3</h4>
+                  
+                  
+                  <div class="question-actions">
+                    <button class="show-answer-btn" onclick="showAnswer('q112_2')" style="display: inline-block;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>在数据库加密方案设计中，选择合适的方式关系到<strong>性能、开发成本和安全保障</strong>。<strong>加解密API</strong> 是数据库提供的编程接口，允许应用系统在读写敏感数据时主动调用API完成加密和解密。其优势在于灵活，开发者可以根据业务需求为不同字段定义加密方式和密钥强度。但它的劣势同样明显：需要修改应用程序代码，增加开发与维护成本；并且加密逻辑嵌入在应用层，可能导致<strong>安全职责分散</strong>，不利于集中管理。</p><p><strong>透明加密（Transparent Data Encryption, TDE）</strong> 由数据库管理系统自动完成加解密工作，应用程序看到的依然是明文数据，所有加密逻辑都在数据库内部完成。安全管理员可通过策略配置为不同字段、表或库设置不同强度的加密方式与密钥，而应用层无需做任何改动。这种方式大幅降低了<strong>开发人员负担和安全管理复杂性</strong>。结合本案例的需求：客户要求对不同敏感字段采用不同强度的密钥，并且“尽可能减少安全管理与应用程序负担”。显然，透明加密能够很好满足要求，在提供分级加密能力的同时，也避免了应用系统的大规模改造。因此，本系统应采用透明加密方案，确保在<strong>安全性、易用性和可维护性</strong>之间取得最佳平衡。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown empty'>暂无内容</div></details>
+            </article></div>
+    </section>
+  </main>
+  <script>
+    const DATA = {"meta": {"paper_name": "2013年11月系统架构真题", "subject": 0, "type": 1, "item_count": 1}, "questions": [{"id": 112, "index": 1, "sort": 5, "knowledge_point": "系统安全", "prompt": "阅读以下有关软件与信息安全方面的说明，在答题纸上回答问题1至问题3。\n【说明】\n某软件公司拟开发一套信息安全支撑平台，为客户的局域网业务环境提供信息安全保护。该支撑平台的主要需求如下：\n（1）为局域网业务环境提供用户身份鉴别与资源访问授权功能；\n（2）为局域网环境中交换的网络数据提供加密保护；\n（3）为服务器和终端机存储的敏感持久数据提供加密保护；\n（4）保护的主要实体对象包括局域网内交换的网络数据包、文件服务器中的敏感数据文件、数据库服务器中的敏感关系数据和终端机用户存储的敏感数据文件；\n（5）服务器中存储的敏感数据按安全管理员配置的权限访问；\n（6）业务系统生成的单个敏感数据文件可能会达到数百兆的规模；\n（7）终端机用户存储的敏感数据为用户私有；\n（8）局域网业务环境的总用户数在100人以内。", "difficulty": null, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "options": [], "correct_letters": [], "correct_texts": [], "official_analysis": "在用户身份鉴别机制的选择上，**安全性与效率的平衡**是关键。**口令认证**的优势在于实现简单、成本低，但缺点十分突出：一方面，用户口令可能过于简单、重复使用或未及时更新，极易遭受**暴力破解、字典攻击、社工攻击**；另一方面，口令在传输或存储过程中若缺乏完善的加密保护，容易被窃取或伪造，从而导致身份冒充。在本案例中，用户数量虽不大，但涉及的安全对象涵盖**网络数据、文件、数据库敏感字段**等，一旦口令被攻破，系统将失去防护意义。\n\n相比之下，**基于公钥体系的认证机制（PKI）** 依托非对称加密技术，客户端通过持有的私钥和公钥对进行认证，私钥仅保存在用户本地，从未在网络中传输，因此可以避免口令传输的脆弱性。同时，系统能够利用用户的私钥为其生成独有的签名，从而绑定用户身份与私有数据，实现**身份认证与数据保护一体化**。虽然其计算代价较大，但考虑到业务环境为局域网、用户规模仅100人以内，性能开销完全可接受。因此，该系统选择基于公钥体系的认证机制，能够兼顾**高安全性与可行性**，是更加合理的架构决策。"}, {"label": "2", "options": [], "correct_letters": [], "correct_texts": [], "official_analysis": "在数据加密方式的选择上，核心考虑因素是**性能与安全性**。对称加密通常有两类：**块加密（Block Cipher）**和**流加密（Stream Cipher）**。块加密将数据分成固定大小的块逐一处理，适合中小规模数据的高安全性保护；流加密则将明文与伪随机密钥流逐位或逐字节异或运算，能够快速处理大规模数据文件，效率优势明显。本案例中的文件可能达到**数百兆**，若采用块加密，不仅需要复杂的分组和填充，还可能因文件过大造成**性能下降与存储开销增加**。因此，应采用流加密方式。\n\n**数字信封机制**结合了非对称加密与对称加密的优点。非对称加密（公钥/私钥）安全性高但效率低，适合用于密钥保护；对称加密效率高但密钥分发困难，适合用于大数据加密。在加密过程中，系统先生成一个临时对称密钥，用用户的公钥加密该密钥并放在文件头部，之后利用该对称密钥对文件数据执行流加密，从而实现**高效的数据保护**。在解密过程中，用户使用私钥解密文件头的对称密钥，再用该密钥解密数据正文，恢复原文。此机制确保了**密钥传输的安全性与大数据处理的效率**，完全契合本案例中“文件大、数据敏感”的需求。"}, {"label": "3", "options": [], "correct_letters": [], "correct_texts": [], "official_analysis": "在数据库加密方案设计中，选择合适的方式关系到**性能、开发成本和安全保障**。**加解密API** 是数据库提供的编程接口，允许应用系统在读写敏感数据时主动调用API完成加密和解密。其优势在于灵活，开发者可以根据业务需求为不同字段定义加密方式和密钥强度。但它的劣势同样明显：需要修改应用程序代码，增加开发与维护成本；并且加密逻辑嵌入在应用层，可能导致**安全职责分散**，不利于集中管理。\n\n**透明加密（Transparent Data Encryption, TDE）** 由数据库管理系统自动完成加解密工作，应用程序看到的依然是明文数据，所有加密逻辑都在数据库内部完成。安全管理员可通过策略配置为不同字段、表或库设置不同强度的加密方式与密钥，而应用层无需做任何改动。这种方式大幅降低了**开发人员负担和安全管理复杂性**。结合本案例的需求：客户要求对不同敏感字段采用不同强度的密钥，并且“尽可能减少安全管理与应用程序负担”。显然，透明加密能够很好满足要求，在提供分级加密能力的同时，也避免了应用系统的大规模改造。因此，本系统应采用透明加密方案，确保在**安全性、易用性和可维护性**之间取得最佳平衡。"}], "model_response": ""}], "knowledge_points": [{"name": "系统安全", "related_questions": ["112"], "summary_markdown": "# 系统安全知识点结构化要点清单\n\n---\n\n## 一、用户身份鉴别机制\n\n**核心定义/结论**\n- 口令认证：实现简单、成本低，但易遭受暴力破解、字典攻击、社工攻击，口令传输/存储若无加密保护则极易被窃取\n- PKI（公钥体系认证）：基于非对称加密，私钥仅存于本地从不传输，可实现身份认证与数据保护一体化，安全性显著高于口令认证\n\n**典型题型与解题要领**\n- 题型：给定业务场景，要求选择并论证身份鉴别方案\n- 解题要领：从\"安全性 vs 效率\"两个维度分析，结合用户规模、数据敏感程度、网络环境综合判断。用户规模小（≤100人）时，PKI的计算开销完全可接受，优先推荐PKI\n\n**易错点与注意事项**\n- 不能只说\"PKI更安全\"就结束，必须说明为什么口令认证在该场景下不够用（传输风险、存储风险、用户行为风险）\n- 注意PKI的优势不只是\"安全\"，还有\"私钥绑定用户身份\"这一特性，可同时支撑后续数据保护需求\n\n---\n\n## 二、数据加密方式选择（对称加密 + 数字信封）\n\n**核心定义/结论**\n- 块加密：数据分组处理，安全性高，适合中小规模数据\n- 流加密：逐位/逐字节与密钥流异或，处理大文件效率高，适合数百兆级别文件\n- 数字信封：用接收方公钥加密对称密钥（放文件头），用对称密钥流加密数据正文，兼顾密钥传输安全与大数据处理效率\n\n**典型题型与解题要领**\n- 题型：给定文件规模和安全需求，要求设计加密方案并说明加解密流程\n- 解题要领：\n  - 文件大 → 流加密（性能优先）\n  - 密钥分发问题 → 数字信封（非对称加密保护对称密钥）\n  - 描述流程时要分\"加密过程\"和\"解密过程\"两步写清楚\n\n**易错点与注意事项**\n- 不要混淆\"非对称加密数据\"和\"非对称加密密钥\"，非对称加密只用于保护密钥，不直接加密大文件\n- 数字信封中对称密钥是临时生成的，每次加密应使用不同密钥，不要描述成固定密钥\n\n---\n\n## 三、数据库透明加密 vs 加解密API\n\n**核心定义/结论**\n- 加解密API：应用层主动调用，灵活但需修改代码，安全职责分散，维护成本高\n- 透明加密（TDE）：DBMS自动完成加解密，应用层无感知，支持按字段/表/库配置不同强度密钥，安全管理集中，开发负担低\n\n**典型题型与解题要领**\n- 题型：给定\"减少应用改造负担\"或\"分级加密\"需求，要求选择数据库加密方案并说明理由\n- 解题要领：抓住两个关键词——\"应用程序是否需要改动\"和\"安全管理是否集中\"，需求中出现\"减少负担\"或\"不同字段不同强度\"时，直接指向透明加密\n\n**易错点与注意事项**\n- 不要把透明加密理解为\"不安全\"，它只是对应用层透明，底层加密强度不低\n- 加解密API并非一无是处，当需要极细粒度的业务逻辑控制时仍有价值，答题时要客观对比而非直接否定\n\n---\n\n## 四、推荐复习顺序\n\n1. 身份鉴别机制（口令 vs PKI）— 基础概念，贯穿整个安全体系\n2. 对称加密基础（块加密 vs 流加密）— 理解性能与安全的权衡\n3. 非对称加密原理（公钥/私钥用途）— 为数字信封打基础\n4. 数字信封机制（组合应用）— 综合前两点，重点掌握加解密流程\n5. 数据库加密方案（TDE vs API）— 工程落地层面的选型判断"}], "generated_at": "2026-02-25 09:43:56"};
+
+    // ===== Theme toggle =====
+    (function() {
+      const THEME_KEY = 'quiz_theme';
+      const root = document.documentElement;
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved) root.setAttribute('data-theme', saved);
+      function updateBtn() {
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        const isLight = root.getAttribute('data-theme') === 'light';
+        btn.textContent = isLight ? '🌙 暗色' : '☀️ 亮色';
+        btn.setAttribute('aria-label', isLight ? '切换到暗色模式' : '切换到亮色模式');
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        updateBtn();
+        document.getElementById('themeToggle').addEventListener('click', () => {
+          const isLight = root.getAttribute('data-theme') === 'light';
+          const next = isLight ? 'dark' : 'light';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem(THEME_KEY, next);
+          updateBtn();
+        });
+      });
+    })();
+
+    function renderBasicMarkdown(raw = '') {
+      if (!raw) return '<p>（尚未生成，稍后重试）</p>';
+      const normalized = raw.split('\r\n').join('\n').split('\r').join('\n');
+      const lines = normalized.split('\n');
+      const htmlParts = [];
+      let inUl = false;
+      let inOl = false;
+      const closeLists = () => {
+        if (inUl) { htmlParts.push('</ul>'); inUl = false; }
+        if (inOl) { htmlParts.push('</ol>'); inOl = false; }
+      };
+      const formatInline = (text) => {
+        const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return escaped
+          .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;" />')
+          .replace(/!(https?:\/\/[^\s<>"'\[\]]+(?:\.[a-zA-Z]{2,}|\/[^\s<>"'\[\]]*)?)/g, '<img src="$1" alt="图片" style="max-width: 100%; height: auto;" />')
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/__(.+?)__/g, '<strong>$1</strong>')
+          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+          .replace(/(?<!_)_(?!_)(.+?)(?<!_)_(?!_)/g, '<em>$1</em>');
+      };
+      const renderTable = (rows) => {
+        if (!rows.length) return '';
+        const splitRow = (row) => row.replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => formatInline(cell.trim()));
+        const headerCells = splitRow(rows[0]);
+        let alignments = Array(headerCells.length).fill('left');
+        let bodyRows = rows.slice(1);
+        if (bodyRows.length) {
+          const alignParts = bodyRows[0].replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
+          const isDivider = alignParts.length === headerCells.length && alignParts.every((cell) => /^:?-{3,}:?$/.test(cell));
+          if (isDivider) {
+            alignments = alignParts.map((cell) => {
+              const left = cell.startsWith(':');
+              const right = cell.endsWith(':');
+              if (left && right) return 'center';
+              if (right) return 'right';
+              return 'left';
+            });
+            bodyRows = bodyRows.slice(1);
+          }
+        }
+        const headerHtml = '<tr>' + headerCells.map((cell, idx) => `<th style="text-align: ${alignments[idx] || 'left'}">${cell}</th>`).join('') + '</tr>';
+        const bodyHtml = bodyRows.map((row) => {
+          const cells = splitRow(row);
+          return '<tr>' + cells.map((cell, idx) => `<td style="text-align: ${alignments[idx] || 'left'}">${cell}</td>`).join('') + '</tr>';
+        }).join('');
+        const filler = '<tr>' + headerCells.map((_, idx) => `<td style="text-align: ${alignments[idx] || 'left'}">&nbsp;</td>`).join('') + '</tr>';
+        return `<table><thead>${headerHtml}</thead><tbody>${bodyHtml || filler}</tbody></table>`;
+      };
+      for (let i = 0; i < lines.length; i += 1) {
+        const trimmed = lines[i].trim();
+        if (!trimmed) { closeLists(); continue; }
+        const headingMatch = trimmed.match(/^(#(1, 4))\s+(.+)$/);
+        if (headingMatch) {
+          closeLists();
+          const level = headingMatch[1].length + 1; // h2-h5 (h1 reserved for page)
+          const tag = 'h' + Math.min(level, 5);
+          htmlParts.push(`<${tag} class="md-heading">${formatInline(headingMatch[2])}</${tag}>`);
+          continue;
+        }
+        if (trimmed === '---' || trimmed === '***' || trimmed === '___') {
+          closeLists();
+          htmlParts.push('<hr class="md-hr" />');
+          continue;
+        }
+        if (/^\|.+\|$/.test(trimmed)) {
+          closeLists();
+          const tableRows = [];
+          let j = i;
+          while (j < lines.length && /^\|.+\|$/.test(lines[j].trim())) {
+            tableRows.push(lines[j].trim());
+            j += 1;
+          }
+          if (tableRows.length) { htmlParts.push(renderTable(tableRows)); }
+          i = j - 1;
+          continue;
+        }
+        if (/^\d+\.\s+/.test(trimmed)) {
+          if (!inOl) { closeLists(); htmlParts.push('<ol>'); inOl = true; }
+          htmlParts.push('<li>' + formatInline(trimmed.replace(/^\d+\.\s+/, '')) + '</li>');
+          continue;
+        }
+        if (/^[-*+]\s+/.test(trimmed)) {
+          if (!inUl) { closeLists(); htmlParts.push('<ul>'); inUl = true; }
+          htmlParts.push('<li>' + formatInline(trimmed.slice(1).trim()) + '</li>');
+          continue;
+        }
+        closeLists();
+        htmlParts.push('<p>' + formatInline(trimmed) + '</p>');
+      }
+      closeLists();
+      const joined = htmlParts.filter(Boolean).join('');
+      return joined || '<p>（尚未生成，稍后重试）</p>';
+    }
+
+    const md = window.markdownit
+      ? window.markdownit({html: true, linkify: true, breaks: true})
+      : { render: (raw = '') => renderBasicMarkdown(raw) };
+    if (md && typeof md.enable === 'function') {
+      md.enable('table');
+      md.enable('strikethrough');
+    }
+
+    const STORAGE_KEY = 'quiz_progress_' + btoa(unescape(encodeURIComponent(document.title))).slice(0, 32);
+
+    const state = {
+      knowledge: 'all',
+      search: '',
+      currentQuestionIndex: 0,
+      quizMode: true,
+      stats: { total: 0, answered: 0, correct: 0, incorrect: 0 },
+      answeredQuestions: {}
+    };
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          currentQuestionIndex: state.currentQuestionIndex,
+          quizMode: state.quizMode,
+          knowledge: state.knowledge,
+          answeredQuestions: state.answeredQuestions,
+          scrollY: window.scrollY
+        }));
+      } catch(e) {}
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const p = JSON.parse(saved);
+        if (typeof p.currentQuestionIndex === 'number') state.currentQuestionIndex = p.currentQuestionIndex;
+        if (typeof p.quizMode === 'boolean') state.quizMode = p.quizMode;
+        if (p.knowledge) state.knowledge = p.knowledge;
+        if (p.answeredQuestions) state.answeredQuestions = p.answeredQuestions;
+        if (typeof p.scrollY === 'number') state._savedScrollY = p.scrollY;
+      } catch(e) {}
+    }
+
+    function restoreAnsweredState(questionId) {
+      const saved = state.answeredQuestions[questionId];
+      if (!saved) return;
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
+      const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      inputs.forEach(input => {
+        if (saved.selected.includes(input.value)) input.checked = true;
+        input.disabled = true;
+        const optionItem = input.closest('.option-item');
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
+      });
+      const feedbackDiv = questionDiv.querySelector('.answer-feedback');
+      if (feedbackDiv) {
+        feedbackDiv.style.display = 'block';
+        feedbackDiv.className = `answer-feedback ${saved.isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackDiv.textContent = saved.isCorrect ? '✓ 回答正确！' : '✗ 回答错误';
+      }
+      const submitBtn = questionDiv.querySelector('.submit-btn');
+      if (submitBtn) submitBtn.style.display = 'none';
+      if (!saved.isCorrect) {
+        const correctAnswerP = questionDiv.querySelector('.correct-answer');
+        if (correctAnswerP) correctAnswerP.style.display = 'block';
+        const analysisDetails = questionDiv.querySelector('.answer-analysis');
+        if (analysisDetails) { analysisDetails.style.display = 'block'; analysisDetails.open = true; }
+      }
+    }
+
+    function renderMarkdownWithMermaid(content) {
+      if (!content) return '<p>（尚未生成，稍后重试）</p>';
+      const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
+      let processed = content.replace(mermaidRegex, (match, graphDef) => `<div class="mermaid">${graphDef.trim()}</div>`);
+      return md.render ? md.render(processed) : renderBasicMarkdown(processed);
+    }
+    function renderKnowledge() {
+      const container = document.getElementById('knowledgeContainer');
+      container.innerHTML = '';
+      DATA.knowledge_points.forEach((kp) => {
+        const name = kp.name;
+        const count = (kp.related_questions || []).length;
+        const summaryMd = typeof kp.summary_markdown === 'object' ? (kp.summary_markdown.response || '') : (kp.summary_markdown || '');
+        const card = document.createElement('article');
+        card.className = 'knowledge-card' + (state.knowledge === name ? ' active' : '');
+        const summaryHTML = summaryMd && summaryMd.trim() ? renderMarkdownWithMermaid(summaryMd) : '<p class="empty-text" style="color:var(--text-muted)">（尚未生成，稍后重试）</p>';
+        const summaryBlock = summaryMd && summaryMd.trim()
+          ? `<details class="knowledge-details"><summary>查看大模型总结</summary><div class="markdown">${summaryHTML}</div></details>`
+          : `<div class="markdown empty">${summaryHTML}</div>`;
+        card.innerHTML = `
+          <div class="knowledge-header">
+            <h3>${name}</h3>
+            <span class="badge badge-accent kp-count-btn" data-kp="${name}" title="点击刷此知识点题库">共 ${count} 题 ▶</span>
+          </div>
+          ${summaryBlock}
+        `;
+        // 整张卡片点击切换知识点
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+          // 如果点击的是 details/summary 展开操作，不干预
+          if (e.target.closest('details') || e.target.closest('summary')) return;
+          jumpToKnowledge(name);
+        });
+        // badge 单独处理（阻止冒泡避免双触发）
+        const badge = card.querySelector('.kp-count-btn');
+        if (badge) {
+          badge.addEventListener('click', (e) => {
+            e.stopPropagation();
+            jumpToKnowledge(name);
+          });
+        }
+        container.append(card);
+      });
+    }
+
+    function jumpToKnowledge(name) {
+      state.knowledge = name;
+      state.currentQuestionIndex = 0;
+      saveState();
+      // 同步下拉框
+      const sel = document.getElementById('knowledgeFilter');
+      if (sel) sel.value = name;
+      renderKnowledge();
+      renderQuestions();
+      // 滚动到题目区
+      const qSection = document.getElementById('questionsContainer');
+      if (qSection) {
+        setTimeout(() => qSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      }
+      showToast(`已切换到：${name}`, 'info');
+    }
+
+    function filterQuestions() {
+      return DATA.questions.filter((q) => {
+        const matchKP = state.knowledge === 'all' || q.knowledge_point === state.knowledge;
+        if (!matchKP) return false;
+        if (!state.search) return true;
+        const haystack = [
+          q.prompt, q.knowledge_point, q.model_response || '',
+          ...(q.sub_questions || []).map((sub) => [sub.official_analysis || '', (sub.options || []).map((o) => o.text).join(' ')].join(' '))
+        ].join(' ').toLowerCase();
+        return haystack.includes(state.search.toLowerCase());
+      });
+    }
+
+    function buildSubQuestionHTML(sub, subIdx, q) {
+      const correctCount = (sub.options || []).filter(o => o.is_correct).length;
+      const isMultiple = correctCount > 1;
+      const inputType = isMultiple ? 'checkbox' : 'radio';
+      const questionId = `q${q.id || q.index}_${subIdx}`;
+      const answers = sub.correct_letters || [];
+      const options = (sub.options || []).map((opt) => {
+        const optionId = `${questionId}_${opt.label}`;
+        return `<li class="option-item"><label for="${optionId}" class="option-label"><input type="${inputType}" id="${optionId}" name="${questionId}" value="${opt.label}" class="option-input" /><span class="option-text">${opt.label}. ${opt.text}</span></label></li>`;
+      }).join('');
+      const subQuestionText = sub.question ? `<div class="sub-question-text">${md.render(sub.question)}</div>` : '';
+      const correctAnswerDetail = sub.correct_answer
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>参考答案</summary><div class="markdown">${md.render(sub.correct_answer)}</div></details>` : '';
+      const answersP = answers.length ? `<p class="correct-answer" style="display:none;"><strong>参考答案：</strong>${answers.join('、')}</p>` : '';
+      const official = sub.official_analysis
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>官方解析</summary><div class="markdown">${md.render(sub.official_analysis)}</div></details>` : '';
+      const hasOptions = sub.options && sub.options.length > 0;
+      const interaction = hasOptions
+        ? `<ul class="options interactive-options">${options}</ul>
+           <div class="question-actions">
+             <button class="btn btn-primary submit-btn" onclick="submitAnswer('${questionId}')">提交答案</button>
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${questionId}')" style="display:none;">查看答案</button>
+           </div>`
+        : `<div class="question-actions">
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${questionId}')" style="display:inline-flex;">查看答案</button>
+           </div>`;
+      return `<div class="sub-question" data-question-id="${questionId}" data-correct-answers="${answers.join(',')}" data-is-multiple="${isMultiple}">
+        <h4>子题${sub.label}</h4>
+        ${subQuestionText}
+        ${interaction}
+        <div class="answer-feedback" style="display:none;"></div>
+        ${answersP}
+        ${correctAnswerDetail}
+        ${official}
+      </div>`;
+    }
+
+    function buildAiNote(q) {
+      const resp = typeof q.model_response === 'object' ? (q.model_response.response || '') : (q.model_response || '');
+      if (resp && resp.trim()) {
+        return `<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown">${renderMarkdownWithMermaid(resp)}</div></details>`;
+      }
+      return '<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown empty">暂无内容</div></details>';
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = '';
+      const results = filterQuestions();
+      if (!results.length) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-text">未找到匹配的题目，试试其他关键词？</div></div>';
+        return;
+      }
+      updateStats(results);
+      if (state.quizMode) {
+        renderSingleQuestion(results);
+      } else {
+        renderAllQuestions(results);
+      }
+      Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
+      updateStats(results);
+    }
+
+    function renderSingleQuestion(questions) {
+      const container = document.getElementById('questionsContainer');
+      const cur = questions[state.currentQuestionIndex];
+      if (!cur) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎉</div><div class="empty-state-text">没有更多题目了</div></div>';
+        return;
+      }
+      const pct = ((state.currentQuestionIndex + 1) / questions.length * 100).toFixed(1);
+      const progressBar = `<div class="quiz-progress-bar">
+        <div class="qp-top">
+          <span class="qp-label">第 ${state.currentQuestionIndex + 1} 题 / 共 ${questions.length} 题</span>
+          <span class="qp-count">${pct}%</span>
+        </div>
+        <div class="qp-bar"><div class="qp-fill" style="width:${pct}%"></div></div>
+      </div>`;
+      const diffBadge = cur.difficulty ? `<span class="badge badge-green">难度 ${cur.difficulty}</span>` : '';
+      const card = document.createElement('div');
+      card.innerHTML = progressBar;
+      const qCard = document.createElement('article');
+      qCard.className = 'question-card';
+      const subs = (cur.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, cur)).join('');
+      const isAnswered = Object.keys(state.answeredQuestions).some(k => k.startsWith(`q${cur.id || cur.index}_`));
+      const nav = `<div class="quiz-nav">
+        <button class="btn btn-outline" onclick="previousQuestion()" ${state.currentQuestionIndex === 0 ? 'disabled' : ''} title="快捷键 ←">← 上一题</button>
+        <button class="btn btn-ghost" onclick="toggleQuizMode()">📋 全部题目</button>
+        <button class="btn btn-outline" onclick="nextQuestion()" ${state.currentQuestionIndex >= questions.length - 1 ? 'disabled' : ''} title="快捷键 →">下一题 →</button>
+      </div>`;
+      qCard.innerHTML = `
+        <div class="question-header">
+          <h3>第${cur.index}题（题号：${cur.sort || cur.index}）</h3>
+          <span class="badge badge-accent">${cur.knowledge_point}</span>
+          ${diffBadge}
+        </div>
+        <p class="question-prompt">${cur.prompt}</p>
+        ${subs}
+        ${nav}
+        ${buildAiNote(cur)}
+      `;
+      card.appendChild(qCard);
+      container.appendChild(card);
+    }
+
+    function renderAllQuestions(results) {
+      const container = document.getElementById('questionsContainer');
+      const toggle = document.createElement('div');
+      toggle.className = 'quiz-mode-toggle';
+      toggle.innerHTML = '<button class="btn btn-success" onclick="toggleQuizMode()">🎯 单题模式</button>';
+      container.appendChild(toggle);
+      results.forEach((q) => {
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        const diffBadge = q.difficulty ? `<span class="badge badge-green">难度 ${q.difficulty}</span>` : '';
+        const subs = (q.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, q)).join('');
+        card.innerHTML = `
+          <div class="question-header">
+            <h3>第${q.index}题（题号：${q.sort || q.index}）</h3>
+            <span class="badge badge-accent">${q.knowledge_point}</span>
+            ${diffBadge}
+          </div>
+          <p class="question-prompt">${q.prompt}</p>
+          ${subs}
+          ${buildAiNote(q)}
+        `;
+        container.appendChild(card);
+      });
+    }
+    function populateFilter() {
+      const select = document.getElementById('knowledgeFilter');
+      const options = ['<option value="all">全部知识点</option>'];
+      DATA.knowledge_points.forEach((kp) => {
+        options.push(`<option value="${kp.name}">${kp.name}（${kp.related_questions.length}）</option>`);
+      });
+      select.innerHTML = options.join('');
+      if (state.knowledge !== 'all') select.value = state.knowledge;
+      select.addEventListener('change', (e) => {
+        state.knowledge = e.target.value;
+        state.currentQuestionIndex = 0;
+        saveState();
+        renderKnowledge();
+        renderQuestions();
+      });
+    }
+
+    function registerSearch() {
+      const input = document.getElementById('searchInput');
+      let timer;
+      input.addEventListener('input', (e) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          state.search = e.target.value.trim();
+          state.currentQuestionIndex = 0;
+          renderQuestions();
+        }, 200);
+      });
+    }
+
+    function initMermaid() {
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'dark',
+          themeVariables: {
+            primaryColor: '#7c6ff7',
+            primaryTextColor: '#e2e8f0',
+            primaryBorderColor: '#a89cf8',
+            lineColor: '#94a3b8',
+            secondaryColor: '#1c1c28',
+            tertiaryColor: '#16161f',
+            background: '#0a0a0f',
+            mainBkg: '#16161f',
+            nodeBorder: '#7c6ff7'
+          }
+        });
+      }
+    }
+
+    function renderMermaidCharts() {
+      if (window.mermaid) {
+        const els = document.querySelectorAll('.mermaid');
+        els.forEach((el, index) => {
+          const def = el.textContent;
+          const id = `mermaid-${Date.now()}-${index}`;
+          el.id = id;
+          mermaid.render(id + '-svg', def).then((result) => {
+            el.innerHTML = result.svg;
+          }).catch(() => {
+            el.innerHTML = '<p style="color:var(--red);">图表渲染失败</p>';
+          });
+        });
+      }
+    }
+
+    function updateStats(questions) {
+      const totalSub = questions.reduce((s, q) => s + (q.sub_questions || []).length, 0);
+      const answered = Object.keys(state.answeredQuestions).length;
+      const correct = Object.values(state.answeredQuestions).filter(a => a.isCorrect).length;
+      const incorrect = answered - correct;
+      state.stats = { total: totalSub, answered, correct, incorrect };
+      renderStatsDisplay();
+    }
+
+    function renderStatsDisplay() {
+      const { total, answered, correct, incorrect } = state.stats;
+      const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+      const progress = total > 0 ? Math.round((answered / total) * 100) : 0;
+      const circumference = 2 * Math.PI * 52;
+      const offset = circumference - (accuracy / 100) * circumference;
+
+      const ring = document.getElementById('ringProgress');
+      if (ring) {
+        ring.style.strokeDasharray = circumference;
+        ring.style.strokeDashoffset = offset;
+        ring.style.transition = 'stroke-dashoffset 0.6s ease';
+      }
+      const ringPct = document.getElementById('ringPct');
+      if (ringPct) ringPct.textContent = accuracy + '%';
+
+      const snTotal = document.getElementById('snTotal');
+      const snAnswered = document.getElementById('snAnswered');
+      const snCorrect = document.getElementById('snCorrect');
+      const snIncorrect = document.getElementById('snIncorrect');
+      if (snTotal) snTotal.textContent = total;
+      if (snAnswered) snAnswered.textContent = answered;
+      if (snCorrect) snCorrect.textContent = correct;
+      if (snIncorrect) snIncorrect.textContent = incorrect;
+
+      const fill = document.getElementById('statsProgressFill');
+      const txt = document.getElementById('statsProgressText');
+      if (fill) fill.style.width = progress + '%';
+      if (txt) txt.textContent = `进度 ${progress}%（${answered}/${total}）`;
+    }
+
+    function submitAnswer(questionId) {
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
+      const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      const selectedAnswers = Array.from(inputs).filter(i => i.checked).map(i => i.value);
+      if (selectedAnswers.length === 0) {
+        showToast('请先选择答案', 'warn');
+        const ul = questionDiv.querySelector('.options');
+        if (ul) { ul.style.animation = 'shake 0.4s ease'; setTimeout(() => ul.style.animation = '', 500); }
+        return;
+      }
+      inputs.forEach(input => input.disabled = true);
+      const isCorrect = correctAnswers.length === selectedAnswers.length &&
+                       correctAnswers.every(a => selectedAnswers.includes(a));
+      const feedbackDiv = questionDiv.querySelector('.answer-feedback');
+      feedbackDiv.style.display = 'block';
+      feedbackDiv.className = `answer-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+      feedbackDiv.innerHTML = isCorrect
+        ? '<span class="feedback-icon">✓</span><span class="feedback-msg">回答正确！继续加油</span>'
+        : '<span class="feedback-icon">✗</span><span class="feedback-msg">回答错误，看看解析吧</span>';
+      inputs.forEach(input => {
+        const optionItem = input.closest('.option-item');
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
+      });
+      const submitBtn = questionDiv.querySelector('.submit-btn');
+      const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
+      submitBtn.style.display = 'none';
+      showAnswerBtn.style.display = 'inline-flex';
+      state.answeredQuestions[questionId] = { selected: selectedAnswers, isCorrect };
+      saveState();
+      if (!isCorrect) showAnswer(questionId);
+      const results = filterQuestions();
+      updateStats(results);
+      // 平滑滚动到反馈区
+      setTimeout(() => {
+        feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+
+    function showAnswer(questionId) {
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswerP = questionDiv.querySelector('.correct-answer');
+      if (correctAnswerP) correctAnswerP.style.display = 'block';
+      const analysisDetailsList = questionDiv.querySelectorAll('.answer-analysis');
+      analysisDetailsList.forEach(d => { d.style.display = 'block'; d.open = true; });
+      const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
+      if (showAnswerBtn) showAnswerBtn.style.display = 'none';
+    }
+
+    function scrollToQuestion() {
+      const el = document.getElementById('questionsContainer') || document.querySelector('.question-card');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function previousQuestion() {
+      if (state.currentQuestionIndex > 0) {
+        state.currentQuestionIndex--;
+        saveState();
+        renderQuestions();
+        scrollToQuestion();
+        animateCardIn();
+      }
+    }
+
+    function nextQuestion() {
+      const questions = filterQuestions();
+      if (state.currentQuestionIndex < questions.length - 1) {
+        state.currentQuestionIndex++;
+        saveState();
+        renderQuestions();
+        scrollToQuestion();
+        animateCardIn();
+      }
+    }
+
+    function animateCardIn() {
+      setTimeout(() => {
+        const card = document.querySelector('.question-card');
+        if (card) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(12px)';
+          card.style.transition = 'none';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          });
+        }
+      }, 10);
+    }
+
+    let _toastTimer;
+    function showToast(msg, type = 'info') {
+      let toast = document.getElementById('_toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = '_toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.className = '_toast-show _toast-' + type;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => { toast.className = ''; }, 2200);
+    }
+
+    function toggleQuizMode() {
+      state.quizMode = !state.quizMode;
+      if (state.quizMode) state.currentQuestionIndex = 0;
+      saveState();
+      renderQuestions();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initMermaid();
+      loadState();
+      populateFilter();
+      registerSearch();
+      renderKnowledge();
+      renderQuestions();
+      // Expand knowledge card to full width when details opens
+      document.getElementById('knowledgeContainer').addEventListener('toggle', (e) => {
+        if (e.target.classList.contains('knowledge-details')) {
+          const card = e.target.closest('.knowledge-card');
+          if (card) card.classList.toggle('expanded', e.target.open);
+        }
+      }, true);
+      Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
+      const results = filterQuestions();
+      updateStats(results);
+      if (state._savedScrollY) {
+        setTimeout(() => window.scrollTo(0, state._savedScrollY), 150);
+      }
+      let scrollTimer = null;
+      window.addEventListener('scroll', () => {
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => saveState(), 300);
+      });
+      window.addEventListener('beforeunload', () => saveState());
+      // 键盘左右键翻页
+      document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (!state.quizMode) return;
+        if (e.key === 'ArrowRight' || e.key === 'l') nextQuestion();
+        if (e.key === 'ArrowLeft'  || e.key === 'h') previousQuestion();
+      });
+      setTimeout(() => renderMermaidCharts(), 100);
+    });
+  </script>
+</body>
+</html>

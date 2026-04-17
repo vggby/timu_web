@@ -1,0 +1,1876 @@
+{
+  "meta": {
+    "paper_name": "2013年11月系统架构真题",
+    "subject": 0,
+    "type": 0,
+    "item_count": 10
+  },
+  "questions": [
+    {
+      "id": 466,
+      "index": 1,
+      "sort": 42,
+      "knowledge_point": "专业英语",
+      "prompt": "A system's architecture is a representation of a system in which there is a mapping of（）onto hardware and software components, a mapping of the（）onto the hardware architecture. and a concern for the human interaction with these components. That is, system architecture is concerned with a total system, including hardware. software, and humans. Software architectural structures can be divided into three major categories, depending on the broad nature of the elements they show. 1）（）embody decisions as a set of code or data units that have to be constructed or procured. 2）（）embody decisions as to how the system is to be structured as set of elements that have runtime behavior and interactions. 3）（）embody decisions as to how the system will relate to non software structures in its environment(such as CPUs, file systems, networks, development teams, etc.).",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "attributes",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "constraint",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "functionality",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "requirements",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "functionality"
+          ],
+          "official_analysis": "本题考察的是**系统架构与软件架构三种主要结构分类**。\n**问题1**：\n系统架构需要将系统的**功能**映射到软硬件组件上，这是系统架构的核心工作。\nA选项 attributes：是质量属性，并非主要映射对象。错误。\nB选项 constraint：约束条件，不是核心映射。错误。\nC选项 functionality：功能，正确。\nD选项 requirements：需求范围更大，不仅限于架构映射。错误。\n因此选 C。\n\n**问题2**：\n系统架构的另一个映射是将**软件架构**映射到硬件架构。\nA选项 physical components：指物理部件，不是体系结构。错误。\nB选项 network architecture：仅描述网络结构，不是系统级核心。错误。\nC选项 software architecture：正确。\nD选项 interface architecture：侧重接口，不是全面的软件架构。错误。\n因此选 C。\n\n**问题3**：\n**模块结构（Module structures）** 体现了作为一组代码或数据单元的决策，即静态结构。\nA选项 Service structures：不属于三大类。错误。\nB选项 Module structures：正确。\nC选项 Deployment structures：属于分配结构，不是代码单元层次。错误。\nD选项 Work assignment structures：属于分配结构，不是代码单元。错误。\n因此选 B。\n\n**问题4**：\n**构件-连接器结构（Component-and-connector structures）** 体现了运行时的组件及交互方式，描述动态行为。\nA选项 Decomposition structures：属于模块分解，不是运行时。错误。\nB选项 Layer structures：静态分层结构。错误。\nC选项 Implementation structures：代码实现相关，不是运行时交互。错误。\nD选项 Component-and-connector structures：正确。\n因此选 D。\n\n**问题5**：\n**分配结构（Allocation structures）** 体现了系统如何与非软件环境（硬件、网络、组织团队）关联。\nA选项 Allocation structures：正确。\nB选项 Class structures：属于面向对象建模，不是环境映射。错误。\nC选项 Concurrency structures：涉及并发，不是环境映射。错误。\nD选项 Uses structures：模块依赖，不是环境映射。错误。\n因此选 A。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "physical components",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "network architecture",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "software architecture",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "interface architecture",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "software architecture"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Service structures",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Module structures",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "Deployment structures",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Work assignment structures",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "Module structures"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Decompostion structures",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Layer structures",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Implementation structures",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Component-and-connector structures",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "Component-and-connector structures"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Allocation structures",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "Class structures",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Concurrency structures",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Uses structures",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "Allocation structures"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📚 软考高级·系统架构设计师 专项笔记\n\n## 🎯 本题核心：软件架构三大结构分类\n\n---\n\n## 一、先搞懂这道题在说什么（白话版）\n\n这段英文在说一件事：\n\n> 系统架构 = 把**功能**映射到硬件和软件上，把**软件架构**映射到硬件架构上，再考虑人与这些组件的交互。\n\n然后引出软件架构的**三大结构分类**。\n\n---\n\n## 二、三大结构 · 顾名思义记忆法\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│              软件架构三大结构（考试只需了解即可）              │\n├──────────────┬──────────────────────────────────────────────┤\n│  结构名称    │  顾名思义记忆                                  │\n├──────────────┼──────────────────────────────────────────────┤\n│  模块结构    │  \"模块\" = 一块一块的代码/数据单元              │\n│  Module      │  → 静态的，还没跑起来，就是你写的那些类和包   │\n│  structures  │  → 类比：你的 Java 项目里一个个 .java 文件    │\n├──────────────┼──────────────────────────────────────────────┤\n│  构件连接器  │  \"构件\" = 跑起来的零件                        │\n│  Component   │  \"连接器\" = 零件之间的管道/桥梁               │\n│  -and-       │  → 动态的，系统运行时组件怎么交互             │\n│  connector   │  → 类比：你的 SpringBoot 服务启动后           │\n│  structures  │    各个 Bean 之间怎么调用、消息怎么传          │\n├──────────────┼──────────────────────────────────────────────┤\n│  分配结构    │  \"分配\" = 软件分配到哪个非软件环境里去         │\n│  Allocation  │  → 软件和外部世界（硬件/网络/团队）的关系     │\n│  structures  │  → 类比：你的服务部署到哪台服务器、           │\n│              │    哪个团队负责哪个模块                        │\n└──────────────┴──────────────────────────────────────────────┘\n```\n\n---\n\n## 三、填空答案速记\n\n```\n第1空 → 功能(functionality) 映射到硬件软件\n        记忆：架构师首先要把\"能干什么\"落地到具体组件\n\n第2空 → 软件架构(software architecture) 映射到硬件架构\n        记忆：软件架构 → 硬件架构，从虚到实\n\n第3空 → 模块结构(Module structures)\n        关键词：代码单元、数据单元、静态、构造/采购\n        顾名思义：模 = 模板/模块，静态的代码块\n\n第4空 → 构件-连接器结构(Component-and-connector structures)\n        关键词：运行时、行为、交互\n        顾名思义：构件跑起来 + 连接器把它们串起来\n\n第5空 → 分配结构(Allocation structures)\n        关键词：CPU、文件系统、网络、开发团队（非软件环境）\n        顾名思义：把软件\"分配\"到现实世界的各种资源上\n```\n\n---\n\n## 四、三大结构 · 一句话区分\n\n```\n静态代码块  →  模块结构       （你写代码时看到的）\n动态运行时  →  构件连接器结构  （程序跑起来时看到的）\n映射到环境  →  分配结构        （部署上线时看到的）\n```\n\n用你熟悉的 SpringBoot 类比：\n\n```\n模块结构      = 你的 controller / service / dao 包结构\n构件连接器    = 服务启动后 Bean 之间的调用链路\n分配结构      = 这个服务部署在哪台机器、哪个团队维护\n```\n\n---\n\n## 五、考试要求\n\n> 🏷️ 标签显示：**了解即可，超纲**\n\n✅ 考试只需做到：\n- 看到\"代码/数据单元、静态\" → 选 **Module structures**\n- 看到\"运行时、交互、行为\" → 选 **Component-and-connector structures**\n- 看到\"CPU、网络、团队、非软件环境\" → 选 **Allocation structures**\n- 第1空认识 **functionality（功能）**\n- 第2空认识 **software architecture（软件架构）**\n\n❌ 不需要深入展开，不会考大题。\n\n---\n\n## 六、英语关键词对照（专为英语不好的同学）\n\n| 英文 | 中文 | 怎么记 |\n|------|------|--------|\n| functionality | 功能性 | function = 功能，加个ality就是名词 |\n| software architecture | 软件架构 | 直译即可 |\n| Module structures | 模块结构 | module = 模块，你每天都在写 |\n| Component-and-connector | 构件-连接器 | component = 零件，connector = 连接头 |\n| Allocation structures | 分配结构 | allocate = 分配，你在代码里分配内存用过 |\n| runtime behavior | 运行时行为 | runtime = 跑起来的时候 |"
+    },
+    {
+      "id": 495,
+      "index": 2,
+      "sort": 46,
+      "knowledge_point": "专业英语",
+      "prompt": "Software architecture reconstruction is an interpretive, interactive, and iterative process including many activities. （）involves analyzing a system's existing design and implementation artifacts to construct a model of it. The result is used in the following activities to construct a view of the system. The database construction activity converts the （） contained in the view into a standard format for storage in a database. The （）activity involves defining and manipulating the information stored in database to reconcile, augment, and establish connections between the elements. Reconstruction consists of two primary activities: （） and （）. The former provides a mechanism for the user to manipulate architectural elements, and the latter provides facilities for architecture reconstruction.",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Reverse engineering",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Information extraction",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "Requirements analysis",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Source code analysis",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "Information extraction"
+          ],
+          "official_analysis": "本题考察的是**软件架构重构（Software Architecture Reconstruction）** 的主要过程与活动。\n架构重构是一种通过分析已有系统的设计和实现工件，重建系统架构视图，并对架构进行理解、评估和改进的过程。它具有解释性、交互性和迭代性，通常包括信息提取、数据库构建、视图融合、可视化与交互、模式定义与识别等活动。\n\n**问题1**：\n**A选项 Reverse engineering**：广义上指对系统进行反向分析，但本题具体描述是分析现有设计与实现工件并构建模型，这更准确地称为信息提取，因此此项不够精准。\n**B选项 Information extraction**：是指通过分析系统的设计与实现工件获取模型信息，用于后续的架构视图构建，符合题干描述，正确。\n**C选项 Requirements analysis**：是需求阶段的活动，不是架构重构中分析现有系统的过程，错误。\n**D选项 Source code analysis**：只是信息提取的一种手段，不等同于整个信息提取活动，错误。\n\n**问题2**：\n**A选项 actors and use cases**：属于需求建模阶段内容，不是架构视图中直接存储的元素。\n**B选项 processes and data**：更贴近业务流程和数据建模，不是架构视图标准存储的核心结构。\n**C选项 elements and relations**：架构视图的核心就是系统中的元素（components、modules等）及它们之间的关系，符合题干，正确。\n**D选项 schemas and tables**：属于数据库结构，不是架构视图的直接描述内容。\n\n**问题3**：\n**A选项 database normalization**：是数据库设计的优化过程，与架构视图合并无关。\n**B选项 schema definition**：定义数据库结构，不是融合架构视图的过程。\n**C选项 database optimization**：是提升数据库性能的活动，非架构视图融合。\n**D选项 view fusion**：是将不同视图的信息合并并建立联系的过程，正是题干描述的活动，正确。\n\n**问题4**：\n**A选项 architecture analysis and design**：是更高层次的架构活动，不是直接的可视化和交互过程。\n**B选项 domain analysis and static modeling**：属于需求分析范畴，非架构重构的交互活动。\n**C选项 visualization and interaction**：用于让用户以图形化、交互的方式操控架构元素，符合题干，正确。\n**D选项 user requirements modeling**：是需求阶段的活动，不是架构重构核心步骤。\n\n**问题5**：\n**A选项 pattern definition and recognition**：在架构重构中用于识别、定义和匹配架构模式，帮助理解架构结构，符合题干，正确。\n**B选项 architecture design and implementation**：是新的系统构建活动，不是重构中用于识别模式的过程。\n**C选项 system architecture modeling**：虽然与架构相关，但不专指模式识别。\n**D选项 dynamic modeling and reconstruction**：属于系统建模手段，不是模式定义和识别。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "actors and use cases",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "processes and data",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "elements and relations",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "schemas and tables",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "elements and relations"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "database normalization",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "schema definition",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "database optimization",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "view fusion",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "view fusion"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "architecture analysis and design",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "domain analysis and static modeling",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "visualization and interaction",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "user requirements modeling",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "visualization and interaction"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "pattern definition and recognition",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "architecture design and implementation",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "system architecture modelingv",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "dynamic modeling and reconstruction",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "pattern definition and recognition"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📚 软考高级·系统架构设计师\n## 专业英语题 · 软件架构重构流程记忆笔记\n\n---\n\n## 🧠 先搞懂这道题在说什么（白话版）\n\n这道题描述的是**给一个已有的老系统\"做体检+画地图\"的过程**，专业叫\"软件架构重构\"。\n\n想象你接手了一个没有文档的老项目（你肯定遇到过），你要：\n1. 把代码和设计文件翻出来分析 → **信息提取**\n2. 把分析结果存进数据库 → **数据库构建**\n3. 把数据库里的信息整合、连线 → **视图融合**\n4. 最后用两种方式呈现结果 → **可视化交互** + **模式识别**\n\n---\n\n## 🗺️ 整体流程字符图\n\n```\n已有系统（老代码/老设计文档）\n         │\n         ▼\n┌─────────────────────┐\n│  ① 信息提取          │  ← 翻出来分析，建模型\n│  Information         │\n│  Extraction          │\n└─────────┬───────────┘\n          │ 产出：视图(View)\n          ▼\n┌─────────────────────┐\n│  ② 数据库构建        │  ← 把视图里的东西存进数据库\n│  Database            │\n│  Construction        │\n└─────────┬───────────┘\n          │ 存的是：元素+关系\n          ▼\n┌─────────────────────┐\n│  ③ 视图融合          │  ← 整合、补充、建立连接\n│  View Fusion         │\n└─────────┬───────────┘\n          │\n          ▼\n    重构的两大核心活动\n    ┌──────┴──────┐\n    ▼             ▼\n┌────────┐  ┌──────────────┐\n│④ 可视化│  │⑤ 模式定义    │\n│  与交互│  │  与识别      │\n│Visuali-│  │Pattern Def.  │\n│zation &│  │& Recognition │\n│Interact│  │              │\n└────────┘  └──────────────┘\n用户可以        识别架构里\n拖拽操作        的规律模式\n架构元素\n```\n\n---\n\n## 🔑 五个答案·顾名思义记忆法\n\n> 原则：看中文名就知道是干什么的\n\n---\n\n### 答案① — **信息提取** (Information Extraction)\n\n**顾名思义：** \"提取信息\" → 从老系统里**把有用的信息挖出来**\n\n| 项目 | 内容 |\n|------|------|\n| 干什么 | 分析现有的代码、设计文档，建立系统模型 |\n| 类比 | 接手老项目第一件事：把所有代码翻一遍，搞清楚有哪些类、哪些模块 |\n| 记忆口诀 | **\"提取\"** = 从已有东西里**抽出**有价值的内容 |\n\n❌ 为什么不选\"逆向工程\"：逆向工程是大概念（像\"开发\"这个词），信息提取才是这一步具体在做的事（像\"写代码\"这个词）\n\n---\n\n### 答案② — **元素与关系** (Elements and Relations)\n\n**顾名思义：** \"元素\" = 系统里的零件；\"关系\" = 零件之间怎么连的\n\n| 项目 | 内容 |\n|------|------|\n| 干什么 | 架构视图存进数据库的核心内容 |\n| 类比 | 你画系统架构图，图上有**方块**（元素：模块、组件、服务）和**箭头**（关系：调用、依赖、继承） |\n| 记忆口诀 | 架构图 = **方块** + **箭头** = 元素 + 关系 |\n\n❌ 为什么不选\"流程与数据\"：那是业务流程图的内容，不是架构图的核心\n\n---\n\n### 答案③ — **视图融合** (View Fusion)\n\n**顾名思义：** \"融合视图\" → 把**多个角度看到的东西合并在一起**\n\n| 项目 | 内容 |\n|------|------|\n| 干什么 | 把数据库里的信息整合、补充缺失内容、建立元素间的连接 |\n| 类比 | 你从代码里提取了模块信息，从配置文件里提取了部署信息，现在把这两份信息**合并成一张完整的图** |\n| 记忆口诀 | **\"融合\"** = 多份信息**合体**，消除矛盾，补全缺失 |\n\n❌ 为什么不选\"数据库规范化\"：那是数据库设计优化，跟架构视图合并没关系\n\n---\n\n### 答案④ — **可视化与交互** (Visualization and Interaction)\n\n**顾名思义：** \"可视化\" = 画出来看；\"交互\" = 用户可以动手操作\n\n| 项目 | 内容 |\n|------|------|\n| 干什么 | 让用户用图形界面**拖拽、操作**架构元素 |\n| 类比 | 就像你用 IDEA 看类图，可以点击、展开、拖动 |\n| 记忆口诀 | **\"可视化\"** = 看得见；**\"交互\"** = 摸得着 |\n\n---\n\n### 答案⑤ — **模式定义与识别** (Pattern Definition and Recognition)\n\n**顾名思义：** \"模式\" = 反复出现的套路；\"识别\" = 找出这些套路\n\n| 项目 | 内容 |\n|------|------|\n| 干什么 | 在架构里找出用了哪些架构模式（比如分层、MVC、微服务） |\n| 类比 | 你看一个 SpringBoot 项目，一眼认出它用了 **MVC 模式**，这就是\"模式识别\" |\n| 记忆口诀 | **\"认出套路\"** = 模式识别 |\n\n---\n\n## 🎯 完整流程一句话串联记忆\n\n> **\"接手老项目：先提取信息 → 存元素和关系进库 → 融合多个视图 → 最后可视化交互 + 识别架构模式\"**\n\n对应你日常工作：\n> 接手老 SpringBoot 项目 → 翻代码搞清楚模块 → 记录到文档 → 整合多份文档 → 画架构图 + 认出它用了微服务模式\n\n---\n\n## 📋 考试备考程度说明\n\n> 题目标签已标注：**了解即可，超纲**\n\n✅ **你只需要做到：**\n- 看到英文单词，能猜出中文意思（靠顾名思义）\n- 记住这5个活动的**顺序和各自干什么**\n- 不需要深入理解每个活动的技术细节\n\n❌ **不需要：**\n- 背英文单词拼写\n- 深入理解架构重构的具体技术实现\n\n---\n\n## 🃏 快速回忆卡片\n\n```\n软件架构重构五步走：\n① 信息提取   → 从老系统挖信息，建模型\n② 存元素+关系 → 存进数据库\n③ 视图融合   → 多份信息合并补全\n④ 可视化交互  → 画出来，让用户能操作  ┐ 重构\n⑤ 模式识别   → 找出架构套路          ┘ 两大核心\n```"
+    },
+    {
+      "id": 407,
+      "index": 3,
+      "sort": 48,
+      "knowledge_point": "专业英语",
+      "prompt": "The objective of （）is to determine what parts of the application software will be assigned to what hardware.The major software components of the system being developed have to be identified and then allocated to the various hardware components on which the system will operate. All software systems can be divided into four basic functions. The first is（）. Most information systems require data to be stored and retrieved,whether a small file,such as a memo produced by a word processor,or a large database,such as one that stores an organization's accounting records. The second function is the （）,the processing required to access data,which often means database queries in Structured Query Language. The third function is the （）,which is the logic documented in the DFDs,use cases,and functional requirements.The fourth function is the presentation logic,the display of information to the user and the acceptance of the user's commands.The three primary hardware components of a system are （）.",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "architecture design",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "modular design",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "physical design",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "distribution design",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "architecture design"
+          ],
+          "official_analysis": "本题考察的是**系统架构设计与软件功能划分**。\n**问题1解析**：\n**A选项 architecture design**：正确。架构设计的目标是确定应用软件的哪些部分运行在何种硬件上，并完成软件构件与硬件构件的分配。\n**B选项 modular design**：强调模块化结构设计，不是此题的核心。\n**C选项 physical design**：指物理部署细节，与整体架构分配不同。\n**D选项 distribution design**：侧重分布式部署策略，不是本题所述的主要目标。\n\n**问题2解析**：\n**A选项 data access components**：是访问数据的中间组件，不是存储本身。\n**B选项 database management system**：是数据管理的软件，而题干描述的是数据存储功能本身。\n**C选项 data storage**：正确。无论是小文件还是大型数据库，都是数据存储功能的体现。\n**D选项 data entities**：指数据实体，与功能分类不符。\n\n**问题3解析**：\n**A选项 data persistence**：强调数据持久化，范围比访问逻辑更广，不完全符合。\n**B选项 data access objects**：是一种实现方式，不是功能类别。\n**C选项 database connection**：仅是连接数据库的机制，不等于访问逻辑。\n**D选项 data access logic**：正确。数据访问逻辑是处理访问存储数据的功能，如SQL查询。\n\n**问题4解析**：\n**A选项 system requirements**：是需求，不是功能逻辑。\n**B选项 system architecture**：是架构设计，不是具体逻辑。\n**C选项 application logic**：正确。应用逻辑是系统的业务处理部分，对应DFD、用例及功能需求。\n**D选项 application program**：是应用程序的实体，不是功能类别。\n\n**问题5解析**：\n**A选项 computers, cables and network**：不够准确，计算机的分类过于笼统。\n**B选项 clients, servers, and network**：正确。系统三大硬件组成是客户端、服务器和网络。\n**C选项 CPUs, memories and I/O devices**：是硬件部件，不是系统架构硬件构成的逻辑分类。\n**D选项 CPUs, hard disks and I/O devices**：同样是硬件组件细节，不符合题意。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "data access components",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "database management system",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "data storage",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "data entities",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "data storage"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "data persistence",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "data access objects",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "database connection",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "dataaccess logic",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "dataaccess logic"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "system requirements",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "system architecture",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "application logic",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "application program",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "application logic"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "computers,cables and network",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "clients,servers,and network",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "CPUs,memories and I/O devices",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "CPUs,hard disks and I/O devices",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "clients,servers,and network"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📒 软考高级·系统架构设计师\n## 专业英语记忆笔记｜2013年11月真题第48题\n\n---\n\n## 🧠 先读懂这段话在说什么（白话翻译）\n\n> 一个软件系统要跑起来，得先决定\"哪块代码跑在哪台机器上\"。\n> 所有软件系统都有4个基本功能：**存数据、取数据、处理业务、显示界面**。\n> 硬件层面，系统由3个东西组成：**客户端、服务器、网络**。\n\n你作为Java开发者，这就是你每天做的事：\n- 数据库存数据 → data storage\n- DAO层查数据 → data access logic  \n- Service层写业务 → application logic\n- 前端展示 → presentation logic（题目没考，了解即可）\n\n---\n\n## 🎯 5个答案·顾名思义记忆法\n\n---\n\n### 第1空 ✅ architecture design（架构设计）\n\n**顾名思义记忆：**\n> \"架构\" = 盖房子前先画图纸，决定哪个房间放在哪层楼\n> architecture design = **决定软件住哪台硬件的设计图**\n\n```\narchitecture = 建筑/架构\ndesign       = 设计\n→ 架构设计 = 画出软件和硬件怎么搭配的图\n```\n\n**排除干扰项：**\n```\nmodular design    → 模块设计（怎么拆代码，不是分配硬件）\nphysical design   → 物理设计（具体部署细节，比架构更细）\ndistribution design → 分布式设计（只管分散部署，范围更窄）\n```\n\n---\n\n### 第2空 ✅ data storage（数据存储）\n\n**顾名思义记忆：**\n> data = 数据，storage = 仓库/储存\n> **data storage = 数据仓库 = 把数据存起来**\n\n```\n你每天写的：\n  @Entity、数据库表、文件存储\n  ↓\n这就是 data storage 的职责\n```\n\n**排除干扰项：**\n```\ndata access components → 访问数据的零件（是取数据，不是存数据）\ndatabase management system → 数据库管理系统（是软件工具，不是功能分类）\ndata entities → 数据实体（是数据的形状，不是功能）\n```\n\n---\n\n### 第3空 ✅ data access logic（数据访问逻辑）\n\n**顾名思义记忆：**\n> access = 进入/访问，logic = 逻辑/规则\n> **data access logic = 进数据仓库的规则 = 你写的DAO层+SQL**\n\n```\n你每天写的：\n  mapper.selectById()\n  SELECT * FROM user WHERE id = ?\n  ↓\n这就是 data access logic\n```\n\n**和第2空的区别：**\n```\ndata storage      → 数据放在哪（仓库本身）\ndata access logic → 怎么进仓库取数据（取货规则）\n```\n\n**排除干扰项：**\n```\ndata persistence    → 数据持久化（比访问逻辑范围更大，包含存和取）\ndata access objects → DAO对象（是实现方式，不是功能分类名称）\ndatabase connection → 数据库连接（只是开门的钥匙，不是取货逻辑）\n```\n\n---\n\n### 第4空 ✅ application logic（应用逻辑）\n\n**顾名思义记忆：**\n> application = 应用/业务，logic = 逻辑\n> **application logic = 业务逻辑 = 你写的Service层**\n\n```\n你每天写的：\n  @Service\n  public void transferMoney(...) {\n      // 判断余额、扣款、记录日志...\n  }\n  ↓\n这就是 application logic\n```\n\n**题目说对应：DFD流程图、用例、功能需求**\n> 这三个都是描述\"业务怎么跑\"的文档，对应的代码就是Service层\n\n**排除干扰项：**\n```\nsystem requirements  → 系统需求（是文档，不是功能代码）\nsystem architecture  → 系统架构（是整体设计，不是具体业务逻辑）\napplication program  → 应用程序（是整个程序实体，不是功能分类）\n```\n\n---\n\n### 第5空 ✅ clients, servers, and network（客户端、服务器、网络）\n\n**顾名思义记忆：**\n> **三件套 = 用的人 + 干活的机器 + 中间的路**\n\n```\nclients  → 客户端（用户用的电脑/手机，发请求的）\nservers  → 服务器（处理请求、存数据的机器）\nnetwork  → 网络（客户端和服务器之间的路）\n\n你熟悉的场景：\n  浏览器(client) → 网络(network) → Tomcat服务器(server)\n```\n\n**排除干扰项：**\n```\ncomputers, cables and network → 太笼统，computer没说清是客户端还是服务器\nCPUs, memories and I/O devices → 这是一台电脑内部的零件，不是系统架构\nCPUs, hard disks and I/O devices → 同上，是硬件零件清单\n```\n\n---\n\n## 📊 整体结构字符图\n\n```\n┌─────────────────────────────────────────────────┐\n│              architecture design                 │\n│              （架构设计：软件分配到硬件）           │\n└──────────────────┬──────────────────────────────┘\n                   │\n       ┌───────────┴───────────┐\n       │    软件4大功能         │\n       └───────────┬───────────┘\n                   │\n    ┌──────────────┼──────────────┬──────────────┐\n    ▼              ▼              ▼              ▼\ndata storage  data access   application   presentation\n（存数据）     logic          logic          logic\n（数据库表）   （取数据/SQL）  （业务逻辑）    （界面显示）\n               ↑              ↑\n              DAO层          Service层\n                   │\n       ┌───────────┴───────────┐\n       │    硬件3大组成         │\n       └───────────┬───────────┘\n                   │\n    ┌──────────────┼──────────────┐\n    ▼              ▼              ▼\n clients        servers        network\n（客户端）      （服务器）       （网络）\n```\n\n---\n\n## ⚡ 考前速记口诀\n\n```\n架构设计分软硬（architecture design）\n存数据靠data storage\n取数据靠access logic\n业务逻辑application\n硬件三件：客服网\n（客户端 + 服务器 + 网络）\n```\n\n---\n\n## 📌 复习到什么程度可以考试？\n\n> 标签已标注：**了解即可，超纲**\n\n这题属于专业英语阅读，考法固定：**看懂句子，选对应的英文词组**。\n\n你只需要做到：\n\n- [x] 看到 `data storage` 知道是\"存数据\"\n- [x] 看到 `data access logic` 知道是\"取数据的逻辑\"\n- [x] 看到 `application logic` 知道是\"业务逻辑/Service层\"\n- [x] 知道系统硬件三件套：clients + servers + network\n- [x] 能排除明显错误选项即可\n\n**不需要**背单词拼写，不需要默写，**认识+能选对**就够了。"
+    },
+    {
+      "id": 359,
+      "index": 4,
+      "sort": 48,
+      "knowledge_point": "专业英语",
+      "prompt": "The objective of（）is to determine what parts of the application software will be assigned to what hardware. The major software components of the system being developed have to be identified and then allocated to the various hardware components on which the system will operate. All software systems can be divided into four basic functions. The first is（）.Most information systems require data to be stored and retrieved, whether a small file,such as a memo produced by a word processor, or a large database, such as one that stores an organization's accounting records.The second function is the（）,the processing required to access data, which often means database queries in Structured Query Language. The third function is the （）,which is the logic documented in the DFDs, use cases,and functional requirements.The fourth function is the presentation logic,the display of information to the user and the acceptance of the user's commands.The three primary hardware components of a system are （）.",
+      "difficulty": 1,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "architecture design",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "modular design",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "physical design",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "distribution design",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "architecture design"
+          ],
+          "official_analysis": "本题考察的是**系统架构设计的目标与软件系统的四大基本功能**。\n\n**问题1**：\n**A选项 architecture design**：架构设计旨在确定应用软件的不同部分将运行在哪些硬件组件上，正确。\n**B选项 modular design**：模块化设计关注软件内部模块划分，不是本题所述目标，错误。\n**C选项 physical design**：物理设计涉及系统物理部署，但不是本题强调的初步架构分配，错误。\n**D选项 distribution design**：分布式设计是架构设计的一部分，但范围更窄，错误。\n所以选择 A。\n\n**问题2**：\n**A选项 data access components**：是访问数据的组件，不是存储数据的功能，错误。\n**B选项 database management system**：是实现数据管理的软件，不是功能分类本身，错误。\n**C选项 data storage**：指数据存储功能，符合第一项功能描述，正确。\n**D选项 data entities**：是数据对象的概念，不是功能分类，错误。\n所以选择 C。\n\n**问题3**：\n**A选项 data persistence**：强调数据持久化，与访问逻辑不同，错误。\n**B选项 data access objects**：是访问数据的一种实现模式，不是功能本身，错误。\n**C选项 database connection**：仅指数据库连接机制，范围过窄，错误。\n**D选项 data access logic**：指访问和操作数据的处理逻辑，符合第二项功能描述，正确。\n所以选择 D。\n\n**问题4**：\n**A选项 system requirements**：是需求说明，不是功能类型，错误。\n**B选项 system architecture**：是系统整体结构，不是软件功能类型，错误。\n**C选项 application logic**：指业务逻辑或应用逻辑，符合第三项功能描述，正确。\n**D选项 application program**：指应用程序实体，不是功能分类，错误。\n所以选择 C。\n\n**问题5**：\n**A选项 computers, cables and network**：虽包含网络，但“computers”未明确区分客户端与服务器，错误。\n**B选项 clients, servers, and network**：系统三大主要硬件组件的准确分类，正确。\n**C选项 CPUs, memories and I/O devices**：是硬件内部构件，不是系统架构层面的硬件分类，错误。\n**D选项 CPUs, hard disks and I/O devices**：同上，错误。\n所以选择 B。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "data access components",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "database management system",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "data storage",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "data entities",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "data storage"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "data persistence",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "data access objects",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "database connection",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "data access logic",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "data access logic"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "system requirements",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "system architecture",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "application logic",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "application program",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "application logic"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "computers,cables and network",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "clients,servers,and network",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "CPUs,memories and I/O devices",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "CPUs,hard disks and I/O devices",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "clients,servers,and network"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📋 软考专业英语记忆笔记\n## 2013年11月 · 系统架构设计师 · 第48题\n\n---\n\n> 🏷️ **备考提示：标签为「了解即可/超纲」**\n> 这题不用深挖，能看懂题干关键词、认识选项含义即可，不需要背诵细节。\n\n---\n\n## 🧠 先读懂这段话在说什么（中文白话版）\n\n这段英文其实就是在说一件事：\n\n> **盖房子之前，要先决定哪个房间放在哪层楼。**\n> 软件开发也一样，架构设计就是决定\"哪块软件跑在哪台机器上\"。\n\n然后它说软件系统有**四个基本功能**，最后说硬件有**三个主要部件**。\n\n---\n\n## 🔑 五个核心词汇·顾名思义记忆法\n\n### 答案1：architecture design（架构设计）\n\n```\narchitecture = 建筑结构  →  软件的\"骨架图纸\"\ndesign       = 设计\n\n顾名思义：给软件画骨架，决定谁跑在哪台机器上\n```\n\n> 记忆口诀：**\"架构设计 = 给软件分配地盘\"**\n\n---\n\n### 答案2：data storage（数据存储）\n\n```\ndata    = 数据（就是信息）\nstorage = 仓库/储藏室\n\n顾名思义：把数据放进仓库\n```\n\n> 记忆口诀：**\"storage = 储藏室，存东西的地方\"**\n> 联想：超市仓库 → 存货 → 存数据\n\n---\n\n### 答案3：data access logic（数据访问逻辑）\n\n```\ndata   = 数据\naccess = 进入/访问（门禁卡刷一下才能进）\nlogic  = 规则/步骤\n\n顾名思义：按照一套规则去\"刷卡进门取数据\"\n```\n\n> 记忆口诀：**\"access = 刷门禁，logic = 怎么刷的规则\"**\n> 联想：你去档案室取文件，要走的那套流程 = data access logic\n\n---\n\n### 答案4：application logic（应用逻辑）\n\n```\napplication = 应用（你手机上装的APP）\nlogic       = 业务规则\n\n顾名思义：APP里那些\"业务规定\"，比如购物车满100减20\n```\n\n> 记忆口诀：**\"application logic = APP的业务规则\"**\n> 对应你Java开发里的 Service层 → 就是 application logic！\n\n---\n\n### 答案5：clients, servers, and network（客户端、服务器、网络）\n\n```\nclients  = 客人（发请求的那一方）\nservers  = 服务员（响应请求的那一方）\nnetwork  = 网络（客人和服务员之间的通道）\n\n顾名思义：客人 → 通道 → 服务员\n```\n\n> 记忆口诀：**\"客人点菜(client) → 走廊传菜(network) → 厨房做菜(server)\"**\n\n---\n\n## 📊 四大软件功能·一张图记清楚\n\n```\n┌─────────────────────────────────────────────┐\n│           软件系统四大基本功能               │\n├──────┬──────────────────────────────────────┤\n│ 第1个 │ data storage        数据存储         │\n│      │ → 把数据存进仓库                      │\n├──────┼──────────────────────────────────────┤\n│ 第2个 │ data access logic   数据访问逻辑     │\n│      │ → 按规则去仓库取数据（SQL查询）        │\n├──────┼──────────────────────────────────────┤\n│ 第3个 │ application logic   应用逻辑         │\n│      │ → 业务规则（你写的Service层）          │\n├──────┼──────────────────────────────────────┤\n│ 第4个 │ presentation logic  展示逻辑         │\n│      │ → 把结果显示给用户看（前端页面）        │\n└──────┴──────────────────────────────────────┘\n```\n\n> 用你熟悉的 SpringBoot 对应一下：\n\n```\npresentation logic  →  Controller层（返回给前端的数据）\napplication logic   →  Service层（业务规则）\ndata access logic   →  Mapper/DAO层（SQL查询）\ndata storage        →  数据库（MySQL等）\n```\n\n**这样是不是一秒就记住了？**\n\n---\n\n## 🖥️ 三大硬件组件·一张图\n\n```\n  [客户端 client]\n       |\n       |  ← network 网络（中间的线）\n       |\n  [服务器 server]\n```\n\n> 记忆口诀：**\"两端一线\"** → 客户端 + 服务器 + 网络\n\n---\n\n## ✅ 考试只需掌握到这个程度\n\n```\n┌─────────────────────────────────────────────┐\n│  因为标签是「了解即可/超纲」，你只需要：     │\n│                                             │\n│  ☑ 看到英文单词能认出中文意思               │\n│  ☑ 知道四大功能对应SpringBoot哪一层         │\n│  ☑ 知道三大硬件 = 客户端+服务器+网络        │\n│                                             │\n│  ✗ 不需要背单词拼写                         │\n│  ✗ 不需要背题干原文                         │\n└─────────────────────────────────────────────┘\n```\n\n---\n\n## 🎯 最终速记口诀\n\n> **架构设计分地盘**（architecture design）\n> **仓库存货是存储**（data storage）\n> **刷卡取货访问逻辑**（data access logic）\n> **Service层是应用逻辑**（application logic）\n> **客人走廊找服务员**（clients + network + servers）"
+    },
+    {
+      "id": 307,
+      "index": 5,
+      "sort": 44,
+      "knowledge_point": "专业英语",
+      "prompt": "The architecture design specifies the overall architecture and the placement of software and hardware that will be used. Architecture design is a very complex process that is often left to experienced architecture designers and consultants. The first step is to refine the （） into more detailed requirements that are then employed to help select the architecture to be used and the software components to be placed on each device. In a （）, one also has to decide whether to use a two-tier, three-tier, or n-tier architecture. Then the requirements and the architecture design are used to develop the hardware and software specification. There are four primary types of nonfunctional requirements that can be important in designing the architecture. （） specify the operating environment（s） in which the system must perform and how those may change over time. （） focus on the nonfunctional requirements issues such as response time, capacity, and reliability. （） are the abilities to protect the information system from disruption and data loss, whether caused by an intentional act. Cultural and political requirements are specific to the countries in which the system will be used.",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "functional requirements",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "nonfunctional requirements",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "system constraint",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "system operational environment",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "nonfunctional requirements"
+          ],
+          "official_analysis": "本题考察的是**系统架构设计中的非功能需求分类及其应用**。\n架构设计不仅涉及功能实现，还要满足系统在性能、可用性、安全性、可维护性等方面的需求，这些非功能需求会直接影响架构方案的选择。\n**问题1**：\n**A选项 functional requirements**：描述系统应具备的业务功能，与架构性能无关，错误。\n**B选项 nonfunctional requirements**：描述系统的质量属性，如性能、可用性、安全性等，本题明确指出是将其细化为详细需求，因此正确。\n**C选项 system constraint**：指系统必须遵守的限制条件，不等同于本题描述的非功能需求，错误。\n**D选项 system operational environment**：指运行环境，不是总类，错误。\n选择选项 B。\n\n**问题2**：\n**A选项 client-based architecture**：客户端承担主要处理，不符合本题“需决定两层、三层或n层架构”的背景，错误。\n**B选项 server-based architecture**：所有处理集中在服务器端，非本题语境，错误。\n**C选项 network architecture**：泛指网络架构，不是应用层的系统架构，错误。\n**D选项 client-server architecture**：符合题干中两层、三层、n层架构的描述，正确。\n选择选项 D。\n\n**问题3**：\n**A选项 Operational requirements**：定义系统运行的操作环境及其变化，本题对应的描述正是此项，正确。\n**B选项 Speed requirements**：属于性能需求，不符合本空格描述，错误。\n**C选项 Access control requirements**：属于安全需求，错误。\n**D选项 Customization requirements**：属于功能或可维护性需求，错误。\n选择选项 A。\n\n**问题4**：\n**A选项 Environment requirements**：与运行环境相关，不是性能问题，错误。\n**B选项 Maintainability requirements**：涉及系统维护方便性，错误。\n**C选项 Performance requirements**：与响应时间、容量、可靠性直接相关，本题描述与其一致，正确。\n**D选项 Virus control requirements**：属于安全性范畴，错误。\n选择选项 C。\n\n**问题5**：\n**A选项 Safety requirements**：与人身和设备安全相关，错误。\n**B选项 Security requirements**：涉及防御恶意破坏、保护数据安全，本题描述正好匹配，正确。\n**C选项 Data management requirements**：涉及数据组织与管理，错误。\n**D选项 System requirements**：泛指系统整体需求，不够具体，错误。\n选择选项 B。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "client-based architecture",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "server-based architecture",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "network architecture",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "client-server architecture",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "client-server architecture"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Operational requirements",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "Speed requirement",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Access control requirements",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Customization requirements",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "Operational requirements"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Environment requirements",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Maintainability requirements",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Performance requirements",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "Virus control requirements",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "Performance requirements"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Safety requirements",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Security requirements",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "Data management requirements",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "System requirements",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "Security requirements"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📚 软考专业英语 · 记忆笔记\n\n## 🎯 本题核心：读懂架构设计中的\"需求分类\"\n\n---\n\n## 一、文章结构速览（字符图）\n\n```\n架构设计流程\n│\n├─ 第一步：细化 [空1] 为详细需求\n│\n├─ 第二步：选择 [空2]（两层/三层/n层）\n│\n└─ 四类非功能需求：\n    ├─ [空3] → 运行环境 & 变化\n    ├─ [空4] → 响应时间、容量、可靠性\n    ├─ [空5] → 防破坏、防数据丢失\n    └─ 文化政治需求（已给出）\n```\n\n---\n\n## 二、五个答案 · 顾名思义记忆法\n\n### 空1 ✅ B — nonfunctional requirements（非功能需求）\n\n> 题干说：把它细化成详细需求，用来选架构\n\n```\nnon = 非    functional = 功能的    requirements = 需求\n→ \"非功能需求\" = 不是说系统能做什么，而是说系统做得怎么样\n  （快不快、稳不稳、安不安全）\n```\n\n**顾名思义口诀：** 非功能 = 功能之外的质量要求\n\n> 对比记忆：\n> - functional requirements = **功能需求** → 系统\"能做什么\"\n> - nonfunctional requirements = **非功能需求** → 系统\"做得好不好\"\n\n---\n\n### 空2 ✅ D — client-server architecture（客户端-服务器架构）\n\n> 题干说：要决定用两层、三层还是n层\n\n```\nclient = 客户端（你的电脑/手机）\nserver = 服务器（后台机器）\narchitecture = 架构\n\n→ \"客户端-服务器架构\" = 一边请求一边响应的分层结构\n  两层/三层/n层 都是它的变体\n```\n\n**顾名思义口诀：** 客户端找服务器要数据 → 分层就是这个模型\n\n> 你做 SpringBoot 开发，前端调你的接口 = 就是这个架构\n\n---\n\n### 空3 ✅ A — Operational requirements（操作环境需求）\n\n> 题干说：定义系统必须在哪些环境下运行，以及环境怎么变化\n\n```\nOperational = 操作的、运行的\nrequirements = 需求\n\n→ \"操作环境需求\" = 系统要在什么环境里跑，环境变了怎么办\n```\n\n**顾名思义口诀：** Operational = 操作/运行 → 跟\"运行环境\"绑定\n\n---\n\n### 空4 ✅ C — Performance requirements（性能需求）\n\n> 题干说：响应时间、容量、可靠性\n\n```\nPerformance = 性能、表现\nrequirements = 需求\n\n→ \"性能需求\" = 系统跑得快不快、撑得住不住\n```\n\n**顾名思义口诀：** Performance = 表演/表现 → 系统的\"表现\"好不好\n\n> 记忆锚点：你优化 SpringBoot 接口响应速度 = 就是在满足 Performance requirements\n\n---\n\n### 空5 ✅ B — Security requirements（安全需求）\n\n> 题干说：防止蓄意破坏、防止数据丢失\n\n```\nSecurity = 安全、保卫\nrequirements = 需求\n\n→ \"安全需求\" = 防黑客、防破坏、保护数据\n```\n\n**顾名思义口诀：** Security = 保安 → 系统的\"保安\"职责\n\n> 对比易混项：\n> - Safety = **人身/设备安全**（防事故）\n> - Security = **信息安全**（防攻击）\n\n---\n\n## 三、四类非功能需求 · 一张对照表\n\n```\n┌─────────────────────────┬──────────────────────────────┐\n│ 需求类型                │ 关键词（题干线索）            │\n├─────────────────────────┼──────────────────────────────┤\n│ Operational（操作环境） │ 运行环境、环境变化            │\n│ Performance（性能）     │ 响应时间、容量、可靠性        │\n│ Security（安全）        │ 防破坏、防数据丢失、蓄意攻击  │\n│ Cultural/Political      │ 国家、文化、政治              │\n└─────────────────────────┴──────────────────────────────┘\n```\n\n---\n\n## 四、复习程度建议\n\n> 标签已标注：**了解即可，超纲**\n\n```\n✅ 你只需要做到：\n   1. 看到英文单词能猜出中文意思（顾名思义）\n   2. 认识 functional / nonfunctional / performance / security 这几个词\n   3. 知道 client-server 就是分层架构的基础模型\n\n❌ 不需要：\n   背单词、写英文、深究语法\n```\n\n**备考时间分配建议：** 专业英语题 = 10分钟过一遍真题即可，重心放在架构知识本身\n\n---\n\n## 五、30秒速记口诀\n\n```\n非功能需求选架构，\n客户服务器分层住，\n操作环境看变化，\n性能响应容量数，\n安全保安防破坏，\n五空答案全记住！\n```"
+    },
+    {
+      "id": 263,
+      "index": 6,
+      "sort": 44,
+      "knowledge_point": "专业英语",
+      "prompt": "Designing the data storage architecture is an important activity in system design. There are two main types of data storage formats: files and databases. Files are electronic of data that have been optimized to perform a particular transaction. There are several types of files that differ in the way they are used to support an application.（） store core information that is important to the business and , more specifically , to the application , such as order information or customer mailing information . （） contain static values , such as a list of valid codes or the names of cities . Typically, the list is used for validation. A database is a collection of groupings of information that are related to each other in some way. There are many different types of databases that exist on the market today.（） is given to those databases which are based on older , sometimes outdated technology that is seldom used to develop new applications . （） are collections of records that are related to each other through pointers. In relational database , （） can be used in ensuring that values linking the tables together through the primary and foreign keys are valid and correctly synchronized.",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Master files",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "Look-up files",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Transaction files",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "History files",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "Master files"
+          ],
+          "official_analysis": "**本题考察的是数据存储架构中不同类型文件与数据库的分类与作用。**\n**小题 1：Master files**\n**A选项 Master files：正确。** 主文件用于存储关键的、经常被访问和更新的业务数据，如客户资料、订单记录等，是系统核心数据的一部分。\n**B选项 Look-up files：仅用于静态值查找，不是核心业务数据，错误。**\n**C选项 Transaction files：记录一次性的交易或处理事件，不是长期的核心数据，错误。**\n**D选项 History files：保存历史记录或归档，不是当前应用所依赖的核心数据，错误。**\n选择选项 A。\n\n**小题 2：Look-up files**\n**B选项 Look-up files：正确。** 查找文件用于保存静态、重复使用的值（如代码、城市名）用于数据校验。\n**A选项 Master files：存储业务核心数据，不是用于校验的静态值，错误。**\n**C选项 Audit files：用于审计追踪，不是静态校验数据，错误。**\n**D选项 History files：存历史记录，不用于静态校验，错误。**\n选择选项 B。\n\n**小题 3：Legacy database**\n**A选项 Legacy database：正确。** 旧式数据库是指基于过时技术的数据库，虽还在使用，但通常不用于新系统开发。\n**B选项 Backup database：用于备份数据，不是过时技术的代表，错误。**\n**C选项 Multidimensional database：用于 OLAP 分析，不是旧技术代表，错误。**\n**D选项 Workgroup database：面向小团队协作，不等同于旧数据库，错误。**\n选择选项 A。\n\n**小题 4：Network database**\n**D选项 Network database：正确。** 网络数据库是用指针连接记录的早期数据库模型之一，记录之间多对多的关系由指针维护。\n**A选项 Hierarchical database：层次结构，仅一对多，非指针连接多记录，错误。**\n**B选项 Workgroup database：描述使用场景，不是结构类型，错误。**\n**C选项 Linked table database：并无明确定义为一种结构类型，错误。**\n选择选项 D。\n\n**小题 5：Referential integrity**\n**C选项 referential integrity：正确。** 关系数据库中的参照完整性用于确保主外键之间的引用关系一致和有效。\n**A选项 identifying relationships：表示建立关系，但不是完整性机制，错误。**\n**B选项 normalization：用于消除数据冗余，不用于验证主外键关系，错误。**\n**D选项 store procedure：是数据库中的程序单元，不用于校验数据关系，错误。**\n选择选项 C。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Master files",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Look-up files",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "Audit files",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "History files",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "Look-up files"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Legacy database",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "Backup database",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Multidimensional database",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Workgroup database",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "Legacy database"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Hierarchical database",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Workgroup database",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Linked table database",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Network database",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "Network database"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "identifying relationships",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "normalization",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "referential integrity",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "store procedure",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "referential integrity"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📚 软考专业英语记忆笔记\n## 2013年11月 · 数据存储架构专业词汇\n\n---\n\n## 🧠 核心记忆法则：顾名思义中文拆解\n\n---\n\n### 📁 文件类型四兄弟\n\n```\n┌─────────────────────────────────────────────────────────┐\n│                   文件类型速记表                          │\n├──────────────────┬──────────────┬───────────────────────┤\n│ 英文             │ 中文直译     │ 顾名思义记忆           │\n├──────────────────┼──────────────┼───────────────────────┤\n│ Master files     │ 主文件       │ \"Master=主人/老大\"     │\n│                  │              │ 老大管着最重要的东西   │\n│                  │              │ → 核心业务数据         │\n│                  │              │ （客户、订单）         │\n├──────────────────┼──────────────┼───────────────────────┤\n│ Look-up files    │ 查找文件     │ \"Look up=查一查\"       │\n│                  │              │ 去查一查城市叫啥名     │\n│                  │              │ → 静态值/校验用        │\n│                  │              │ （城市名、代码表）     │\n├──────────────────┼──────────────┼───────────────────────┤\n│ Transaction files│ 交易文件     │ \"Transaction=一笔交易\" │\n│                  │              │ 记录这一次发生的事     │\n│                  │              │ → 一次性交易记录       │\n├──────────────────┼──────────────┼───────────────────────┤\n│ History files    │ 历史文件     │ \"History=历史\"         │\n│                  │              │ 历史博物馆，存旧东西   │\n│                  │              │ → 归档/历史记录        │\n└──────────────────┴──────────────┴───────────────────────┘\n```\n\n> 💡 四兄弟关系速记口诀：\n> **\"老大管核心，查查找静态，交易记一次，历史存过去\"**\n\n---\n\n### 🗄️ 数据库类型三兄弟\n\n```\n┌─────────────────────────────────────────────────────────┐\n│                  数据库类型速记表                         │\n├──────────────────────┬──────────────────────────────────┤\n│ Legacy database      │ \"Legacy = 遗留/遗产\"              │\n│ 遗留数据库           │ 爷爷留下来的老古董               │\n│                      │ → 过时技术，不用来开发新系统     │\n├──────────────────────┼──────────────────────────────────┤\n│ Network database     │ \"Network = 网络/网状\"             │\n│ 网状数据库           │ 像渔网一样，节点之间用绳子        │\n│                      │（指针）互相连着                  │\n│                      │ → 记录之间用指针连接             │\n├──────────────────────┼──────────────────────────────────┤\n│ Hierarchical database│ \"Hierarchical = 层级\"             │\n│ 层次数据库           │ 公司组织架构图，一层一层往下      │\n│                      │ → 树形结构，一对多               │\n└──────────────────────┴──────────────────────────────────┘\n```\n\n> 💡 网状 vs 层次 傻傻分不清？\n>\n> 层次 = 树形，只能从上往下，爸爸只有一个\n> 网状 = 渔网，可以多个爸爸，靠指针连着\n\n---\n\n### 🔗 关系数据库核心概念\n\n```\n┌─────────────────────────────────────────────────────────┐\n│ Referential integrity   参照完整性                       │\n│                                                         │\n│ \"Referential = 参照/引用\"                               │\n│ \"Integrity = 完整/不能乱\"                               │\n│                                                         │\n│ 顾名思义：                                              │\n│ 你引用了别人，就得保证引用的东西真实存在                 │\n│                                                         │\n│ 生活例子：                                              │\n│ 订单表里写了\"客户ID=888\"                                │\n│ 参照完整性就保证客户表里真的有888这个人                  │\n│ 不能凭空引用一个不存在的客户                            │\n│                                                         │\n│ 技术本质：主键和外键之间的引用关系必须有效               │\n└─────────────────────────────────────────────────────────┘\n```\n\n---\n\n### 🎯 本题5个答案连线速记\n\n```\n题目线索                    →    答案\n─────────────────────────────────────────────\n\"核心业务数据，如订单客户\"  →    Master files（老大管核心）\n\"静态值，用于校验\"          →    Look-up files（查查找静态）\n\"过时技术，不开发新系统\"    →    Legacy database（爷爷的老古董）\n\"记录之间通过指针连接\"      →    Network database（渔网+指针）\n\"主键外键引用关系有效\"      →    Referential integrity（引用不能乱）\n```\n\n---\n\n### ⚠️ 备考提示\n\n```\n┌─────────────────────────────────────────────┐\n│  标签：了解即可（超纲）                      │\n│                                             │\n│  这类专业英语题 → 认识单词就能选对          │\n│  不需要深入理解技术细节                     │\n│  重点记住每个词的\"中文直觉\"就够了           │\n└─────────────────────────────────────────────┘\n```\n\n---\n\n> 📝 复习到这个程度就可以考试了：\n> 看到英文单词，脑子里能立刻蹦出中文意思，知道它是干什么用的，不需要会拼写，选择题认识就行。"
+    },
+    {
+      "id": 219,
+      "index": 7,
+      "sort": 40,
+      "knowledge_point": "专业英语",
+      "prompt": "During the systems analysis phase, you must decide how data will be organized, stored, and managed. A（）is a framework for organizing, storing, and managing data. Each file or table contains data about people, places, things, or events. One of the potential problems existing in a file processing environment is（）, which means that data common to two or more information systems is stored in several places.\nIn a DBMS，the linked tables form a unified data structure that greatly improves data quality and access. A(n)（）is a model that shows the logical relationships and interaction among system entities . It provides an overall view of the system and a blueprint for creating the physical data structures.（）is the process of creating table designs by assigning specific fields or attributes to each table in the database. A table design specifies the fields and identifies the primary key in a particular table or file. The three normal forms constitute a progression in which（）represents the best design. Most business-related databases must be designed in that form.",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "data entity",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "data structure",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "file collection",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "data definition",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "data structure"
+          ],
+          "official_analysis": "**问题 1**\n**A. data entity**：指数据对象或数据项，不是用于组织和管理数据的整体框架，错误。\n**B. data structure**：是组织、存储和管理数据的框架，正确。\n**C. file collection**：只是文件集合，没有描述内部逻辑组织方式，错误。\n**D. data definition**：描述数据的格式和含义，不是整体框架，错误。\n所以选择 **B**。\n\n**问题 2**\n**A. data integrity**：数据完整性，强调数据的正确性与一致性，不是多处存储问题，错误。\n**B. the rigid data structure**：指僵化的数据结构，与多处存储无关，错误。\n**C. data redundancy**：数据冗余，指相同数据在多个地方重复存储，正确。\n**D. the many-to-many relationship**：是数据库关系类型，与存储冗余无直接关系，错误。\n所以选择 **C**。\n\n**问题 3**\n**A. entity-relationship diagram**：实体联系图，表示系统实体及其逻辑关系和交互，符合题意，正确。\n**B. data dictionary**：数据字典，用于记录数据定义和元数据，不是系统关系模型，错误。\n**C. database schema**：数据库模式，描述数据库逻辑结构，但不以图形方式展示关系，错误。\n**D. physical database model**：物理数据库模型，侧重存储实现，不是逻辑关系图，错误。\n所以选择 **A**。\n\n**问题 4**\n**A. Normalization**：规范化，是设计表结构、分配字段并确定主键的过程，正确。\n**B. Replication**：数据复制，与表结构设计无关，错误。\n**C. Partitioning**：数据分区，用于性能优化，不是规范化过程，错误。\n**D. Optimization**：泛指优化，不特指数据库表设计过程，错误。\n所以选择 **A**。\n\n**问题 5**\n**A. standard notation form**：无此数据库范式概念，错误。\n**B. first normal form**：消除非原子字段，是初级范式，不是最佳设计，错误。\n**C. second normal form**：消除部分依赖，优于1NF但不是最优，错误。\n**D. third normal form**：消除传递依赖，通常代表业务数据库的最佳设计，正确。\n所以选择 **D**。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "data integrity",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "the rigid data structure",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "data redundancy",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "the many-to-many relationship",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "data redundancy"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "entity-relationship diagram",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "data dictionary",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "database schema",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "physical database model",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "entity-relationship diagram"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Normalization",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "Replication",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Partitioning",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Optimization",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "Normalization"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "standard notation form",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "first normal form",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "second normal form",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "third normal form",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "third normal form"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📒 软考专业英语记忆笔记\n## 2013年11月真题·第40题·数据库核心术语\n\n---\n\n> 🎯 **备考建议**：此题标注「了解即可超纲」，只需能看懂英文选项、认识关键词即可，无需深究原理。\n\n---\n\n## 🔑 五个核心词汇·顾名思义记忆法\n\n---\n\n### 1️⃣ data structure　→　选 B（第一空）\n\n**顾名思义拆解：**\n```\ndata    = 数据\nstructure = 结构（建筑的骨架/框架）\n\ndata structure = 数据的骨架框架\n```\n**白话理解：**\n就像盖房子要先有框架，数据也要有个\"架子\"来装。\n题目说\"组织、存储、管理数据的**框架**\"，框架=结构，选它没错。\n\n---\n\n### 2️⃣ data redundancy　→　选 C（第二空）\n\n**顾名思义拆解：**\n```\ndata      = 数据\nredundancy = 冗余（多余的、重复的）\n           → 联想：redundancy 里有个 \"dun\"，\n             像\"囤积\"，囤了很多重复的东西\n             \ndata redundancy = 数据囤积 = 数据重复存了好多份\n```\n**白话理解：**\n同一份数据，A系统存一份，B系统也存一份，到处都是重复的——这就是数据冗余。\n题目说\"相同数据存在多个地方\"，就是它。\n\n---\n\n### 3️⃣ entity-relationship diagram　→　选 A（第三空）\n\n**顾名思义拆解：**\n```\nentity       = 实体（现实中真实存在的东西，比如\"用户\"\"订单\"）\nrelationship = 关系（实体之间怎么连接的）\ndiagram      = 图（画出来的图）\n\nentity-relationship diagram = 实体关系图 = E-R图\n```\n**白话理解：**\n你画过数据库设计图吗？那个画\"用户——下单——订单\"的图就是它。\n题目说\"展示系统实体逻辑关系的模型图\"，就是E-R图。\n\n> 💡 **程序员联想**：你用 Spring Boot 设计数据库表之前，画的那个\"方框+连线\"的设计图，就是 E-R 图。\n\n---\n\n### 4️⃣ Normalization　→　选 A（第四空）\n\n**顾名思义拆解：**\n```\nNormal     = 正常的、规范的\n-ization   = 变成...的过程（动作后缀）\n\nNormalization = 让数据变规范的过程 = 规范化\n```\n**白话理解：**\n设计数据库表时，把字段合理分配到各个表里，并确定主键——让表结构变得\"规规矩矩\"的过程。\n题目说\"给每张表分配字段、确定主键的过程\"，就是规范化。\n\n---\n\n### 5️⃣ third normal form　→　选 D（第五空）\n\n**顾名思义拆解：**\n```\nthird  = 第三\nnormal = 规范\nform   = 形式/范式\n\nthird normal form = 第三范式 = 3NF\n```\n\n**三个范式的\"升级打怪\"记忆：**\n```\n┌─────────────────────────────────────────┐\n│  第一范式(1NF)  →  字段不能再拆分        │\n│       ↓  升级                           │\n│  第二范式(2NF)  →  消除\"部分依赖\"        │\n│       ↓  升级                           │\n│  第三范式(3NF)  →  消除\"传递依赖\"★最优  │\n└─────────────────────────────────────────┘\n```\n**白话理解：**\n三个范式是从低到高的\"数据库设计等级\"，第三范式是业务数据库的最优设计标准。\n题目说\"三个范式中代表最佳设计的\"，就是第三范式。\n\n---\n\n## 📋 快速对照表（考场速查）\n\n```\n┌──────────────────────────┬──────────────┬────────────────────┐\n│ 英文词                   │ 中文         │ 一句话记忆         │\n├──────────────────────────┼──────────────┼────────────────────┤\n│ data structure           │ 数据结构     │ 数据的骨架框架     │\n│ data redundancy          │ 数据冗余     │ 数据囤积重复存     │\n│ entity-relationship      │ 实体关系图   │ 画实体连线的图     │\n│ diagram (E-R图)          │             │                    │\n│ Normalization            │ 规范化       │ 让表结构变规矩     │\n│ third normal form (3NF)  │ 第三范式     │ 三级最优设计       │\n└──────────────────────────┴──────────────┴────────────────────┘\n```\n\n---\n\n## ⚡ 考前只需记住这些\n\n由于此题标注**超纲·了解即可**，你只需要：\n\n- ✅ 看到 `structure` → 想到\"框架\"\n- ✅ 看到 `redundancy` → 想到\"重复冗余\"\n- ✅ 看到 `entity-relationship` → 想到\"E-R图\"\n- ✅ 看到 `Normalization` → 想到\"规范化/设计表\"\n- ✅ 看到 `third normal form` → 想到\"3NF最优\"\n\n**不需要**背范式的具体定义，不需要会手动规范化，认识单词选对答案即可。"
+    },
+    {
+      "id": 179,
+      "index": 8,
+      "sort": 36,
+      "knowledge_point": "专业英语",
+      "prompt": "The purpose of systems design is to specify a(n)（）, which defines the technologies to be used to build the proposed information systems. This task is accomplished by analyzing the data models and process models that were initially created during（）. The（）is used to establish physical processes and data stores across a network. To complete this activity, the analyst may involve a number of system designers and（）, which may be involved in this activity to help address business data, process, and location issues. The key inputs to this task are the facts, recommendations, and opinions that are solicited from various sources and the approved（）from the decision analysis phase.",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "physical model",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "prototype system",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "database schema",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "application architecture",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "application architecture"
+          ],
+          "official_analysis": "本题考察的是**系统设计阶段的核心任务与输入输出**。\n系统设计的目标是将需求分析阶段的逻辑模型转化为可实施的物理设计与技术方案。\n**问题1**：\n**A选项 physical model**：是对系统物理实现的详细描述，但题干强调的是定义技术的平台性方案，应为更高层次的架构，不正确。\n**B选项 prototype system**：原型系统是一种验证设计思想的手段，而不是最终定义技术的体系架构，不正确。\n**C选项 database schema**：是数据库结构定义，仅涉及数据存储层，不足以涵盖整套技术方案，不正确。\n**D选项 application architecture**：应用体系架构定义了构建系统所需的技术、平台、框架和通信方式，是系统设计的核心成果，正确。\n因此，正确选项为 D。\n\n**问题2**：\n**A选项 requirements analysis**：需求分析阶段产出的逻辑数据模型和逻辑流程模型，是系统设计阶段的重要输入，正确。\n**B选项 problem analysis**：问题分析用于明确问题范围与原因，不直接产生可供设计阶段使用的数据与流程模型，错误。\n**C选项 cause-effect analysis**：因果分析是问题溯源方法，不是系统设计的直接输入，错误。\n**D选项 decision analysis**：决策分析是方案评估与选择阶段，虽然产出方案建议书，但题干此处指模型来源，错误。\n因此，正确选项为 A。\n\n**问题3**：\n**A选项 entity-relationship diagram**：ER图描述数据逻辑结构，不用于建立跨网络的物理过程和数据存储，错误。\n**B选项 physical data flow diagram**：物理数据流图是在逻辑DFD基础上加入具体实现要素，用于建立跨网络的物理过程和数据存储，正确。\n**C选项 data flow diagram**：逻辑DFD描述数据流动，不包含物理实现细节，错误。\n**D选项 physical database model**：物理数据库模型仅关注数据存储细节，未涉及网络过程分布，错误。\n因此，正确选项为 B。\n\n**问题4**：\n**A选项 system users**：系统用户能提供业务数据、流程和位置上的实际需求与反馈，是设计阶段重要的参与者，正确。\n**B选项 system analyst**：系统分析师主导设计，但题干此处强调“其他参与者”，错误。\n**C选项 system owner**：系统所有者提供资源与决策支持，但不一定参与具体设计细节，错误。\n**D选项 project manager**：项目经理负责进度与资源协调，并非该环节的主要业务输入方，错误。\n因此，正确选项为 A。\n\n**问题5**：\n**A选项 system architecture**：系统架构是技术方案的总体蓝图，但题干强调来自决策分析阶段的批准文件，错误。\n**B选项 system proposal**：系统建议书是决策分析阶段批准的成果，包含可行性分析与推荐方案，作为系统设计的正式输入，正确。\n**C选项 technical model**：技术模型只是架构设计的部分产物，不是决策分析阶段的正式文件，错误。\n**D选项 business procedure**：业务流程定义不等同于系统建议书，错误。\n因此，正确选项为 B。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "requirements analysis",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "problem analysis",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "cause-effect analysis",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "decision analysis",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "requirements analysis"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "entity-relationship diagram",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "physical data flow diagram",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "data flow diagram",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "physical database model",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "physical data flow diagram"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "system users",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "system analyst",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "system owner",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "project manager",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "system users"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "system architecture",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "system proposal",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "technical model",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "business procedure",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "system proposal"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📒 软考专业英语记忆笔记\n## 2013年11月真题·第36题\n\n---\n\n> 🎯 **标签提示：了解即可，不用深挖，认识单词能选对就行**\n\n---\n\n## 🧩 题干翻译（先看懂在说什么）\n\n```\n系统设计的目的是定义一个【空1】，它规定了构建信息系统所需的技术。\n这项任务通过分析【空2】阶段创建的数据模型和流程模型来完成。\n【空3】用于在网络中建立物理流程和数据存储。\n分析师可能会邀请【空4】参与，以解决业务数据、流程和位置问题。\n关键输入包括来自各方的意见，以及决策分析阶段批准的【空5】。\n```\n\n---\n\n## ✅ 五个答案·顾名思义记忆法\n\n---\n\n### 空1 ✦ **D. application architecture**\n**应用 架构**\n\n```\napplication = 应用（你每天用的APP就是application）\narchitecture = 架构（建筑师设计房子的蓝图）\n\n👉 \"应用架构\" = 给整个系统画一张技术蓝图\n   规定用什么技术、什么框架、怎么通信\n   \n   你做SpringBoot项目时，决定\"用微服务还是单体\"\n   这个决定本身就是在定应用架构！\n```\n\n**为什么不选其他：**\n- physical model（物理模型）= 太细节，只是蓝图的一部分\n- prototype system（原型系统）= 用来验证想法的demo，不是蓝图\n- database schema（数据库结构）= 只管数据库，管不了整体\n\n---\n\n### 空2 ✦ **A. requirements analysis**\n**需求 分析**\n\n```\nrequirements = 需求（甲方说\"我要这个功能\"就是requirement）\nanalysis = 分析\n\n👉 \"需求分析\" = 听甲方说完需求后，整理成数据模型和流程图\n   这些模型后来被系统设计阶段拿去用\n\n   记忆口诀：先\"需求分析\"画逻辑图 → 再\"系统设计\"变成技术方案\n```\n\n---\n\n### 空3 ✦ **B. physical data flow diagram**\n**物理 数据 流 图**\n\n```\nphysical = 物理的（有具体机器、网络、服务器的那种）\ndata flow = 数据流（数据从A流向B）\ndiagram = 图\n\n👉 \"物理数据流图\" = 画出数据在真实网络中怎么流动的图\n   比逻辑DFD多了：服务器在哪、走哪条网线、存在哪台机器\n\n对比记忆：\n┌─────────────────────────────────────┐\n│ data flow diagram（逻辑数据流图）     │\n│ → 只画\"数据从哪来到哪去\"的逻辑关系   │\n│                                     │\n│ physical data flow diagram（物理版） │\n│ → 加上\"跑在哪台服务器、哪个网络节点\" │\n└─────────────────────────────────────┘\n```\n\n---\n\n### 空4 ✦ **A. system users**\n**系统 用户**\n\n```\nsystem users = 系统的使用者（就是最终用这个软件干活的人）\n\n👉 为什么要找用户参与设计？\n   因为他们最清楚：\n   · 业务数据长什么样（data）\n   · 工作流程是怎么走的（process）  \n   · 在哪个地点用（location）\n\n   就像你开发一个仓库管理系统\n   仓库工人才知道货物怎么入库出库的！\n```\n\n---\n\n### 空5 ✦ **B. system proposal**\n**系统 建议书**\n\n```\nsystem = 系统\nproposal = 建议书/提案（propose求婚也是这个词根，正式提出一个方案）\n\n👉 \"系统建议书\" = 决策分析阶段产出的正式文件\n   里面写了：做哪个方案、为什么选它、可不可行\n   经过批准后，作为系统设计的\"圣旨\"输入\n\n记忆：proposal = 正式提出的方案 → 被批准了就是设计的依据\n```\n\n---\n\n## 🗺️ 整体流程串联记忆\n\n```\n【系统开发流程】\n\n  需求分析阶段\n  (requirements analysis)\n       ↓\n   画出逻辑模型\n  （数据模型+流程模型）\n       ↓\n  决策分析阶段\n  产出：系统建议书\n  (system proposal) ✅批准\n       ↓\n  ══════════════════════\n     系统设计阶段\n  ══════════════════════\n  目标：定义应用架构\n  (application architecture)\n  \n  工具：物理数据流图\n  (physical data flow diagram)\n  \n  参与者：系统用户\n  (system users)\n  ══════════════════════\n```\n\n---\n\n## 📌 考前速记卡（背这个就够）\n\n```\n空1 → 应用架构    application architecture\n      （整个系统的技术蓝图）\n\n空2 → 需求分析    requirements analysis  \n      （产出逻辑模型的那个阶段）\n\n空3 → 物理数据流图 physical data flow diagram\n      （带网络节点的数据流图）\n\n空4 → 系统用户    system users\n      （最懂业务的人）\n\n空5 → 系统建议书  system proposal\n      （决策分析阶段批准的文件）\n```\n\n---\n\n> 💡 **复习到什么程度可以考试：**\n> 这题标注了\"了解即可/超纲\"，只需认识这5个英文词组，看到选项能对上中文意思就行，**不需要背定义，不需要深究**。把上面速记卡扫一眼，能选对即可。"
+    },
+    {
+      "id": 130,
+      "index": 9,
+      "sort": 51,
+      "knowledge_point": "专业英语",
+      "prompt": "The prevailing distributed computing model of the current era is called client/server computing. A （） is a solution in which the presentation,presentation logic,application logic,data manipulation and data layers are distributed between client PCs and one or more servers. A （） is a personal computer that does not have to be very powerful in terms of processor speed and memory because it only presents the interface to the user. A （） is a personal computer,notebook computer,or workstation that is typically more powerful in terms of processor speed,memory,and storage capacity. A （） hosts one or more shared database but also executes all database commands and services for information systems. A （n）（） hosts Internet or intranet Web sites,it communicates with clients by returning to them documents and data.",
+      "difficulty": 1,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Client/Server system",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "Client-side",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Serve-sider",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Database",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "Client/Server system"
+          ],
+          "official_analysis": "本题考察的是**C/S 架构及相关服务器类型**。\n\n**问题1**\n**A选项 Client/Server system**：客户/服务器系统是一种将表示层、逻辑层、数据层分布在客户端和服务器之间的分布式计算模型，正确。\n**B选项 Client-side**：指客户端一侧，不是完整的计算模型名称，错误。\n**C选项 Serve-sider**：拼写错误且概念不准确，错误。\n**D选项 Database**：仅指数据库，不是整体架构模式，错误。\n所以选择 A。\n\n**问题2**\n**A选项 Serve-sider**：错误术语，不符合描述，错误。\n**B选项 Browser**：浏览器只是用户接口的一种形式，不等于题中所述的仅展示界面的客户端，错误。\n**C选项 Fat client**：胖客户端功能强大，不符合“无须很强大，仅展示界面”的描述，错误。\n**D选项 Thin client**：瘦客户端性能要求低，仅负责用户界面展示，正确。\n所以选择 D。\n\n**问题3**\n**A选项 Cloud platform**：指云计算平台，不是客户端类型，错误。\n**B选项 Cluster system**：指集群系统，不是客户端类型，错误。\n**C选项 Fat client**：胖客户端计算能力强，存储资源丰富，符合题意，正确。\n**D选项 Thin client**：性能弱，不符合题中“更强大”的描述，错误。\n所以选择 C。\n\n**问题4**\n**A选项 Transaction server**：事务服务器主要处理事务请求，不等于数据库服务器，错误。\n**B选项 Database server**：数据库服务器管理共享数据库并执行所有数据库命令，符合描述，正确。\n**C选项 Application server**：应用服务器处理业务逻辑，不是直接执行数据库命令的服务器，错误。\n**D选项 Message server**：处理消息传递，不符合题意，错误。\n所以选择 B。\n\n**问题5**\n**A选项 Database server**：处理数据库操作，不负责网站页面服务，错误。\n**B选项 Message server**：用于消息传递，不负责网页服务，错误。\n**C选项 Web server**：Web 服务器负责管理网站，与客户端通信并返回网页与数据，正确。\n**D选项 Application server**：应用服务器主要负责业务逻辑，不直接提供网页文档，错误。\n所以选择 C。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Serve-sider",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Browser",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Fat client",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Thin client",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "Thin client"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Cloud platform",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Cluster system",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Fat client",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "Thin client",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "Fat client"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Transaction server",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Database serverer",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "Application server",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "Message server",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "Database serverer"
+          ],
+          "official_analysis": ""
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Database server",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Message server",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Web server",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "Application server",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "Web server"
+          ],
+          "official_analysis": ""
+        }
+      ],
+      "model_response": "# 📚 软考高级·系统架构设计师 专业英语记忆笔记\n\n## 🎯 本题核心：C/S架构中的\"角色分工\"\n\n> 把整个系统想象成一家**餐厅**，各个角色各司其职\n\n---\n\n## 🧠 顾名思义记忆法·核心词汇\n\n---\n\n### 1️⃣ Client/Server System — 客户/服务器系统\n\n```\n【顾名思义】\n\"客户\" + \"服务器\" = 客户来点菜，服务器来做菜\n整个餐厅的运营模式 = Client/Server System\n\n【本质】\n把\"界面展示、逻辑处理、数据存储\"\n分散到客户端和服务器两边来完成的分布式架构\n```\n\n---\n\n### 2️⃣ Thin Client — 瘦客户端\n\n```\n【顾名思义】\n\"瘦\" = 功能少、配置低、很轻量\n就像餐厅里只负责\"传菜\"的服务员\n——不做菜、不管库存，只把菜端给客人（展示界面）\n\n【记忆口诀】\n瘦子力气小 → 处理器弱、内存小\n只管\"脸面\" → 只负责用户界面展示\n```\n\n---\n\n### 3️⃣ Fat Client — 胖客户端\n\n```\n【顾名思义】\n\"胖\" = 功能多、配置高、能力强\n就像餐厅里的\"大厨兼采购\"\n——自己能处理很多事情\n\n【记忆口诀】\n胖子力气大 → 处理器强、内存大、存储多\n能干很多活 → 本地可以跑业务逻辑\n\n【对比记忆】\n瘦客户端 🤏 ←→ 胖客户端 💪\n只展示界面      功能强大能处理逻辑\n```\n\n---\n\n### 4️⃣ Database Server — 数据库服务器\n\n```\n【顾名思义】\n\"数据库\" + \"服务器\"\n= 专门管\"仓库\"的大管家\n\n就像餐厅的\"食材仓库管理员\"\n——所有食材（数据）都在他这里\n——所有取食材的命令（数据库命令）都由他执行\n\n【关键特征】\n托管共享数据库 + 执行所有数据库命令\n```\n\n---\n\n### 5️⃣ Web Server — 网页服务器\n\n```\n【顾名思义】\n\"Web\" 就是\"网页/网站\"\n= 专门管网站的服务器\n\n就像餐厅的\"外卖接单员\"\n——管理网站内容\n——客户来访问，就把网页和数据返回给他\n\n【关键特征】\n托管网站 + 与客户端通信 + 返回文档和数据\n```\n\n---\n\n## 📊 五大角色对比速记表\n\n```\n角色                  中文名          核心职责              类比\n─────────────────────────────────────────────────────────────\nClient/Server System  客户/服务器系统  整体分布式架构模式     整个餐厅运营模式\nThin Client           瘦客户端        只展示界面，配置低     传菜服务员\nFat Client            胖客户端        功能强，配置高         大厨兼采购\nDatabase Server       数据库服务器    管数据库+执行DB命令    仓库大管家\nWeb Server            网页服务器      托管网站+返回网页      外卖接单员\n```\n\n---\n\n## 🔁 做题思路（考场快速判断）\n\n```\n读到\"分布式计算模型/表示层逻辑层数据层分布\"\n  → Client/Server System ✅\n\n读到\"不需要很强大/只展示界面\"\n  → Thin Client（瘦=弱=只展示）✅\n\n读到\"更强大/处理器内存存储都强\"\n  → Fat Client（胖=强=能干活）✅\n\n读到\"托管共享数据库/执行数据库命令\"\n  → Database Server（数据库专属管家）✅\n\n读到\"托管网站/返回文档和数据给客户端\"\n  → Web Server（网页专属服务员）✅\n```\n\n---\n\n## ✅ 复习到什么程度可以上考场？\n\n> 专业英语题属于**送分题**，目标是**全对**\n\n达到以下程度即可：\n\n**1. 看到中文描述 → 立刻选出英文选项**（无需拼写，只需认识）\n\n**2. 区分这两对最容易混淆的：**\n- `Thin Client` vs `Fat Client`（瘦弱只展示 vs 胖强能处理）\n- `Database Server` vs `Web Server`（管数据 vs 管网页）\n\n**3. 不需要记英文拼写**，考试是选择题，认识单词即可\n\n---\n\n> 💡 **最后一句话记住全部：**\n> 胖客户能干活，瘦客户只露脸，数据库管仓库，Web服务器管网页，合在一起叫C/S架构。"
+    },
+    {
+      "id": 77,
+      "index": 10,
+      "sort": 62,
+      "knowledge_point": "专业英语",
+      "prompt": "Micro-service is a software development technology, which advocates dividing a single application into a group of small services, which coordinates and cooperates with each other to provide ultimate value for users.The micro-service （） has many important benefits.First,it solves the problem of business complexity. It decomposes the original huge single application into a group of services. Although the total amount of functions remains the same, the application has been decomposed into manageable services.The development speed of a single service is much faster, and it is easier to understand and （）. Second, this architecture allows each service to be （） independently by a team. Developers are free to choose any appropriate technology. Third, the micro-service architecture mode enables each service to be （） independently. Developers never need to coordinate the deployment of local changes to their services. These types of changes can be deployed immediately after testing. Finally, the micro-service architecture enables each service to （） independently.",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "architecture",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "software",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "application",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "technology",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "architecture"
+          ],
+          "official_analysis": "本题考察的是**微服务架构的特点与优势**。\n**问题 1**：A选项architecture指架构，符合题干中描述“micro-service … has many important benefits”，强调的是微服务架构的优点，正确。B选项software泛指软件，不特指架构，不准确。C选项application是应用，与题意不符。D选项technology是技术，未能准确指代“微服务架构”这一整体。\n选择选项 A。\n**问题 2**：B选项maintain（维护）符合语境，微服务拆分后更易理解和维护。A选项develop（开发）已在后文提及，与这里语境不符。C选项utilized（使用）与上下文逻辑不符。D选项deploy（部署）在此位置不合适。\n选择选项 B。\n**问题 3**：B选项developed（开发）符合“each service to be … independently by a team”的语境，说明团队可独立开发。A选项planned（规划）强调前期计划，不是这里要表达的核心。C选项utilized（使用）与逻辑不符。D选项deployed（部署）与上下文位置不符。\n选择选项 B。\n**问题 4**：D选项deployed（部署）符合“enables each service to be … independently”的语境，微服务支持独立部署。A选项utilized（使用）、B选项developed（开发）、C选项tested（测试）均与上下文意思不完全匹配。\n选择选项 D。\n**问题 5**：D选项expand（扩展）符合“micro-service architecture enables each service to … independently”的语境，说明微服务支持独立扩展。A选项analyze（分析）、B选项use（使用）、C选项design（设计）均不能准确表达架构优势。\n选择选项 D。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "develop",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "maintain",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "utilized",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "deploy",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "maintain"
+          ],
+          "official_analysis": "微服务是一种软件开发技术，它主张将单个应用程序划分为一组小服务，相互协调合作，为用户提供终极价值。微服务架构有许多重要的好处。首先，它解决了业务复杂性的问题。它将原来庞大的单个应用程序分解为一组服务，尽管功能的总数保持不变，但应用程序已被分解为可管理的服务。单个服务的开发速度要快得多，而且更容易理解和维护；其次，这种架构允许每个服务由一个团队独立开发，开发人员可以自由选择任何适当的技术；再次，微服务架构模式允许各个服务独立部署，开发人员永远不需要协调对其服务的本地更改的部署，这些类型的更改可以在测试后立即部署；最后，微服务架构允许每个服务独立扩展。"
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "planned",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "developed",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "utilized",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "deployed",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "developed"
+          ],
+          "official_analysis": "微服务是一种软件开发技术，它主张将单个应用程序划分为一组小服务，相互协调合作，为用户提供终极价值。微服务架构有许多重要的好处。首先，它解决了业务复杂性的问题。它将原来庞大的单个应用程序分解为一组服务，尽管功能的总数保持不变，但应用程序已被分解为可管理的服务。单个服务的开发速度要快得多，而且更容易理解和维护；其次，这种架构允许每个服务由一个团队独立开发，开发人员可以自由选择任何适当的技术；再次，微服务架构模式允许各个服务独立部署，开发人员永远不需要协调对其服务的本地更改的部署，这些类型的更改可以在测试后立即部署；最后，微服务架构允许每个服务独立扩展。"
+        },
+        {
+          "label": "4",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "utilized",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "developed",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "tested",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "deployed",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "deployed"
+          ],
+          "official_analysis": "微服务是一种软件开发技术，它主张将单个应用程序划分为一组小服务，相互协调合作，为用户提供终极价值。微服务架构有许多重要的好处。首先，它解决了业务复杂性的问题。它将原来庞大的单个应用程序分解为一组服务，尽管功能的总数保持不变，但应用程序已被分解为可管理的服务。单个服务的开发速度要快得多，而且更容易理解和维护；其次，这种架构允许每个服务由一个团队独立开发，开发人员可以自由选择任何适当的技术；再次，微服务架构模式允许各个服务独立部署，开发人员永远不需要协调对其服务的本地更改的部署，这些类型的更改可以在测试后立即部署；最后，微服务架构允许每个服务独立扩展。"
+        },
+        {
+          "label": "5",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "analyze",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "use",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "design",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "expand",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "expand"
+          ],
+          "official_analysis": "微服务是一种软件开发技术，它主张将单个应用程序划分为一组小服务，相互协调合作，为用户提供终极价值。微服务架构有许多重要的好处。首先，它解决了业务复杂性的问题。它将原来庞大的单个应用程序分解为一组服务，尽管功能的总数保持不变，但应用程序已被分解为可管理的服务。单个服务的开发速度要快得多，而且更容易理解和维护；其次，这种架构允许每个服务由一个团队独立开发，开发人员可以自由选择任何适当的技术；再次，微服务架构模式允许各个服务独立部署，开发人员永远不需要协调对其服务的本地更改的部署，这些类型的更改可以在测试后立即部署；最后，微服务架构允许每个服务独立扩展。"
+        }
+      ],
+      "model_response": "# 📝 软考专业英语 · 微服务题 记忆笔记\n\n---\n\n## 🎯 先搞懂这5个单词（顾名思义版）\n\n| 英文 | 中文 | 顾名思义记忆法 |\n|------|------|----------------|\n| architecture | 架构 | \"建筑师\"设计的蓝图 → 系统的\"骨架结构\" |\n| maintain | 维护 | \"维持\"系统正常运转 → 维护 |\n| develop | 开发 | \"发展\"出新功能 → 开发 |\n| deploy | 部署 | \"调兵遣将\"把代码放到服务器上跑 → 部署 |\n| expand | 扩展 | \"扩大\"服务规模 → 扩展/伸缩 |\n\n---\n\n## 🧩 题目结构拆解（填空逻辑）\n\n```\n微服务 [①架构] 有很多好处：\n\n好处1：解决复杂性\n  → 拆分后更易理解和 [②维护 maintain]\n\n好处2：团队自由\n  → 每个服务可由团队独立 [③开发 develop]\n\n好处3：快速上线\n  → 每个服务可独立 [④部署 deploy]\n\n好处4：弹性伸缩\n  → 每个服务可独立 [⑤扩展 expand]\n```\n\n---\n\n## 🔑 答题核心逻辑（排除法）\n\n### 第①空 → 选 architecture（架构）\n```\n题干说\"微服务___有很多好处\"\n微服务本身是个\"架构风格\"\nsoftware/application/technology 太泛，不精确\n记住：微服务 = 架构，不是软件、不是应用\n```\n\n### 第②空 → 选 maintain（维护）\n```\n前面已经说了\"开发速度更快\"\n后面接的是\"更容易理解和___\"\n开发(develop)已经说过了，不重复\n部署(deploy)放这里不通顺\n→ 理解 + 维护，是一对固定搭配\n```\n\n### 第③空 → 选 develop（开发）\n```\n\"这种架构允许每个服务由团队独立___\"\n团队的核心职责 = 开发\nplanned(规划)太前期\ndeployed(部署)在下一段才说\n→ 团队 + 独立 = 开发\n```\n\n### 第④空 → 选 deploy（部署）\n```\n\"开发人员不需要协调___，测试后立即___\"\n两个空都在说同一件事：部署\n这段话的主题就是\"独立部署\"\n→ 上下文反复提到deploy，锁定答案\n```\n\n### 第⑤空 → 选 expand（扩展）\n```\n最后一个好处，前面说了：\n维护✓ 开发✓ 部署✓\n最后只剩\"扩展\"没说\n→ 微服务四大优势：维护、开发、部署、扩展\n```\n\n---\n\n## 🧠 终极记忆口诀\n\n```\n微服务架构四兄弟：\n  好维护、好开发、好部署、好扩展\n  maintain develop deploy expand\n  维  开  部  扩\n```\n\n> 用你熟悉的 SpringBoot 微服务场景想象：\n> 你把一个大单体拆成多个 SpringBoot 服务\n> → 每个服务单独改代码（维护）\n> → 每个团队单独写（开发）\n> → 每个服务单独发版（部署）\n> → 某个服务压力大单独加机器（扩展）\n\n---\n\n## ✅ 复习到什么程度可以考试？\n\n这道题标注了「了解即可/超纲」，意味着：\n\n```\n┌─────────────────────────────────┐\n│  只需要：                        │\n│  ✓ 认识这5个单词的中文意思        │\n│  ✓ 能根据上下文语境选对词         │\n│  ✗ 不需要：背语法、背拼写         │\n└─────────────────────────────────┘\n```\n\n专业英语题本质是\"读懂中文逻辑再对号入座\"，你有5年开发经验，微服务概念本身完全熟悉，这题稳拿。"
+    }
+  ],
+  "knowledge_points": [
+    {
+      "name": "专业英语",
+      "related_questions": [
+        "466",
+        "495",
+        "407",
+        "359",
+        "307",
+        "263",
+        "219",
+        "179",
+        "130",
+        "77"
+      ],
+      "summary_markdown": "# 专业英语知识点结构化要点清单\n## 2013年11月系统架构设计师真题\n\n---\n\n## 一、知识点名称\n\n**系统架构专业英语阅读理解**（Professional English for System Architecture）\n\n---\n\n## 二、核心定义/结论\n\n这类题本质是**英文填空/选词**，考的不是英语语法，而是：\n1. 认识专业术语的中文含义\n2. 根据上下文语境判断正确选项\n\n涉及的核心概念域共五类：\n\n**① 软件架构三大结构**\n- Module structures（模块结构）→ 静态代码单元\n- Component-and-connector structures（构件连接器结构）→ 运行时交互\n- Allocation structures（分配结构）→ 与非软件环境的映射\n\n**② 软件架构重构五步流程**\n- Information extraction → Database construction → View fusion → Visualization & interaction → Pattern definition & recognition\n\n**③ 软件系统四大基本功能**\n- Data storage → Data access logic → Application logic → Presentation logic\n\n**④ 非功能需求四类**\n- Operational / Performance / Security / Cultural & Political requirements\n\n**⑤ C/S架构角色分工**\n- Thin client（瘦客户端）/ Fat client（胖客户端）/ Database server / Web server / Application server\n\n---\n\n## 三、典型题型与解题要领\n\n**题型特征：** 段落填空，每段5个空，选项均为英文词组\n\n**解题三步走：**\n\n```\n第一步：读题干中文逻辑（不要逐字翻译，抓关键词）\n         ↓\n第二步：用顾名思义法猜选项含义\n         ↓\n第三步：排除明显错误项，锁定答案\n```\n\n**各题核心解题要领：**\n\n| 题号 | 核心判断线索 |\n|------|-------------|\n| 42题 | 看到\"代码单元/静态\"→Module；\"运行时/交互\"→C&C；\"CPU/网络/团队\"→Allocation |\n| 46题 | 看到\"分析现有工件建模型\"→Information extraction；\"主外键引用\"→View fusion |\n| 48题 | 看到\"存数据\"→data storage；\"SQL查询\"→data access logic；\"DFD/用例\"→application logic |\n| 44题 | 看到\"响应时间/容量\"→Performance；\"防破坏/数据丢失\"→Security；\"运行环境变化\"→Operational |\n| 51题 | 看到\"只展示界面/配置低\"→Thin client；\"托管网站/返回网页\"→Web server |\n| 62题 | 四大好处顺序：维护→开发→部署→扩展（maintain→develop→deploy→expand） |\n\n---\n\n## 四、易错点与注意事项\n\n**① 形近词混淆**\n- `Safety`（人身安全）≠ `Security`（信息安全/防攻击）\n- `Thin client`（弱/只展示）≠ `Fat client`（强/能处理逻辑）\n- `data storage`（存数据）≠ `data access logic`（取数据的规则）\n- `functional requirements`（能做什么）≠ `nonfunctional requirements`（做得好不好）\n\n**② 范围大小陷阱**\n- `Reverse engineering`（大概念）≠ `Information extraction`（具体步骤）\n- `physical design`（物理部署细节）≠ `architecture design`（整体技术蓝图）\n- `data flow diagram`（逻辑版）≠ `physical data flow diagram`（带网络节点的物理版）\n\n**③ 数据库类型易混**\n- Legacy database = 遗留/过时技术的数据库（不是备份库）\n- Network database = 用指针连接记录（不是\"联网的数据库\"）\n- Hierarchical database = 树形一对多（不是网状多对多）\n\n**④ 三范式顺序**\n- 1NF → 2NF → 3NF，第三范式是最优，不要选错方向\n\n---\n\n## 五、推荐复习顺序\n\n按照\"认知负担从低到高\"排列：\n\n```\n第1轮（30分钟）：建立词汇直觉\n  → 把所有题目的答案词组过一遍\n  → 只记中文意思，不背拼写\n  → 重点：顾名思义，联系你的开发经验\n\n第2轮（20分钟）：攻克易混词对\n  → 专项区分上面\"易错点\"里的词对\n  → 用对比表格记忆，不要孤立记单词\n\n第3轮（15分钟）：做题验证\n  → 把这10道题重新做一遍（不看答案）\n  → 重点检查：能否根据题干关键词快速定位答案\n\n第4轮（5分钟）：考前速记\n  → 微服务四好处：维护→开发→部署→扩展\n  → 软件四功能：存→取→业务→展示\n  → 硬件三件套：客户端+服务器+网络\n```\n\n> 这类题全部标注\"了解即可/超纲\"，投入时间不超过1小时，目标是认识单词能选对，不需要深究原理。有5年开发经验的话，大部分概念本身已经熟悉，只是换了英文外壳。"
+    }
+  ],
+  "generated_at": "2026-02-26 12:39:46"
+}

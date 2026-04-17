@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>系统架构设计师 · 题库总览</title>
+<style>
+:root{color-scheme:light dark;--bg:#f0f4f8;--card:#fff;--accent:#2563eb;--accent2:#7c3aed;--text:#1e293b;--sub:#64748b;--shadow:0 4px 24px -8px rgba(15,23,42,.12);--border:rgba(148,163,184,.2)}
+@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--shadow:0 4px 24px -8px rgba(0,0,0,.4);--border:rgba(148,163,184,.1)}}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.container{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+.header{text-align:center;margin-bottom:2.5rem}
+.header h1{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header p{color:var(--sub);margin-top:.5rem;font-size:1.05rem}
+.stats{display:flex;justify-content:center;gap:2rem;margin:1.5rem 0}
+.stat{text-align:center}
+.stat .num{font-size:2rem;font-weight:800;color:var(--accent)}
+.stat .label{font-size:.85rem;color:var(--sub);margin-top:.2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;margin-top:2rem}
+.card{background:var(--card);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .2s,box-shadow .2s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px -8px rgba(37,99,235,.2)}
+.card h2{font-size:1.2rem;font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.card .icon{font-size:1.4rem}
+.card .meta{display:flex;gap:1rem;color:var(--sub);font-size:.9rem}
+.card .meta span{display:flex;align-items:center;gap:.3rem}
+.card .bar{height:4px;background:var(--border);border-radius:2px;margin-top:1rem;overflow:hidden}
+.card .bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px}
+.footer{text-align:center;margin-top:3rem;color:var(--sub);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>📚 系统架构设计师 · 刷题笔记</h1>
+<p>AI 增强解析 · 知识点总结 · 高效备考</p>
+<div class="stats" id="stats"></div>
+</div>
+<div class="grid" id="grid"></div>
+<div class="footer">
+<p>数据来源：芝士架构 · AI 解析由 Claude 生成</p>
+</div>
+</div>
+<script>
+const icons = ['📐','🏢','💻','📊','🗄️','🔍','🛡️','🏗️','🌐','⚙️','📋'];
+const subjects = [
+  {name:'系统架构设计',q:176,kp:10,icon:'🏗️'},
+  {name:'软件工程',q:93,kp:10,icon:'⚙️'},
+  {name:'系统分析与设计',q:72,kp:8,icon:'🔍'},
+  {name:'操作系统',q:64,kp:6,icon:'💻'},
+  {name:'计算机网络',q:43,kp:5,icon:'🌐'},
+  {name:'数据库系统',q:42,kp:4,icon:'🗄️'},
+  {name:'企业信息化战略',q:31,kp:8,icon:'🏢'},
+  {name:'数学与经济管理',q:18,kp:7,icon:'📊'},
+  {name:'项目管理',q:17,kp:5,icon:'📋'},
+  {name:'专业英语',q:10,kp:1,icon:'📐'},
+  {name:'系统可靠性',q:8,kp:1,icon:'🛡️'}
+];
+const totalQ = subjects.reduce((s,x)=>s+x.q,0);
+const totalKP = subjects.reduce((s,x)=>s+x.kp,0);
+const maxQ = Math.max(...subjects.map(x=>x.q));
+document.getElementById('stats').innerHTML = `
+  <div class="stat"><div class="num">${subjects.length}</div><div class="label">科目</div></div>
+  <div class="stat"><div class="num">${totalQ}</div><div class="label">题目</div></div>
+  <div class="stat"><div class="num">${totalKP}</div><div class="label">知识点</div></div>`;
+const grid = document.getElementById('grid');
+subjects.forEach(s => {
+  const pct = Math.round(s.q / maxQ * 100);
+  grid.innerHTML += `
+  <a class="card" href="${encodeURIComponent(s.name)}/index.html">
+    <h2><span class="icon">${s.icon}</span>${s.name}</h2>
+    <div class="meta">
+      <span>📝 ${s.q} 题</span>
+      <span>💡 ${s.kp} 知识点</span>
+    </div>
+    <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
+  </a>`;
+});
+</script>
+</body>
+</html>
