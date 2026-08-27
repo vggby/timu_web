@@ -1,0 +1,10 @@
+{
+  "id": "c9189494",
+  "url": "https://www.cheko.cc/test/select?test_id=927836",
+  "title": "2013年11月系统架构真题 - 基本概念",
+  "question_type": "choice",
+  "model_config": "gemini-3.1-pro-preview-all",
+  "created_at": "2026-05-19T19:51:43.671590",
+  "status": "failed",
+  "error": "模型配置 'gemini-3.1-pro-preview-all' 不存在，可用: ['default', 'claude-sonnet-4-6']"
+}

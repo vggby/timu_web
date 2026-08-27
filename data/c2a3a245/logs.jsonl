@@ -1,0 +1,335 @@
+{"time": "23:04:20", "level": "info", "msg": "任务启动 | URL: https://www.cheko.cc/test/select?test_id=531033 | 题型: choice | 模型: gpt-5.4"}
+{"time": "23:04:20", "level": "info", "msg": "页面抓取完成 | HTML大小: 185208 字符"}
+{"time": "23:04:20", "level": "info", "msg": "开始解析 HTML 页面..."}
+{"time": "23:04:20", "level": "info", "msg": "题目解析完成 | 题目数: 42 | 知识点数: 4"}
+{"time": "23:04:20", "level": "info", "msg": "LLM 客户端初始化 | model=gpt-5.4 | base_url=https://api.psydo.top | concurrency=8"}
+{"time": "23:04:20", "level": "info", "msg": "开始生成题目解析 | 共 42 题 | 并发 8"}
+{"time": "23:04:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1161"}
+{"time": "23:04:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=3199"}
+{"time": "23:04:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=999"}
+{"time": "23:04:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1752"}
+{"time": "23:04:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1029"}
+{"time": "23:04:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=848"}
+{"time": "23:04:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2201"}
+{"time": "23:04:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=910"}
+{"time": "23:05:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:05:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:05:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:05:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:05:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:05:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:05:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:05:21", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:05:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=848"}
+{"time": "23:05:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=999"}
+{"time": "23:05:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1752"}
+{"time": "23:05:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=3199"}
+{"time": "23:05:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1161"}
+{"time": "23:05:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2201"}
+{"time": "23:05:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=910"}
+{"time": "23:05:22", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1029"}
+{"time": "23:06:13", "level": "info", "msg": "API 响应 ← status=200 | 51.1s | body_len=8772"}
+{"time": "23:06:13", "level": "info", "msg": "API 成功 | 回复 8023 字符"}
+{"time": "23:06:13", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1967"}
+{"time": "23:06:18", "level": "info", "msg": "API 响应 ← status=200 | 56.9s | body_len=10156"}
+{"time": "23:06:18", "level": "info", "msg": "API 成功 | 回复 9068 字符"}
+{"time": "23:06:18", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=967"}
+{"time": "23:06:21", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:06:21", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:06:21", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:06:21", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:06:21", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:06:21", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:06:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=848"}
+{"time": "23:06:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=3199"}
+{"time": "23:06:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1752"}
+{"time": "23:06:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1161"}
+{"time": "23:06:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2201"}
+{"time": "23:06:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=910"}
+{"time": "23:07:08", "level": "info", "msg": "API 响应 ← status=200 | 49.4s | body_len=9681"}
+{"time": "23:07:08", "level": "info", "msg": "API 成功 | 回复 8820 字符"}
+{"time": "23:07:08", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1941"}
+{"time": "23:07:13", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:07:14", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1967"}
+{"time": "23:07:18", "level": "info", "msg": "API 响应 ← status=200 | 54.3s | body_len=9972"}
+{"time": "23:07:18", "level": "info", "msg": "API 成功 | 回复 8914 字符"}
+{"time": "23:07:18", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1206"}
+{"time": "23:07:20", "level": "info", "msg": "API 响应 ← status=200 | 57.2s | body_len=11683"}
+{"time": "23:07:20", "level": "info", "msg": "API 成功 | 回复 10805 字符"}
+{"time": "23:07:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1214"}
+{"time": "23:07:23", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:07:23", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:07:23", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:07:23", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:07:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=3199"}
+{"time": "23:07:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1752"}
+{"time": "23:07:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2201"}
+{"time": "23:07:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1161"}
+{"time": "23:08:08", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:09", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1941"}
+{"time": "23:08:14", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:16", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1967"}
+{"time": "23:08:18", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:19", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1206"}
+{"time": "23:08:20", "level": "info", "msg": "API 响应 ← status=200 | 59.6s | body_len=12319"}
+{"time": "23:08:20", "level": "info", "msg": "API 成功 | 回复 11160 字符"}
+{"time": "23:08:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2276"}
+{"time": "23:08:26", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:26", "level": "error", "msg": "题目 411 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1705"}
+{"time": "23:08:26", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:26", "level": "error", "msg": "题目 428 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=908"}
+{"time": "23:08:26", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:26", "level": "error", "msg": "题目 364 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1080"}
+{"time": "23:08:26", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:26", "level": "error", "msg": "题目 427 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:08:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1846"}
+{"time": "23:09:09", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:09:10", "level": "info", "msg": "API 响应 ← status=200 | 44.1s | body_len=8909"}
+{"time": "23:09:10", "level": "info", "msg": "API 成功 | 回复 8142 字符"}
+{"time": "23:09:10", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=890"}
+{"time": "23:09:11", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1941"}
+{"time": "23:09:11", "level": "info", "msg": "API 响应 ← status=200 | 44.4s | body_len=9128"}
+{"time": "23:09:11", "level": "info", "msg": "API 成功 | 回复 8263 字符"}
+{"time": "23:09:11", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=998"}
+{"time": "23:09:16", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:09:19", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1967"}
+{"time": "23:09:19", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:09:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:09:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1206"}
+{"time": "23:09:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2276"}
+{"time": "23:09:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:09:27", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:09:27", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1705"}
+{"time": "23:09:28", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1846"}
+{"time": "23:10:10", "level": "info", "msg": "API 响应 ← status=200 | 59.2s | body_len=11517"}
+{"time": "23:10:10", "level": "info", "msg": "API 成功 | 回复 10430 字符"}
+{"time": "23:10:10", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2241"}
+{"time": "23:10:11", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:10:11", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:10:12", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=890"}
+{"time": "23:10:14", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1941"}
+{"time": "23:10:19", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:10:19", "level": "error", "msg": "题目 315 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:10:19", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1113"}
+{"time": "23:10:21", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:10:21", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:10:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2276"}
+{"time": "23:10:24", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1206"}
+{"time": "23:10:28", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:10:28", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:10:30", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1705"}
+{"time": "23:10:30", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1846"}
+{"time": "23:11:10", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:11", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2241"}
+{"time": "23:11:12", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:14", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=890"}
+{"time": "23:11:14", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:14", "level": "error", "msg": "题目 270 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:14", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1955"}
+{"time": "23:11:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1113"}
+{"time": "23:11:23", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:24", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:24", "level": "error", "msg": "题目 271 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:24", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1210"}
+{"time": "23:11:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2276"}
+{"time": "23:11:30", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:30", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:11:33", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1705"}
+{"time": "23:11:33", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1846"}
+{"time": "23:12:11", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:13", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2241"}
+{"time": "23:12:14", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:14", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:15", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1955"}
+{"time": "23:12:17", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=890"}
+{"time": "23:12:17", "level": "info", "msg": "API 响应 ← status=200 | 56.9s | body_len=11459"}
+{"time": "23:12:17", "level": "info", "msg": "API 成功 | 回复 10587 字符"}
+{"time": "23:12:17", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=979"}
+{"time": "23:12:24", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:25", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1210"}
+{"time": "23:12:27", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:27", "level": "error", "msg": "题目 223 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:27", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=858"}
+{"time": "23:12:33", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:33", "level": "error", "msg": "题目 185 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:33", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=996"}
+{"time": "23:12:33", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:33", "level": "error", "msg": "题目 224 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:12:33", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1338"}
+{"time": "23:13:13", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:15", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:16", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=2241"}
+{"time": "23:13:17", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:17", "level": "error", "msg": "题目 186 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:17", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1230"}
+{"time": "23:13:17", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1955"}
+{"time": "23:13:17", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:18", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=979"}
+{"time": "23:13:25", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:27", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:27", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1210"}
+{"time": "23:13:28", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=858"}
+{"time": "23:13:33", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:33", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:13:34", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=996"}
+{"time": "23:13:34", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1338"}
+{"time": "23:14:16", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:14:16", "level": "error", "msg": "题目 136 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:14:16", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1002"}
+{"time": "23:14:17", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:14:17", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:14:18", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1230"}
+{"time": "23:14:18", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:14:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=979"}
+{"time": "23:14:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1955"}
+{"time": "23:14:25", "level": "info", "msg": "API 响应 ← status=200 | 57.3s | body_len=11185"}
+{"time": "23:14:25", "level": "info", "msg": "API 成功 | 回复 10187 字符"}
+{"time": "23:14:25", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1142"}
+{"time": "23:14:27", "level": "info", "msg": "API 响应 ← status=502 | 8.8s | body_len=71"}
+{"time": "23:14:27", "level": "error", "msg": "API 错误 502: Upstream request failed"}
+{"time": "23:14:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:14:27", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:14:29", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1230"}
+{"time": "23:14:29", "level": "info", "msg": "API 响应 ← status=200 | 55.3s | body_len=10043"}
+{"time": "23:14:29", "level": "info", "msg": "API 成功 | 回复 9059 字符"}
+{"time": "23:14:29", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=946"}
+{"time": "23:14:30", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1210"}
+{"time": "23:14:32", "level": "info", "msg": "API 响应 ← status=502 | 3.4s | body_len=71"}
+{"time": "23:14:32", "level": "error", "msg": "API 错误 502: Upstream request failed"}
+{"time": "23:14:32", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:14:34", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:14:35", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1230"}
+{"time": "23:14:36", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1338"}
+{"time": "23:15:06", "level": "info", "msg": "API 响应 ← status=200 | 49.8s | body_len=7082"}
+{"time": "23:15:06", "level": "info", "msg": "API 成功 | 回复 6216 字符"}
+{"time": "23:15:06", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=859"}
+{"time": "23:15:10", "level": "info", "msg": "API 响应 ← status=502 | 4.4s | body_len=71"}
+{"time": "23:15:10", "level": "error", "msg": "API 错误 502: Upstream request failed"}
+{"time": "23:15:10", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:15:11", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=859"}
+{"time": "23:15:20", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:20", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:20", "level": "error", "msg": "题目 82 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:20", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=900"}
+{"time": "23:15:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=979"}
+{"time": "23:15:25", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:26", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1142"}
+{"time": "23:15:29", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:30", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=946"}
+{"time": "23:15:30", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:30", "level": "error", "msg": "题目 86 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:30", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=965"}
+{"time": "23:15:35", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:35", "level": "error", "msg": "题目 1123 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:35", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1110"}
+{"time": "23:15:36", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:15:39", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1338"}
+{"time": "23:16:11", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:16:13", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=859"}
+{"time": "23:16:19", "level": "info", "msg": "API 响应 ← status=200 | 56.2s | body_len=11279"}
+{"time": "23:16:19", "level": "info", "msg": "API 成功 | 回复 10294 字符"}
+{"time": "23:16:19", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=789"}
+{"time": "23:16:20", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:16:21", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=900"}
+{"time": "23:16:26", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:16:28", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1142"}
+{"time": "23:16:29", "level": "info", "msg": "API 响应 ← status=200 | 53.3s | body_len=11479"}
+{"time": "23:16:29", "level": "info", "msg": "API 成功 | 回复 10678 字符"}
+{"time": "23:16:29", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=991"}
+{"time": "23:16:30", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:16:30", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:16:31", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=965"}
+{"time": "23:16:32", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=946"}
+{"time": "23:16:39", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:16:39", "level": "error", "msg": "题目 23 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:16:39", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1030"}
+{"time": "23:17:02", "level": "info", "msg": "API 响应 ← status=200 | 42.8s | body_len=7725"}
+{"time": "23:17:02", "level": "info", "msg": "API 成功 | 回复 6917 字符"}
+{"time": "23:17:02", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=914"}
+{"time": "23:17:14", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:17:17", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=859"}
+{"time": "23:17:21", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:17:23", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=900"}
+{"time": "23:17:24", "level": "info", "msg": "API 响应 ← status=200 | 55.9s | body_len=10911"}
+{"time": "23:17:24", "level": "info", "msg": "API 成功 | 回复 9912 字符"}
+{"time": "23:17:24", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1556"}
+{"time": "23:17:29", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:17:30", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=991"}
+{"time": "23:17:32", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:17:32", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:17:34", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=965"}
+{"time": "23:17:35", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=946"}
+{"time": "23:17:39", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:17:40", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1030"}
+{"time": "23:18:01", "level": "info", "msg": "API 响应 ← status=200 | 59.0s | body_len=12372"}
+{"time": "23:18:01", "level": "info", "msg": "API 成功 | 回复 11351 字符"}
+{"time": "23:18:01", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1061"}
+{"time": "23:18:17", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:18:17", "level": "error", "msg": "题目 1184 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:18:24", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:18:24", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:18:25", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1556"}
+{"time": "23:18:25", "level": "info", "msg": "API 响应 ← status=200 | 55.9s | body_len=11065"}
+{"time": "23:18:25", "level": "info", "msg": "API 成功 | 回复 9920 字符"}
+{"time": "23:18:27", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=900"}
+{"time": "23:18:34", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:18:35", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:18:35", "level": "error", "msg": "题目 1183 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:18:37", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=965"}
+{"time": "23:18:40", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:18:42", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1030"}
+{"time": "23:18:59", "level": "info", "msg": "API 响应 ← status=200 | 57.4s | body_len=10799"}
+{"time": "23:18:59", "level": "info", "msg": "API 成功 | 回复 9725 字符"}
+{"time": "23:19:20", "level": "info", "msg": "API 响应 ← status=200 | 53.3s | body_len=10522"}
+{"time": "23:19:20", "level": "info", "msg": "API 成功 | 回复 9535 字符"}
+{"time": "23:19:24", "level": "info", "msg": "API 响应 ← status=200 | 58.8s | body_len=11849"}
+{"time": "23:19:24", "level": "info", "msg": "API 成功 | 回复 10978 字符"}
+{"time": "23:19:37", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:19:37", "level": "error", "msg": "题目 1207 生成失败: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:19:42", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:19:45", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=1030"}
+{"time": "23:19:49", "level": "info", "msg": "API 响应 ← status=502 | 3.1s | body_len=71"}
+{"time": "23:19:49", "level": "error", "msg": "API 错误 502: Upstream request failed"}
+{"time": "23:19:49", "level": "error", "msg": "API 最终失败 (重试4次): 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:19:49", "level": "error", "msg": "题目 1304 生成失败: 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:19:49", "level": "info", "msg": "题目解析完成 | 成功 22 题"}
+{"time": "23:19:49", "level": "info", "msg": "开始生成知识点总结 | 共 4 个知识点"}
+{"time": "23:19:49", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=104460"}
+{"time": "23:19:49", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=52798"}
+{"time": "23:19:49", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=21523"}
+{"time": "23:19:49", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=65247"}
+{"time": "23:20:48", "level": "info", "msg": "API 响应 ← status=200 | 59.7s | body_len=10908"}
+{"time": "23:20:48", "level": "info", "msg": "API 成功 | 回复 10219 字符"}
+{"time": "23:21:02", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:21:03", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=104460"}
+{"time": "23:21:03", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:21:04", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:21:04", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=52798"}
+{"time": "23:21:05", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=65247"}
+{"time": "23:22:04", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: ('Connection aborted.', TimeoutError('The write operation timed out'))"}
+{"time": "23:22:06", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=52798"}
+{"time": "23:22:17", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:22:19", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=104460"}
+{"time": "23:22:22", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:22:24", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=65247"}
+{"time": "23:23:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:23:25", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=52798"}
+{"time": "23:23:38", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.psydo.top', port=443): Read timed out. (read timeout=60)"}
+{"time": "23:23:38", "level": "info", "msg": "API 响应 ← status=200 | 74.7s | body_len=9475"}
+{"time": "23:23:38", "level": "info", "msg": "API 成功 | 回复 8843 字符"}
+{"time": "23:23:41", "level": "info", "msg": "API 请求 → https://api.psydo.top/v1/chat/completions | model=gpt-5.4 | msg_len=104460"}
+{"time": "23:24:05", "level": "info", "msg": "API 响应 ← status=502 | 39.9s | body_len=71"}
+{"time": "23:24:05", "level": "error", "msg": "API 错误 502: Upstream request failed"}
+{"time": "23:24:05", "level": "error", "msg": "API 最终失败 (重试4次): 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:24:05", "level": "error", "msg": "知识点 \"特殊数据库系统\" 生成失败: 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:24:07", "level": "info", "msg": "API 响应 ← status=502 | 25.9s | body_len=71"}
+{"time": "23:24:07", "level": "error", "msg": "API 错误 502: Upstream request failed"}
+{"time": "23:24:07", "level": "error", "msg": "API 最终失败 (重试4次): 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:24:07", "level": "error", "msg": "知识点 \"关系数据库\" 生成失败: 502 Server Error: Bad Gateway for url: https://api.psydo.top/v1/chat/completions"}
+{"time": "23:24:07", "level": "info", "msg": "知识点总结完成 | 成功 2 个"}
+{"time": "23:24:07", "level": "info", "msg": "网站构建完成 | 题目数: 42 | 知识点: 4"}
+{"time": "23:24:07", "level": "info", "msg": "✅ 任务完成！"}

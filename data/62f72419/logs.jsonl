@@ -1,0 +1,194 @@
+{"time": "22:44:13", "level": "info", "msg": "任务启动 | URL: https://www.cheko.cc/test/select?test_id=531033 | 题型: choice | 模型: minimax-m2.7"}
+{"time": "22:44:13", "level": "info", "msg": "页面抓取完成 | HTML大小: 185208 字符"}
+{"time": "22:44:13", "level": "info", "msg": "开始解析 HTML 页面..."}
+{"time": "22:44:13", "level": "info", "msg": "题目解析完成 | 题目数: 42 | 知识点数: 4"}
+{"time": "22:44:13", "level": "info", "msg": "LLM 客户端初始化 | model=minimax-m2.7 | base_url=https://api.minimaxi.com | concurrency=8"}
+{"time": "22:44:13", "level": "info", "msg": "开始生成题目解析 | 共 42 题 | 并发 8"}
+{"time": "22:44:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1161"}
+{"time": "22:44:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=3199"}
+{"time": "22:44:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=999"}
+{"time": "22:44:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1752"}
+{"time": "22:44:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1029"}
+{"time": "22:44:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=848"}
+{"time": "22:44:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=2201"}
+{"time": "22:44:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=910"}
+{"time": "22:44:55", "level": "info", "msg": "API 响应 ← status=200 | 41.9s | body_len=6833"}
+{"time": "22:44:55", "level": "info", "msg": "API 成功 | 回复 5977 字符"}
+{"time": "22:44:55", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1967"}
+{"time": "22:44:58", "level": "info", "msg": "API 响应 ← status=200 | 44.1s | body_len=16730"}
+{"time": "22:44:58", "level": "info", "msg": "API 成功 | 回复 15794 字符"}
+{"time": "22:44:58", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=967"}
+{"time": "22:44:59", "level": "info", "msg": "API 响应 ← status=200 | 45.3s | body_len=4472"}
+{"time": "22:44:59", "level": "info", "msg": "API 成功 | 回复 3761 字符"}
+{"time": "22:44:59", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1941"}
+{"time": "22:45:00", "level": "info", "msg": "API 响应 ← status=200 | 46.5s | body_len=4745"}
+{"time": "22:45:00", "level": "info", "msg": "API 成功 | 回复 3920 字符"}
+{"time": "22:45:00", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1206"}
+{"time": "22:45:05", "level": "info", "msg": "API 响应 ← status=200 | 51.4s | body_len=3889"}
+{"time": "22:45:05", "level": "info", "msg": "API 成功 | 回复 3185 字符"}
+{"time": "22:45:05", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1214"}
+{"time": "22:45:06", "level": "info", "msg": "API 响应 ← status=200 | 52.9s | body_len=3835"}
+{"time": "22:45:06", "level": "info", "msg": "API 成功 | 回复 3051 字符"}
+{"time": "22:45:06", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=2276"}
+{"time": "22:45:14", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:45:14", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:45:15", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1161"}
+{"time": "22:45:15", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=3199"}
+{"time": "22:45:38", "level": "info", "msg": "API 响应 ← status=200 | 40.9s | body_len=6741"}
+{"time": "22:45:38", "level": "info", "msg": "API 成功 | 回复 5945 字符"}
+{"time": "22:45:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1705"}
+{"time": "22:45:43", "level": "info", "msg": "API 响应 ← status=200 | 47.8s | body_len=6508"}
+{"time": "22:45:43", "level": "info", "msg": "API 成功 | 回复 5653 字符"}
+{"time": "22:45:43", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=908"}
+{"time": "22:45:44", "level": "info", "msg": "API 响应 ← status=200 | 39.4s | body_len=4684"}
+{"time": "22:45:44", "level": "info", "msg": "API 成功 | 回复 3968 字符"}
+{"time": "22:45:44", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1080"}
+{"time": "22:45:57", "level": "info", "msg": "API 响应 ← status=200 | 57.6s | body_len=6093"}
+{"time": "22:45:57", "level": "info", "msg": "API 成功 | 回复 5350 字符"}
+{"time": "22:45:57", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1846"}
+{"time": "22:45:59", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:46:00", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1941"}
+{"time": "22:46:01", "level": "info", "msg": "API 响应 ← status=200 | 55.0s | body_len=5509"}
+{"time": "22:46:01", "level": "info", "msg": "API 成功 | 回复 4788 字符"}
+{"time": "22:46:01", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=890"}
+{"time": "22:46:07", "level": "info", "msg": "API 响应 ← status=200 | 22.7s | body_len=4099"}
+{"time": "22:46:07", "level": "info", "msg": "API 成功 | 回复 3348 字符"}
+{"time": "22:46:07", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=998"}
+{"time": "22:46:15", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:46:15", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:46:17", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=3199"}
+{"time": "22:46:17", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1161"}
+{"time": "22:46:24", "level": "info", "msg": "API 响应 ← status=200 | 41.3s | body_len=5550"}
+{"time": "22:46:24", "level": "info", "msg": "API 成功 | 回复 4754 字符"}
+{"time": "22:46:24", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=2241"}
+{"time": "22:46:31", "level": "info", "msg": "API 响应 ← status=200 | 52.7s | body_len=4164"}
+{"time": "22:46:31", "level": "info", "msg": "API 成功 | 回复 3441 字符"}
+{"time": "22:46:31", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1113"}
+{"time": "22:46:47", "level": "info", "msg": "API 响应 ← status=200 | 49.1s | body_len=6992"}
+{"time": "22:46:47", "level": "info", "msg": "API 成功 | 回复 6108 字符"}
+{"time": "22:46:47", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1955"}
+{"time": "22:46:56", "level": "info", "msg": "API 响应 ← status=200 | 54.8s | body_len=4651"}
+{"time": "22:46:56", "level": "info", "msg": "API 成功 | 回复 3892 字符"}
+{"time": "22:46:56", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1210"}
+{"time": "22:46:57", "level": "info", "msg": "API 响应 ← status=200 | 25.5s | body_len=4320"}
+{"time": "22:46:57", "level": "info", "msg": "API 成功 | 回复 3553 字符"}
+{"time": "22:46:57", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=979"}
+{"time": "22:47:00", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:47:02", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1941"}
+{"time": "22:47:07", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:47:08", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=998"}
+{"time": "22:47:17", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:47:17", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:47:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1161"}
+{"time": "22:47:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=3199"}
+{"time": "22:47:22", "level": "info", "msg": "API 响应 ← status=200 | 57.7s | body_len=5013"}
+{"time": "22:47:22", "level": "info", "msg": "API 成功 | 回复 4198 字符"}
+{"time": "22:47:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=858"}
+{"time": "22:47:29", "level": "info", "msg": "API 响应 ← status=200 | 42.7s | body_len=5862"}
+{"time": "22:47:29", "level": "info", "msg": "API 成功 | 回复 5038 字符"}
+{"time": "22:47:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=996"}
+{"time": "22:47:35", "level": "info", "msg": "API 响应 ← status=200 | 38.5s | body_len=6081"}
+{"time": "22:47:35", "level": "info", "msg": "API 成功 | 回复 5270 字符"}
+{"time": "22:47:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1338"}
+{"time": "22:47:37", "level": "info", "msg": "API 响应 ← status=200 | 40.6s | body_len=5848"}
+{"time": "22:47:37", "level": "info", "msg": "API 成功 | 回复 5082 字符"}
+{"time": "22:47:37", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1230"}
+{"time": "22:47:42", "level": "info", "msg": "API 响应 ← status=200 | 33.7s | body_len=2499"}
+{"time": "22:47:42", "level": "info", "msg": "API 成功 | 回复 1821 字符"}
+{"time": "22:47:42", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1002"}
+{"time": "22:48:02", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:48:05", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1941"}
+{"time": "22:48:08", "level": "info", "msg": "API 响应 ← status=200 | 46.1s | body_len=7439"}
+{"time": "22:48:08", "level": "info", "msg": "API 成功 | 回复 6616 字符"}
+{"time": "22:48:08", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1142"}
+{"time": "22:48:18", "level": "info", "msg": "API 响应 ← status=200 | 9.4s | body_len=2304"}
+{"time": "22:48:18", "level": "info", "msg": "API 成功 | 回复 1664 字符"}
+{"time": "22:48:18", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=946"}
+{"time": "22:48:20", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:48:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=859"}
+{"time": "22:48:20", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:48:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=900"}
+{"time": "22:48:23", "level": "info", "msg": "API 响应 ← status=200 | 45.8s | body_len=7879"}
+{"time": "22:48:23", "level": "info", "msg": "API 成功 | 回复 7034 字符"}
+{"time": "22:48:23", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=965"}
+{"time": "22:48:26", "level": "info", "msg": "API 响应 ← status=200 | 44.4s | body_len=4206"}
+{"time": "22:48:26", "level": "info", "msg": "API 成功 | 回复 3437 字符"}
+{"time": "22:48:26", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1110"}
+{"time": "22:48:28", "level": "info", "msg": "API 响应 ← status=200 | 52.9s | body_len=4783"}
+{"time": "22:48:28", "level": "info", "msg": "API 成功 | 回复 4058 字符"}
+{"time": "22:48:28", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=789"}
+{"time": "22:48:29", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:48:30", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=996"}
+{"time": "22:49:00", "level": "info", "msg": "API 响应 ← status=200 | 32.2s | body_len=3447"}
+{"time": "22:49:00", "level": "info", "msg": "API 成功 | 回复 2776 字符"}
+{"time": "22:49:00", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=991"}
+{"time": "22:49:04", "level": "info", "msg": "API 响应 ← status=200 | 41.8s | body_len=4874"}
+{"time": "22:49:04", "level": "info", "msg": "API 成功 | 回复 4078 字符"}
+{"time": "22:49:04", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1030"}
+{"time": "22:49:05", "level": "info", "msg": "API 响应 ← status=200 | 44.8s | body_len=3138"}
+{"time": "22:49:05", "level": "info", "msg": "API 成功 | 回复 2482 字符"}
+{"time": "22:49:05", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=914"}
+{"time": "22:49:05", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:49:05", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1556"}
+{"time": "22:49:09", "level": "info", "msg": "API 响应 ← status=200 | 49.6s | body_len=6736"}
+{"time": "22:49:09", "level": "info", "msg": "API 成功 | 回复 5905 字符"}
+{"time": "22:49:09", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1061"}
+{"time": "22:49:18", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:49:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=946"}
+{"time": "22:49:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:49:27", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1110"}
+{"time": "22:49:30", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:49:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=996"}
+{"time": "22:49:33", "level": "info", "msg": "API 响应 ← status=200 | 28.3s | body_len=4088"}
+{"time": "22:49:33", "level": "info", "msg": "API 成功 | 回复 3342 字符"}
+{"time": "22:49:41", "level": "info", "msg": "API 响应 ← status=200 | 36.7s | body_len=4461"}
+{"time": "22:49:41", "level": "info", "msg": "API 成功 | 回复 3762 字符"}
+{"time": "22:49:42", "level": "info", "msg": "API 响应 ← status=200 | 32.5s | body_len=8676"}
+{"time": "22:49:42", "level": "info", "msg": "API 成功 | 回复 7861 字符"}
+{"time": "22:49:53", "level": "info", "msg": "API 响应 ← status=200 | 48.6s | body_len=5463"}
+{"time": "22:49:53", "level": "info", "msg": "API 成功 | 回复 4708 字符"}
+{"time": "22:50:00", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:50:01", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=991"}
+{"time": "22:50:03", "level": "info", "msg": "API 响应 ← status=200 | 44.7s | body_len=4264"}
+{"time": "22:50:03", "level": "info", "msg": "API 成功 | 回复 3554 字符"}
+{"time": "22:50:15", "level": "info", "msg": "API 响应 ← status=200 | 43.0s | body_len=8298"}
+{"time": "22:50:15", "level": "info", "msg": "API 成功 | 回复 7411 字符"}
+{"time": "22:50:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:50:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=1110"}
+{"time": "22:51:01", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:51:03", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=991"}
+{"time": "22:51:25", "level": "info", "msg": "API 响应 ← status=200 | 55.7s | body_len=5783"}
+{"time": "22:51:25", "level": "info", "msg": "API 成功 | 回复 4997 字符"}
+{"time": "22:52:03", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:52:06", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=991"}
+{"time": "22:53:06", "level": "info", "msg": "API 响应 ← status=200 | 59.4s | body_len=6375"}
+{"time": "22:53:06", "level": "info", "msg": "API 成功 | 回复 5608 字符"}
+{"time": "22:53:06", "level": "info", "msg": "题目解析完成 | 成功 39 题"}
+{"time": "22:53:06", "level": "info", "msg": "开始生成知识点总结 | 共 4 个知识点"}
+{"time": "22:53:06", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=118630"}
+{"time": "22:53:06", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=35088"}
+{"time": "22:53:06", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=20125"}
+{"time": "22:53:06", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=48563"}
+{"time": "22:53:52", "level": "info", "msg": "API 响应 ← status=200 | 46.1s | body_len=6656"}
+{"time": "22:53:52", "level": "info", "msg": "API 成功 | 回复 5886 字符"}
+{"time": "22:54:06", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:54:06", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:54:06", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:54:07", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=35088"}
+{"time": "22:54:07", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=20125"}
+{"time": "22:54:07", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=48563"}
+{"time": "22:54:59", "level": "info", "msg": "API 响应 ← status=200 | 52.0s | body_len=5706"}
+{"time": "22:54:59", "level": "info", "msg": "API 成功 | 回复 4977 字符"}
+{"time": "22:55:07", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:55:07", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:55:09", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=35088"}
+{"time": "22:55:09", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=48563"}
+{"time": "22:56:09", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:56:10", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:56:12", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=35088"}
+{"time": "22:56:13", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/chat/completions | model=minimax-m2.7 | msg_len=48563"}
+{"time": "22:57:12", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:57:13", "level": "error", "msg": "API 最终失败 (重试4次): HTTPSConnectionPool(host='api.minimaxi.com', port=443): Read timed out. (read timeout=60)"}
+{"time": "22:57:13", "level": "info", "msg": "知识点总结完成 | 成功 2 个"}
+{"time": "22:57:14", "level": "info", "msg": "网站构建完成 | 题目数: 42 | 知识点: 4"}
+{"time": "22:57:14", "level": "info", "msg": "✅ 任务完成！"}

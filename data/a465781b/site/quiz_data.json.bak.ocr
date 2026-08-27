@@ -1,0 +1,3721 @@
+{
+  "meta": {
+    "paper_name": "2026年05月系统架构设计师考前预测",
+    "subject": 0,
+    "type": 0,
+    "item_count": 75
+  },
+  "questions": [
+    {
+      "id": 1,
+      "index": 1,
+      "sort": 1,
+      "knowledge_point": "架构评估",
+      "prompt": "在软件架构设计中，某架构师认为\"系统应该采用微服务架构，因为每个服务可以独立部署\"。另一位架构师指出\"微服务架构的分布式事务处理会增加系统复杂度\"。这种关于架构选择的讨论，最适宜采用以下哪种方法进行系统化决策？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "基于检查表的评估",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "架构权衡分析法",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "成本效益分析法",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "基于度量的评估",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "架构权衡分析法"
+          ],
+          "official_analysis": "ATAM专门用于识别架构决策中的权衡点，帮助干系人理解不同架构选择对质量属性的影响。微服务架构中独立部署（可维护性提升）与分布式事务（性能/一致性下降）正是典型的权衡点。"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "index": 2,
+      "sort": 2,
+      "knowledge_point": "UML",
+      "prompt": "在UML用例图中，以下关于\"参与者\"（Actor）的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "参与者只能是使用系统的人",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "参与者之间可以存在泛化关系",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "参与者与用例之间的关系是依赖关系",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "一个参与者只能参与一个用例",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "参与者之间可以存在泛化关系"
+          ],
+          "official_analysis": "在UML中，参与者之间可以存在泛化关系（如\"管理员\"继承\"普通用户\"）。参与者可以是人、外部系统或硬件设备；参与者与用例之间是关联关系；一个参与者可以参与多个用例。"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "index": 3,
+      "sort": 3,
+      "knowledge_point": "系统集成",
+      "prompt": "某企业计划将多个独立开发的信息系统进行整合，这些系统分别由不同部门维护，使用不同的数据库和开发语言。以下哪种集成方式的改造工作量最小？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "数据集成",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "表示层集成",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "业务流程集成",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "重建所有系统为统一平台",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "表示层集成"
+          ],
+          "official_analysis": "表示层集成仅需在现有系统之上构建统一的用户界面门户，不修改原有系统业务逻辑和数据层，是改造工作量最小的集成方式。"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "index": 4,
+      "sort": 4,
+      "knowledge_point": "系统可靠性",
+      "prompt": "某系统在运行过程中，运行30天内共发生了3次故障，每次故障时间都不同，但总故障时间为6小时，那么该系统在这段运行期间的MTTR=？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "0.2",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "2",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "20",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "10",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "2"
+          ],
+          "official_analysis": "MTTR是平均故障恢复时间，也就是求平均值，直接用6/3=2。"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "index": 5,
+      "sort": 5,
+      "knowledge_point": "SOA",
+      "prompt": "以下关于SOA的关键技术的说法中，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "WSDL协议一般被服务请求者用来发现服务",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "UDDI协议一般被服务提供者用来描述服务内容",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "SOAP协议用来在服务请求者和服务提供者之间传递数据",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "SOAP协议是基于JSON的",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "SOAP协议用来在服务请求者和服务提供者之间传递数据"
+          ],
+          "official_analysis": "WSDL是用来描述服务的，UDDI既可以发现服务也可以进行服务注册，SOAP是基于XML的。"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "index": 6,
+      "sort": 6,
+      "knowledge_point": "知识产权",
+      "prompt": "下列关于发明专利和实用新型专利的说法中，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "发明专利需要具备突出的实质性特点和显著的进步，实用新型专利需要具备实质性特点和进步",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "发明专利的保护期限为20年，实用新型专利的保护期限为10年",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "发明专利不需要进行实质审查，实用新型专利需要进行实质审查",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "发明专利可以保护算法，实用新型专利可以保护用户界面",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "发明专利的保护期限为20年，实用新型专利的保护期限为10年"
+          ],
+          "official_analysis": "我国《专利法》规定，发明专利权的期限为20年，实用新型专利权的期限为10年，均自申请日起计算。"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "index": 7,
+      "sort": 7,
+      "knowledge_point": "分布式系统",
+      "prompt": "某在线交易系统采用分布式架构，需要保证跨多个微服务的订单创建操作的原子性。以下哪种方案在保证数据一致性的同时，对业务代码的侵入性最低？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "两阶段提交（2PC）",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "本地消息表+消息队列",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "分布式锁",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "应用程序中手动编写补偿逻辑",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "本地消息表+消息队列"
+          ],
+          "official_analysis": "本地消息表+消息队列是实现最终一致性的典型方案，对业务代码侵入性较低，且避免了2PC的性能瓶颈和单点故障问题。"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "index": 8,
+      "sort": 8,
+      "knowledge_point": "架构评估",
+      "prompt": "The Software Architecture Analysis Method (SAAM) was one of the first documented methods for evaluating software architectures. SAAM focuses primarily on assessing the ( ) of an architecture.",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "performance",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "security",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "modifiability",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "usability",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "modifiability"
+          ],
+          "official_analysis": "SAAM主要关注可修改性（modifiability）评估。"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "index": 9,
+      "sort": 9,
+      "knowledge_point": "架构评估",
+      "prompt": "SAAM评估过程中，直接场景（direct scenarios）代表系统的（）行为。",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "current",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "future",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "ideal",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "maximum",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "current"
+          ],
+          "official_analysis": "直接场景描述系统当前行为，间接场景描述未来可能的变化。"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "index": 10,
+      "sort": 10,
+      "knowledge_point": "架构评估",
+      "prompt": "SAAM的主要输出包括敏感性分析，以及（）分析，用于揭示一个组件的变更如何影响其他组件。",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "dependency",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "risk",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "tradeoff",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "cost",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "dependency"
+          ],
+          "official_analysis": "敏感性分析后还需要依赖分析，找出组件间的相互影响。"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "index": 11,
+      "sort": 11,
+      "knowledge_point": "UML",
+      "prompt": "在UML类图中，以下关系表示\"一个类的对象包含另一个类的对象，且两者的生命周期相互独立\"的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "组合",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "聚合",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "依赖",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "泛化",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "聚合"
+          ],
+          "official_analysis": "聚合（空心菱形）表示\"整体-部分\"关系，但部分可以脱离整体独立存在。组合（实心菱形）表示部分的生命周期由整体管理。"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "index": 12,
+      "sort": 12,
+      "knowledge_point": "架构风格",
+      "prompt": "某公司正在开发一个智能家居控制系统，该系统需要根据温度、湿度、光照、用户预设规则等多种条件自动控制空调、灯光、窗帘等设备。随着用户需求的变化，控制规则需要频繁调整（如新增\"空气质量差时开启空气净化器\"）。以下哪种架构风格最适合这种场景？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "管道-过滤器风格",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "基于规则的系统风格",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "分层风格",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "仓库风格",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "基于规则的系统风格"
+          ],
+          "official_analysis": "基于规则的系统将业务逻辑表示为\"条件-动作\"规则，规则的增删改不需要修改应用程序的核心逻辑，非常适合频繁变化的业务规则场景。"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "index": 13,
+      "sort": 13,
+      "knowledge_point": "逆向工程",
+      "prompt": "在逆向工程中，以下哪个层次的分析可以帮助理解\"系统中的哪些模块承担了核心业务逻辑\"？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "实现级",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "结构级",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "功能级",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "领域级",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "功能级"
+          ],
+          "official_analysis": "功能级关注系统\"做什么\"，即分析系统中各模块的功能和职责，可以帮助理解哪些模块承担了核心业务逻辑。"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "index": 14,
+      "sort": 14,
+      "knowledge_point": "线性规划",
+      "prompt": "某工厂生产甲、乙两种产品，每种产品所需的材料、工时及利润如下表所示。已知每天材料1最多供应80单位，材料2最多供应200单位，工时最多300小时。问如何安排生产可使利润最大？最大利润是多少？\n\n| | 甲产品 | 乙产品 | 最大供应量 |\n|---|---|---|---|\n| 材料1 | 2 | 1 | 80 |\n| 材料2 | 4 | 5 | 200 |\n| 工时 | 3 | 10 | 300 |\n| 利润 | 7 | 12 | |",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "480",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "460",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "393",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "428",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "428"
+          ],
+          "official_analysis": "设生产甲产品x件，乙产品y件，则目标函数为最大化利润Z=7x+12y。约束条件为：2x+y≤80，4x+5y≤200，3x+10y≤300，x≥0,y≥0。最大利润为428，对应生产甲产品20件、乙产品24件。"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "index": 15,
+      "sort": 15,
+      "knowledge_point": "ABSD方法",
+      "prompt": "在ABSD（基于架构的软件设计）方法中，以下哪个活动发生在\"架构复审\"阶段？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "确定系统的质量目标",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "将架构文档化并提供给项目干系人",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "由用户代表和领域专家评审架构是否能满足需求",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "根据架构选择具体的实现技术",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "由用户代表和领域专家评审架构是否能满足需求"
+          ],
+          "official_analysis": "架构复审是由客户、用户、领域专家等干系人对架构进行评审，确认架构是否满足需求。"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "index": 16,
+      "sort": 16,
+      "knowledge_point": "操作系统",
+      "prompt": "某缓存系统采用LRU（最近最少使用）置换算法。以下关于LRU的说法，错误的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "LRU基于程序的局部性原理",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "LRU需要维护一个按访问时间排序的链",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "LRU算法的实现复杂度低于FIFO",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "LRU在循环遍历类工作负载下可能表现不佳",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "LRU算法的实现复杂度低于FIFO"
+          ],
+          "official_analysis": "LRU的实现复杂度高于FIFO（需要维护访问顺序或使用近似算法），C是错误的。"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "index": 17,
+      "sort": 17,
+      "knowledge_point": "数据库",
+      "prompt": "在关系数据库中，事务的隔离级别从低到高依次是：读未提交、读已提交、可重复读、串行化。以下说法正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "读未提交级别可以避免脏读",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "可重复读级别可以避免幻读",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "串行化级别的并发性能最高",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "读已提交级别是Oracle数据库的默认隔离级别",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "读已提交级别是Oracle数据库的默认隔离级别"
+          ],
+          "official_analysis": "Oracle数据库的默认隔离级别是\"读已提交\"（READ COMMITTED）。"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "index": 18,
+      "sort": 18,
+      "knowledge_point": "数据库",
+      "prompt": "以下关系运算中，（）运算会同时操作元组和属性",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "选择",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "投影",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "除",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "并",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "除"
+          ],
+          "official_analysis": "选择只操作元组（行），投影只操作属性（列），除运算同时涉及对元组和属性的操作，并运算主要操作元组。"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "index": 19,
+      "sort": 19,
+      "knowledge_point": "架构评估",
+      "prompt": "关于ATAM评估方法中\"效用树\"（Utility Tree）的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "效用树的根节点代表系统的功能需求",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "效用树的叶子节点是具体的质量属性场景",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "效用树只包含性能和安全两类质量属性",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "效用树的构建不需要干系人参与",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "效用树的叶子节点是具体的质量属性场景"
+          ],
+          "official_analysis": "效用树的叶子节点是具体的质量属性场景。根节点代表系统的\"效用\"，而非功能需求，构建需要干系人参与以获得优先级。"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "index": 20,
+      "sort": 20,
+      "knowledge_point": "架构风格",
+      "prompt": "以下关于软件架构\"脆弱性\"的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "管道-过滤器风格的脆弱性在于过滤器不能并行执行",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "层次风格的脆弱性在于分层过多会增加系统复杂性并降低性能",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "事件驱动风格的脆弱性在于构件之间耦合度过高",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "微服务架构的脆弱性在于服务数量少时管理复杂度高",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "层次风格的脆弱性在于分层过多会增加系统复杂性并降低性能"
+          ],
+          "official_analysis": "层次风格中每层调用都需要进行数据封装/解封装，层数过多会增加复杂性和性能开销。"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "index": 21,
+      "sort": 21,
+      "knowledge_point": "软件测试",
+      "prompt": "在软件测试中，以下关于\"回归测试\"的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "回归测试只在软件交付前执行一次",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "回归测试的目的是验证修改没有引入新的缺陷",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "回归测试只能手工执行",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "回归测试与冒烟测试是同一概念",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "回归测试的目的是验证修改没有引入新的缺陷"
+          ],
+          "official_analysis": "回归测试的核心目的是确保代码修改后，原有功能仍然正常工作，没有引入新的缺陷。"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "index": 22,
+      "sort": 22,
+      "knowledge_point": "CMMI",
+      "prompt": "某系统采用CMMI进行过程改进，其当前阶段的特点是：所有项目都已建立标准化的软件过程，过程文档化并可裁剪，项目的过程性能稳定。请问该组织处于CMMI的阶段式模型的哪个等级？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "第2级已管理级",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "第3级已定义级",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "第4级定量管理级",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "第5级优化级",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "第3级已定义级"
+          ],
+          "official_analysis": "CMMI阶段式模型第3级（已定义级）的特征是：组织建立了标准化的软件过程，所有项目使用标准过程的裁剪版本，过程已文档化。"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "index": 23,
+      "sort": 23,
+      "knowledge_point": "DSSA",
+      "prompt": "在DSSA的领域分析阶段，主要目的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "设计该领域的参考架构",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "构建可复用的软件构件",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "识别领域中的共性和变化性，建立领域模型",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "编写具体的应用系统代码",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "识别领域中的共性和变化性，建立领域模型"
+          ],
+          "official_analysis": "领域分析阶段的核心目标是理解领域、识别共性和变化点，建立领域模型。"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "index": 24,
+      "sort": 24,
+      "knowledge_point": "微服务架构",
+      "prompt": "在架构设计中，某架构师提出\"所有服务应共享同一个数据库以保证数据一致性\"。另一位架构师反驳说\"这违反了微服务架构的设计原则\"。以下最可能成为第二位架构师反驳理由的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "共享数据库会导致性能瓶颈",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "共享数据库会导致服务之间的紧耦合",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "共享数据库会增加数据冗余",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "共享数据库会增加代码复杂度",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "共享数据库会导致服务之间的紧耦合"
+          ],
+          "official_analysis": "微服务架构的核心原则之一是\"数据自治\"——每个服务应有自己的数据库。共享数据库会导致服务之间通过数据库表直接耦合。"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "index": 25,
+      "sort": 25,
+      "knowledge_point": "开发模型",
+      "prompt": "某项目因前期需求多，工期紧，经与客户协商，客户同意分期发布产品不同功能，属于（）开发模型",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "增量",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "V模型",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "瀑布",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "迭代",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "增量"
+          ],
+          "official_analysis": "增量是每次都发布产品的不同的功能；迭代是每次都对完整产品进行修改完善。"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "index": 26,
+      "sort": 26,
+      "knowledge_point": "设计模式",
+      "prompt": "在软件设计模式中，以下哪组都属于创建型模式？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "工厂方法、单例、适配器",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "建造者、原型、抽象工厂",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "代理、装饰器、外观",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "观察者、策略、模板方法",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "建造者、原型、抽象工厂"
+          ],
+          "official_analysis": "创建型模式包括：工厂方法、抽象工厂、建造者、原型、单例。"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "index": 27,
+      "sort": 27,
+      "knowledge_point": "UML",
+      "prompt": "在UML序列图中，以下关于\"生命线\"（Lifeline）的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "生命线代表一个具体的对象实例",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "生命线代表一个类",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "生命线代表一个用例",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "生命线代表一个子系统",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "生命线代表一个具体的对象实例"
+          ],
+          "official_analysis": "UML序列图中的生命线代表一个具体的对象实例在交互过程中的生命期。"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "index": 28,
+      "sort": 28,
+      "knowledge_point": "软件容错",
+      "prompt": "以下关于软件容错技术的说法中，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "N版本程序设计是一种动态的故障屏蔽技术，采用后向恢复策略",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "恢复块方法是一种静态的故障屏蔽技术，采用前向恢复的策略",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "N版本程序设计的实时性比恢复块方法更好",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "恢复块方法一般是多机同时运行",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "N版本程序设计的实时性比恢复块方法更好"
+          ],
+          "official_analysis": "N版本程序设计的实时性比恢复块方法更好。恢复块方法同一时间只有主机运行，备份机静止。"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "index": 29,
+      "sort": 29,
+      "knowledge_point": "数据流图",
+      "prompt": "在数据流图（DFD）中，以下哪种错误表示\"一个加工有输出数据流，但没有输入数据流来产生该输出\"？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "黑洞",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "奇迹",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "灰洞",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "数据流不平衡",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "奇迹"
+          ],
+          "official_analysis": "DFD的常见错误：黑洞（只有输入无输出）、奇迹（只有输出无输入）、灰洞（输入无法被完全消耗）。"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "index": 30,
+      "sort": 30,
+      "knowledge_point": "网络安全",
+      "prompt": "以下（）协议能够提供安全的电子邮箱服务",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "SSL",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "IPSec",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "SSH",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "S/MIME",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "S/MIME"
+          ],
+          "official_analysis": "S/MIME是安全的多用途网际邮件扩充协议，能提供安全邮件服务的还有PGP等协议。"
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "index": 31,
+      "sort": 31,
+      "knowledge_point": "质量属性",
+      "prompt": "关于软件架构\"可修改性\"（Modifiability）质量属性的以下说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "可修改性只关注代码的易读性",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "可修改性是关于软件能否适应需求变更的难易程度",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "可修改性只与开发阶段有关，与维护阶段无关",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "可修改性越高，系统性能一定越好",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "可修改性是关于软件能否适应需求变更的难易程度"
+          ],
+          "official_analysis": "可修改性是指软件系统能够以较高的性价比对系统进行变更的能力，包括增加功能、修改缺陷、调整配置等。"
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "index": 32,
+      "sort": 32,
+      "knowledge_point": "面向对象设计",
+      "prompt": "某电商系统需要增加银行卡支付方式，要求在原有支付宝支付的方式下，以不修改现有支付方式的方法来添加其他支付方式，遵循了面向对象的（）原则",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "依赖倒置",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "里氏替换",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "开闭原则",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "接口最小",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "开闭原则"
+          ],
+          "official_analysis": "原来的不变，然后去新增，就是对修改关闭，对扩展开放。"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "index": 33,
+      "sort": 33,
+      "knowledge_point": "架构文档化",
+      "prompt": "在软件架构文档化中，以下哪个视图最常用于描述系统的并发和同步机制？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "逻辑视图",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "进程视图",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "物理视图",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "场景视图",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "进程视图"
+          ],
+          "official_analysis": "4+1视图中的进程视图关注系统的并发行为、同步机制、任务间通信和性能特性。"
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "index": 34,
+      "sort": 34,
+      "knowledge_point": "密码学",
+      "prompt": "在非对称加密体制中，甲作为发送方给乙发送加密数据，应该",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "甲用乙的公钥加密，乙用乙的私钥解密",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "甲用甲的私钥加密，乙用甲的公钥解密",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "甲用乙的私钥加密，乙用乙的公钥解密",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "甲用甲的公钥加密，乙用甲的私钥解密",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "甲用乙的公钥加密，乙用乙的私钥解密"
+          ],
+          "official_analysis": "用接收方的公钥加密，接收方的私钥解密。"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "index": 35,
+      "sort": 35,
+      "knowledge_point": "架构风格",
+      "prompt": "下列架构风格中，不属于调用/返回风格的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "管道过滤器",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "客户端/服务器",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "层次风格",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "主程序子程序",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "管道过滤器"
+          ],
+          "official_analysis": "管道过滤器属于数据流风格。调用/返回风格包含客户端/服务器、层次风格、主程序子程序和面向对象。"
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "index": 36,
+      "sort": 36,
+      "knowledge_point": "架构评估",
+      "prompt": "在软件架构的SAAM评估方法中，以下哪个是SAAM的核心评估维度？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "性能",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "可修改性",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "安全性",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "可用性",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "可修改性"
+          ],
+          "official_analysis": "SAAM（软件架构分析方法）是最早的架构评估方法之一，其主要关注点是软件架构的\"可修改性\"。"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "index": 37,
+      "sort": 37,
+      "knowledge_point": "ORM",
+      "prompt": "关于ORM（对象关系映射）技术的说法，错误的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "ORM可以将面向对象模型中的对象与关系型数据库中的表进行映射",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "ORM可以帮助开发者避免手写SQL语句",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "ORM可能引入性能开销（如N+1查询问题）",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "ORM可以完全避免SQL注入风险",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "ORM可以完全避免SQL注入风险"
+          ],
+          "official_analysis": "ORM可以参数化查询来减少SQL注入风险，但不能完全避免，尤其是在使用原生SQL查询或拼接条件时。"
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "index": 38,
+      "sort": 38,
+      "knowledge_point": "数据仓库",
+      "prompt": "某系统采用ODS（操作数据存储）作为数据仓库架构中的数据临时存储层，用于从业务系统中抽取、清洗、转换数据。ODS与数据仓库（Data Warehouse）的主要区别是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "ODS存储历史数据，数据仓库存储当前数据",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "ODS的数据是可变的，数据仓库的数据是不可变的",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "ODS使用列式存储，数据仓库使用行式存储",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "ODS不需要数据清洗",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "ODS的数据是可变的，数据仓库的数据是不可变的"
+          ],
+          "official_analysis": "ODS中的数据可以更新和覆盖（反映业务系统的最新状态），而数据仓库中的数据一般是不可变的。"
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "index": 39,
+      "sort": 39,
+      "knowledge_point": "密码学",
+      "prompt": "数字签名技术不能直接保证",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "数据完整性",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "数据保密性",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "发送方身份",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "防止发送方抵赖",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "数据保密性"
+          ],
+          "official_analysis": "数字签名可以用来保证完整性、抗抵赖性，但用发送方的私钥加密，任何人都可以用发送方的公钥解密，因此不具备保密性。"
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "index": 40,
+      "sort": 40,
+      "knowledge_point": "架构评估",
+      "prompt": "在软件架构的ATAM评估中，以下哪项属于\"敏感点\"的特征？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "对多个质量属性同时产生影响的架构决策",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "对单个质量属性影响显著的架构决策",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "可能导致项目失败的高风险决策",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "与业务目标无关的架构决策",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "对单个质量属性影响显著的架构决策"
+          ],
+          "official_analysis": "敏感点是对于某个质量属性影响显著的架构决策。权衡点是对多个质量属性同时产生影响的决策。"
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "index": 41,
+      "sort": 41,
+      "knowledge_point": "软件配置管理",
+      "prompt": "以下关于软件配置管理（SCM）的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "SCM只管理源代码，不管理文档",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "SCM中的基线一旦建立就不能再修改",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "SCM可以帮助追踪需求变更的影响范围",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "SCM与版本控制系统（如Git）是同一概念",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "SCM可以帮助追踪需求变更的影响范围"
+          ],
+          "official_analysis": "SCM通过版本管理、变更控制、配置审计等功能，可以追踪需求-设计-代码-测试之间的变更影响。"
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "index": 42,
+      "sort": 42,
+      "knowledge_point": "数据库",
+      "prompt": "关系模式属性集{A, B, C, D}，依赖集{A->B，A->C，B->C，C->D}，则其候选键为",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "A",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "BC",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "B",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "AB",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "A"
+          ],
+          "official_analysis": "首先没在右边出现过的是A，其次由A可以推出B、C，再由传递依赖可推出D，因此仅凭A就可以推出剩下属性，候选键就是A。"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "index": 43,
+      "sort": 43,
+      "knowledge_point": "架构模式",
+      "prompt": "某系统采用MVVM（Model-View-ViewModel）架构模式开发前端应用。以下关于MVVM的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "ViewModel直接操作DOM元素",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Model负责用户界面显示",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "数据绑定机制将View和ViewModel自动同步",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "ViewModel中不应包含任何逻辑",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "数据绑定机制将View和ViewModel自动同步"
+          ],
+          "official_analysis": "MVVM的核心是数据绑定，View和ViewModel通过数据绑定机制自动同步，减少了手动操作DOM的代码。"
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "index": 44,
+      "sort": 44,
+      "knowledge_point": "架构演化",
+      "prompt": "在软件架构的\"演化\"过程中，以下哪个说法是正确的？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "架构演化只在软件开发完成后才开始",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "架构演化主要涉及代码层面的修改",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "架构演化应优先于代码演化，以降低总体成本",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "架构演化的记录和文档化不是必需的",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "架构演化应优先于代码演化，以降低总体成本"
+          ],
+          "official_analysis": "在软件演化时，应优先进行架构层面的评估和调整，再实施代码层面的修改，这样可以避免架构腐化和技术债务的积累。"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "index": 45,
+      "sort": 45,
+      "knowledge_point": "计算机网络",
+      "prompt": "将IP地址192.102.150.21/24划分为4个子网，并要求每个子网至少有30台主机，则划分后的网络对应的子网掩码是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "255.255.255.192",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "255.255.255.224",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "255.255.255.240",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "255.255.255.248",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "255.255.255.192"
+          ],
+          "official_analysis": "4个子网，则子网号为2位，原始网络号是24位，划分后的网络号一共是26位，剩32-26=6位是主机号，可以表示2^6-2=62台主机。子网掩码为255.255.255.192。"
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "index": 46,
+      "sort": 46,
+      "knowledge_point": "架构设计原则",
+      "prompt": "在系统架构设计中，\"关注点分离\"原则的主要目的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "提高系统的运行性能",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "降低系统的复杂性和提高可维护性",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "减少代码的重复",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "提高数据库的查询效率",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "降低系统的复杂性和提高可维护性"
+          ],
+          "official_analysis": "关注点分离是将系统划分为不同的、重用功能尽可能少的部分，每个部分关注一个独立的关注点。"
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "index": 47,
+      "sort": 47,
+      "knowledge_point": "数据库",
+      "prompt": "某数据库系统采用主从复制架构，主机负责处理写请求，从机负责处理读请求。以下关于该架构的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "该架构可以解决所有数据一致性问题",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "该架构存在主从复制的延迟问题",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "该架构可以完全避免单点故障",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "该架构不需要考虑数据同步策略",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "该架构存在主从复制的延迟问题"
+          ],
+          "official_analysis": "主从复制架构中，从机复制主机数据存在时间延迟，可能导致从机读到旧数据。"
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "index": 48,
+      "sort": 48,
+      "knowledge_point": "软件测试",
+      "prompt": "以下关于测试的说法中，（）是正确的",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "没有发现错误的测试是好的测试",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "测试的目的是尽可能发现之前未发现的错误",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "测试的目的是为了找到错误",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "通过测试能够验证程序没有任何问题",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "测试的目的是尽可能发现之前未发现的错误"
+          ],
+          "official_analysis": "B的说法最准确，不单单是找到错误，而是要找到之前没发现的错误。"
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "index": 49,
+      "sort": 49,
+      "knowledge_point": "敏捷开发",
+      "prompt": "在Scrum敏捷开发框架中，以下哪个角色负责保护开发团队不受外界干扰，并确保Scrum过程正确实施？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "产品负责人",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Scrum Master",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "开发团队",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "项目经理",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "Scrum Master"
+          ],
+          "official_analysis": "Scrum Master是Scrum团队的服务型领导，负责保护团队免受干扰、促进Scrum事件和工件、移除障碍。"
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "index": 50,
+      "sort": 50,
+      "knowledge_point": "数据中台",
+      "prompt": "在数据中台架构中，以下哪个层次主要负责数据的清洗、加工和融合？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "数据采集层",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "数据存储层",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "数据计算层",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "数据服务层",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "数据计算层"
+          ],
+          "official_analysis": "数据中台通常分为：数据采集层、数据存储层、数据计算层（ETL处理、清洗、融合）、数据服务层。"
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "index": 51,
+      "sort": 51,
+      "knowledge_point": "UML",
+      "prompt": "在银行系统的架构设计中，需要实现一个\"发送短信验证码\"的功能模块。该模块负责生成验证码，并调用安全网关将短信发送至用户手机。请问，该模块最适合设计为以下哪种UML类？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "实体类",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "边界类",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "控制类",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "数据访问类",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "控制类"
+          ],
+          "official_analysis": "控制类用于封装复杂的业务逻辑、协调多个对象或管理外部交互流程。\"发送短信验证码\"涉及生成验证码、调用外部安全网关接口等一系列协调与控制操作。"
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "index": 52,
+      "sort": 52,
+      "knowledge_point": "质量属性",
+      "prompt": "在软件架构的\"可测试性\"（Testability）质量属性中，以下哪种设计最有利于单元测试？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "高内聚、低耦合的模块设计",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "模块间通过全局变量共享状态",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "业务逻辑与数据库操作耦合在同一个方法中",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "使用单例模式管理所有服务",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "高内聚、低耦合的模块设计"
+          ],
+          "official_analysis": "高内聚、低耦合的设计使每个模块职责单一、依赖明确，便于单独测试和模拟依赖。"
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "index": 53,
+      "sort": 53,
+      "knowledge_point": "UML",
+      "prompt": "关于UML中\"用例\"的描述，错误的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "用例描述系统与外部参与者之间的交互",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "用例是从用户视角描述系统功能",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "用例之间的包含关系表示一个用例必须包含另一个用例的行为",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "用例可以描述系统的非功能性需求",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "用例可以描述系统的非功能性需求"
+          ],
+          "official_analysis": "用例主要用于描述系统的功能性需求。非功能性需求通常使用补充规格说明或用例场景中的约束来表达。"
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "index": 54,
+      "sort": 54,
+      "knowledge_point": "软件产品线",
+      "prompt": "在软件产品线工程中，\"核心资产\"不包括以下哪项？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "产品线的参考架构",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "可复用的需求分析模型",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "某个具体产品的用户手册",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "领域测试用例集",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "某个具体产品的用户手册"
+          ],
+          "official_analysis": "核心资产是指产品线中多个产品可以共享的资产。有具体产品的用户手册是应用工程的产出，不被其他产品复用。"
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "index": 55,
+      "sort": 55,
+      "knowledge_point": "架构风格",
+      "prompt": "关于软件架构风格\"客户端/服务器\"（C/S）的三层架构，以下说法正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "三层C/S架构又可以称为胖客户端架构",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "三层C/S架构中，客户端只负责表示层逻辑",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "三层C/S架构必须使用Web技术",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "三层C/S架构一般是表示层、功能层和数据访问层",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "三层C/S架构中，客户端只负责表示层逻辑"
+          ],
+          "official_analysis": "三层C/S架构的典型划分是：表示层（客户端）、业务逻辑层（应用服务器）、数据层（数据库服务器）。客户端主要负责展示和简单逻辑。"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "index": 56,
+      "sort": 56,
+      "knowledge_point": "模块化设计",
+      "prompt": "以下哪种方法可以有效降低模块间的耦合？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "通过很长的数据结构在不同模块间进行统一的数据传递",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "通过依赖抽象接口而非具体实现",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "通过全局变量",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "直接模块合并",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "通过依赖抽象接口而非具体实现"
+          ],
+          "official_analysis": "依赖抽象接口而非具体实现是面向对象设计中的重要原则（如依赖倒置原则），可以有效降低耦合。"
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "index": 57,
+      "sort": 57,
+      "knowledge_point": "云计算",
+      "prompt": "以下关于\"云计算\"中IaaS、PaaS、SaaS的说法，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "IaaS提供完整的应用程序，用户可以直接使用",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "PaaS提供运行环境，用户需要自己管理操作系统和中间件",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "SaaS用户需要自己管理底层基础设施",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "IaaS提供基础设施（如虚拟机、存储），用户需要自己管理操作系统和应用",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "IaaS提供基础设施（如虚拟机、存储），用户需要自己管理操作系统和应用"
+          ],
+          "official_analysis": "IaaS提供基础设施，用户自己管理操作系统、中间件和应用；PaaS提供运行环境，用户只需部署应用；SaaS提供完整应用，用户直接使用。"
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "index": 58,
+      "sort": 58,
+      "knowledge_point": "质量属性",
+      "prompt": "在软件架构的\"质量属性场景\"描述中，\"刺激\"要素指的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "系统中的某个构件",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "触发系统响应的条件或事件",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "系统响应后的度量标准",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "系统的运行环境",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "触发系统响应的条件或事件"
+          ],
+          "official_analysis": "质量属性场景的六要素：刺激源、刺激、环境、制品、响应、响应度量。刺激是触发系统响应的条件或事件。"
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "index": 59,
+      "sort": 59,
+      "knowledge_point": "UML",
+      "prompt": "在UML中，组件图主要用于描述",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "系统的物理部署结构",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "系统的软件构件之间的组织和依赖关系",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "系统与外部参与者的交互",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "系统的状态转换",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "系统的软件构件之间的组织和依赖关系"
+          ],
+          "official_analysis": "UML组件图用于描述软件系统中构件之间的组织关系和依赖关系。部署图描述物理部署结构，用例图描述参与者交互，状态图描述状态转换。"
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "index": 60,
+      "sort": 60,
+      "knowledge_point": "操作系统",
+      "prompt": "以下关于线程和进程的描述中，正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "线程拥有独立的文件资源和内存资源",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "线程可以直接访问其他进程的资源",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "线程是CPU调度的基本单位",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "创建线程的开销通常大于创建进程的开销",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "线程是CPU调度的基本单位"
+          ],
+          "official_analysis": "在操作系统中，线程是CPU调度的基本单位，而进程是资源分配的基本单位。线程与同进程内的其他线程共享进程的资源。"
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "index": 61,
+      "sort": 61,
+      "knowledge_point": "架构风格",
+      "prompt": "在软件体系结构中，分层架构是一种重要的风格。以下（）是分层架构的主要优点",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "提高了模块间的耦合度",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "增强了系统的可扩展性和可维护性",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "减少了系统的层次数量",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "保证了系统的性能最优",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "增强了系统的可扩展性和可维护性"
+          ],
+          "official_analysis": "分层架构通过将系统划分为若干层次，每一层为上层提供服务，并利用下层的服务。这种分离关注点的设计使得层与层之间松散耦合，便于独立修改和替换某一层，从而增强了系统的可扩展性和可维护性。"
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "index": 62,
+      "sort": 62,
+      "knowledge_point": "质量属性",
+      "prompt": "故障快速修复体现了以下（）软件质量属性",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "可用性",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "可修改性",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "可靠性",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "安全性",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "可用性"
+          ],
+          "official_analysis": "可用性（Availability）指系统在需要时能够正常运行和访问的程度。故障快速修复能够缩短系统停机时间，尽快恢复服务，从而提升系统的可用性。"
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "index": 63,
+      "sort": 63,
+      "knowledge_point": "数据库",
+      "prompt": "现有数据关系集1：选课{学号，课程名称，成绩，学分}，依赖集为{(学号,课程名称)→成绩，课程名称→学分}。请问关系1达到了",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "1NF",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "2NF",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "3NF",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "BCNF",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "1NF"
+          ],
+          "official_analysis": "根据关系1的依赖集可得出其候选键为(学号,课程名称)，课程名称→学分是部分函数依赖，那么就是1NF。"
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "index": 64,
+      "sort": 64,
+      "knowledge_point": "数据库",
+      "prompt": "现有数据关系集2：学生{学号，姓名，学院编号}，依赖集为{学号→姓名，学号→学院编号}。请问关系2达到了",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "1NF",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "2NF",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "3NF",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "BCNF",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "BCNF"
+          ],
+          "official_analysis": "根据关系2的依赖集可得出其候选键为学号，不存在非主属性对主属性的部分和传递依赖，而且因为只是单属性主键，也不存在主属性之间的依赖，所以是BCNF。"
+        }
+      ]
+    },
+    {
+      "id": 65,
+      "index": 65,
+      "sort": 65,
+      "knowledge_point": "事件驱动架构",
+      "prompt": "在\"事件驱动架构\"（EDA）中，以下哪个组件负责将事件从生产者路由到消费者？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "事件发布者",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "事件监听器",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "事件总线",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "事件存储",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "事件总线"
+          ],
+          "official_analysis": "事件驱动架构中，事件生产者将事件发送到事件总线（或消息代理，如Kafka、RabbitMQ），事件总线负责任务的路由、过滤、持久化和分发。"
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "index": 66,
+      "sort": 66,
+      "knowledge_point": "领域驱动设计",
+      "prompt": "在\"领域驱动设计\"（DDD）中，\"限界上下文\"（Bounded Context）的主要作用是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "定义微服务之间的通信协议",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "划分子系统和定义模型的一致性边界",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "管理分布式事务",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "实现读写分离",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "划分子系统和定义模型的一致性边界"
+          ],
+          "official_analysis": "DDD中的限界上下文是模型应用的一致性边界，在其中模型具有明确的语义和规则。不同上下文之间通过上下文映射进行集成，有助于划分微服务边界。"
+        }
+      ]
+    },
+    {
+      "id": 67,
+      "index": 67,
+      "sort": 67,
+      "knowledge_point": "运筹学",
+      "prompt": "某石油管理公司拥有输油管道网，其中有6个站点。站点①是唯一的供油站。各站点之间的箭线表示输油管道和流向，箭线边上标注的数字表示该管道的最大流量（单位：百吨/小时）。据此可算出，从站点①到达站点⑥的最大流量为（）百吨/小时。",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "14",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "15",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "16",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "18",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "16"
+          ],
+          "official_analysis": "本题要求从结点1到结点6的最大流量，把从结点1到结点6所有的路径找出来，然后把每条路径的流量进行累加，所有路径运力累加和为16。"
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "index": 68,
+      "sort": 68,
+      "knowledge_point": "运筹学",
+      "prompt": "接上题（输油管道网），当管道（）关闭维修时，管道网仍可按该最大流量值向站点⑥供油。",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "①→②",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "②→⑤",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "③→⑤",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "①→③",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "①→③"
+          ],
+          "official_analysis": "可以通过代入法进行求解，即假设各管道运力为0，计算图中结点1到结点6的最大运力有没有发生变化。当①→③关闭时，最大流量仍为16。"
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "index": 69,
+      "sort": 69,
+      "knowledge_point": "软件测试",
+      "prompt": "某系统在增加了指纹登录方式之后，上线后发现原有的用户名密码登录功能失败。这最有可能是以下哪种情况引起的？",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "未采用真实的指纹测试导致",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "需求未明确指纹登录与密码登录冲突",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "开发人员未进行用户名密码登录的回归测试",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "指纹登录功能修改了用户认证模块的数据库连接配置，导致密码登录时数据库连接失败",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "开发人员未进行用户名密码登录的回归测试"
+          ],
+          "official_analysis": "在软件开发生命周期中，新增功能后原有功能出现失败，通常是由于没有进行充分的回归测试。"
+        }
+      ]
+    },
+    {
+      "id": 70,
+      "index": 70,
+      "sort": 70,
+      "knowledge_point": "知识产权",
+      "prompt": "以下不属于软件著作权保护范围的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "系统设计的界面",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "代码程序",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "文档",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "算法原理",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "算法原理"
+          ],
+          "official_analysis": "算法原理不属于软件著作权保护范围。软件著作权保护的是软件的表达形式（代码、文档、界面等），而非思想或算法原理。"
+        }
+      ]
+    },
+    {
+      "id": 71,
+      "index": 71,
+      "sort": 71,
+      "knowledge_point": "面向对象设计",
+      "prompt": "关于软件设计中的\"迪米特法则\"（Law of Demeter，最少知识原则），以下描述正确的是",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "B",
+          "options": [
+            {
+              "label": "A",
+              "text": "一个对象应尽可能多地了解其他对象",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "一个对象应该只与其直接的朋友通信",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "该法则主要关注数据库设计",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "迪米特法则会降低代码的可维护性",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "一个对象应该只与其直接的朋友通信"
+          ],
+          "official_analysis": "迪米特法则的核心思想是：一个对象应该对其他对象有尽可能少的了解，即只与直接的朋友通信。这有助于降低耦合、提高可维护性。"
+        }
+      ]
+    },
+    {
+      "id": 72,
+      "index": 72,
+      "sort": 72,
+      "knowledge_point": "知识产权",
+      "prompt": "发现竞争对手用了我们公司的设计页面是侵犯了（）。",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "著作权",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "专利权",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "商标权",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "商业秘密权",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "著作权"
+          ],
+          "official_analysis": "典型的著作权，公司设计的页面直接被盗用。"
+        }
+      ]
+    },
+    {
+      "id": 73,
+      "index": 73,
+      "sort": 73,
+      "knowledge_point": "ERP",
+      "prompt": "企业资源计划（ERP）的主要功能不包括",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "D",
+          "options": [
+            {
+              "label": "A",
+              "text": "生产控制",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "物流管理",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "财务管理",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "人力资源管理属于独立系统，不属于ERP",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "人力资源管理属于独立系统，不属于ERP"
+          ],
+          "official_analysis": "典型的ERP系统的主要功能模块包括：财会管理、物流管理、生产控制管理、人力资源管理。"
+        }
+      ]
+    },
+    {
+      "id": 74,
+      "index": 74,
+      "sort": 74,
+      "knowledge_point": "物联网",
+      "prompt": "The Internet of Things (IoT) architecture is commonly described as a multi-layered framework. The ( ) layer consists of sensors, actuators, and other physical devices that collect data and interact with the environment.",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "A",
+          "options": [
+            {
+              "label": "A",
+              "text": "perception",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "transport",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "application",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "security",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "perception"
+          ],
+          "official_analysis": "物联网三层架构：感知层（传感器/执行器）、网络层（数据传输）、应用层（服务与界面）。感知层英文标准术语为\"Perception Layer\"。"
+        }
+      ]
+    },
+    {
+      "id": 75,
+      "index": 75,
+      "sort": 75,
+      "knowledge_point": "物联网",
+      "prompt": "The network layer in IoT architecture is responsible for ( ) the collected data from the perception layer to the processing systems.",
+      "difficulty": 0,
+      "tags": [],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "C",
+          "options": [
+            {
+              "label": "A",
+              "text": "filtering",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "analyzing",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "transmitting",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "storing",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "transmitting"
+          ],
+          "official_analysis": "网络层负责数据的\"传输\"（transmitting）。"
+        }
+      ]
+    }
+  ],
+  "knowledge_points": [
+    {
+      "name": "架构评估",
+      "related_questions": [
+        "1",
+        "8",
+        "9",
+        "10",
+        "19",
+        "36",
+        "40"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "UML",
+      "related_questions": [
+        "2",
+        "11",
+        "27",
+        "51",
+        "53",
+        "59"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "系统集成",
+      "related_questions": [
+        "3"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "系统可靠性",
+      "related_questions": [
+        "4"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "SOA",
+      "related_questions": [
+        "5"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "知识产权",
+      "related_questions": [
+        "6",
+        "70",
+        "72"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "分布式系统",
+      "related_questions": [
+        "7"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "架构风格",
+      "related_questions": [
+        "12",
+        "20",
+        "35",
+        "55",
+        "61"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "逆向工程",
+      "related_questions": [
+        "13"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "线性规划",
+      "related_questions": [
+        "14"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "ABSD方法",
+      "related_questions": [
+        "15"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "操作系统",
+      "related_questions": [
+        "16",
+        "60"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "数据库",
+      "related_questions": [
+        "17",
+        "18",
+        "42",
+        "47",
+        "63",
+        "64"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "软件测试",
+      "related_questions": [
+        "21",
+        "48",
+        "69"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "CMMI",
+      "related_questions": [
+        "22"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "DSSA",
+      "related_questions": [
+        "23"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "微服务架构",
+      "related_questions": [
+        "24"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "开发模型",
+      "related_questions": [
+        "25"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "设计模式",
+      "related_questions": [
+        "26"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "软件容错",
+      "related_questions": [
+        "28"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "数据流图",
+      "related_questions": [
+        "29"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "网络安全",
+      "related_questions": [
+        "30"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "质量属性",
+      "related_questions": [
+        "31",
+        "52",
+        "58",
+        "62"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "面向对象设计",
+      "related_questions": [
+        "32",
+        "71"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "架构文档化",
+      "related_questions": [
+        "33"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "密码学",
+      "related_questions": [
+        "34",
+        "39"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "ORM",
+      "related_questions": [
+        "37"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "数据仓库",
+      "related_questions": [
+        "38"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "软件配置管理",
+      "related_questions": [
+        "41"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "架构模式",
+      "related_questions": [
+        "43"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "架构演化",
+      "related_questions": [
+        "44"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "计算机网络",
+      "related_questions": [
+        "45"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "架构设计原则",
+      "related_questions": [
+        "46"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "敏捷开发",
+      "related_questions": [
+        "49"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "数据中台",
+      "related_questions": [
+        "50"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "软件产品线",
+      "related_questions": [
+        "54"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "模块化设计",
+      "related_questions": [
+        "56"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "云计算",
+      "related_questions": [
+        "57"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "事件驱动架构",
+      "related_questions": [
+        "65"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "领域驱动设计",
+      "related_questions": [
+        "66"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "运筹学",
+      "related_questions": [
+        "67",
+        "68"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "ERP",
+      "related_questions": [
+        "73"
+      ],
+      "summary_markdown": ""
+    },
+    {
+      "name": "物联网",
+      "related_questions": [
+        "74",
+        "75"
+      ],
+      "summary_markdown": ""
+    }
+  ],
+  "generated_at": "2026-05-17 17:18:03"
+}

@@ -1,0 +1,2126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2022年11月系统架构真题</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@13/dist/markdown-it.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --bg: #0a0a0f;
+      --bg-subtle: #111118;
+      --card: #16161f;
+      --card-hover: #1c1c28;
+      --accent: #7c6ff7;
+      --accent-light: #a89cf8;
+      --accent-bg: rgba(124, 111, 247, 0.12);
+      --accent-bg-hover: rgba(124, 111, 247, 0.2);
+      --green: #34d399;
+      --green-bg: rgba(52, 211, 153, 0.12);
+      --green-border: rgba(52, 211, 153, 0.35);
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.12);
+      --red-border: rgba(248, 113, 113, 0.35);
+      --orange: #fbbf24;
+      --text: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+    [data-theme="light"] {
+      --bg: #f0f4f8;
+      --bg-subtle: #e8edf2;
+      --card: #ffffff;
+      --card-hover: #f8f9fc;
+      --accent: #6c5ce7;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108, 92, 231, 0.10);
+      --accent-bg-hover: rgba(108, 92, 231, 0.18);
+      --green: #10b981;
+      --green-bg: rgba(16, 185, 129, 0.10);
+      --green-border: rgba(16, 185, 129, 0.30);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.10);
+      --red-border: rgba(239, 68, 68, 0.30);
+      --orange: #f59e0b;
+      --text: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08);
+      --glass: rgba(0,0,0,0.02);
+      --glass-border: rgba(0,0,0,0.08);
+    }
+    /* ===== Theme toggle button ===== */
+    .theme-toggle {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.15s;
+      font-family: var(--font-sans);
+    }
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.04);
+    }
+    [data-theme="light"] .theme-toggle {
+      background: rgba(0,0,0,0.12);
+      border-color: rgba(0,0,0,0.18);
+      color: #fff;
+    }
+    [data-theme="light"] .theme-toggle:hover {
+      background: rgba(0,0,0,0.20);
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* ===== Header ===== */
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      color: #fff;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .page-header .meta-line {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Controls ===== */
+    .controls-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .controls-bar select,
+    .controls-bar input {
+      flex: 1 1 200px;
+      min-width: 0;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+      -webkit-appearance: none;
+    }
+    .controls-bar select:focus,
+    .controls-bar input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    /* ===== Stats Ring ===== */
+    .stats-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .stats-card h2 {
+      margin: 0 0 20px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stats-layout {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .ring-container {
+      flex-shrink: 0;
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    .ring-container svg {
+      transform: rotate(-90deg);
+    }
+    .ring-container .ring-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .ring-container .ring-pct {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1.2;
+    }
+    .ring-container .ring-text {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+    .stats-numbers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      flex: 1;
+      min-width: 200px;
+    }
+    .sn-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .sn-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .sn-val.green { color: var(--green); }
+    .sn-val.red { color: var(--red); }
+    .sn-val.accent { color: var(--accent); }
+    .sn-val.orange { color: var(--orange); }
+    .sn-lbl {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .stats-progress {
+      margin-top: 16px;
+    }
+    .stats-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stats-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+    .stats-progress-text {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    /* ===== Knowledge Section ===== */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .knowledge-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--accent-light);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+    .knowledge-card:nth-child(3n+1) { border-left-color: #4f46e5; }
+    .knowledge-card:nth-child(3n+2) { border-left-color: #0ea5e9; }
+    .knowledge-card:nth-child(3n+3) { border-left-color: #8b5cf6; }
+    .knowledge-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .knowledge-card.active {
+      border-left-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(79,70,229,0.2), var(--shadow-md);
+    }
+    .knowledge-card.expanded {
+      grid-column: 1 / -1;
+      transition: grid-column 0s;
+    }
+    .knowledge-card.expanded .knowledge-details {
+      max-height: none;
+    }
+    .knowledge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .knowledge-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-accent {
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+    .kp-count-btn {
+      cursor: pointer;
+      transition: background 0.18s, transform 0.15s;
+      user-select: none;
+    }
+    .kp-count-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.06);
+    }
+    .badge-green {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+    .knowledge-details {
+      margin-top: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+    }
+    .knowledge-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent);
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .knowledge-details summary::before {
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .knowledge-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .knowledge-details .markdown {
+      margin-top: 10px;
+    }
+    .knowledge-details[open] summary {
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    /* ===== Question Cards ===== */
+    .question-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .question-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .question-header h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .question-prompt {
+      margin: 0 0 16px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .sub-question {
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .sub-question h4 {
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .sub-question-text {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Options ===== */
+    ul.options {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+    }
+    .option-item {
+      margin-bottom: 8px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+    .option-item:hover {
+      border-color: var(--accent-light);
+      background: var(--accent-bg);
+      transform: translateX(2px);
+    }
+    .option-label {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      cursor: pointer;
+      gap: 12px;
+    }
+    .option-input {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+    }
+    .option-text {
+      flex: 1;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    .option-item.selected {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+    }
+    .option-item.correct {
+      border-color: var(--green);
+      background: var(--green-bg);
+      animation: correctPulse 0.5s ease;
+    }
+    .option-item.incorrect {
+      border-color: var(--red);
+      background: var(--red-bg);
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+    @keyframes correctPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.01); }
+      100% { transform: scale(1); }
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      60% { transform: scale(1.02); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Toast ===== */
+    #_toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 9999;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
+    #_toast._toast-show {
+      animation: toastIn 0.25s ease forwards;
+    }
+    #_toast._toast-info  { background: var(--accent);  color: #fff; }
+    #_toast._toast-warn  { background: var(--orange);  color: #000; }
+    #_toast._toast-ok    { background: var(--green);   color: #000; }
+    #_toast._toast-err   { background: var(--red);     color: #fff; }
+
+    /* ===== Answer Feedback ===== */
+    .answer-feedback {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: fadeSlideUp 0.3s ease;
+    }
+    .feedback-icon { font-size: 1.1rem; }
+    .feedback-msg { flex: 1; }
+
+    /* ===== Buttons ===== */
+    .question-actions {
+      margin: 16px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 22px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(79,70,229,0.3);
+    }
+    .btn-primary:hover {
+      background: #6d62e0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79,70,229,0.35);
+    }
+    .btn-primary:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-warning {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(245,158,11,0.3);
+    }
+    .btn-warning:hover {
+      background: #e4a320;
+      transform: translateY(-1px);
+    }
+    .btn-success {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(16,185,129,0.3);
+    }
+    .btn-success:hover {
+      background: #2ab77f;
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: var(--card);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+    .btn-outline:hover {
+      background: var(--accent-bg);
+    }
+    .btn-outline:disabled {
+      color: var(--text-muted);
+      border-color: var(--border);
+      background: transparent;
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid transparent;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      background: var(--glass);
+      border-color: var(--border);
+    }
+
+    /* ===== Feedback ===== */
+    .answer-feedback.correct {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-border);
+    }
+    .answer-feedback.incorrect {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+    .correct-answer {
+      background: var(--green-bg);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--green-border);
+      margin: 8px 0;
+      font-size: 0.95rem;
+    }
+
+    /* ===== Quiz Navigation ===== */
+    .quiz-progress-bar {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .qp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .qp-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .qp-count {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .qp-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .qp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .quiz-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .quiz-mode-toggle {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    /* ===== Details / Panels ===== */
+    .rich-details {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-top: 10px;
+    }
+    .rich-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent-light);
+      user-select: none;
+      transition: color 0.2s;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rich-details summary::before {
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .rich-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .rich-details summary:hover {
+      color: var(--accent);
+    }
+    .rich-details[open] summary {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rich-details .markdown {
+      margin-top: 8px;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    .answer-analysis {
+      margin-top: 10px;
+    }
+    /* ===== Markdown ===== */
+    .markdown {
+      line-height: 1.7;
+      color: inherit;
+      font-size: 0.95rem;
+    }
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
+      margin: 1em 0 0.5em;
+      font-weight: 700;
+    }
+    .markdown h1, .md-heading.h2-equiv { font-size: 1.3rem; color: var(--text); }
+    .markdown h2, .md-heading { font-size: 1.15rem; color: var(--text); }
+    .markdown h3 { font-size: 1.05rem; }
+    .md-heading { margin: 1em 0 0.4em; font-weight: 700; }
+    .md-hr { border: none; border-top: 1px solid var(--border); margin: 1em 0; }
+    .markdown p { margin: 0.5em 0; }
+    .markdown ul, .markdown ol { padding-left: 1.5em; margin: 0.5em 0; }
+    .markdown li { margin-bottom: 0.3em; }
+    .markdown table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+    .markdown th, .markdown td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+    }
+    .markdown th {
+      background: var(--accent-bg);
+      font-weight: 600;
+    }
+    .markdown code {
+      background: rgba(99,102,241,0.1);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      font-size: 0.88em;
+    }
+    .markdown pre {
+      background: #0d0d14;
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-size: 0.88rem;
+    }
+    .markdown pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    .markdown img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-xs);
+    }
+    .markdown.empty {
+      color: var(--text-muted);
+    }
+    .mermaid {
+      text-align: center;
+      margin: 1rem 0;
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      border: 1px solid var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* ===== Empty State ===== */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .empty-state-text {
+      font-size: 1rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      main {
+        padding: 16px 12px 48px;
+      }
+      .page-header {
+        padding: 24px 20px;
+        border-radius: var(--radius-sm);
+      }
+      .page-header h1 {
+        font-size: 1.35rem;
+      }
+      .controls-bar {
+        flex-direction: column;
+      }
+      .controls-bar select,
+      .controls-bar input {
+        flex: 1 1 100%;
+      }
+      .stats-layout {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .ring-container {
+        margin: 0 auto;
+      }
+      .stats-numbers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .knowledge-grid {
+        grid-template-columns: 1fr;
+      }
+      .question-card {
+        padding: 18px 16px;
+      }
+      .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .option-label {
+        padding: 14px 16px;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
+      }
+      .quiz-nav {
+        flex-direction: column;
+      }
+      .quiz-nav .btn {
+        width: 100%;
+      }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .knowledge-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌙 暗色</button>
+      <h1>📝 2022年11月系统架构真题</h1>
+      <p class="meta-line">共 8 题 · 生成于 2026-02-26 12:39:45</p>
+    </header>
+
+    <div class="controls-bar">
+      <select id="knowledgeFilter" aria-label="筛选知识点"></select>
+      <input id="searchInput" type="search" placeholder="🔍 搜索题干 / 解析 / AI 笔记" aria-label="搜索题目" />
+    </div>
+
+    <section class="stats-card" aria-label="答题统计">
+      <h2>📊 答题统计</h2>
+      <div id="statsContainer">
+        <div class="stats-layout">
+          <div class="ring-container">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#2d2d3f" stroke-width="10"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="10"
+                stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round" id="ringProgress"/>
+            </svg>
+            <div class="ring-label">
+              <span class="ring-pct" id="ringPct">0%</span>
+              <span class="ring-text">正确率</span>
+            </div>
+          </div>
+          <div class="stats-numbers">
+            <div class="sn-item"><div class="sn-val accent" id="snTotal">0</div><div class="sn-lbl">总题数</div></div>
+            <div class="sn-item"><div class="sn-val accent" id="snAnswered">0</div><div class="sn-lbl">已答题</div></div>
+            <div class="sn-item"><div class="sn-val green" id="snCorrect">0</div><div class="sn-lbl">答对</div></div>
+            <div class="sn-item"><div class="sn-val red" id="snIncorrect">0</div><div class="sn-lbl">答错</div></div>
+          </div>
+        </div>
+        <div class="stats-progress">
+          <div class="stats-progress-bar"><div class="stats-progress-fill" id="statsProgressFill" style="width:0%"></div></div>
+          <div class="stats-progress-text" id="statsProgressText">进度 0%</div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="知识点总结">
+      <h2 class="section-title">💡 知识点总结</h2>
+      <div id="knowledgeContainer" class="knowledge-grid"><article class='card knowledge-card' style='cursor:pointer' onclick="jumpToKnowledge('系统可靠性')">
+              <div class='knowledge-header'>
+                <h3>系统可靠性</h3>
+                <span class='badge badge-accent kp-count-btn' title='点击刷此知识点题库' onclick="event.stopPropagation();jumpToKnowledge('系统可靠性')">共 8 题 ▶</span>
+              </div>
+              <details class='knowledge-details'><summary>查看大模型总结</summary><div class='markdown'><h2 class="md-heading">系统可靠性 · 结构化知识点清单</h2><hr class="md-hr" /><h3 class="md-heading">一、知识点名称</h3><p><strong>系统可靠性（System Reliability）</strong></p><hr class="md-hr" /><h3 class="md-heading">二、核心定义与结论</h3><h4 class="md-heading">基础概念辨析</h4><p><strong>可靠性</strong> — 在规定时间、规定条件下完成规定功能的能力（三个&quot;规定&quot;是关键词）</p><p><strong>可用性</strong> — 系统处于可运行状态的时间占比，受可靠性和可维护性共同影响</p><p>两者区别：可靠性关注&quot;有没有出故障&quot;，可用性关注&quot;能用的时间比例&quot;</p><hr class="md-hr" /><h4 class="md-heading">四大度量指标</h4><p>```</p><p>MTTF（平均失效等待时间）= 1/λ</p><p>→ 从开机到第一次坏掉的平均时间</p><p>MTTR（平均故障修复时间）= 1/μ</p><p>→ 坏掉之后修好需要的平均时间</p><p>MTBF（平均失效间隔时间）= MTTF + MTTR</p><p>→ 两次故障之间的平均间隔</p><p>可用性 = MTTF / (MTTF + MTTR) × 100%</p><p>可靠度 R(t) = 在规定时间内无故障运行的概率（0~1之间的数值）</p><p>```</p><p>时间轴理解：</p><p>```</p><p>开机         坏了    修好         又坏了</p><table><thead><tr><th style='text-align: left'></th><th style='text-align: left'></th><th style='text-align: left'></th></tr></thead><tbody><tr><td style='text-align: left'>←── MTTF ──</td><td style='text-align: left'>←MTTR→</td><td style='text-align: left'>←── MTTF ───</td></tr></tbody></table><p>|←────────── MTBF ──────────────→|</p><p>```</p><hr class="md-hr" /><h4 class="md-heading">失效率函数 f(t) 的性质</h4><ul><li>f(0) = 0，系统刚启动时故障概率为 0</li><li>f(t) 随时间单调递增，趋近于 1</li><li>取值范围在 0 到 1 之间</li><li>所有系统最终都会失效</li></ul><hr class="md-hr" /><h4 class="md-heading">可靠性管理各阶段任务</h4><table><thead><tr><th style='text-align: left'>阶段</th><th style='text-align: left'>主要任务</th></tr></thead><tbody><tr><td style='text-align: left'>需求分析阶段</td><td style='text-align: left'>分析影响可靠性的因素、确定可靠性目标、确定验收标准、制定管理计划</td></tr><tr><td style='text-align: left'>测试阶段</td><td style='text-align: left'>可靠性建模（依赖测试数据，需求阶段没有数据，建不了模型）</td></tr></tbody></table><hr class="md-hr" /><h4 class="md-heading">可靠性测试分类</h4><p><strong>广义可靠性测试</strong> — 核心目的是评价可靠性，包含定义操作剖面、收集数据、分析失效等完整流程</p><p><strong>狭义可靠性测试</strong> — 在给定操作剖面下，模拟真实使用场景，收集数据评价可靠性</p><p><strong>操作剖面</strong> — 描述用户使用系统的场景分布（如：80%查询、15%录入、5%删除）</p><hr class="md-hr" /><h4 class="md-heading">N版本程序设计（NVP）</h4><p>核心思想：同一需求让 N 个团队互不通气独立开发，通过多版本冗余实现容错</p><p>三个新增阶段（口诀：<strong>异审 → 异认 → 背靠背</strong>）：</p><ol><li><strong>相异成分规范评审</strong> — 审查各团队对需求的理解是否足够&quot;相异&quot;</li><li><strong>相异性确认</strong> — 详细设计后确认各版本实现方案确实不同，防止公共故障</li><li><strong>背对背测试</strong> — 用相同输入并行跑所有版本，对比输出结果</li></ol><hr class="md-hr" /><h4 class="md-heading">单片机系统评价指标</h4><p>单片机三要素：<strong>MTBF（可靠）+ 功耗（省电）+ 响应时间（快响应）</strong></p><p>吞吐量属于服务器/网络/数据库系统的指标，不适用于单片机/嵌入式系统。</p><hr class="md-hr" /><h3 class="md-heading">三、典型题型与解题要领</h3><p><strong>概念辨析题（如第15题）</strong></p><ul><li>看到&quot;规定时间 + 规定条件 + 规定功能&quot;三个规定 → 锁定可靠性</li><li>看到&quot;无故障的概率&quot; → 锁定可靠度 R(t)</li><li>看到&quot;时间占比/能用多久&quot; → 锁定可用性</li></ul><p><strong>指标关系推导题（如第50题）</strong></p><ul><li>先写出公式 MTBF = MTTF + MTTR</li><li>代入题目给的条件（如 MTTR 极小）</li><li>直接推导大小关系</li></ul><p><strong>阶段归属判断题（如第15题可靠性建模）</strong></p><ul><li>需求阶段关键词：分析、确定、计划、标准</li><li>测试阶段关键词：建模、数据、计算、评估</li><li>建模需要数据，需求阶段没数据 → 建模不属于需求阶段</li></ul><p><strong>N版本程序设计题（如第51题）</strong></p><ul><li>看到&quot;相同&quot;直接排除（NVP 的灵魂是&quot;相异&quot;）</li><li>看到&quot;面对面&quot;直接排除（应该是&quot;背对背&quot;）</li></ul><p><strong>系统类型匹配题（如第22题）</strong></p><ul><li>看到&quot;吞吐量&quot;就排除单片机/嵌入式选项</li></ul><hr class="md-hr" /><h3 class="md-heading">四、易错点与注意事项</h3><p><strong>可靠性 vs 可用性混淆</strong></p><ul><li>可靠性强调&quot;不出故障&quot;，可用性强调&quot;能用的时间比例&quot;</li><li>可用性受 MTTR 影响，可靠性不直接受维修速度影响</li></ul><p><strong>可靠度 vs 其他三个指标混淆</strong></p><ul><li>故障率、MTTF、MTBF 都是时间或速率概念</li><li>只有可靠度是概率（0~1 的数值），题目出现&quot;概率&quot;二字直接选可靠度</li></ul><p><strong>MTTF vs MTBF 的关系</strong></p><ul><li>MTBF = MTTF + MTTR，MTBF 永远 ≥ MTTF</li><li>当 MTTR 极小时两者近似相等，不存在 MTTF &gt; MTBF 的情况</li></ul><p><strong>f(t) 的单调性</strong></p><ul><li>f(t) 从 0 增大到 1，是单调递增，不是递减</li><li>&quot;单调递减&quot;是高频错误选项</li></ul><p><strong>广义可靠性测试的目的</strong></p><ul><li>目的是&quot;评价可靠性&quot;，不是&quot;发现缺陷提高质量&quot;</li><li>发现缺陷是过程，不是核心目标</li></ul><p><strong>可靠性建模的阶段归属</strong></p><ul><li>建模依赖测试数据，只能在测试阶段完成</li><li>需求阶段没有数据，无法建模</li></ul><p><strong>N版本程序设计的关键词</strong></p><ul><li>三个阶段都带&quot;相异&quot;，不是&quot;相同&quot;</li><li>测试方式是&quot;背对背&quot;，不是&quot;面对面&quot;</li></ul><hr class="md-hr" /><h3 class="md-heading">五、推荐复习顺序</h3><p><strong>第一步：建立概念框架</strong></p><p>先搞清楚可靠性、可用性、可靠度三个核心概念的区别，这是所有题目的基础。</p><p><strong>第二步：掌握四大指标和公式</strong></p><p>背熟 MTTF、MTTR、MTBF、可用性四个公式，理解时间轴关系图，能做推导题。</p><p><strong>第三步：理解可靠性管理阶段划分</strong></p><p>重点记住&quot;可靠性建模属于测试阶段&quot;这一个易错点，其余需求阶段任务理解即可。</p><p><strong>第四步：区分可靠性测试的广义/狭义</strong></p><p>记住广义=评价，狭义=模拟收数据，操作剖面的概念顺带理解。</p><p><strong>第五步：N版本程序设计</strong></p><p>记住三个阶段名称和&quot;相异&quot;这个核心关键词，做题时用排除法。</p><p><strong>第六步：补充了解</strong></p><p>失效率函数 f(t) 的性质（超纲内容，了解即可）和单片机评价指标（记住排除吞吐量）。</p></div></details>
+            </article></div>
+    </section>
+
+    <section aria-label="题目列表">
+      <h2 class="section-title">📋 题目列表</h2>
+      <div id="questionsContainer"><article class='card question-card'>
+              <div class='question-header'>
+              <h3>第1题（题号：15）</h3>
+              <span class='badge'>系统可靠性</span>
+              <span class='badge'>难度：1</span>
+            </div>
+            <p>系统（）是指在规定的时间内和规定条件下能有效地实现规定功能的能力。它不仅取决于规定的使用条件等因素，还与设计技术有关。常用的度量指标主要有故障率（或失效率）、平均失效等待时间、平均失效间隔时间和可靠度等。其中，（）是系统在规定工作时间内无故障的概率。</p>
+              <div class='sub-question' data-question-id="q30_0" data-correct-answers="A" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q30_0_A" class="option-label">
+                            <input type="radio" id="q30_0_A" name="q30_0" value="A" class="option-input" />
+                            <span class="option-text">A. 可靠性</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q30_0_B" class="option-label">
+                            <input type="radio" id="q30_0_B" name="q30_0" value="B" class="option-input" />
+                            <span class="option-text">B. 可用性</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q30_0_C" class="option-label">
+                            <input type="radio" id="q30_0_C" name="q30_0" value="C" class="option-input" />
+                            <span class="option-text">C. 可理解性</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q30_0_D" class="option-label">
+                            <input type="radio" id="q30_0_D" name="q30_0" value="D" class="option-input" />
+                            <span class="option-text">D. 可测试性</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q30_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q30_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>A</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>系统可靠性及可靠性度量指标</strong>的基本概念。</p><p>可靠性强调在规定时间与条件下无故障完成规定功能；可用性强调“能用”的时间占比，它受可靠性与可维护性共同影响；常见度量中，可靠度R(t)刻画“在规定时间内无故障”的概率，是可靠性的核心概率度量。</p><p><strong>问题 1：</strong></p><p><strong>A选项可靠性</strong>：指系统在规定时间、规定条件下完成规定功能的能力，符合题干定义，正确。</p><p><strong>B选项可用性</strong>：指系统处于可运行状态的时间比例，通常与可靠性、可维修性（如MTTR）共同决定，不等同于题干所给定义。</p><p><strong>C选项可理解性</strong>：指理解系统结构与代码/文档的难易程度，属于可维护性子特性之一，与题干无关。</p><p><strong>D选项可测试性</strong>：指验证系统是否满足需求的难易程度，也属于可维护性子特性，与题干无关。</p><p>选择选项 A。</p><p><strong>问题 2：</strong></p><p><strong>A选项失效率</strong>：单位时间内发生故障的速率（常记为λ），描述故障发生强度，不是“在规定时间内无故障的概率”。</p><p><strong>B选项平均失效等待时间</strong>：从失效到开始维修的平均等待时长，偏向可维护性指标，不是无故障概率。</p><p><strong>C选项平均失效间隔时间</strong>：两次相邻失效之间的平均时间（常与MTBF/MTTF相关），是时间指标而非概率。</p><p><strong>D选项可靠度</strong>：系统在规定工作时间内无故障的概率，通常记为R(t)，与题干后半句完全一致，正确。</p><p>选择选项 D。</p></div></details>
+                </div>
+<div class='sub-question' data-question-id="q30_1" data-correct-answers="D" data-is-multiple="false">
+                  <h4>子题2</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q30_1_A" class="option-label">
+                            <input type="radio" id="q30_1_A" name="q30_1" value="A" class="option-input" />
+                            <span class="option-text">A. 失效率</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q30_1_B" class="option-label">
+                            <input type="radio" id="q30_1_B" name="q30_1" value="B" class="option-input" />
+                            <span class="option-text">B. 平均失效等待时间</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q30_1_C" class="option-label">
+                            <input type="radio" id="q30_1_C" name="q30_1" value="C" class="option-input" />
+                            <span class="option-text">C. 平均失效间隔时间</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q30_1_D" class="option-label">
+                            <input type="radio" id="q30_1_D" name="q30_1" value="D" class="option-input" />
+                            <span class="option-text">D. 可靠度</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q30_1')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q30_1')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>D</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>（尚未生成，稍后重试）</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📋 系统可靠性 · 精华笔记</h2><hr class="md-hr" /><h3 class="md-heading">🧠 核心概念速记（顾名思义版）</h3><h4 class="md-heading">可靠性 vs 可用性 — 傻傻分不清？</h4><p>```</p><p>可靠性 = &quot;靠得住吗？&quot;</p><p>→ 在规定时间、规定条件下，能不能完成规定功能</p><p>→ 强调：有没有出故障（故障本身）</p><p>可用性 = &quot;能用吗？&quot;</p><p>→ 系统处于&quot;可以被使用&quot;状态的时间占比</p><p>→ 强调：能用的时间比例（受维修速度影响）</p><p>```</p><p>&gt; 记忆口诀：<strong>&quot;靠&quot;的是不出故障，&quot;用&quot;的是能用多久</strong></p><hr class="md-hr" /><h3 class="md-heading">📊 四大度量指标 — 字面拆解记忆</h3><p>```</p><p>┌─────────────────────┬──────────────────────────────────────────┐</p><p>│ 名称                │ 顾名思义记忆法                           │</p><p>├─────────────────────┼──────────────────────────────────────────┤</p><p>│ 故障率（失效率）    │ &quot;单位时间内坏了多少次&quot; → 坏的频率        │</p><p>│                     │ 就像你的车，每年坏几次                   │</p><p>├─────────────────────┼──────────────────────────────────────────┤</p><p>│ 平均失效等待时间    │ &quot;坏了之后，等多久才开始修&quot;               │</p><p>│                     │ 失效 → 等待 → 开始维修 的平均时长        │</p><p>│                     │ 偏向：维护管理能力                       │</p><p>├─────────────────────┼──────────────────────────────────────────┤</p><p>│ 平均失效间隔时间    │ &quot;两次故障之间，平均能撑多久&quot;             │</p><p>│                     │ 上次坏 → 修好 → 再次坏 的平均间隔        │</p><p>│                     │ 时间越长 = 越可靠                        │</p><p>├─────────────────────┼──────────────────────────────────────────┤</p><p>│ 可靠度 R(t)         │ &quot;在规定时间内，无故障运行的概率&quot;         │</p><p>│                     │ 是一个概率值（0~1之间）                  │</p><p>│                     │ 可靠度高 = 这段时间内不出问题的把握大    │</p><p>└─────────────────────┴──────────────────────────────────────────┘</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🎯 题目陷阱识别</h3><h4 class="md-heading">第一空陷阱：可靠性 vs 可用性</h4><p>```</p><p>题干关键词：&quot;规定时间 + 规定条件 + 规定功能&quot;</p><p>↓</p><p>三个&quot;规定&quot; → 答案锁定 可靠性</p><p>```</p><p>&gt; 如果题干说的是&quot;能用时间占总时间的比例&quot; → 才选可用性</p><hr class="md-hr" /><h4 class="md-heading">第二空陷阱：可靠度 vs 其他三个</h4><p>```</p><p>其他三个都是&quot;时间&quot;或&quot;速率&quot;的概念：</p><p>故障率     → 速率（每小时坏几次）</p><p>等待时间   → 时长（等多久）</p><p>间隔时间   → 时长（撑多久）</p><p>只有 可靠度 = 概率（0~1的数字）</p><p>题干说&quot;无故障的概率&quot; → 有&quot;概率&quot;两字 → 唯一答案 可靠度</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🔗 类比记忆（用你熟悉的Java世界）</h3><p>```</p><p>可靠性   ≈ 你的服务在SLA承诺内不抛异常的能力</p><p>可用性   ≈ 服务的 uptime 百分比（如 99.9%）</p><p>故障率   ≈ 每小时抛出异常的次数</p><p>可靠度   ≈ 在接下来1小时内，服务不崩溃的概率是多少</p><p>平均失效间隔时间 ≈ 两次服务宕机之间平均能跑多久</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">✅ 考试掌握程度要求</h3><p>```</p><p>这道题属于【必须掌握】级别，要求：</p><ol><li>能区分&quot;可靠性&quot;和&quot;可用性&quot;的定义差异       ← 必背</li><li>记住&quot;可靠度 = 概率&quot;这个唯一特征           ← 必背</li><li>四个度量指标各自描述什么维度               ← 理解即可</li><li>不需要记公式，只需要认识概念               ← 选择题够用</li></ol><p>```</p><hr class="md-hr" /><h3 class="md-heading">🗂️ 一句话终极速记</h3><p>&gt; <strong>可靠性</strong>：三个&quot;规定&quot;下能完成功能的能力</p><p>&gt; <strong>可靠度</strong>：规定时间内不出故障的那个<strong>概率数字</strong></p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第2题（题号：50）</h3>
+              <span class='badge'>系统可靠性</span>
+              <span class='badge'>难度：2</span>
+            </div>
+            <p>平均失效等待时间（mean time to failure，MTTF）和平均失效间隔时间（mcan time between failure，MTBF）是进行系统可靠性分析时的要指标，在失效率为常数和修复时间很短的情况下，（）。</p>
+              <div class='sub-question' data-question-id="q67_0" data-correct-answers="D" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q67_0_A" class="option-label">
+                            <input type="radio" id="q67_0_A" name="q67_0" value="A" class="option-input" />
+                            <span class="option-text">A. MTTF 远远小于 MTBF</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q67_0_B" class="option-label">
+                            <input type="radio" id="q67_0_B" name="q67_0" value="B" class="option-input" />
+                            <span class="option-text">B. MTTF 和 MTBF 无法计算</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q67_0_C" class="option-label">
+                            <input type="radio" id="q67_0_C" name="q67_0" value="C" class="option-input" />
+                            <span class="option-text">C. MTTF 远远大于 MTBF</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q67_0_D" class="option-label">
+                            <input type="radio" id="q67_0_D" name="q67_0" value="D" class="option-input" />
+                            <span class="option-text">D. MTTF 和 MTBF 几乎相等</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q67_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q67_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>D</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>系统可靠性分析中的四个核心指标</strong>，包括 MTTF、MTTR、MTBF 与系统可用性公式。</p><p>平均失效等待时间（MTTF）= 1/λ，λ 为失效率。</p><p>平均故障修复时间 (MTTR) = 1/μ，μ 为修复率。</p><p>平均失效间隔时间又称平均无故障时间(MTBF) = MTTR + MTTF。</p><p>系统可用性 = MTTF/(MTTR+MTTF)×100%</p><p><img src="https://oss.cheko.cc/b837341334c5df82ea5bbcc8308fa37568bb8f43812952f019da33bc6914acfc.png" alt="https://oss.cheko.cc/b837341334c5df82ea5bbcc8308fa37568bb8f43812952f019da33bc6914acfc.png#716px #421px" style="max-width: 100%; height: auto;" /></p><p><strong>A选项 MTTF 远远小于 MTBF</strong>：在 MTTR 很小的情况下，MTBF≈MTTF，不存在“远远小于”的关系，错误。</p><p><strong>B选项 MTTF 和 MTBF 无法计算</strong>：在失效率 λ 和修复率 μ 已知时，这两个指标是可以直接计算的，错误。</p><p><strong>C选项 MTTF 远远大于 MTBF</strong>：与实际公式 MTBF = MTTF + MTTR 不符，错误。</p><p><strong>D选项 MTTF 和 MTBF 几乎相等</strong>：公式 MTBF = MTTF + MTTR，当 MTTR 很小时，MTBF 与 MTTF 的差值可以忽略，因此几乎相等，正确。</p><p>选择选项 D。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📋 系统可靠性四大指标 · 精华笔记</h2><hr class="md-hr" /><h3 class="md-heading">🧠 顾名思义速记法（核心）</h3><table><thead><tr><th style='text-align: left'>英文缩写</th><th style='text-align: left'>中文拆解记忆</th><th style='text-align: left'>白话意思</th></tr></thead><tbody><tr><td style='text-align: left'><strong>MTTF</strong></td><td style='text-align: left'><strong>&quot;等失效&quot;</strong> — 等多久才坏</td><td style='text-align: left'>从开机到第一次坏掉，平均要等多久</td></tr><tr><td style='text-align: left'><strong>MTTR</strong></td><td style='text-align: left'><strong>&quot;等修好&quot;</strong> — 坏了等多久修好</td><td style='text-align: left'>坏掉之后，平均要花多久修好</td></tr><tr><td style='text-align: left'><strong>MTBF</strong></td><td style='text-align: left'><strong>&quot;两次坏之间&quot;</strong> — 两次故障之间隔多久</td><td style='text-align: left'>从这次修好，到下次再坏，中间隔多久</td></tr><tr><td style='text-align: left'><strong>可用性</strong></td><td style='text-align: left'><strong>&quot;能用的时间占比&quot;</strong></td><td style='text-align: left'>系统真正能用的时间，占总时间的百分比</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">🔢 四个公式（必须背）</h3><p>```</p><p>MTTF = 1 ÷ λ        （λ 是失效率，坏得越快λ越大，能用时间越短）</p><p>MTTR = 1 ÷ μ        （μ 是修复率，修得越快μ越大，修复时间越短）</p><p>MTBF = MTTF + MTTR  （两次坏之间 = 能用时间 + 修复时间）</p><p>可用性 = MTTF ÷ (MTTF + MTTR) × 100%</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🖼️ 字符时间轴图（帮助理解）</h3><p>```</p><p>开机                坏了        修好了              又坏了</p><table><thead><tr><th style='text-align: left'></th><th style='text-align: left'></th><th style='text-align: left'></th></tr></thead><tbody><tr><td style='text-align: left'>←——— MTTF ————————</td><td style='text-align: left'>←— MTTR ———</td><td style='text-align: left'>←——— MTTF ————————</td></tr></tbody></table><p>|                                                    |</p><p>|←———————————————— MTBF ————————————————————————————|</p><p>```</p><p>&gt; MTBF = MTTF + MTTR，就是&quot;能用的时间&quot;加上&quot;修理的时间&quot;</p><hr class="md-hr" /><h3 class="md-heading">🎯 本题考点：为什么 MTTF ≈ MTBF？</h3><p><strong>题目条件：修复时间很短（MTTR 极小）</strong></p><p>```</p><p>MTBF = MTTF + MTTR</p><p>当 MTTR ≈ 0 时：</p><p>MTBF ≈ MTTF + 0 ≈ MTTF</p><p>所以两者几乎相等 → 选 D</p><p>```</p><p><strong>生活类比：</strong></p><p>&gt; 你的手机平均用 365 天会坏一次（MTTF=365天），</p><p>&gt; 送去修只要 1 小时（MTTR极小），</p><p>&gt; 那&quot;两次坏之间的间隔&quot;（MTBF）≈ 365天，</p><p>&gt; 和 MTTF 几乎没区别。</p><hr class="md-hr" /><h3 class="md-heading">❌ 排错速查</h3><table><thead><tr><th style='text-align: left'>选项</th><th style='text-align: left'>说法</th><th style='text-align: left'>为什么错</th></tr></thead><tbody><tr><td style='text-align: left'>A</td><td style='text-align: left'>MTTF 远小于 MTBF</td><td style='text-align: left'>MTTR 很小时差值可忽略，不存在&quot;远小于&quot;</td></tr><tr><td style='text-align: left'>B</td><td style='text-align: left'>无法计算</td><td style='text-align: left'>λ 和 μ 已知就能算，说法错误</td></tr><tr><td style='text-align: left'>C</td><td style='text-align: left'>MTTF 远大于 MTBF</td><td style='text-align: left'>MTBF = MTTF + MTTR，MTBF 只会 ≥ MTTF，不可能更小</td></tr><tr><td style='text-align: left'>D ✅</td><td style='text-align: left'>几乎相等</td><td style='text-align: left'>MTTR 极小时 MTBF ≈ MTTF，正确</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">✅ 考试掌握程度要求</h3><p>&gt; 这是<strong>第二版教材必须掌握</strong>的内容，要求如下：</p><ul><li><strong>公式要默写</strong>：四个公式一个不能少</li><li><strong>概念要区分</strong>：MTTF（等坏）vs MTBF（两坏之间）vs MTTR（等修好）</li><li><strong>会推导结论</strong>：给你条件（如 MTTR 很小），能判断各指标大小关系</li><li><strong>可用性公式会用</strong>：给出 λ 和 μ，能算出可用性百分比</li></ul><hr class="md-hr" /><p><strong>🔑 最终记忆口诀</strong></p><p>```</p><p>等坏是MTTF，等修是MTTR</p><p>两坏之间是MTBF，等于前两个相加</p><p>修复时间若极短，MTTF和MTBF差不差</p><p>```</p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第3题（题号：15）</h3>
+              <span class='badge'>系统可靠性</span>
+              <span class='badge'>难度：1</span>
+            </div>
+            <p>在软件可靠性管理过程中，以下工作不属于需求分析阶段应完成的是（）。</p>
+              <div class='sub-question' data-question-id="q1188_0" data-correct-answers="C" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q1188_0_A" class="option-label">
+                            <input type="radio" id="q1188_0_A" name="q1188_0" value="A" class="option-input" />
+                            <span class="option-text">A. 分析可能影响可靠性的因素</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1188_0_B" class="option-label">
+                            <input type="radio" id="q1188_0_B" name="q1188_0" value="B" class="option-input" />
+                            <span class="option-text">B. 确定软件的可靠性目标</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1188_0_C" class="option-label">
+                            <input type="radio" id="q1188_0_C" name="q1188_0" value="C" class="option-input" />
+                            <span class="option-text">C. 可靠性建模</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1188_0_D" class="option-label">
+                            <input type="radio" id="q1188_0_D" name="q1188_0" value="D" class="option-input" />
+                            <span class="option-text">D. 确定可靠性的验收标准</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q1188_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q1188_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>C</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>软件可靠性管理各阶段的关键活动</strong>。</p><p>根据可靠性管理流程：<strong>需求分析阶段</strong>的主要任务包括：</p><ul><li>分析可能影响软件可靠性的因素；</li><li>确定软件的可靠性目标；</li><li>明确可靠性的验收标准；</li><li>确定管理机制与数据收集规范；</li><li>制定初步的可靠性管理计划。</li></ul><p><strong>可靠性建模</strong>是<strong>测试阶段</strong>的重要任务之一，通过收集测试数据并结合实际运行环境建立数学模型，以评估和预测软件的可靠性。</p><p><strong>A选项分析可能影响可靠性的因素</strong>：正确，属于需求阶段的初期分析工作。</p><p><strong>B选项确定软件的可靠性目标</strong>：正确，属于需求阶段的核心任务之一。</p><p><strong>C选项可靠性建模</strong>：错误，建模工作依赖测试数据，通常在测试阶段完成。</p><p><strong>D选项确定可靠性的验收标准</strong>：正确，是需求阶段确定评估标准的重要内容。</p><p>因此，正确答案为 C。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📝 软考高级·系统架构设计师 考点笔记</h2><hr class="md-hr" /><h3 class="md-heading">🎯 题目速览</h3><p><strong>2022年11月真题 · 第15题 · 系统可靠性</strong></p><p>&gt; 软件可靠性管理中，<strong>不属于需求分析阶段</strong>的工作是？</p><p>&gt; <strong>答案：C · 可靠性建模</strong></p><hr class="md-hr" /><h3 class="md-heading">🧠 顾名思义记忆法</h3><h4 class="md-heading">核心问题：需求阶段 vs 测试阶段，怎么区分？</h4><p><strong>记忆口诀：需求阶段&quot;定目标&quot;，测试阶段&quot;建模型&quot;</strong></p><p>&gt; 需求阶段 = 还没开始做，只是<strong>&quot;想清楚要什么&quot;</strong></p><p>&gt; 测试阶段 = 已经有数据了，才能<strong>&quot;建数学模型算结果&quot;</strong></p><hr class="md-hr" /><h3 class="md-heading">📖 专业名词白话解释</h3><table><thead><tr><th style='text-align: left'>名词</th><th style='text-align: left'>白话理解</th><th style='text-align: left'>顾名思义记忆</th></tr></thead><tbody><tr><td style='text-align: left'><strong>软件可靠性</strong></td><td style='text-align: left'>软件&quot;靠不靠谱&quot;，用了多久会出错</td><td style='text-align: left'>可靠 = 靠得住，性 = 程度</td></tr><tr><td style='text-align: left'><strong>可靠性目标</strong></td><td style='text-align: left'>定一个&quot;我要这个软件多靠谱&quot;的指标，比如一年只能崩1次</td><td style='text-align: left'>目标 = 想达到的标准</td></tr><tr><td style='text-align: left'><strong>可靠性建模</strong></td><td style='text-align: left'>收集测试数据后，用数学公式<strong>算出</strong>软件有多靠谱</td><td style='text-align: left'>建模 = 建数学模型，没数据就建不了</td></tr><tr><td style='text-align: left'><strong>验收标准</strong></td><td style='text-align: left'>最终交付时，用来判断&quot;合不合格&quot;的尺子</td><td style='text-align: left'>验收 = 验货收货，标准 = 尺子</td></tr><tr><td style='text-align: left'><strong>影响可靠性的因素</strong></td><td style='text-align: left'>找出哪些原因会让软件变得不靠谱，比如代码复杂度、团队经验</td><td style='text-align: left'>因素 = 原因</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">🗂️ 各阶段任务对照表</h3><p>```</p><p>软件可靠性管理流程</p><p>│</p><p>├── 📋 需求分析阶段（还没动手，先&quot;想清楚&quot;）</p><p>│   ├── ✅ 分析影响可靠性的因素     → 找出&quot;哪些事会让它不靠谱&quot;</p><p>│   ├── ✅ 确定可靠性目标           → 定&quot;要多靠谱&quot;</p><p>│   ├── ✅ 确定验收标准             → 定&quot;怎么算合格&quot;</p><p>│   ├── ✅ 制定管理计划             → 定&quot;怎么管&quot;</p><p>│   └── ✅ 确定数据收集规范         → 定&quot;收集哪些数据&quot;</p><p>│</p><p>└── 🧪 测试阶段（有数据了，才能&quot;算结果&quot;）</p><p>└── ❌ 可靠性建模               → 拿测试数据建数学模型</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">💡 为什么&quot;可靠性建模&quot;不在需求阶段？</h3><p>```</p><p>需求阶段                    测试阶段</p><p>│                           │</p><p>│  还没有测试数据            │  已经跑了大量测试</p><p>│  ❌ 没法建模               │  ✅ 有数据 → 才能建模</p><p>│                           │</p><p>└──────────────────────────►│</p><p>时间轴</p><p>```</p><p><strong>一句话记住：建模需要&quot;喂数据&quot;，需求阶段没数据，所以建不了。</strong></p><hr class="md-hr" /><h3 class="md-heading">✍️ 考试要求</h3><p>&gt; 📌 教材标注：<strong>了解即可</strong>（第二版教材）</p><p>&gt;</p><p>&gt; 复习到这个程度就够了：</p><p>&gt; - 知道需求阶段的<strong>4件事</strong>（分析因素、定目标、定验收标准、定计划）</p><p>&gt; - 记住<strong>可靠性建模属于测试阶段</strong>，不是需求阶段</p><p>&gt; - 遇到选项里有&quot;建模&quot;二字，需求阶段的题直接排除它</p><hr class="md-hr" /><h3 class="md-heading">🔁 30秒快速回忆</h3><p><strong>需求阶段关键词：</strong> 分析 · 确定 · 计划 · 标准</p><p><strong>测试阶段关键词：</strong> 建模 · 数据 · 计算 · 评估</p><p>&gt; 口诀：<strong>&quot;需求想清楚，测试算结果&quot;</strong></p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第4题（题号：13）</h3>
+              <span class='badge'>系统可靠性</span>
+              <span class='badge'>难度：2</span>
+            </div>
+            <p>下列不属于可用性的选项是（）。</p>
+              <div class='sub-question' data-question-id="q1285_0" data-correct-answers="C" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q1285_0_A" class="option-label">
+                            <input type="radio" id="q1285_0_A" name="q1285_0" value="A" class="option-input" />
+                            <span class="option-text">A. 可用时间</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1285_0_B" class="option-label">
+                            <input type="radio" id="q1285_0_B" name="q1285_0" value="B" class="option-input" />
+                            <span class="option-text">B. 可用时间间隔</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1285_0_C" class="option-label">
+                            <input type="radio" id="q1285_0_C" name="q1285_0" value="C" class="option-input" />
+                            <span class="option-text">C. 数据延迟时间</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1285_0_D" class="option-label">
+                            <input type="radio" id="q1285_0_D" name="q1285_0" value="D" class="option-input" />
+                            <span class="option-text">D. 故障间隔</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q1285_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q1285_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>C</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>系统可用性（Availability）</strong> 的相关概念。</p><p><strong>A选项可用时间</strong>：指系统在一定时间内能够提供正常服务的总时间，是衡量系统可用性的直接指标。时间越长，系统可用性越高，因此属于可用性指标。</p><p><strong>B选项可用时间间隔</strong>：指系统能够持续正常运行的时间长度，实际上与<strong>故障间隔（MTBF）</strong>密切相关，也用于评估系统的稳定性和可用性。</p><p><strong>C选项数据延迟时间</strong>：指数据在处理或传输过程中所经历的延迟时间，反映的是系统的<strong>性能</strong>，尤其是<strong>响应时间</strong>或<strong>吞吐率</strong>方面的指标，而非系统是否“可用”，所以它不属于可用性范畴。</p><p><strong>D选项故障间隔</strong>：即<strong>平均无故障时间（MTBF）</strong>，是可用性的常用度量指标之一。故障间隔越长，说明系统更稳定、更可用。</p><p>因此，<strong>选项 C 数据延迟时间</strong>不属于系统可用性的指标，正确答案为 C。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📒 系统可靠性 · 可用性指标 备考笔记</h2><hr class="md-hr" /><h3 class="md-heading">🧠 核心概念：先搞清楚&quot;可用性&quot;是什么</h3><p>&gt; <strong>可用性</strong> = 系统&quot;能不能用&quot;的问题</p><p>&gt; <strong>性能</strong> = 系统&quot;用起来快不快&quot;的问题</p><p>这两个是不同维度，别混淆。</p><hr class="md-hr" /><h3 class="md-heading">🔑 顾名思义记忆法（中文内核）</h3><h4 class="md-heading">✅ 属于可用性的三个指标</h4><table><thead><tr><th style='text-align: left'>名称</th><th style='text-align: left'>顾名思义拆解</th><th style='text-align: left'>大白话</th></tr></thead><tbody><tr><td style='text-align: left'><strong>可用时间</strong></td><td style='text-align: left'>&quot;可以用&quot;的&quot;时间&quot;</td><td style='text-align: left'>系统总共能正常开门营业多少小时</td></tr><tr><td style='text-align: left'><strong>可用时间间隔</strong></td><td style='text-align: left'>两次故障之间&quot;可以用&quot;的那段&quot;间隔&quot;</td><td style='text-align: left'>上次坏到这次坏，中间能用多久</td></tr><tr><td style='text-align: left'><strong>故障间隔（MTBF）</strong></td><td style='text-align: left'>&quot;故障&quot;和&quot;故障&quot;之间的&quot;间隔&quot;</td><td style='text-align: left'>平均多久坏一次，间隔越长越稳</td></tr></tbody></table><p>```</p><p>三者关系图：</p><p>时间轴 ──────────────────────────────────────────▶</p><p>[正常运行]  💥故障  [正常运行]  💥故障  [正常运行]</p><p>|←─────────────────────────────────────|</p><p>可用时间（累计）</p><table><thead><tr><th style='text-align: left'>←── 可用时间间隔 ──→</th><th style='text-align: left'></th><th style='text-align: left'>←── 可用时间间隔 ──→</th></tr></thead><tbody><tr><td style='text-align: left'>&nbsp;</td><td style='text-align: left'>&nbsp;</td><td style='text-align: left'>&nbsp;</td></tr></tbody></table><p>|←────── 故障间隔(MTBF) ──────→|</p><p>```</p><p>&gt; 💡 记忆口诀：<strong>&quot;能不能用&quot;才叫可用性，三个指标都在说&quot;开门营业多久&quot;</strong></p><hr class="md-hr" /><h4 class="md-heading">❌ 不属于可用性的指标</h4><table><thead><tr><th style='text-align: left'>名称</th><th style='text-align: left'>顾名思义拆解</th><th style='text-align: left'>大白话</th><th style='text-align: left'>属于哪个维度</th></tr></thead><tbody><tr><td style='text-align: left'><strong>数据延迟时间</strong></td><td style='text-align: left'>数据&quot;延迟&quot;了多久才到</td><td style='text-align: left'>你发请求，系统慢吞吞才回你</td><td style='text-align: left'>⚡ 性能指标</td></tr></tbody></table><p>&gt; 💡 关键区分：</p><p>&gt; - 系统<strong>开着但很慢</strong> → 性能问题，不是可用性问题</p><p>&gt; - 系统<strong>直接挂了</strong> → 才是可用性问题</p><hr class="md-hr" /><h3 class="md-heading">🎯 做题口诀</h3><p>&gt; 看到&quot;延迟、速度、响应、吞吐&quot;→ 性能</p><p>&gt; 看到&quot;时间、间隔、故障、恢复&quot;→ 可用性</p><hr class="md-hr" /><h3 class="md-heading">📌 考试掌握程度</h3><p><strong>这道题只需掌握到：</strong></p><ul><li>✅ 能区分&quot;可用性指标&quot;和&quot;性能指标&quot;</li><li>✅ 记住 MTBF = 故障间隔 = 可用性指标</li><li>✅ 记住&quot;延迟时间&quot;是性能，不是可用性</li><li>❌ 不需要记公式，不需要会计算</li></ul><p>&gt; 这类题属于<strong>概念辨析选择题</strong>，认识名词、知道分类就能拿分。</p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第5题（题号：51）</h3>
+              <span class='badge'>系统可靠性</span>
+              <span class='badge'>难度：0</span>
+            </div>
+            <p>与通常软件开发过程不同的是，N版本程序设计增加了三个新的阶段，分别是（）。</p>
+              <div class='sub-question' data-question-id="q1323_0" data-correct-answers="C" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q1323_0_A" class="option-label">
+                            <input type="radio" id="q1323_0_A" name="q1323_0" value="A" class="option-input" />
+                            <span class="option-text">A. 相同成分规范评审、面对面测试和背对背测试</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1323_0_B" class="option-label">
+                            <input type="radio" id="q1323_0_B" name="q1323_0" value="B" class="option-input" />
+                            <span class="option-text">B. 相同成分规范评审、相异性确认和背对背测试</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1323_0_C" class="option-label">
+                            <input type="radio" id="q1323_0_C" name="q1323_0" value="C" class="option-input" />
+                            <span class="option-text">C. 相异成分规范评审、相异性确认和背对背测试</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1323_0_D" class="option-label">
+                            <input type="radio" id="q1323_0_D" name="q1323_0" value="D" class="option-input" />
+                            <span class="option-text">D. 相异成分规范评审、面对面测试和背对背测试</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q1323_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q1323_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>C</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>N版本程序设计（N-Version Programming, NVP）中为实现容错与可靠性所引入的新开发阶段</strong>。</p><p>与普通软件开发过程相比，N版本设计通过多版本冗余提高容错能力，增加了三个特有阶段：</p><ol><li><strong>相异成分规范评审</strong>：多个开发小组在不了解其他组设计的前提下独立开发，确保设计“相异性”，通过独立理解同一份 SRS，并通过问题单反馈与协调。</li><li><strong>相异性确认</strong>：在详细设计之后，通过分析或评估确保不同版本设计的实现机制、方法等具有相异性，从而降低公共故障的概率。</li><li><strong>背对背测试（Back-to-Back Testing）</strong>：对各个版本使用相同的测试数据，<strong>并行执行</strong>，对比输出结果，检测是否存在一致性问题，从而发现潜在的软件缺陷。</li></ol><p>因此，正确答案是：<strong>C. 相异成分规范评审、相异性确认和背对背测试</strong>。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📒 软考高级·系统架构设计师 记忆笔记</h2><h3 class="md-heading">核心考点：N版本程序设计的三个新阶段</h3><hr class="md-hr" /><h3 class="md-heading">🧠 先搞懂&quot;N版本程序设计&quot;是什么</h3><p>&gt; 用大白话说：<strong>同一个需求，让N个互不通气的团队各自独立写一遍程序</strong>，最后投票/对比结果，少数服从多数，这样即使某个版本出bug，其他版本还能顶上。</p><p>&gt;</p><p>&gt; 就像考试时让3个同学各自独立答题，答案不一样就说明有人错了。</p><hr class="md-hr" /><h3 class="md-heading">🔑 三个新阶段 — 顾名思义记忆法</h3><h4 class="md-heading">关键词锁定：<strong>&quot;相异&quot;贯穿始终</strong></h4><p>&gt; 💡 记忆口诀：<strong>&quot;异审 → 异认 → 背靠背&quot;</strong></p><p>&gt; 三步走：先审图纸异不异 → 再确认设计异不异 → 最后背靠背跑一遍</p><hr class="md-hr" /><h4 class="md-heading">第一阶段：相异成分规范评审</h4><p>```</p><p>拆字理解：</p><p>&quot;相异&quot; = 各团队的理解和设计方向必须不同（不能抄作业）</p><p>&quot;成分&quot; = 组成部分，即各团队对需求文档的理解内容</p><p>&quot;规范评审&quot; = 对照需求说明书（SRS）做审查</p><p>👉 顾名思义：审查各团队对需求的理解，确保大家&quot;想法不一样&quot;</p><p>```</p><p><strong>大白话</strong>：拿到同一份需求文档后，各团队独立理解，然后开会审查——不是为了统一答案，而是为了<strong>确认大家的理解和设计思路确实不同</strong>，有疑问通过&quot;问题单&quot;沟通，但不能互相抄设计。</p><hr class="md-hr" /><h4 class="md-heading">第二阶段：相异性确认</h4><p>```</p><p>拆字理解：</p><p>&quot;相异性&quot; = 不同版本之间的差异程度</p><p>&quot;确认&quot; = 正式核实、盖章认可</p><p>👉 顾名思义：正式确认各版本的实现方式确实&quot;长得不一样&quot;</p><p>```</p><p><strong>大白话</strong>：详细设计完成后，专门检查一遍——各团队用的算法、数据结构、实现方法是否真的不同。<strong>目的是防止大家不约而同犯同一个错误</strong>（公共故障）。</p><p>&gt; 🌰 举例：如果3个团队都用了同一个有漏洞的加密库，那N版本就失去意义了。</p><hr class="md-hr" /><h4 class="md-heading">第三阶段：背对背测试</h4><p>```</p><p>拆字理解：</p><p>&quot;背对背&quot; = 两人背靠背站着，互相看不见对方 → 各版本独立运行，互不干扰</p><p>&quot;测试&quot; = 用相同数据跑程序，对比输出结果</p><p>👉 顾名思义：各版本背靠背同时跑，看输出结果对不对得上</p><p>```</p><p><strong>大白话</strong>：用<strong>完全相同的测试数据</strong>，同时喂给所有N个版本，然后对比输出。如果某个版本结果和其他版本不一样，说明它可能有bug。</p><p>&gt; 🌰 举例：输入同一道数学题，3个版本答案分别是 5、5、7 → 第三个版本有问题。</p><hr class="md-hr" /><h3 class="md-heading">📊 三阶段关系图</h3><p>```</p><p>需求文档(SRS)</p><p>|</p><p>▼</p><p>┌─────────────────────────────┐</p><p>│  第一阶段：相异成分规范评审    │  ← 审&quot;理解&quot;异不异</p><p>│  各团队独立读需求，提问题单   │</p><p>└─────────────┬───────────────┘</p><p>|</p><p>▼</p><p>┌─────────────────────────────┐</p><p>│  各团队独立详细设计           │</p><p>└─────────────┬───────────────┘</p><p>|</p><p>▼</p><p>┌─────────────────────────────┐</p><p>│  第二阶段：相异性确认          │  ← 审&quot;设计&quot;异不异</p><p>│  核实实现方法、算法确实不同    │</p><p>└─────────────┬───────────────┘</p><p>|</p><p>▼</p><p>┌─────────────────────────────┐</p><p>│  各团队独立编码               │</p><p>└─────────────┬───────────────┘</p><p>|</p><p>▼</p><p>┌─────────────────────────────┐</p><p>│  第三阶段：背对背测试          │  ← 跑结果，对比输出</p><p>│  相同输入 → 对比N个版本输出   │</p><p>└─────────────────────────────┘</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">❌ 排除干扰项：为什么不选&quot;相同&quot;和&quot;面对面&quot;</h3><table><thead><tr><th style='text-align: left'>干扰词</th><th style='text-align: left'>为什么错</th></tr></thead><tbody><tr><td style='text-align: left'>相同成分规范评审</td><td style='text-align: left'>N版本的核心就是&quot;相异&quot;，审查&quot;相同&quot;完全背离目的</td></tr><tr><td style='text-align: left'>面对面测试</td><td style='text-align: left'>面对面 = 互相看得见 = 会互相影响，破坏独立性；应该是&quot;背对背&quot;</td></tr></tbody></table><p>&gt; 💡 <strong>只要记住：N版本的灵魂是&quot;异&quot;</strong>，凡是带&quot;相同&quot;的选项直接排除，凡是&quot;面对面&quot;的也排除。</p><hr class="md-hr" /><h3 class="md-heading">🎯 考试掌握程度要求</h3><p>&gt; 标签标注：<strong>第二版教材必须掌握</strong>，属于高频考点</p><p>```</p><p>需要掌握的层次：</p><p>✅ 必须能背出：三个阶段的名称（顺序不要求，但名称要准确）</p><p>✅ 必须理解：每个阶段的目的是什么（用大白话能说出来）</p><p>✅ 必须会排除：看到&quot;相同&quot;和&quot;面对面&quot;直接排除</p><p>✅ 了解即可：N版本的整体思想（多版本冗余容错）</p><p>❌ 不需要：记忆具体实施细节和数学公式</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🔁 最终速记卡</h3><p>```</p><p>╔══════════════════════════════════════╗</p><p>║   N版本程序设计 三个新阶段            ║</p><p>║                                      ║</p><p>║   口诀：异审 → 异认 → 背靠背          ║</p><p>║                                      ║</p><p>║   1. 相异成分规范评审                 ║</p><p>║      → 审各团队对需求的理解是否够&quot;异&quot; ║</p><p>║                                      ║</p><p>║   2. 相异性确认                       ║</p><p>║      → 确认各团队的设计方案够&quot;异&quot;     ║</p><p>║                                      ║</p><p>║   3. 背对背测试                       ║</p><p>║      → 同输入，跑N版本，比输出        ║</p><p>║                                      ║</p><p>║   灵魂关键词：相异 / 独立 / 不通气    ║</p><p>╚══════════════════════════════════════╝</p><p>```</p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第6题（题号：19）</h3>
+              <span class='badge'>系统可靠性</span>
+              <span class='badge'>难度：1</span>
+            </div>
+            <p>系统运行过程中，其失效率函数 f(t) 用于描述系统在时间 t 发生故障的概率特性。关于失效率函数 f(t) 的下列说法中，哪一项是错误的？（）</p>
+              <div class='sub-question' data-question-id="q1549_0" data-correct-answers="C" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q1549_0_A" class="option-label">
+                            <input type="radio" id="q1549_0_A" name="q1549_0" value="A" class="option-input" />
+                            <span class="option-text">A. f(0)=0，表示系统在刚开始运行时不会发生故障</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1549_0_B" class="option-label">
+                            <input type="radio" id="q1549_0_B" name="q1549_0" value="B" class="option-input" />
+                            <span class="option-text">B. 所有系统最终都会出现故障</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1549_0_C" class="option-label">
+                            <input type="radio" id="q1549_0_C" name="q1549_0" value="C" class="option-input" />
+                            <span class="option-text">C. f(t) 在 (0，+∞) 上单调递减</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1549_0_D" class="option-label">
+                            <input type="radio" id="q1549_0_D" name="q1549_0" value="D" class="option-input" />
+                            <span class="option-text">D. f(t) 的取值范围在 0 到 1 之间</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q1549_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q1549_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>C</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>可靠性工程中失效率函数（hazard rate）f(t）</strong> 的定义及性质。</p><p><strong>A选项 f(0)=0，表示系统刚运行时不会发生故障</strong>：这是典型的“早期失效忽略”假设，可以认为正确。</p><p><strong>B选项 所有系统最终都会出现故障</strong>：可靠性工程假设系统在无限时间下故障概率趋近于 1，即系统不会永远正常工作，因此该说法通常视为正确。</p><p><strong>C选项 f(t) 在 (0，+∞) 上单调递减</strong>：单调递减肯定是错误，因为一开始是0，最终趋近于 1。因此此选项错误。</p><p><strong>D选项 f(t) 在 0 到 1 的范围内</strong>：失效率是概率肯定是在 0-1 之间。</p><p>选择选项 C。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📝 软考高级·系统架构设计师 考点笔记</h2><hr class="md-hr" /><h3 class="md-heading">🎯 题目定位</h3><p>&gt; 2022年11月真题 · 第19题 · 系统可靠性</p><p>&gt; <strong>标签：了解即可，超纲题</strong></p><hr class="md-hr" /><h3 class="md-heading">🧠 核心概念：失效率函数 f(t)</h3><h4 class="md-heading">顾名思义记忆法</h4><p><strong>&quot;失效率&quot;</strong> = <strong>失去效果的概率</strong></p><p>→ 就是系统在某个时间点 t，<strong>挂掉的可能性有多大</strong></p><p><strong>f(t)</strong> 你就理解成：<strong>&quot;故障可能性随时间变化的曲线&quot;</strong></p><hr class="md-hr" /><h3 class="md-heading">📊 字符图：f(t) 的变化趋势</h3><p>```</p><p>故障</p><p>概率</p><p>1 |                              ........</p><p>|                         .....</p><p>|                    .....</p><p>|               .....</p><p>|          .....</p><p>|     .....</p><p>|.....</p><p>0 +---------------------------------&gt; 时间 t</p><p>0                              +∞</p><p>刚启动=0        慢慢增大        最终趋近1</p><p>```</p><p>&gt; 记忆口诀：<strong>&quot;刚出生没病，越老越容易坏&quot;</strong></p><p>&gt; 就像一台新电脑，刚买来不会坏，用久了越来越容易出问题</p><hr class="md-hr" /><h3 class="md-heading">✅ 四个选项逐条拆解</h3><table><thead><tr><th style='text-align: left'>选项</th><th style='text-align: left'>说法</th><th style='text-align: left'>对错</th><th style='text-align: left'>大白话理解</th></tr></thead><tbody><tr><td style='text-align: left'>A</td><td style='text-align: left'>f(0)=0，刚运行不会故障</td><td style='text-align: left'>✅ 正确</td><td style='text-align: left'>新机器刚开机，默认没问题</td></tr><tr><td style='text-align: left'>B</td><td style='text-align: left'>所有系统最终都会故障</td><td style='text-align: left'>✅ 正确</td><td style='text-align: left'>没有永远不坏的东西</td></tr><tr><td style='text-align: left'>C</td><td style='text-align: left'>f(t) 在(0,+∞)上<strong>单调递减</strong></td><td style='text-align: left'>❌ <strong>错误</strong></td><td style='text-align: left'>明明是越来越大，怎么可能一直减小？</td></tr><tr><td style='text-align: left'>D</td><td style='text-align: left'>f(t) 取值在 0 到 1 之间</td><td style='text-align: left'>✅ 正确</td><td style='text-align: left'>概率就是0到1，天经地义</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">🔑 答案锁定技巧</h3><p><strong>C选项的坑：</strong> &quot;单调递减&quot; 这四个字是陷阱</p><p>&gt; 单调递减 = 一直在变小</p><p>&gt; 但 f(t) 明明从 0 <strong>涨到</strong> 1</p><p>&gt; 所以 C 说的是反的 → <strong>C 是错的</strong></p><hr class="md-hr" /><h3 class="md-heading">💡 超纲题应对策略</h3><p>这道题标注了<strong>&quot;了解即可·超纲&quot;</strong>，意味着：</p><ul><li>不需要记公式</li><li>只需要记住<strong>一个常识</strong>：</li></ul><p>&gt; <strong>系统故障概率 = 随时间增大，不会减小</strong></p><p>&gt; 就像人会老，机器会磨损，软件会腐化</p><p>考场遇到类似题，用这个常识判断即可，<strong>不要深究数学细节</strong>。</p><hr class="md-hr" /><h3 class="md-heading">🗂️ 一句话总结（背这个就够）</h3><p>&gt; <strong>f(t) 是故障概率，从0涨到1，不可能一直在减小。</strong></p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第7题（题号：20）</h3>
+              <span class='badge'>系统可靠性</span>
+              <span class='badge'>难度：0</span>
+            </div>
+            <p>下列关于可靠性测试的说法中，哪一项是错误的（）。</p>
+              <div class='sub-question' data-question-id="q1550_0" data-correct-answers="C" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q1550_0_A" class="option-label">
+                            <input type="radio" id="q1550_0_A" name="q1550_0" value="A" class="option-input" />
+                            <span class="option-text">A. 定义系统剖面是广义可靠性测试的重要手段</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1550_0_B" class="option-label">
+                            <input type="radio" id="q1550_0_B" name="q1550_0" value="B" class="option-input" />
+                            <span class="option-text">B. 可以通过可靠性测试发现系统薄弱点</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1550_0_C" class="option-label">
+                            <input type="radio" id="q1550_0_C" name="q1550_0" value="C" class="option-input" />
+                            <span class="option-text">C. 广义可靠性测试是指通过测试发现软件缺陷并提高软件质量</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1550_0_D" class="option-label">
+                            <input type="radio" id="q1550_0_D" name="q1550_0" value="D" class="option-input" />
+                            <span class="option-text">D. 狭义可靠性测试是指在给定操作剖面的条件下，通过获取可靠性数据来评价软件可靠性</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q1550_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q1550_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>C</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>可靠性测试的分类及其目的</strong>。</p><p><strong>广义可靠性测试</strong>：强调对软件可靠性的整体评价过程，包括定义运行剖面、设计测试用例、执行测试、收集可靠性数据、分析失效并排错等。其核心目标是<strong>获取可靠性数据并评价软件可靠性</strong>，而非以发现缺陷为主要目的。</p><p><strong>狭义可靠性测试</strong>：为了获取可靠性数据，在给定操作剖面（Operational Profile）下执行预先设计的测试用例，模拟用户实际使用过程，用测试数据评价软件的可靠性。具有“面向缺陷”和“模拟实际使用场景”的特点。</p><p><strong>A选项 定义系统剖面是广义可靠性测试的重要手段</strong>：广义可靠性测试的关键步骤之一就是<strong>定义运行剖面（操作剖面）</strong>，用于模拟系统真实环境中的使用情况，为后续测试用例设计和可靠性评价提供依据。因此，正确。</p><p><strong>B选项 可以通过可靠性测试发现系统薄弱点</strong>：此说法正确。可靠性测试不仅能够收集可靠性数据，还可以暴露系统中的薄弱点，例如模块易失效区域、设计不完善之处，以及在实际工作负载下可能发生的稳定性问题。这也是可靠性测试的主要价值之一。</p><p><strong>C选项 广义可靠性测试是指通过测试发现软件缺陷并提高软件质量</strong>：这是错误的。广义可靠性测试的核心不在“发现缺陷”，而在“评价可靠性”。</p><p><strong>D选项 狭义可靠性测试是指在给定操作剖面的条件下，通过获取可靠性数据来评价软件可靠性</strong>。正确。</p><p>选择选项 C。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📒 软考笔记 · 系统可靠性 · 可靠性测试分类</h2><hr class="md-hr" /><h3 class="md-heading">🧠 核心记忆口诀</h3><p>&gt; <strong>广义 = 评价可靠性（量化打分）</strong></p><p>&gt; <strong>狭义 = 模拟真实用，收数据打分</strong></p><hr class="md-hr" /><h3 class="md-heading">🔑 两个概念顾名思义拆解</h3><h4 class="md-heading">广义可靠性测试</h4><p><strong>&quot;广&quot;= 范围广、目标大</strong></p><p>不是只盯着找bug，而是做一整套&quot;体检&quot;流程：</p><p>```</p><p>定义剖面 → 设计用例 → 执行测试 → 收集数据 → 分析失效 → 评价可靠性</p><p>```</p><p>&gt; 记忆钩子：<strong>广义 = 广泛评价</strong>，像给软件做&quot;全身体检报告&quot;，最终目的是给出一个&quot;可靠性评分&quot;，不是专门找病。</p><hr class="md-hr" /><h4 class="md-heading">狭义可靠性测试</h4><p><strong>&quot;狭&quot;= 范围窄、目标专一</strong></p><p>只做一件事：<strong>模拟用户真实使用场景，收数据，评分</strong></p><p>&gt; 记忆钩子：<strong>狭义 = 狭路模拟</strong>，像让软件&quot;走一遍用户的真实路&quot;，记录它在路上摔了几次，算出可靠性分数。</p><hr class="md-hr" /><h3 class="md-heading">⚠️ 本题易错点（C选项为什么错）</h3><p>```</p><p>❌ 错误说法：广义可靠性测试 = 发现缺陷 + 提高质量</p><p>✅ 正确说法：广义可靠性测试 = 评价可靠性（发现缺陷只是过程，不是核心目的）</p><p>```</p><p>&gt; 类比：体检的目的是&quot;评估你的健康状况&quot;，不是&quot;治病&quot;。治病是后续的事。</p><hr class="md-hr" /><h3 class="md-heading">📌 操作剖面 是什么</h3><p><strong>剖面 = 切面 = 使用场景的切片</strong></p><p>就是把用户怎么用这个软件，用多少频率，做什么操作，全部描述出来的一张&quot;使用说明书&quot;。</p><p>```</p><p>用户 80% 时间在查询</p><p>用户 15% 时间在录入</p><p>用户  5% 时间在删除</p><p>↑ 这就是一个操作剖面</p><p>```</p><p>&gt; 记忆钩子：<strong>剖面 = 剖开用户行为，看里面的使用分布</strong></p><hr class="md-hr" /><h3 class="md-heading">✅ 四个选项速记表</h3><table><thead><tr><th style='text-align: left'>选项</th><th style='text-align: left'>说法</th><th style='text-align: left'>对错</th><th style='text-align: left'>一句话记忆</th></tr></thead><tbody><tr><td style='text-align: left'>A</td><td style='text-align: left'>定义系统剖面是广义测试的重要手段</td><td style='text-align: left'>✅ 对</td><td style='text-align: left'>广义测试第一步就是定义剖面</td></tr><tr><td style='text-align: left'>B</td><td style='text-align: left'>可靠性测试能发现系统薄弱点</td><td style='text-align: left'>✅ 对</td><td style='text-align: left'>测试过程中自然会暴露弱点</td></tr><tr><td style='text-align: left'>C</td><td style='text-align: left'>广义测试 = 发现缺陷提高质量</td><td style='text-align: left'>❌ 错</td><td style='text-align: left'>广义目的是<strong>评价</strong>，不是<strong>找bug</strong></td></tr><tr><td style='text-align: left'>D</td><td style='text-align: left'>狭义测试 = 给定剖面下收数据评价</td><td style='text-align: left'>✅ 对</td><td style='text-align: left'>狭义就是模拟真实场景收数据</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">🎯 考试掌握程度要求</h3><p><strong>这道题属于「第二版教材必须掌握」</strong>，要求如下：</p><ul><li>能区分广义和狭义的<strong>核心目的差异</strong>（背住：广义=评价，狭义=模拟收数据）</li><li>知道&quot;操作剖面&quot;是什么（用户使用场景的描述）</li><li>看到&quot;发现缺陷提高质量&quot;这种说法，立刻警觉——这是普通测试的目标，不是可靠性测试的核心</li></ul><p>&gt; 不需要背具体步骤顺序，只需要记住<strong>目的</strong>和<strong>易混淆点</strong>即可上考场。</p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第8题（题号：22）</h3>
+              <span class='badge'>系统可靠性</span>
+              <span class='badge'>难度：0</span>
+            </div>
+            <p>在单片机系统性能与可靠性评价指标中，下列组合中哪一组指标最符合单片机系统常用的考量要素（）。</p>
+              <div class='sub-question' data-question-id="q1552_0" data-correct-answers="D" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q1552_0_A" class="option-label">
+                            <input type="radio" id="q1552_0_A" name="q1552_0" value="A" class="option-input" />
+                            <span class="option-text">A. 吞吐量、MTBF、功耗</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1552_0_B" class="option-label">
+                            <input type="radio" id="q1552_0_B" name="q1552_0" value="B" class="option-input" />
+                            <span class="option-text">B. 吞吐量、MTBF、响应时间</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1552_0_C" class="option-label">
+                            <input type="radio" id="q1552_0_C" name="q1552_0" value="C" class="option-input" />
+                            <span class="option-text">C. 吞吐量、功耗、响应时间</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q1552_0_D" class="option-label">
+                            <input type="radio" id="q1552_0_D" name="q1552_0" value="D" class="option-input" />
+                            <span class="option-text">D. MTBF、功耗、响应时间</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q1552_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q1552_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>D</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>单片机（嵌入式系统）性能指标与可靠性指标的核心特征</strong>。</p><p>单片机系统不同于通用计算机系统，其关注点主要集中在：<strong>低功耗、可靠运行能力（如 MTBF）、实时响应能力（响应时间）</strong>。反之，吞吐量是服务器、网络系统、数据库系统中常见的性能指标，并非嵌入式系统的核心指标。</p><p><strong>A选项吞吐量、MTBF、功耗</strong>：包含吞吐量，而吞吐量不属于单片机常用评价指标，因此该组合不正确。</p><p><strong>B选项吞吐量、MTBF、响应时间</strong>：包含吞吐量，因此也不是单片机主要评价指标组合。</p><p><strong>C选项吞吐量、功耗、响应时间</strong>：同样包含吞吐量，不符合嵌入式系统评价特性。</p><p><strong>D选项MTBF、功耗、响应时间</strong>：均为单片机系统最主要的关注指标，因此该选项正确。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📝 系统可靠性 · 单片机评价指标记忆笔记</h2><hr class="md-hr" /><h3 class="md-heading">🧠 核心记忆口诀</h3><p>&gt; <strong>&quot;单片机，不吞吐，要可靠、省电、快响应&quot;</strong></p><hr class="md-hr" /><h3 class="md-heading">🔑 名词白话解释（零专业术语）</h3><h4 class="md-heading">MTBF — &quot;平均撑多久才坏&quot;</h4><p>&gt; 全称：Mean Time Between Failures</p><p>&gt; 白话：<strong>一台机器从正常运行到下一次出故障，平均能撑多少小时</strong></p><p>&gt; 顾名思义记忆：<strong>M（Mean均值）T（Time时间）B（Between两次之间）F（Failure坏掉）= 两次坏掉之间的平均时间</strong></p><p>&gt; 类比：你的手机平均用多久会死机一次，MTBF就是这个数字，越大越可靠</p><hr class="md-hr" /><h4 class="md-heading">功耗 — &quot;吃电量&quot;</h4><p>&gt; 白话：<strong>机器运行时每秒消耗多少电</strong></p><p>&gt; 顾名思义：<strong>功（电功率）耗（消耗）= 消耗的电量</strong></p><p>&gt; 类比：手机待机一天耗20%电 vs 耗80%电，单片机装在设备里靠电池供电，当然越省电越好</p><hr class="md-hr" /><h4 class="md-heading">响应时间 — &quot;反应速度&quot;</h4><p>&gt; 白话：<strong>你发出一个指令，机器多久给你反馈</strong></p><p>&gt; 顾名思义：<strong>响（响应回应）应（应答）时间 = 回应你需要的时间</strong></p><p>&gt; 类比：你按下电梯按钮，门多久打开，这就是响应时间</p><hr class="md-hr" /><h4 class="md-heading">吞吐量 — &quot;单位时间处理多少任务&quot;</h4><p>&gt; 白话：<strong>一秒钟能处理多少请求/数据</strong></p><p>&gt; 顾名思义：<strong>吞（吞进来）吐（吐出去）量 = 进进出出处理的总量</strong></p><p>&gt; 类比：餐厅一小时能接待多少桌客人，这是餐厅（服务器）关心的，不是一个小家电（单片机）关心的</p><hr class="md-hr" /><h3 class="md-heading">🎯 为什么单片机不用&quot;吞吐量&quot;？</h3><p>```</p><p>通用服务器（淘宝后台）        单片机（空调控制板）</p><p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p><p>每秒处理百万请求 ✅            没有大量并发请求 ❌</p><p>不在乎耗多少电   ❌            插电池运行，省电第一 ✅</p><p>坏了重启就行     ❌            坏了可能出安全事故 ✅</p><p>响应慢点无所谓   ❌            必须实时控制，慢了出问题 ✅</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">📌 选项排雷记忆法</h3><p>&gt; <strong>看到&quot;吞吐量&quot;就排除</strong> — 只要选项里有吞吐量，单片机题直接划掉</p><p>```</p><p>A. 吞吐量 + MTBF + 功耗      ← 有&quot;吞吐量&quot; ❌ 划掉</p><p>B. 吞吐量 + MTBF + 响应时间  ← 有&quot;吞吐量&quot; ❌ 划掉</p><p>C. 吞吐量 + 功耗 + 响应时间  ← 有&quot;吞吐量&quot; ❌ 划掉</p><p>D. MTBF  + 功耗 + 响应时间   ← 三个都对  ✅ 选它</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🗂️ 复习程度建议</h3><p>&gt; 标签显示：<strong>第二版教材了解即可</strong></p><table><thead><tr><th style='text-align: left'>复习深度</th><th style='text-align: left'>具体要求</th></tr></thead><tbody><tr><td style='text-align: left'>✅ 需要掌握</td><td style='text-align: left'>单片机/嵌入式系统 → 看到就想到 MTBF + 功耗 + 响应时间</td></tr><tr><td style='text-align: left'>✅ 需要掌握</td><td style='text-align: left'>吞吐量属于服务器/网络/数据库，不属于单片机</td></tr><tr><td style='text-align: left'>⚡ 了解即可</td><td style='text-align: left'>MTBF的具体计算公式不用背</td></tr><tr><td style='text-align: left'>⚡ 了解即可</td><td style='text-align: left'>不需要深入理解嵌入式系统原理</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">🔁 最终速记卡</h3><p>```</p><p>┌─────────────────────────────────────┐</p><p>│  单片机三宝：可靠 + 省电 + 快响应    │</p><p>│                                     │</p><p>│  MTBF    = 平均撑多久才坏（可靠）    │</p><p>│  功耗    = 吃多少电（省电）          │</p><p>│  响应时间 = 反应多快（快响应）        │</p><p>│                                     │</p><p>│  ⚠️ 吞吐量 = 服务器的事，单片机不用  │</p><p>└─────────────────────────────────────┘</p><p>```</p></div></details>
+            </article></div>
+    </section>
+  </main>
+  <script>
+    const DATA = {"meta": {"paper_name": "2022年11月系统架构真题", "subject": 0, "type": 0, "item_count": 8}, "questions": [{"id": 30, "index": 1, "sort": 15, "knowledge_point": "系统可靠性", "prompt": "系统（）是指在规定的时间内和规定条件下能有效地实现规定功能的能力。它不仅取决于规定的使用条件等因素，还与设计技术有关。常用的度量指标主要有故障率（或失效率）、平均失效等待时间、平均失效间隔时间和可靠度等。其中，（）是系统在规定工作时间内无故障的概率。", "difficulty": 1, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "可靠性", "is_correct": true}, {"label": "B", "text": "可用性", "is_correct": false}, {"label": "C", "text": "可理解性", "is_correct": false}, {"label": "D", "text": "可测试性", "is_correct": false}], "correct_letters": ["A"], "correct_texts": ["可靠性"], "official_analysis": "本题考察的是**系统可靠性及可靠性度量指标**的基本概念。\n可靠性强调在规定时间与条件下无故障完成规定功能；可用性强调“能用”的时间占比，它受可靠性与可维护性共同影响；常见度量中，可靠度R(t)刻画“在规定时间内无故障”的概率，是可靠性的核心概率度量。\n**问题 1：**\n**A选项可靠性**：指系统在规定时间、规定条件下完成规定功能的能力，符合题干定义，正确。\n**B选项可用性**：指系统处于可运行状态的时间比例，通常与可靠性、可维修性（如MTTR）共同决定，不等同于题干所给定义。\n**C选项可理解性**：指理解系统结构与代码/文档的难易程度，属于可维护性子特性之一，与题干无关。\n**D选项可测试性**：指验证系统是否满足需求的难易程度，也属于可维护性子特性，与题干无关。\n选择选项 A。\n\n**问题 2：**\n**A选项失效率**：单位时间内发生故障的速率（常记为λ），描述故障发生强度，不是“在规定时间内无故障的概率”。\n**B选项平均失效等待时间**：从失效到开始维修的平均等待时长，偏向可维护性指标，不是无故障概率。\n**C选项平均失效间隔时间**：两次相邻失效之间的平均时间（常与MTBF/MTTF相关），是时间指标而非概率。\n**D选项可靠度**：系统在规定工作时间内无故障的概率，通常记为R(t)，与题干后半句完全一致，正确。\n选择选项 D。"}, {"label": "2", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "失效率", "is_correct": false}, {"label": "B", "text": "平均失效等待时间", "is_correct": false}, {"label": "C", "text": "平均失效间隔时间", "is_correct": false}, {"label": "D", "text": "可靠度", "is_correct": true}], "correct_letters": ["D"], "correct_texts": ["可靠度"], "official_analysis": ""}], "model_response": "# 📋 系统可靠性 · 精华笔记\n\n---\n\n## 🧠 核心概念速记（顾名思义版）\n\n### 可靠性 vs 可用性 — 傻傻分不清？\n\n```\n可靠性 = \"靠得住吗？\"\n         → 在规定时间、规定条件下，能不能完成规定功能\n         → 强调：有没有出故障（故障本身）\n\n可用性 = \"能用吗？\"\n         → 系统处于\"可以被使用\"状态的时间占比\n         → 强调：能用的时间比例（受维修速度影响）\n```\n\n> 记忆口诀：**\"靠\"的是不出故障，\"用\"的是能用多久**\n\n---\n\n## 📊 四大度量指标 — 字面拆解记忆\n\n```\n┌─────────────────────┬──────────────────────────────────────────┐\n│ 名称                │ 顾名思义记忆法                           │\n├─────────────────────┼──────────────────────────────────────────┤\n│ 故障率（失效率）    │ \"单位时间内坏了多少次\" → 坏的频率        │\n│                     │ 就像你的车，每年坏几次                   │\n├─────────────────────┼──────────────────────────────────────────┤\n│ 平均失效等待时间    │ \"坏了之后，等多久才开始修\"               │\n│                     │ 失效 → 等待 → 开始维修 的平均时长        │\n│                     │ 偏向：维护管理能力                       │\n├─────────────────────┼──────────────────────────────────────────┤\n│ 平均失效间隔时间    │ \"两次故障之间，平均能撑多久\"             │\n│                     │ 上次坏 → 修好 → 再次坏 的平均间隔        │\n│                     │ 时间越长 = 越可靠                        │\n├─────────────────────┼──────────────────────────────────────────┤\n│ 可靠度 R(t)         │ \"在规定时间内，无故障运行的概率\"         │\n│                     │ 是一个概率值（0~1之间）                  │\n│                     │ 可靠度高 = 这段时间内不出问题的把握大    │\n└─────────────────────┴──────────────────────────────────────────┘\n```\n\n---\n\n## 🎯 题目陷阱识别\n\n### 第一空陷阱：可靠性 vs 可用性\n\n```\n题干关键词：\"规定时间 + 规定条件 + 规定功能\"\n                          ↓\n三个\"规定\" → 答案锁定 可靠性\n```\n\n> 如果题干说的是\"能用时间占总时间的比例\" → 才选可用性\n\n---\n\n### 第二空陷阱：可靠度 vs 其他三个\n\n```\n其他三个都是\"时间\"或\"速率\"的概念：\n  故障率     → 速率（每小时坏几次）\n  等待时间   → 时长（等多久）\n  间隔时间   → 时长（撑多久）\n\n只有 可靠度 = 概率（0~1的数字）\n\n题干说\"无故障的概率\" → 有\"概率\"两字 → 唯一答案 可靠度\n```\n\n---\n\n## 🔗 类比记忆（用你熟悉的Java世界）\n\n```\n可靠性   ≈ 你的服务在SLA承诺内不抛异常的能力\n可用性   ≈ 服务的 uptime 百分比（如 99.9%）\n故障率   ≈ 每小时抛出异常的次数\n可靠度   ≈ 在接下来1小时内，服务不崩溃的概率是多少\n平均失效间隔时间 ≈ 两次服务宕机之间平均能跑多久\n```\n\n---\n\n## ✅ 考试掌握程度要求\n\n```\n这道题属于【必须掌握】级别，要求：\n\n1. 能区分\"可靠性\"和\"可用性\"的定义差异       ← 必背\n2. 记住\"可靠度 = 概率\"这个唯一特征           ← 必背\n3. 四个度量指标各自描述什么维度               ← 理解即可\n4. 不需要记公式，只需要认识概念               ← 选择题够用\n```\n\n---\n\n## 🗂️ 一句话终极速记\n\n> **可靠性**：三个\"规定\"下能完成功能的能力\n> **可靠度**：规定时间内不出故障的那个**概率数字**"}, {"id": 67, "index": 2, "sort": 50, "knowledge_point": "系统可靠性", "prompt": "平均失效等待时间（mean time to failure，MTTF）和平均失效间隔时间（mcan time between failure，MTBF）是进行系统可靠性分析时的要指标，在失效率为常数和修复时间很短的情况下，（）。", "difficulty": 2, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "MTTF 远远小于 MTBF", "is_correct": false}, {"label": "B", "text": "MTTF 和 MTBF 无法计算", "is_correct": false}, {"label": "C", "text": "MTTF 远远大于 MTBF", "is_correct": false}, {"label": "D", "text": "MTTF 和 MTBF 几乎相等", "is_correct": true}], "correct_letters": ["D"], "correct_texts": ["MTTF 和 MTBF 几乎相等"], "official_analysis": "本题考察的是**系统可靠性分析中的四个核心指标**，包括 MTTF、MTTR、MTBF 与系统可用性公式。\n平均失效等待时间（MTTF）= 1/λ，λ 为失效率。\n平均故障修复时间 (MTTR) = 1/μ，μ 为修复率。\n平均失效间隔时间又称平均无故障时间(MTBF) = MTTR + MTTF。\n系统可用性 = MTTF/(MTTR+MTTF)×100%\n![https://oss.cheko.cc/b837341334c5df82ea5bbcc8308fa37568bb8f43812952f019da33bc6914acfc.png#716px #421px](https://oss.cheko.cc/b837341334c5df82ea5bbcc8308fa37568bb8f43812952f019da33bc6914acfc.png)\n**A选项 MTTF 远远小于 MTBF**：在 MTTR 很小的情况下，MTBF≈MTTF，不存在“远远小于”的关系，错误。\n**B选项 MTTF 和 MTBF 无法计算**：在失效率 λ 和修复率 μ 已知时，这两个指标是可以直接计算的，错误。\n**C选项 MTTF 远远大于 MTBF**：与实际公式 MTBF = MTTF + MTTR 不符，错误。\n**D选项 MTTF 和 MTBF 几乎相等**：公式 MTBF = MTTF + MTTR，当 MTTR 很小时，MTBF 与 MTTF 的差值可以忽略，因此几乎相等，正确。\n选择选项 D。"}], "model_response": "# 📋 系统可靠性四大指标 · 精华笔记\n\n---\n\n## 🧠 顾名思义速记法（核心）\n\n| 英文缩写 | 中文拆解记忆 | 白话意思 |\n|--------|------------|--------|\n| **MTTF** | **\"等失效\"** — 等多久才坏 | 从开机到第一次坏掉，平均要等多久 |\n| **MTTR** | **\"等修好\"** — 坏了等多久修好 | 坏掉之后，平均要花多久修好 |\n| **MTBF** | **\"两次坏之间\"** — 两次故障之间隔多久 | 从这次修好，到下次再坏，中间隔多久 |\n| **可用性** | **\"能用的时间占比\"** | 系统真正能用的时间，占总时间的百分比 |\n\n---\n\n## 🔢 四个公式（必须背）\n\n```\nMTTF = 1 ÷ λ        （λ 是失效率，坏得越快λ越大，能用时间越短）\n\nMTTR = 1 ÷ μ        （μ 是修复率，修得越快μ越大，修复时间越短）\n\nMTBF = MTTF + MTTR  （两次坏之间 = 能用时间 + 修复时间）\n\n可用性 = MTTF ÷ (MTTF + MTTR) × 100%\n```\n\n---\n\n## 🖼️ 字符时间轴图（帮助理解）\n\n```\n开机                坏了        修好了              又坏了\n |                   |            |                   |\n |←——— MTTF ————————|←— MTTR ———|←——— MTTF ————————|\n |                                                    |\n |←———————————————— MTBF ————————————————————————————|\n```\n\n> MTBF = MTTF + MTTR，就是\"能用的时间\"加上\"修理的时间\"\n\n---\n\n## 🎯 本题考点：为什么 MTTF ≈ MTBF？\n\n**题目条件：修复时间很短（MTTR 极小）**\n\n```\nMTBF = MTTF + MTTR\n\n当 MTTR ≈ 0 时：\n\nMTBF ≈ MTTF + 0 ≈ MTTF\n\n所以两者几乎相等 → 选 D\n```\n\n**生活类比：**\n> 你的手机平均用 365 天会坏一次（MTTF=365天），\n> 送去修只要 1 小时（MTTR极小），\n> 那\"两次坏之间的间隔\"（MTBF）≈ 365天，\n> 和 MTTF 几乎没区别。\n\n---\n\n## ❌ 排错速查\n\n| 选项 | 说法 | 为什么错 |\n|-----|------|--------|\n| A | MTTF 远小于 MTBF | MTTR 很小时差值可忽略，不存在\"远小于\" |\n| B | 无法计算 | λ 和 μ 已知就能算，说法错误 |\n| C | MTTF 远大于 MTBF | MTBF = MTTF + MTTR，MTBF 只会 ≥ MTTF，不可能更小 |\n| D ✅ | 几乎相等 | MTTR 极小时 MTBF ≈ MTTF，正确 |\n\n---\n\n## ✅ 考试掌握程度要求\n\n> 这是**第二版教材必须掌握**的内容，要求如下：\n\n- **公式要默写**：四个公式一个不能少\n- **概念要区分**：MTTF（等坏）vs MTBF（两坏之间）vs MTTR（等修好）\n- **会推导结论**：给你条件（如 MTTR 很小），能判断各指标大小关系\n- **可用性公式会用**：给出 λ 和 μ，能算出可用性百分比\n\n---\n\n**🔑 最终记忆口诀**\n\n```\n等坏是MTTF，等修是MTTR\n两坏之间是MTBF，等于前两个相加\n修复时间若极短，MTTF和MTBF差不差\n```"}, {"id": 1188, "index": 3, "sort": 15, "knowledge_point": "系统可靠性", "prompt": "在软件可靠性管理过程中，以下工作不属于需求分析阶段应完成的是（）。", "difficulty": 1, "tags": ["第二版教材", "了解即可"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "分析可能影响可靠性的因素", "is_correct": false}, {"label": "B", "text": "确定软件的可靠性目标", "is_correct": false}, {"label": "C", "text": "可靠性建模", "is_correct": true}, {"label": "D", "text": "确定可靠性的验收标准", "is_correct": false}], "correct_letters": ["C"], "correct_texts": ["可靠性建模"], "official_analysis": "本题考察的是**软件可靠性管理各阶段的关键活动**。\n根据可靠性管理流程：**需求分析阶段**的主要任务包括：\n- 分析可能影响软件可靠性的因素；\n- 确定软件的可靠性目标；\n- 明确可靠性的验收标准；\n- 确定管理机制与数据收集规范；\n- 制定初步的可靠性管理计划。\n\n**可靠性建模**是**测试阶段**的重要任务之一，通过收集测试数据并结合实际运行环境建立数学模型，以评估和预测软件的可靠性。\n**A选项分析可能影响可靠性的因素**：正确，属于需求阶段的初期分析工作。\n**B选项确定软件的可靠性目标**：正确，属于需求阶段的核心任务之一。\n**C选项可靠性建模**：错误，建模工作依赖测试数据，通常在测试阶段完成。\n**D选项确定可靠性的验收标准**：正确，是需求阶段确定评估标准的重要内容。\n因此，正确答案为 C。"}], "model_response": "# 📝 软考高级·系统架构设计师 考点笔记\n\n---\n\n## 🎯 题目速览\n\n**2022年11月真题 · 第15题 · 系统可靠性**\n\n> 软件可靠性管理中，**不属于需求分析阶段**的工作是？\n> **答案：C · 可靠性建模**\n\n---\n\n## 🧠 顾名思义记忆法\n\n### 核心问题：需求阶段 vs 测试阶段，怎么区分？\n\n**记忆口诀：需求阶段\"定目标\"，测试阶段\"建模型\"**\n\n> 需求阶段 = 还没开始做，只是**\"想清楚要什么\"**\n> 测试阶段 = 已经有数据了，才能**\"建数学模型算结果\"**\n\n---\n\n## 📖 专业名词白话解释\n\n| 名词 | 白话理解 | 顾名思义记忆 |\n|------|----------|-------------|\n| **软件可靠性** | 软件\"靠不靠谱\"，用了多久会出错 | 可靠 = 靠得住，性 = 程度 |\n| **可靠性目标** | 定一个\"我要这个软件多靠谱\"的指标，比如一年只能崩1次 | 目标 = 想达到的标准 |\n| **可靠性建模** | 收集测试数据后，用数学公式**算出**软件有多靠谱 | 建模 = 建数学模型，没数据就建不了 |\n| **验收标准** | 最终交付时，用来判断\"合不合格\"的尺子 | 验收 = 验货收货，标准 = 尺子 |\n| **影响可靠性的因素** | 找出哪些原因会让软件变得不靠谱，比如代码复杂度、团队经验 | 因素 = 原因 |\n\n---\n\n## 🗂️ 各阶段任务对照表\n\n```\n软件可靠性管理流程\n│\n├── 📋 需求分析阶段（还没动手，先\"想清楚\"）\n│   ├── ✅ 分析影响可靠性的因素     → 找出\"哪些事会让它不靠谱\"\n│   ├── ✅ 确定可靠性目标           → 定\"要多靠谱\"\n│   ├── ✅ 确定验收标准             → 定\"怎么算合格\"\n│   ├── ✅ 制定管理计划             → 定\"怎么管\"\n│   └── ✅ 确定数据收集规范         → 定\"收集哪些数据\"\n│\n└── 🧪 测试阶段（有数据了，才能\"算结果\"）\n    └── ❌ 可靠性建模               → 拿测试数据建数学模型\n```\n\n---\n\n## 💡 为什么\"可靠性建模\"不在需求阶段？\n\n```\n需求阶段                    测试阶段\n   │                           │\n   │  还没有测试数据            │  已经跑了大量测试\n   │  ❌ 没法建模               │  ✅ 有数据 → 才能建模\n   │                           │\n   └──────────────────────────►│\n              时间轴\n```\n\n**一句话记住：建模需要\"喂数据\"，需求阶段没数据，所以建不了。**\n\n---\n\n## ✍️ 考试要求\n\n> 📌 教材标注：**了解即可**（第二版教材）\n>\n> 复习到这个程度就够了：\n> - 知道需求阶段的**4件事**（分析因素、定目标、定验收标准、定计划）\n> - 记住**可靠性建模属于测试阶段**，不是需求阶段\n> - 遇到选项里有\"建模\"二字，需求阶段的题直接排除它\n\n---\n\n## 🔁 30秒快速回忆\n\n**需求阶段关键词：** 分析 · 确定 · 计划 · 标准\n\n**测试阶段关键词：** 建模 · 数据 · 计算 · 评估\n\n> 口诀：**\"需求想清楚，测试算结果\"**"}, {"id": 1285, "index": 4, "sort": 13, "knowledge_point": "系统可靠性", "prompt": "下列不属于可用性的选项是（）。", "difficulty": 2, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "可用时间", "is_correct": false}, {"label": "B", "text": "可用时间间隔", "is_correct": false}, {"label": "C", "text": "数据延迟时间", "is_correct": true}, {"label": "D", "text": "故障间隔", "is_correct": false}], "correct_letters": ["C"], "correct_texts": ["数据延迟时间"], "official_analysis": "本题考察的是**系统可用性（Availability）** 的相关概念。\n**A选项可用时间**：指系统在一定时间内能够提供正常服务的总时间，是衡量系统可用性的直接指标。时间越长，系统可用性越高，因此属于可用性指标。\n**B选项可用时间间隔**：指系统能够持续正常运行的时间长度，实际上与**故障间隔（MTBF）**密切相关，也用于评估系统的稳定性和可用性。\n**C选项数据延迟时间**：指数据在处理或传输过程中所经历的延迟时间，反映的是系统的**性能**，尤其是**响应时间**或**吞吐率**方面的指标，而非系统是否“可用”，所以它不属于可用性范畴。\n**D选项故障间隔**：即**平均无故障时间（MTBF）**，是可用性的常用度量指标之一。故障间隔越长，说明系统更稳定、更可用。\n因此，**选项 C 数据延迟时间**不属于系统可用性的指标，正确答案为 C。"}], "model_response": "# 📒 系统可靠性 · 可用性指标 备考笔记\n\n---\n\n## 🧠 核心概念：先搞清楚\"可用性\"是什么\n\n> **可用性** = 系统\"能不能用\"的问题\n> **性能** = 系统\"用起来快不快\"的问题\n\n这两个是不同维度，别混淆。\n\n---\n\n## 🔑 顾名思义记忆法（中文内核）\n\n### ✅ 属于可用性的三个指标\n\n| 名称 | 顾名思义拆解 | 大白话 |\n|------|------------|--------|\n| **可用时间** | \"可以用\"的\"时间\" | 系统总共能正常开门营业多少小时 |\n| **可用时间间隔** | 两次故障之间\"可以用\"的那段\"间隔\" | 上次坏到这次坏，中间能用多久 |\n| **故障间隔（MTBF）** | \"故障\"和\"故障\"之间的\"间隔\" | 平均多久坏一次，间隔越长越稳 |\n\n```\n三者关系图：\n\n时间轴 ──────────────────────────────────────────▶\n        [正常运行]  💥故障  [正常运行]  💥故障  [正常运行]\n        |←─────────────────────────────────────|\n                      可用时间（累计）\n\n        |←── 可用时间间隔 ──→|  |←── 可用时间间隔 ──→|\n        |←────── 故障间隔(MTBF) ──────→|\n```\n\n> 💡 记忆口诀：**\"能不能用\"才叫可用性，三个指标都在说\"开门营业多久\"**\n\n---\n\n### ❌ 不属于可用性的指标\n\n| 名称 | 顾名思义拆解 | 大白话 | 属于哪个维度 |\n|------|------------|--------|------------|\n| **数据延迟时间** | 数据\"延迟\"了多久才到 | 你发请求，系统慢吞吞才回你 | ⚡ 性能指标 |\n\n> 💡 关键区分：\n> - 系统**开着但很慢** → 性能问题，不是可用性问题\n> - 系统**直接挂了** → 才是可用性问题\n\n---\n\n## 🎯 做题口诀\n\n> 看到\"延迟、速度、响应、吞吐\"→ 性能\n> 看到\"时间、间隔、故障、恢复\"→ 可用性\n\n---\n\n## 📌 考试掌握程度\n\n**这道题只需掌握到：**\n- ✅ 能区分\"可用性指标\"和\"性能指标\"\n- ✅ 记住 MTBF = 故障间隔 = 可用性指标\n- ✅ 记住\"延迟时间\"是性能，不是可用性\n- ❌ 不需要记公式，不需要会计算\n\n> 这类题属于**概念辨析选择题**，认识名词、知道分类就能拿分。"}, {"id": 1323, "index": 5, "sort": 51, "knowledge_point": "系统可靠性", "prompt": "与通常软件开发过程不同的是，N版本程序设计增加了三个新的阶段，分别是（）。", "difficulty": 0, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "相同成分规范评审、面对面测试和背对背测试", "is_correct": false}, {"label": "B", "text": "相同成分规范评审、相异性确认和背对背测试", "is_correct": false}, {"label": "C", "text": "相异成分规范评审、相异性确认和背对背测试", "is_correct": true}, {"label": "D", "text": "相异成分规范评审、面对面测试和背对背测试", "is_correct": false}], "correct_letters": ["C"], "correct_texts": ["相异成分规范评审、相异性确认和背对背测试"], "official_analysis": "本题考察的是**N版本程序设计（N-Version Programming, NVP）中为实现容错与可靠性所引入的新开发阶段**。\n与普通软件开发过程相比，N版本设计通过多版本冗余提高容错能力，增加了三个特有阶段：\n1. **相异成分规范评审**：多个开发小组在不了解其他组设计的前提下独立开发，确保设计“相异性”，通过独立理解同一份 SRS，并通过问题单反馈与协调。\n2. **相异性确认**：在详细设计之后，通过分析或评估确保不同版本设计的实现机制、方法等具有相异性，从而降低公共故障的概率。\n3. **背对背测试（Back-to-Back Testing）**：对各个版本使用相同的测试数据，**并行执行**，对比输出结果，检测是否存在一致性问题，从而发现潜在的软件缺陷。\n\n因此，正确答案是：**C. 相异成分规范评审、相异性确认和背对背测试**。"}], "model_response": "# 📒 软考高级·系统架构设计师 记忆笔记\n\n## 核心考点：N版本程序设计的三个新阶段\n\n---\n\n## 🧠 先搞懂\"N版本程序设计\"是什么\n\n> 用大白话说：**同一个需求，让N个互不通气的团队各自独立写一遍程序**，最后投票/对比结果，少数服从多数，这样即使某个版本出bug，其他版本还能顶上。\n>\n> 就像考试时让3个同学各自独立答题，答案不一样就说明有人错了。\n\n---\n\n## 🔑 三个新阶段 — 顾名思义记忆法\n\n### 关键词锁定：**\"相异\"贯穿始终**\n\n> 💡 记忆口诀：**\"异审 → 异认 → 背靠背\"**\n> 三步走：先审图纸异不异 → 再确认设计异不异 → 最后背靠背跑一遍\n\n---\n\n### 第一阶段：相异成分规范评审\n\n```\n拆字理解：\n\"相异\" = 各团队的理解和设计方向必须不同（不能抄作业）\n\"成分\" = 组成部分，即各团队对需求文档的理解内容\n\"规范评审\" = 对照需求说明书（SRS）做审查\n\n👉 顾名思义：审查各团队对需求的理解，确保大家\"想法不一样\"\n```\n\n**大白话**：拿到同一份需求文档后，各团队独立理解，然后开会审查——不是为了统一答案，而是为了**确认大家的理解和设计思路确实不同**，有疑问通过\"问题单\"沟通，但不能互相抄设计。\n\n---\n\n### 第二阶段：相异性确认\n\n```\n拆字理解：\n\"相异性\" = 不同版本之间的差异程度\n\"确认\" = 正式核实、盖章认可\n\n👉 顾名思义：正式确认各版本的实现方式确实\"长得不一样\"\n```\n\n**大白话**：详细设计完成后，专门检查一遍——各团队用的算法、数据结构、实现方法是否真的不同。**目的是防止大家不约而同犯同一个错误**（公共故障）。\n\n> 🌰 举例：如果3个团队都用了同一个有漏洞的加密库，那N版本就失去意义了。\n\n---\n\n### 第三阶段：背对背测试\n\n```\n拆字理解：\n\"背对背\" = 两人背靠背站着，互相看不见对方 → 各版本独立运行，互不干扰\n\"测试\" = 用相同数据跑程序，对比输出结果\n\n👉 顾名思义：各版本背靠背同时跑，看输出结果对不对得上\n```\n\n**大白话**：用**完全相同的测试数据**，同时喂给所有N个版本，然后对比输出。如果某个版本结果和其他版本不一样，说明它可能有bug。\n\n> 🌰 举例：输入同一道数学题，3个版本答案分别是 5、5、7 → 第三个版本有问题。\n\n---\n\n## 📊 三阶段关系图\n\n```\n需求文档(SRS)\n      |\n      ▼\n┌─────────────────────────────┐\n│  第一阶段：相异成分规范评审    │  ← 审\"理解\"异不异\n│  各团队独立读需求，提问题单   │\n└─────────────┬───────────────┘\n              |\n              ▼\n┌─────────────────────────────┐\n│  各团队独立详细设计           │\n└─────────────┬───────────────┘\n              |\n              ▼\n┌─────────────────────────────┐\n│  第二阶段：相异性确认          │  ← 审\"设计\"异不异\n│  核实实现方法、算法确实不同    │\n└─────────────┬───────────────┘\n              |\n              ▼\n┌─────────────────────────────┐\n│  各团队独立编码               │\n└─────────────┬───────────────┘\n              |\n              ▼\n┌─────────────────────────────┐\n│  第三阶段：背对背测试          │  ← 跑结果，对比输出\n│  相同输入 → 对比N个版本输出   │\n└─────────────────────────────┘\n```\n\n---\n\n## ❌ 排除干扰项：为什么不选\"相同\"和\"面对面\"\n\n| 干扰词 | 为什么错 |\n|--------|---------|\n| 相同成分规范评审 | N版本的核心就是\"相异\"，审查\"相同\"完全背离目的 |\n| 面对面测试 | 面对面 = 互相看得见 = 会互相影响，破坏独立性；应该是\"背对背\" |\n\n> 💡 **只要记住：N版本的灵魂是\"异\"**，凡是带\"相同\"的选项直接排除，凡是\"面对面\"的也排除。\n\n---\n\n## 🎯 考试掌握程度要求\n\n> 标签标注：**第二版教材必须掌握**，属于高频考点\n\n```\n需要掌握的层次：\n\n✅ 必须能背出：三个阶段的名称（顺序不要求，但名称要准确）\n✅ 必须理解：每个阶段的目的是什么（用大白话能说出来）\n✅ 必须会排除：看到\"相同\"和\"面对面\"直接排除\n✅ 了解即可：N版本的整体思想（多版本冗余容错）\n❌ 不需要：记忆具体实施细节和数学公式\n```\n\n---\n\n## 🔁 最终速记卡\n\n```\n╔══════════════════════════════════════╗\n║   N版本程序设计 三个新阶段            ║\n║                                      ║\n║   口诀：异审 → 异认 → 背靠背          ║\n║                                      ║\n║   1. 相异成分规范评审                 ║\n║      → 审各团队对需求的理解是否够\"异\" ║\n║                                      ║\n║   2. 相异性确认                       ║\n║      → 确认各团队的设计方案够\"异\"     ║\n║                                      ║\n║   3. 背对背测试                       ║\n║      → 同输入，跑N版本，比输出        ║\n║                                      ║\n║   灵魂关键词：相异 / 独立 / 不通气    ║\n╚══════════════════════════════════════╝\n```"}, {"id": 1549, "index": 6, "sort": 19, "knowledge_point": "系统可靠性", "prompt": "系统运行过程中，其失效率函数 f(t) 用于描述系统在时间 t 发生故障的概率特性。关于失效率函数 f(t) 的下列说法中，哪一项是错误的？（）", "difficulty": 1, "tags": ["了解即可", "超纲"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "f(0)=0，表示系统在刚开始运行时不会发生故障", "is_correct": false}, {"label": "B", "text": "所有系统最终都会出现故障", "is_correct": false}, {"label": "C", "text": "f(t) 在 (0，+∞) 上单调递减", "is_correct": true}, {"label": "D", "text": "f(t) 的取值范围在 0 到 1 之间", "is_correct": false}], "correct_letters": ["C"], "correct_texts": ["f(t) 在 (0，+∞) 上单调递减"], "official_analysis": "本题考察的是**可靠性工程中失效率函数（hazard rate）f(t）** 的定义及性质。\n**A选项 f(0)=0，表示系统刚运行时不会发生故障**：这是典型的“早期失效忽略”假设，可以认为正确。\n**B选项 所有系统最终都会出现故障**：可靠性工程假设系统在无限时间下故障概率趋近于 1，即系统不会永远正常工作，因此该说法通常视为正确。\n**C选项 f(t) 在 (0，+∞) 上单调递减**：单调递减肯定是错误，因为一开始是0，最终趋近于 1。因此此选项错误。\n**D选项 f(t) 在 0 到 1 的范围内**：失效率是概率肯定是在 0-1 之间。\n选择选项 C。"}], "model_response": "# 📝 软考高级·系统架构设计师 考点笔记\n\n---\n\n## 🎯 题目定位\n\n> 2022年11月真题 · 第19题 · 系统可靠性\n> **标签：了解即可，超纲题**\n\n---\n\n## 🧠 核心概念：失效率函数 f(t)\n\n### 顾名思义记忆法\n\n**\"失效率\"** = **失去效果的概率**\n→ 就是系统在某个时间点 t，**挂掉的可能性有多大**\n\n**f(t)** 你就理解成：**\"故障可能性随时间变化的曲线\"**\n\n---\n\n## 📊 字符图：f(t) 的变化趋势\n\n```\n故障\n概率\n 1 |                              ........\n   |                         .....\n   |                    .....\n   |               .....\n   |          .....\n   |     .....\n   |.....\n 0 +---------------------------------> 时间 t\n   0                              +∞\n\n  刚启动=0        慢慢增大        最终趋近1\n```\n\n> 记忆口诀：**\"刚出生没病，越老越容易坏\"**\n> 就像一台新电脑，刚买来不会坏，用久了越来越容易出问题\n\n---\n\n## ✅ 四个选项逐条拆解\n\n| 选项 | 说法 | 对错 | 大白话理解 |\n|------|------|------|-----------|\n| A | f(0)=0，刚运行不会故障 | ✅ 正确 | 新机器刚开机，默认没问题 |\n| B | 所有系统最终都会故障 | ✅ 正确 | 没有永远不坏的东西 |\n| C | f(t) 在(0,+∞)上**单调递减** | ❌ **错误** | 明明是越来越大，怎么可能一直减小？|\n| D | f(t) 取值在 0 到 1 之间 | ✅ 正确 | 概率就是0到1，天经地义 |\n\n---\n\n## 🔑 答案锁定技巧\n\n**C选项的坑：** \"单调递减\" 这四个字是陷阱\n\n> 单调递减 = 一直在变小\n> 但 f(t) 明明从 0 **涨到** 1\n> 所以 C 说的是反的 → **C 是错的**\n\n---\n\n## 💡 超纲题应对策略\n\n这道题标注了**\"了解即可·超纲\"**，意味着：\n\n- 不需要记公式\n- 只需要记住**一个常识**：\n\n> **系统故障概率 = 随时间增大，不会减小**\n> 就像人会老，机器会磨损，软件会腐化\n\n考场遇到类似题，用这个常识判断即可，**不要深究数学细节**。\n\n---\n\n## 🗂️ 一句话总结（背这个就够）\n\n> **f(t) 是故障概率，从0涨到1，不可能一直在减小。**"}, {"id": 1550, "index": 7, "sort": 20, "knowledge_point": "系统可靠性", "prompt": "下列关于可靠性测试的说法中，哪一项是错误的（）。", "difficulty": 0, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "定义系统剖面是广义可靠性测试的重要手段", "is_correct": false}, {"label": "B", "text": "可以通过可靠性测试发现系统薄弱点", "is_correct": false}, {"label": "C", "text": "广义可靠性测试是指通过测试发现软件缺陷并提高软件质量", "is_correct": true}, {"label": "D", "text": "狭义可靠性测试是指在给定操作剖面的条件下，通过获取可靠性数据来评价软件可靠性", "is_correct": false}], "correct_letters": ["C"], "correct_texts": ["广义可靠性测试是指通过测试发现软件缺陷并提高软件质量"], "official_analysis": "本题考察的是**可靠性测试的分类及其目的**。\n**广义可靠性测试**：强调对软件可靠性的整体评价过程，包括定义运行剖面、设计测试用例、执行测试、收集可靠性数据、分析失效并排错等。其核心目标是**获取可靠性数据并评价软件可靠性**，而非以发现缺陷为主要目的。\n**狭义可靠性测试**：为了获取可靠性数据，在给定操作剖面（Operational Profile）下执行预先设计的测试用例，模拟用户实际使用过程，用测试数据评价软件的可靠性。具有“面向缺陷”和“模拟实际使用场景”的特点。\n\n**A选项 定义系统剖面是广义可靠性测试的重要手段**：广义可靠性测试的关键步骤之一就是**定义运行剖面（操作剖面）**，用于模拟系统真实环境中的使用情况，为后续测试用例设计和可靠性评价提供依据。因此，正确。\n**B选项 可以通过可靠性测试发现系统薄弱点**：此说法正确。可靠性测试不仅能够收集可靠性数据，还可以暴露系统中的薄弱点，例如模块易失效区域、设计不完善之处，以及在实际工作负载下可能发生的稳定性问题。这也是可靠性测试的主要价值之一。\n**C选项 广义可靠性测试是指通过测试发现软件缺陷并提高软件质量**：这是错误的。广义可靠性测试的核心不在“发现缺陷”，而在“评价可靠性”。\n**D选项 狭义可靠性测试是指在给定操作剖面的条件下，通过获取可靠性数据来评价软件可靠性**。正确。\n选择选项 C。"}], "model_response": "# 📒 软考笔记 · 系统可靠性 · 可靠性测试分类\n\n---\n\n## 🧠 核心记忆口诀\n\n> **广义 = 评价可靠性（量化打分）**\n> **狭义 = 模拟真实用，收数据打分**\n\n---\n\n## 🔑 两个概念顾名思义拆解\n\n### 广义可靠性测试\n**\"广\"= 范围广、目标大**\n\n不是只盯着找bug，而是做一整套\"体检\"流程：\n\n```\n定义剖面 → 设计用例 → 执行测试 → 收集数据 → 分析失效 → 评价可靠性\n```\n\n> 记忆钩子：**广义 = 广泛评价**，像给软件做\"全身体检报告\"，最终目的是给出一个\"可靠性评分\"，不是专门找病。\n\n---\n\n### 狭义可靠性测试\n**\"狭\"= 范围窄、目标专一**\n\n只做一件事：**模拟用户真实使用场景，收数据，评分**\n\n> 记忆钩子：**狭义 = 狭路模拟**，像让软件\"走一遍用户的真实路\"，记录它在路上摔了几次，算出可靠性分数。\n\n---\n\n## ⚠️ 本题易错点（C选项为什么错）\n\n```\n❌ 错误说法：广义可靠性测试 = 发现缺陷 + 提高质量\n✅ 正确说法：广义可靠性测试 = 评价可靠性（发现缺陷只是过程，不是核心目的）\n```\n\n> 类比：体检的目的是\"评估你的健康状况\"，不是\"治病\"。治病是后续的事。\n\n---\n\n## 📌 操作剖面 是什么\n\n**剖面 = 切面 = 使用场景的切片**\n\n就是把用户怎么用这个软件，用多少频率，做什么操作，全部描述出来的一张\"使用说明书\"。\n\n```\n用户 80% 时间在查询\n用户 15% 时间在录入\n用户  5% 时间在删除\n↑ 这就是一个操作剖面\n```\n\n> 记忆钩子：**剖面 = 剖开用户行为，看里面的使用分布**\n\n---\n\n## ✅ 四个选项速记表\n\n| 选项 | 说法 | 对错 | 一句话记忆 |\n|------|------|------|------------|\n| A | 定义系统剖面是广义测试的重要手段 | ✅ 对 | 广义测试第一步就是定义剖面 |\n| B | 可靠性测试能发现系统薄弱点 | ✅ 对 | 测试过程中自然会暴露弱点 |\n| C | 广义测试 = 发现缺陷提高质量 | ❌ 错 | 广义目的是**评价**，不是**找bug** |\n| D | 狭义测试 = 给定剖面下收数据评价 | ✅ 对 | 狭义就是模拟真实场景收数据 |\n\n---\n\n## 🎯 考试掌握程度要求\n\n**这道题属于「第二版教材必须掌握」**，要求如下：\n\n- 能区分广义和狭义的**核心目的差异**（背住：广义=评价，狭义=模拟收数据）\n- 知道\"操作剖面\"是什么（用户使用场景的描述）\n- 看到\"发现缺陷提高质量\"这种说法，立刻警觉——这是普通测试的目标，不是可靠性测试的核心\n\n> 不需要背具体步骤顺序，只需要记住**目的**和**易混淆点**即可上考场。"}, {"id": 1552, "index": 8, "sort": 22, "knowledge_point": "系统可靠性", "prompt": "在单片机系统性能与可靠性评价指标中，下列组合中哪一组指标最符合单片机系统常用的考量要素（）。", "difficulty": 0, "tags": ["第二版教材", "了解即可"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "吞吐量、MTBF、功耗", "is_correct": false}, {"label": "B", "text": "吞吐量、MTBF、响应时间", "is_correct": false}, {"label": "C", "text": "吞吐量、功耗、响应时间", "is_correct": false}, {"label": "D", "text": "MTBF、功耗、响应时间", "is_correct": true}], "correct_letters": ["D"], "correct_texts": ["MTBF、功耗、响应时间"], "official_analysis": "本题考察的是**单片机（嵌入式系统）性能指标与可靠性指标的核心特征**。\n单片机系统不同于通用计算机系统，其关注点主要集中在：**低功耗、可靠运行能力（如 MTBF）、实时响应能力（响应时间）**。反之，吞吐量是服务器、网络系统、数据库系统中常见的性能指标，并非嵌入式系统的核心指标。\n**A选项吞吐量、MTBF、功耗**：包含吞吐量，而吞吐量不属于单片机常用评价指标，因此该组合不正确。\n**B选项吞吐量、MTBF、响应时间**：包含吞吐量，因此也不是单片机主要评价指标组合。\n**C选项吞吐量、功耗、响应时间**：同样包含吞吐量，不符合嵌入式系统评价特性。\n**D选项MTBF、功耗、响应时间**：均为单片机系统最主要的关注指标，因此该选项正确。"}], "model_response": "# 📝 系统可靠性 · 单片机评价指标记忆笔记\n\n---\n\n## 🧠 核心记忆口诀\n\n> **\"单片机，不吞吐，要可靠、省电、快响应\"**\n\n---\n\n## 🔑 名词白话解释（零专业术语）\n\n### MTBF — \"平均撑多久才坏\"\n> 全称：Mean Time Between Failures\n> 白话：**一台机器从正常运行到下一次出故障，平均能撑多少小时**\n> 顾名思义记忆：**M（Mean均值）T（Time时间）B（Between两次之间）F（Failure坏掉）= 两次坏掉之间的平均时间**\n> 类比：你的手机平均用多久会死机一次，MTBF就是这个数字，越大越可靠\n\n---\n\n### 功耗 — \"吃电量\"\n> 白话：**机器运行时每秒消耗多少电**\n> 顾名思义：**功（电功率）耗（消耗）= 消耗的电量**\n> 类比：手机待机一天耗20%电 vs 耗80%电，单片机装在设备里靠电池供电，当然越省电越好\n\n---\n\n### 响应时间 — \"反应速度\"\n> 白话：**你发出一个指令，机器多久给你反馈**\n> 顾名思义：**响（响应回应）应（应答）时间 = 回应你需要的时间**\n> 类比：你按下电梯按钮，门多久打开，这就是响应时间\n\n---\n\n### 吞吐量 — \"单位时间处理多少任务\"\n> 白话：**一秒钟能处理多少请求/数据**\n> 顾名思义：**吞（吞进来）吐（吐出去）量 = 进进出出处理的总量**\n> 类比：餐厅一小时能接待多少桌客人，这是餐厅（服务器）关心的，不是一个小家电（单片机）关心的\n\n---\n\n## 🎯 为什么单片机不用\"吞吐量\"？\n\n```\n通用服务器（淘宝后台）        单片机（空调控制板）\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n每秒处理百万请求 ✅            没有大量并发请求 ❌\n不在乎耗多少电   ❌            插电池运行，省电第一 ✅\n坏了重启就行     ❌            坏了可能出安全事故 ✅\n响应慢点无所谓   ❌            必须实时控制，慢了出问题 ✅\n```\n\n---\n\n## 📌 选项排雷记忆法\n\n> **看到\"吞吐量\"就排除** — 只要选项里有吞吐量，单片机题直接划掉\n\n```\nA. 吞吐量 + MTBF + 功耗      ← 有\"吞吐量\" ❌ 划掉\nB. 吞吐量 + MTBF + 响应时间  ← 有\"吞吐量\" ❌ 划掉\nC. 吞吐量 + 功耗 + 响应时间  ← 有\"吞吐量\" ❌ 划掉\nD. MTBF  + 功耗 + 响应时间   ← 三个都对  ✅ 选它\n```\n\n---\n\n## 🗂️ 复习程度建议\n\n> 标签显示：**第二版教材了解即可**\n\n| 复习深度 | 具体要求 |\n|--------|--------|\n| ✅ 需要掌握 | 单片机/嵌入式系统 → 看到就想到 MTBF + 功耗 + 响应时间 |\n| ✅ 需要掌握 | 吞吐量属于服务器/网络/数据库，不属于单片机 |\n| ⚡ 了解即可 | MTBF的具体计算公式不用背 |\n| ⚡ 了解即可 | 不需要深入理解嵌入式系统原理 |\n\n---\n\n## 🔁 最终速记卡\n\n```\n┌─────────────────────────────────────┐\n│  单片机三宝：可靠 + 省电 + 快响应    │\n│                                     │\n│  MTBF    = 平均撑多久才坏（可靠）    │\n│  功耗    = 吃多少电（省电）          │\n│  响应时间 = 反应多快（快响应）        │\n│                                     │\n│  ⚠️ 吞吐量 = 服务器的事，单片机不用  │\n└─────────────────────────────────────┘\n```"}], "knowledge_points": [{"name": "系统可靠性", "related_questions": ["30", "67", "1188", "1285", "1323", "1549", "1550", "1552"], "summary_markdown": "# 系统可靠性 · 结构化知识点清单\n\n---\n\n## 一、知识点名称\n\n**系统可靠性（System Reliability）**\n\n---\n\n## 二、核心定义与结论\n\n### 基础概念辨析\n\n**可靠性** — 在规定时间、规定条件下完成规定功能的能力（三个\"规定\"是关键词）\n\n**可用性** — 系统处于可运行状态的时间占比，受可靠性和可维护性共同影响\n\n两者区别：可靠性关注\"有没有出故障\"，可用性关注\"能用的时间比例\"\n\n---\n\n### 四大度量指标\n\n```\nMTTF（平均失效等待时间）= 1/λ\n  → 从开机到第一次坏掉的平均时间\n\nMTTR（平均故障修复时间）= 1/μ\n  → 坏掉之后修好需要的平均时间\n\nMTBF（平均失效间隔时间）= MTTF + MTTR\n  → 两次故障之间的平均间隔\n\n可用性 = MTTF / (MTTF + MTTR) × 100%\n\n可靠度 R(t) = 在规定时间内无故障运行的概率（0~1之间的数值）\n```\n\n时间轴理解：\n```\n开机         坏了    修好         又坏了\n |            |       |             |\n |←── MTTF ──|←MTTR→|←── MTTF ───|\n |←────────── MTBF ──────────────→|\n```\n\n---\n\n### 失效率函数 f(t) 的性质\n\n- f(0) = 0，系统刚启动时故障概率为 0\n- f(t) 随时间单调递增，趋近于 1\n- 取值范围在 0 到 1 之间\n- 所有系统最终都会失效\n\n---\n\n### 可靠性管理各阶段任务\n\n| 阶段 | 主要任务 |\n|------|---------|\n| 需求分析阶段 | 分析影响可靠性的因素、确定可靠性目标、确定验收标准、制定管理计划 |\n| 测试阶段 | 可靠性建模（依赖测试数据，需求阶段没有数据，建不了模型） |\n\n---\n\n### 可靠性测试分类\n\n**广义可靠性测试** — 核心目的是评价可靠性，包含定义操作剖面、收集数据、分析失效等完整流程\n\n**狭义可靠性测试** — 在给定操作剖面下，模拟真实使用场景，收集数据评价可靠性\n\n**操作剖面** — 描述用户使用系统的场景分布（如：80%查询、15%录入、5%删除）\n\n---\n\n### N版本程序设计（NVP）\n\n核心思想：同一需求让 N 个团队互不通气独立开发，通过多版本冗余实现容错\n\n三个新增阶段（口诀：**异审 → 异认 → 背靠背**）：\n\n1. **相异成分规范评审** — 审查各团队对需求的理解是否足够\"相异\"\n2. **相异性确认** — 详细设计后确认各版本实现方案确实不同，防止公共故障\n3. **背对背测试** — 用相同输入并行跑所有版本，对比输出结果\n\n---\n\n### 单片机系统评价指标\n\n单片机三要素：**MTBF（可靠）+ 功耗（省电）+ 响应时间（快响应）**\n\n吞吐量属于服务器/网络/数据库系统的指标，不适用于单片机/嵌入式系统。\n\n---\n\n## 三、典型题型与解题要领\n\n**概念辨析题（如第15题）**\n- 看到\"规定时间 + 规定条件 + 规定功能\"三个规定 → 锁定可靠性\n- 看到\"无故障的概率\" → 锁定可靠度 R(t)\n- 看到\"时间占比/能用多久\" → 锁定可用性\n\n**指标关系推导题（如第50题）**\n- 先写出公式 MTBF = MTTF + MTTR\n- 代入题目给的条件（如 MTTR 极小）\n- 直接推导大小关系\n\n**阶段归属判断题（如第15题可靠性建模）**\n- 需求阶段关键词：分析、确定、计划、标准\n- 测试阶段关键词：建模、数据、计算、评估\n- 建模需要数据，需求阶段没数据 → 建模不属于需求阶段\n\n**N版本程序设计题（如第51题）**\n- 看到\"相同\"直接排除（NVP 的灵魂是\"相异\"）\n- 看到\"面对面\"直接排除（应该是\"背对背\"）\n\n**系统类型匹配题（如第22题）**\n- 看到\"吞吐量\"就排除单片机/嵌入式选项\n\n---\n\n## 四、易错点与注意事项\n\n**可靠性 vs 可用性混淆**\n- 可靠性强调\"不出故障\"，可用性强调\"能用的时间比例\"\n- 可用性受 MTTR 影响，可靠性不直接受维修速度影响\n\n**可靠度 vs 其他三个指标混淆**\n- 故障率、MTTF、MTBF 都是时间或速率概念\n- 只有可靠度是概率（0~1 的数值），题目出现\"概率\"二字直接选可靠度\n\n**MTTF vs MTBF 的关系**\n- MTBF = MTTF + MTTR，MTBF 永远 ≥ MTTF\n- 当 MTTR 极小时两者近似相等，不存在 MTTF > MTBF 的情况\n\n**f(t) 的单调性**\n- f(t) 从 0 增大到 1，是单调递增，不是递减\n- \"单调递减\"是高频错误选项\n\n**广义可靠性测试的目的**\n- 目的是\"评价可靠性\"，不是\"发现缺陷提高质量\"\n- 发现缺陷是过程，不是核心目标\n\n**可靠性建模的阶段归属**\n- 建模依赖测试数据，只能在测试阶段完成\n- 需求阶段没有数据，无法建模\n\n**N版本程序设计的关键词**\n- 三个阶段都带\"相异\"，不是\"相同\"\n- 测试方式是\"背对背\"，不是\"面对面\"\n\n---\n\n## 五、推荐复习顺序\n\n**第一步：建立概念框架**\n先搞清楚可靠性、可用性、可靠度三个核心概念的区别，这是所有题目的基础。\n\n**第二步：掌握四大指标和公式**\n背熟 MTTF、MTTR、MTBF、可用性四个公式，理解时间轴关系图，能做推导题。\n\n**第三步：理解可靠性管理阶段划分**\n重点记住\"可靠性建模属于测试阶段\"这一个易错点，其余需求阶段任务理解即可。\n\n**第四步：区分可靠性测试的广义/狭义**\n记住广义=评价，狭义=模拟收数据，操作剖面的概念顺带理解。\n\n**第五步：N版本程序设计**\n记住三个阶段名称和\"相异\"这个核心关键词，做题时用排除法。\n\n**第六步：补充了解**\n失效率函数 f(t) 的性质（超纲内容，了解即可）和单片机评价指标（记住排除吞吐量）。"}], "generated_at": "2026-02-26 12:39:45"};
+
+    // ===== Theme toggle =====
+    (function() {
+      const THEME_KEY = 'quiz_theme';
+      const root = document.documentElement;
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved) root.setAttribute('data-theme', saved);
+      function updateBtn() {
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        const isLight = root.getAttribute('data-theme') === 'light';
+        btn.textContent = isLight ? '🌙 暗色' : '☀️ 亮色';
+        btn.setAttribute('aria-label', isLight ? '切换到暗色模式' : '切换到亮色模式');
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        updateBtn();
+        document.getElementById('themeToggle').addEventListener('click', () => {
+          const isLight = root.getAttribute('data-theme') === 'light';
+          const next = isLight ? 'dark' : 'light';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem(THEME_KEY, next);
+          updateBtn();
+        });
+      });
+    })();
+
+    function renderBasicMarkdown(raw = '') {
+      if (!raw) return '<p>（尚未生成，稍后重试）</p>';
+      const normalized = raw.split('\r\n').join('\n').split('\r').join('\n');
+      const lines = normalized.split('\n');
+      const htmlParts = [];
+      let inUl = false;
+      let inOl = false;
+      const closeLists = () => {
+        if (inUl) { htmlParts.push('</ul>'); inUl = false; }
+        if (inOl) { htmlParts.push('</ol>'); inOl = false; }
+      };
+      const formatInline = (text) => {
+        const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return escaped
+          .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;" />')
+          .replace(/!(https?:\/\/[^\s<>"'\[\]]+(?:\.[a-zA-Z]{2,}|\/[^\s<>"'\[\]]*)?)/g, '<img src="$1" alt="图片" style="max-width: 100%; height: auto;" />')
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/__(.+?)__/g, '<strong>$1</strong>')
+          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+          .replace(/(?<!_)_(?!_)(.+?)(?<!_)_(?!_)/g, '<em>$1</em>');
+      };
+      const renderTable = (rows) => {
+        if (!rows.length) return '';
+        const splitRow = (row) => row.replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => formatInline(cell.trim()));
+        const headerCells = splitRow(rows[0]);
+        let alignments = Array(headerCells.length).fill('left');
+        let bodyRows = rows.slice(1);
+        if (bodyRows.length) {
+          const alignParts = bodyRows[0].replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
+          const isDivider = alignParts.length === headerCells.length && alignParts.every((cell) => /^:?-{3,}:?$/.test(cell));
+          if (isDivider) {
+            alignments = alignParts.map((cell) => {
+              const left = cell.startsWith(':');
+              const right = cell.endsWith(':');
+              if (left && right) return 'center';
+              if (right) return 'right';
+              return 'left';
+            });
+            bodyRows = bodyRows.slice(1);
+          }
+        }
+        const headerHtml = '<tr>' + headerCells.map((cell, idx) => `<th style="text-align: ${alignments[idx] || 'left'}">${cell}</th>`).join('') + '</tr>';
+        const bodyHtml = bodyRows.map((row) => {
+          const cells = splitRow(row);
+          return '<tr>' + cells.map((cell, idx) => `<td style="text-align: ${alignments[idx] || 'left'}">${cell}</td>`).join('') + '</tr>';
+        }).join('');
+        const filler = '<tr>' + headerCells.map((_, idx) => `<td style="text-align: ${alignments[idx] || 'left'}">&nbsp;</td>`).join('') + '</tr>';
+        return `<table><thead>${headerHtml}</thead><tbody>${bodyHtml || filler}</tbody></table>`;
+      };
+      for (let i = 0; i < lines.length; i += 1) {
+        const trimmed = lines[i].trim();
+        if (!trimmed) { closeLists(); continue; }
+        const headingMatch = trimmed.match(/^(#(1, 4))\s+(.+)$/);
+        if (headingMatch) {
+          closeLists();
+          const level = headingMatch[1].length + 1; // h2-h5 (h1 reserved for page)
+          const tag = 'h' + Math.min(level, 5);
+          htmlParts.push(`<${tag} class="md-heading">${formatInline(headingMatch[2])}</${tag}>`);
+          continue;
+        }
+        if (trimmed === '---' || trimmed === '***' || trimmed === '___') {
+          closeLists();
+          htmlParts.push('<hr class="md-hr" />');
+          continue;
+        }
+        if (/^\|.+\|$/.test(trimmed)) {
+          closeLists();
+          const tableRows = [];
+          let j = i;
+          while (j < lines.length && /^\|.+\|$/.test(lines[j].trim())) {
+            tableRows.push(lines[j].trim());
+            j += 1;
+          }
+          if (tableRows.length) { htmlParts.push(renderTable(tableRows)); }
+          i = j - 1;
+          continue;
+        }
+        if (/^\d+\.\s+/.test(trimmed)) {
+          if (!inOl) { closeLists(); htmlParts.push('<ol>'); inOl = true; }
+          htmlParts.push('<li>' + formatInline(trimmed.replace(/^\d+\.\s+/, '')) + '</li>');
+          continue;
+        }
+        if (/^[-*+]\s+/.test(trimmed)) {
+          if (!inUl) { closeLists(); htmlParts.push('<ul>'); inUl = true; }
+          htmlParts.push('<li>' + formatInline(trimmed.slice(1).trim()) + '</li>');
+          continue;
+        }
+        closeLists();
+        htmlParts.push('<p>' + formatInline(trimmed) + '</p>');
+      }
+      closeLists();
+      const joined = htmlParts.filter(Boolean).join('');
+      return joined || '<p>（尚未生成，稍后重试）</p>';
+    }
+
+    const md = window.markdownit
+      ? window.markdownit({html: true, linkify: true, breaks: true})
+      : { render: (raw = '') => renderBasicMarkdown(raw) };
+    if (md && typeof md.enable === 'function') {
+      md.enable('table');
+      md.enable('strikethrough');
+    }
+
+    const STORAGE_KEY = 'quiz_progress_' + btoa(unescape(encodeURIComponent(document.title))).slice(0, 32);
+
+    const state = {
+      knowledge: 'all',
+      search: '',
+      currentQuestionIndex: 0,
+      quizMode: true,
+      stats: { total: 0, answered: 0, correct: 0, incorrect: 0 },
+      answeredQuestions: {}
+    };
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          currentQuestionIndex: state.currentQuestionIndex,
+          quizMode: state.quizMode,
+          knowledge: state.knowledge,
+          answeredQuestions: state.answeredQuestions,
+          scrollY: window.scrollY
+        }));
+      } catch(e) {}
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const p = JSON.parse(saved);
+        if (typeof p.currentQuestionIndex === 'number') state.currentQuestionIndex = p.currentQuestionIndex;
+        if (typeof p.quizMode === 'boolean') state.quizMode = p.quizMode;
+        if (p.knowledge) state.knowledge = p.knowledge;
+        if (p.answeredQuestions) state.answeredQuestions = p.answeredQuestions;
+        if (typeof p.scrollY === 'number') state._savedScrollY = p.scrollY;
+      } catch(e) {}
+    }
+
+    function restoreAnsweredState(questionId) {
+      const saved = state.answeredQuestions[questionId];
+      if (!saved) return;
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
+      const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      inputs.forEach(input => {
+        if (saved.selected.includes(input.value)) input.checked = true;
+        input.disabled = true;
+        const optionItem = input.closest('.option-item');
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
+      });
+      const feedbackDiv = questionDiv.querySelector('.answer-feedback');
+      if (feedbackDiv) {
+        feedbackDiv.style.display = 'block';
+        feedbackDiv.className = `answer-feedback ${saved.isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackDiv.textContent = saved.isCorrect ? '✓ 回答正确！' : '✗ 回答错误';
+      }
+      const submitBtn = questionDiv.querySelector('.submit-btn');
+      if (submitBtn) submitBtn.style.display = 'none';
+      if (!saved.isCorrect) {
+        const correctAnswerP = questionDiv.querySelector('.correct-answer');
+        if (correctAnswerP) correctAnswerP.style.display = 'block';
+        const analysisDetails = questionDiv.querySelector('.answer-analysis');
+        if (analysisDetails) { analysisDetails.style.display = 'block'; analysisDetails.open = true; }
+      }
+    }
+
+    function renderMarkdownWithMermaid(content) {
+      if (!content) return '<p>（尚未生成，稍后重试）</p>';
+      const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
+      let processed = content.replace(mermaidRegex, (match, graphDef) => `<div class="mermaid">${graphDef.trim()}</div>`);
+      return md.render ? md.render(processed) : renderBasicMarkdown(processed);
+    }
+    function renderKnowledge() {
+      const container = document.getElementById('knowledgeContainer');
+      container.innerHTML = '';
+      DATA.knowledge_points.forEach((kp) => {
+        const name = kp.name;
+        const count = (kp.related_questions || []).length;
+        const summaryMd = typeof kp.summary_markdown === 'object' ? (kp.summary_markdown.response || '') : (kp.summary_markdown || '');
+        const card = document.createElement('article');
+        card.className = 'knowledge-card' + (state.knowledge === name ? ' active' : '');
+        const summaryHTML = summaryMd && summaryMd.trim() ? renderMarkdownWithMermaid(summaryMd) : '<p class="empty-text" style="color:var(--text-muted)">（尚未生成，稍后重试）</p>';
+        const summaryBlock = summaryMd && summaryMd.trim()
+          ? `<details class="knowledge-details"><summary>查看大模型总结</summary><div class="markdown">${summaryHTML}</div></details>`
+          : `<div class="markdown empty">${summaryHTML}</div>`;
+        card.innerHTML = `
+          <div class="knowledge-header">
+            <h3>${name}</h3>
+            <span class="badge badge-accent kp-count-btn" data-kp="${name}" title="点击刷此知识点题库">共 ${count} 题 ▶</span>
+          </div>
+          ${summaryBlock}
+        `;
+        // 整张卡片点击切换知识点
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+          // 如果点击的是 details/summary 展开操作，不干预
+          if (e.target.closest('details') || e.target.closest('summary')) return;
+          jumpToKnowledge(name);
+        });
+        // badge 单独处理（阻止冒泡避免双触发）
+        const badge = card.querySelector('.kp-count-btn');
+        if (badge) {
+          badge.addEventListener('click', (e) => {
+            e.stopPropagation();
+            jumpToKnowledge(name);
+          });
+        }
+        container.append(card);
+      });
+    }
+
+    function jumpToKnowledge(name) {
+      state.knowledge = name;
+      state.currentQuestionIndex = 0;
+      saveState();
+      // 同步下拉框
+      const sel = document.getElementById('knowledgeFilter');
+      if (sel) sel.value = name;
+      renderKnowledge();
+      renderQuestions();
+      // 滚动到题目区
+      const qSection = document.getElementById('questionsContainer');
+      if (qSection) {
+        setTimeout(() => qSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      }
+      showToast(`已切换到：${name}`, 'info');
+    }
+
+    function filterQuestions() {
+      return DATA.questions.filter((q) => {
+        const matchKP = state.knowledge === 'all' || q.knowledge_point === state.knowledge;
+        if (!matchKP) return false;
+        if (!state.search) return true;
+        const haystack = [
+          q.prompt, q.knowledge_point, q.model_response || '',
+          ...(q.sub_questions || []).map((sub) => [sub.official_analysis || '', (sub.options || []).map((o) => o.text).join(' ')].join(' '))
+        ].join(' ').toLowerCase();
+        return haystack.includes(state.search.toLowerCase());
+      });
+    }
+
+    function buildSubQuestionHTML(sub, subIdx, q) {
+      const correctCount = (sub.options || []).filter(o => o.is_correct).length;
+      const isMultiple = correctCount > 1;
+      const inputType = isMultiple ? 'checkbox' : 'radio';
+      const questionId = `q${q.id || q.index}_${subIdx}`;
+      const answers = sub.correct_letters || [];
+      const options = (sub.options || []).map((opt) => {
+        const optionId = `${questionId}_${opt.label}`;
+        return `<li class="option-item"><label for="${optionId}" class="option-label"><input type="${inputType}" id="${optionId}" name="${questionId}" value="${opt.label}" class="option-input" /><span class="option-text">${opt.label}. ${opt.text}</span></label></li>`;
+      }).join('');
+      const subQuestionText = sub.question ? `<div class="sub-question-text">${md.render(sub.question)}</div>` : '';
+      const correctAnswerDetail = sub.correct_answer
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>参考答案</summary><div class="markdown">${md.render(sub.correct_answer)}</div></details>` : '';
+      const answersP = answers.length ? `<p class="correct-answer" style="display:none;"><strong>参考答案：</strong>${answers.join('、')}</p>` : '';
+      const official = sub.official_analysis
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>官方解析</summary><div class="markdown">${md.render(sub.official_analysis)}</div></details>` : '';
+      const hasOptions = sub.options && sub.options.length > 0;
+      const interaction = hasOptions
+        ? `<ul class="options interactive-options">${options}</ul>
+           <div class="question-actions">
+             <button class="btn btn-primary submit-btn" onclick="submitAnswer('${questionId}')">提交答案</button>
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${questionId}')" style="display:none;">查看答案</button>
+           </div>`
+        : `<div class="question-actions">
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${questionId}')" style="display:inline-flex;">查看答案</button>
+           </div>`;
+      return `<div class="sub-question" data-question-id="${questionId}" data-correct-answers="${answers.join(',')}" data-is-multiple="${isMultiple}">
+        <h4>子题${sub.label}</h4>
+        ${subQuestionText}
+        ${interaction}
+        <div class="answer-feedback" style="display:none;"></div>
+        ${answersP}
+        ${correctAnswerDetail}
+        ${official}
+      </div>`;
+    }
+
+    function buildAiNote(q) {
+      const resp = typeof q.model_response === 'object' ? (q.model_response.response || '') : (q.model_response || '');
+      if (resp && resp.trim()) {
+        return `<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown">${renderMarkdownWithMermaid(resp)}</div></details>`;
+      }
+      return '<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown empty">暂无内容</div></details>';
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = '';
+      const results = filterQuestions();
+      if (!results.length) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-text">未找到匹配的题目，试试其他关键词？</div></div>';
+        return;
+      }
+      updateStats(results);
+      if (state.quizMode) {
+        renderSingleQuestion(results);
+      } else {
+        renderAllQuestions(results);
+      }
+      Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
+      updateStats(results);
+    }
+
+    function renderSingleQuestion(questions) {
+      const container = document.getElementById('questionsContainer');
+      const cur = questions[state.currentQuestionIndex];
+      if (!cur) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎉</div><div class="empty-state-text">没有更多题目了</div></div>';
+        return;
+      }
+      const pct = ((state.currentQuestionIndex + 1) / questions.length * 100).toFixed(1);
+      const progressBar = `<div class="quiz-progress-bar">
+        <div class="qp-top">
+          <span class="qp-label">第 ${state.currentQuestionIndex + 1} 题 / 共 ${questions.length} 题</span>
+          <span class="qp-count">${pct}%</span>
+        </div>
+        <div class="qp-bar"><div class="qp-fill" style="width:${pct}%"></div></div>
+      </div>`;
+      const diffBadge = cur.difficulty ? `<span class="badge badge-green">难度 ${cur.difficulty}</span>` : '';
+      const card = document.createElement('div');
+      card.innerHTML = progressBar;
+      const qCard = document.createElement('article');
+      qCard.className = 'question-card';
+      const subs = (cur.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, cur)).join('');
+      const isAnswered = Object.keys(state.answeredQuestions).some(k => k.startsWith(`q${cur.id || cur.index}_`));
+      const nav = `<div class="quiz-nav">
+        <button class="btn btn-outline" onclick="previousQuestion()" ${state.currentQuestionIndex === 0 ? 'disabled' : ''} title="快捷键 ←">← 上一题</button>
+        <button class="btn btn-ghost" onclick="toggleQuizMode()">📋 全部题目</button>
+        <button class="btn btn-outline" onclick="nextQuestion()" ${state.currentQuestionIndex >= questions.length - 1 ? 'disabled' : ''} title="快捷键 →">下一题 →</button>
+      </div>`;
+      qCard.innerHTML = `
+        <div class="question-header">
+          <h3>第${cur.index}题（题号：${cur.sort || cur.index}）</h3>
+          <span class="badge badge-accent">${cur.knowledge_point}</span>
+          ${diffBadge}
+        </div>
+        <p class="question-prompt">${cur.prompt}</p>
+        ${subs}
+        ${nav}
+        ${buildAiNote(cur)}
+      `;
+      card.appendChild(qCard);
+      container.appendChild(card);
+    }
+
+    function renderAllQuestions(results) {
+      const container = document.getElementById('questionsContainer');
+      const toggle = document.createElement('div');
+      toggle.className = 'quiz-mode-toggle';
+      toggle.innerHTML = '<button class="btn btn-success" onclick="toggleQuizMode()">🎯 单题模式</button>';
+      container.appendChild(toggle);
+      results.forEach((q) => {
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        const diffBadge = q.difficulty ? `<span class="badge badge-green">难度 ${q.difficulty}</span>` : '';
+        const subs = (q.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, q)).join('');
+        card.innerHTML = `
+          <div class="question-header">
+            <h3>第${q.index}题（题号：${q.sort || q.index}）</h3>
+            <span class="badge badge-accent">${q.knowledge_point}</span>
+            ${diffBadge}
+          </div>
+          <p class="question-prompt">${q.prompt}</p>
+          ${subs}
+          ${buildAiNote(q)}
+        `;
+        container.appendChild(card);
+      });
+    }
+    function populateFilter() {
+      const select = document.getElementById('knowledgeFilter');
+      const options = ['<option value="all">全部知识点</option>'];
+      DATA.knowledge_points.forEach((kp) => {
+        options.push(`<option value="${kp.name}">${kp.name}（${kp.related_questions.length}）</option>`);
+      });
+      select.innerHTML = options.join('');
+      if (state.knowledge !== 'all') select.value = state.knowledge;
+      select.addEventListener('change', (e) => {
+        state.knowledge = e.target.value;
+        state.currentQuestionIndex = 0;
+        saveState();
+        renderKnowledge();
+        renderQuestions();
+      });
+    }
+
+    function registerSearch() {
+      const input = document.getElementById('searchInput');
+      let timer;
+      input.addEventListener('input', (e) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          state.search = e.target.value.trim();
+          state.currentQuestionIndex = 0;
+          renderQuestions();
+        }, 200);
+      });
+    }
+
+    function initMermaid() {
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'dark',
+          themeVariables: {
+            primaryColor: '#7c6ff7',
+            primaryTextColor: '#e2e8f0',
+            primaryBorderColor: '#a89cf8',
+            lineColor: '#94a3b8',
+            secondaryColor: '#1c1c28',
+            tertiaryColor: '#16161f',
+            background: '#0a0a0f',
+            mainBkg: '#16161f',
+            nodeBorder: '#7c6ff7'
+          }
+        });
+      }
+    }
+
+    function renderMermaidCharts() {
+      if (window.mermaid) {
+        const els = document.querySelectorAll('.mermaid');
+        els.forEach((el, index) => {
+          const def = el.textContent;
+          const id = `mermaid-${Date.now()}-${index}`;
+          el.id = id;
+          mermaid.render(id + '-svg', def).then((result) => {
+            el.innerHTML = result.svg;
+          }).catch(() => {
+            el.innerHTML = '<p style="color:var(--red);">图表渲染失败</p>';
+          });
+        });
+      }
+    }
+
+    function updateStats(questions) {
+      const totalSub = questions.reduce((s, q) => s + (q.sub_questions || []).length, 0);
+      const answered = Object.keys(state.answeredQuestions).length;
+      const correct = Object.values(state.answeredQuestions).filter(a => a.isCorrect).length;
+      const incorrect = answered - correct;
+      state.stats = { total: totalSub, answered, correct, incorrect };
+      renderStatsDisplay();
+    }
+
+    function renderStatsDisplay() {
+      const { total, answered, correct, incorrect } = state.stats;
+      const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+      const progress = total > 0 ? Math.round((answered / total) * 100) : 0;
+      const circumference = 2 * Math.PI * 52;
+      const offset = circumference - (accuracy / 100) * circumference;
+
+      const ring = document.getElementById('ringProgress');
+      if (ring) {
+        ring.style.strokeDasharray = circumference;
+        ring.style.strokeDashoffset = offset;
+        ring.style.transition = 'stroke-dashoffset 0.6s ease';
+      }
+      const ringPct = document.getElementById('ringPct');
+      if (ringPct) ringPct.textContent = accuracy + '%';
+
+      const snTotal = document.getElementById('snTotal');
+      const snAnswered = document.getElementById('snAnswered');
+      const snCorrect = document.getElementById('snCorrect');
+      const snIncorrect = document.getElementById('snIncorrect');
+      if (snTotal) snTotal.textContent = total;
+      if (snAnswered) snAnswered.textContent = answered;
+      if (snCorrect) snCorrect.textContent = correct;
+      if (snIncorrect) snIncorrect.textContent = incorrect;
+
+      const fill = document.getElementById('statsProgressFill');
+      const txt = document.getElementById('statsProgressText');
+      if (fill) fill.style.width = progress + '%';
+      if (txt) txt.textContent = `进度 ${progress}%（${answered}/${total}）`;
+    }
+
+    function submitAnswer(questionId) {
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
+      const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      const selectedAnswers = Array.from(inputs).filter(i => i.checked).map(i => i.value);
+      if (selectedAnswers.length === 0) {
+        showToast('请先选择答案', 'warn');
+        const ul = questionDiv.querySelector('.options');
+        if (ul) { ul.style.animation = 'shake 0.4s ease'; setTimeout(() => ul.style.animation = '', 500); }
+        return;
+      }
+      inputs.forEach(input => input.disabled = true);
+      const isCorrect = correctAnswers.length === selectedAnswers.length &&
+                       correctAnswers.every(a => selectedAnswers.includes(a));
+      const feedbackDiv = questionDiv.querySelector('.answer-feedback');
+      feedbackDiv.style.display = 'block';
+      feedbackDiv.className = `answer-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+      feedbackDiv.innerHTML = isCorrect
+        ? '<span class="feedback-icon">✓</span><span class="feedback-msg">回答正确！继续加油</span>'
+        : '<span class="feedback-icon">✗</span><span class="feedback-msg">回答错误，看看解析吧</span>';
+      inputs.forEach(input => {
+        const optionItem = input.closest('.option-item');
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
+      });
+      const submitBtn = questionDiv.querySelector('.submit-btn');
+      const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
+      submitBtn.style.display = 'none';
+      showAnswerBtn.style.display = 'inline-flex';
+      state.answeredQuestions[questionId] = { selected: selectedAnswers, isCorrect };
+      saveState();
+      if (!isCorrect) showAnswer(questionId);
+      const results = filterQuestions();
+      updateStats(results);
+      // 平滑滚动到反馈区
+      setTimeout(() => {
+        feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+
+    function showAnswer(questionId) {
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswerP = questionDiv.querySelector('.correct-answer');
+      if (correctAnswerP) correctAnswerP.style.display = 'block';
+      const analysisDetailsList = questionDiv.querySelectorAll('.answer-analysis');
+      analysisDetailsList.forEach(d => { d.style.display = 'block'; d.open = true; });
+      const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
+      if (showAnswerBtn) showAnswerBtn.style.display = 'none';
+    }
+
+    function scrollToQuestion() {
+      const el = document.getElementById('questionsContainer') || document.querySelector('.question-card');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function previousQuestion() {
+      if (state.currentQuestionIndex > 0) {
+        state.currentQuestionIndex--;
+        saveState();
+        renderQuestions();
+        scrollToQuestion();
+        animateCardIn();
+      }
+    }
+
+    function nextQuestion() {
+      const questions = filterQuestions();
+      if (state.currentQuestionIndex < questions.length - 1) {
+        state.currentQuestionIndex++;
+        saveState();
+        renderQuestions();
+        scrollToQuestion();
+        animateCardIn();
+      }
+    }
+
+    function animateCardIn() {
+      setTimeout(() => {
+        const card = document.querySelector('.question-card');
+        if (card) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(12px)';
+          card.style.transition = 'none';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          });
+        }
+      }, 10);
+    }
+
+    let _toastTimer;
+    function showToast(msg, type = 'info') {
+      let toast = document.getElementById('_toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = '_toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.className = '_toast-show _toast-' + type;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => { toast.className = ''; }, 2200);
+    }
+
+    function toggleQuizMode() {
+      state.quizMode = !state.quizMode;
+      if (state.quizMode) state.currentQuestionIndex = 0;
+      saveState();
+      renderQuestions();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initMermaid();
+      loadState();
+      populateFilter();
+      registerSearch();
+      renderKnowledge();
+      renderQuestions();
+      // Expand knowledge card to full width when details opens
+      document.getElementById('knowledgeContainer').addEventListener('toggle', (e) => {
+        if (e.target.classList.contains('knowledge-details')) {
+          const card = e.target.closest('.knowledge-card');
+          if (card) card.classList.toggle('expanded', e.target.open);
+        }
+      }, true);
+      Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
+      const results = filterQuestions();
+      updateStats(results);
+      if (state._savedScrollY) {
+        setTimeout(() => window.scrollTo(0, state._savedScrollY), 150);
+      }
+      let scrollTimer = null;
+      window.addEventListener('scroll', () => {
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => saveState(), 300);
+      });
+      window.addEventListener('beforeunload', () => saveState());
+      // 键盘左右键翻页
+      document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (!state.quizMode) return;
+        if (e.key === 'ArrowRight' || e.key === 'l') nextQuestion();
+        if (e.key === 'ArrowLeft'  || e.key === 'h') previousQuestion();
+      });
+      setTimeout(() => renderMermaidCharts(), 100);
+    });
+  </script>
+</body>
+</html>

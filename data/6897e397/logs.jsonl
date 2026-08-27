@@ -1,0 +1,747 @@
+{"time": "22:42:19", "level": "info", "msg": "任务启动 | URL: https://www.cheko.cc/test/select?test_id=531033 | 题型: choice | 模型: minimax-m2.7"}
+{"time": "22:42:19", "level": "info", "msg": "页面抓取完成 | HTML大小: 185208 字符"}
+{"time": "22:42:19", "level": "info", "msg": "开始解析 HTML 页面..."}
+{"time": "22:42:19", "level": "info", "msg": "题目解析完成 | 题目数: 42 | 知识点数: 4"}
+{"time": "22:42:19", "level": "info", "msg": "LLM 客户端初始化 | model=minimax-m2.7 | base_url=https://api.minimaxi.com/v1 | concurrency=8"}
+{"time": "22:42:19", "level": "info", "msg": "开始生成题目解析 | 共 42 题 | 并发 8"}
+{"time": "22:42:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1161"}
+{"time": "22:42:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=3199"}
+{"time": "22:42:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=999"}
+{"time": "22:42:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1752"}
+{"time": "22:42:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1029"}
+{"time": "22:42:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=848"}
+{"time": "22:42:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2201"}
+{"time": "22:42:19", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=910"}
+{"time": "22:42:19", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:19", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:19", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:19", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:19", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:19", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:19", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:19", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:19", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:19", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:19", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:19", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:19", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:19", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:19", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:19", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:19", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1161"}
+{"time": "22:42:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2201"}
+{"time": "22:42:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=999"}
+{"time": "22:42:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1029"}
+{"time": "22:42:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=3199"}
+{"time": "22:42:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=848"}
+{"time": "22:42:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=910"}
+{"time": "22:42:20", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1752"}
+{"time": "22:42:20", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:20", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:20", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:20", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:20", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:20", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:20", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:20", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:20", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:20", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:20", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:20", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:20", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:20", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:20", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:20", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:20", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:20", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:20", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:20", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:20", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:20", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:20", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:20", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2201"}
+{"time": "22:42:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1161"}
+{"time": "22:42:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1029"}
+{"time": "22:42:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=999"}
+{"time": "22:42:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=3199"}
+{"time": "22:42:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=848"}
+{"time": "22:42:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=910"}
+{"time": "22:42:22", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1752"}
+{"time": "22:42:22", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:22", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:22", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:22", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:22", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:22", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:22", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:22", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:22", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:22", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:22", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:22", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:22", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:22", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:22", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:22", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:22", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2201"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1161"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=3199"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=999"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=848"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=910"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1752"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1029"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1967"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=967"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1941"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1206"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1214"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2276"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1705"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:25", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:25", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:25", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=908"}
+{"time": "22:42:26", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:26", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:26", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:26", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:26", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:26", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:26", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:26", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:26", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:26", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:26", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:26", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:26", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:26", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:26", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:26", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1967"}
+{"time": "22:42:27", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1941"}
+{"time": "22:42:27", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=967"}
+{"time": "22:42:27", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:27", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:27", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1206"}
+{"time": "22:42:27", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1705"}
+{"time": "22:42:27", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2276"}
+{"time": "22:42:27", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1214"}
+{"time": "22:42:27", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=908"}
+{"time": "22:42:27", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:27", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:27", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:27", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:27", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:27", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:27", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:27", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:27", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:27", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:27", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:27", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:27", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:27", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:27", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1967"}
+{"time": "22:42:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1941"}
+{"time": "22:42:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=967"}
+{"time": "22:42:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1705"}
+{"time": "22:42:29", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:29", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:29", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1206"}
+{"time": "22:42:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2276"}
+{"time": "22:42:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1214"}
+{"time": "22:42:29", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=908"}
+{"time": "22:42:29", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:29", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:29", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:29", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:29", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:29", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:29", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:29", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:29", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:29", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:29", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:29", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:29", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:29", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:29", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:29", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:29", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:29", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:29", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:29", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:29", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1967"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=967"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1705"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1206"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1214"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2276"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1941"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1080"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=908"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1846"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=890"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=998"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2241"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1113"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1955"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1210"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:32", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:32", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:32", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:33", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1080"}
+{"time": "22:42:33", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1846"}
+{"time": "22:42:33", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1113"}
+{"time": "22:42:33", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=998"}
+{"time": "22:42:33", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2241"}
+{"time": "22:42:33", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1955"}
+{"time": "22:42:33", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=890"}
+{"time": "22:42:33", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1210"}
+{"time": "22:42:33", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:33", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:33", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:33", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:33", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:33", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:33", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:33", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:33", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:33", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:33", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:33", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:33", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:33", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:33", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:33", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:33", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:33", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:33", "level": "info", "msg": "API 响应 ← status=404 | 0.3s | body_len=18"}
+{"time": "22:42:33", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:33", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:33", "level": "info", "msg": "API 响应 ← status=404 | 0.4s | body_len=18"}
+{"time": "22:42:33", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:33", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1113"}
+{"time": "22:42:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1955"}
+{"time": "22:42:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=998"}
+{"time": "22:42:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2241"}
+{"time": "22:42:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=890"}
+{"time": "22:42:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1210"}
+{"time": "22:42:35", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:35", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:35", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:35", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:35", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:35", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:35", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:35", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:35", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:35", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:35", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:35", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1080"}
+{"time": "22:42:35", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:35", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:35", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:35", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:35", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:35", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:35", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:35", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:35", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:35", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1846"}
+{"time": "22:42:35", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:35", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:35", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=998"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1955"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1113"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2241"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=890"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1210"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=979"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=858"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=996"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1338"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1080"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1230"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1002"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1142"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:38", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1846"}
+{"time": "22:42:38", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:38", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:38", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:39", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:39", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:39", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:39", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=979"}
+{"time": "22:42:39", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=996"}
+{"time": "22:42:39", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=858"}
+{"time": "22:42:39", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1338"}
+{"time": "22:42:39", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1230"}
+{"time": "22:42:39", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1002"}
+{"time": "22:42:39", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:39", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:40", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:40", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:40", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1142"}
+{"time": "22:42:40", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:40", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:40", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:40", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:40", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:40", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:40", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:40", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:40", "level": "info", "msg": "API 响应 ← status=404 | 0.3s | body_len=18"}
+{"time": "22:42:40", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:40", "level": "info", "msg": "API 响应 ← status=404 | 1.8s | body_len=18"}
+{"time": "22:42:40", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:40", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=946"}
+{"time": "22:42:40", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:40", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:40", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:41", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=946"}
+{"time": "22:42:42", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=979"}
+{"time": "22:42:42", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=858"}
+{"time": "22:42:42", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1338"}
+{"time": "22:42:42", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:42", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:42", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:42", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1230"}
+{"time": "22:42:42", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:42", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:42", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:42", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1002"}
+{"time": "22:42:42", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1142"}
+{"time": "22:42:42", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:42", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:42", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:42", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:42", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:42", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:42", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:42", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:42", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:42", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:42", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:42", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:42", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:42", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:42", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:42", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=996"}
+{"time": "22:42:42", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:42", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:42", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:44", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=946"}
+{"time": "22:42:44", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:44", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:44", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=858"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=979"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1338"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1230"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1002"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1142"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=859"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=900"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=965"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1110"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=789"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=996"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=991"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1030"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:45", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:45", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:45", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:46", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=859"}
+{"time": "22:42:46", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=900"}
+{"time": "22:42:46", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=965"}
+{"time": "22:42:46", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1110"}
+{"time": "22:42:46", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:46", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:46", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:46", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=789"}
+{"time": "22:42:46", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=991"}
+{"time": "22:42:46", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:46", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:46", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:46", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:46", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:46", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:46", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1030"}
+{"time": "22:42:46", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:46", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:46", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:46", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:46", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:46", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:46", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:46", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:46", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:46", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:46", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:46", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:47", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=946"}
+{"time": "22:42:47", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:47", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:47", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:47", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=914"}
+{"time": "22:42:47", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:47", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:47", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:48", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=914"}
+{"time": "22:42:48", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=859"}
+{"time": "22:42:48", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:48", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:48", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:48", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=965"}
+{"time": "22:42:48", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1110"}
+{"time": "22:42:48", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:48", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:48", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:48", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=789"}
+{"time": "22:42:48", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=900"}
+{"time": "22:42:48", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=991"}
+{"time": "22:42:48", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:48", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:48", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:48", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:48", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:48", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:48", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:48", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:48", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:48", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1030"}
+{"time": "22:42:48", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:48", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:48", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:48", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:48", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:48", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:48", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:48", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:48", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:50", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=914"}
+{"time": "22:42:50", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:50", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:50", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=859"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=965"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=789"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1556"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=991"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1110"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=900"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1061"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1030"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:51", "level": "info", "msg": "API 响应 ← status=404 | 0.3s | body_len=18"}
+{"time": "22:42:51", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:51", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:52", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1556"}
+{"time": "22:42:52", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1061"}
+{"time": "22:42:52", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:52", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:52", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:52", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:52", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:52", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:53", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=914"}
+{"time": "22:42:53", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:53", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:53", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:54", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1556"}
+{"time": "22:42:54", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1061"}
+{"time": "22:42:54", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:54", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:54", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:55", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:55", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:55", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:57", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1556"}
+{"time": "22:42:58", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=1061"}
+{"time": "22:42:58", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:58", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:58", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:58", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:58", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:58", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:58", "level": "info", "msg": "题目解析完成 | 成功 0 题"}
+{"time": "22:42:58", "level": "info", "msg": "开始生成知识点总结 | 共 4 个知识点"}
+{"time": "22:42:58", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=22289"}
+{"time": "22:42:58", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=4031"}
+{"time": "22:42:58", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2496"}
+{"time": "22:42:58", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=6010"}
+{"time": "22:42:58", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:58", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:58", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:58", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:58", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:58", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:58", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:58", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:58", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:58", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:42:58", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:58", "level": "warn", "msg": "API 第1次失败，1.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:59", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=4031"}
+{"time": "22:42:59", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2496"}
+{"time": "22:42:59", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=22289"}
+{"time": "22:42:59", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=6010"}
+{"time": "22:42:59", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:59", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:59", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:59", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:42:59", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:59", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:59", "level": "info", "msg": "API 响应 ← status=404 | 0.5s | body_len=18"}
+{"time": "22:42:59", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:59", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:42:59", "level": "info", "msg": "API 响应 ← status=404 | 0.5s | body_len=18"}
+{"time": "22:42:59", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:42:59", "level": "warn", "msg": "API 第2次失败，2.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:01", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=4031"}
+{"time": "22:43:01", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2496"}
+{"time": "22:43:01", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:43:01", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:43:01", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:01", "level": "info", "msg": "API 响应 ← status=404 | 0.2s | body_len=18"}
+{"time": "22:43:01", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:43:01", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:01", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=6010"}
+{"time": "22:43:01", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=22289"}
+{"time": "22:43:01", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:43:01", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:43:01", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:02", "level": "info", "msg": "API 响应 ← status=404 | 0.3s | body_len=18"}
+{"time": "22:43:02", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:43:02", "level": "warn", "msg": "API 第3次失败，3.0s 后重试: 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:04", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=2496"}
+{"time": "22:43:04", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=4031"}
+{"time": "22:43:04", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:43:04", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:43:04", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:04", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:43:04", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:43:04", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:04", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=6010"}
+{"time": "22:43:05", "level": "info", "msg": "API 响应 ← status=404 | 0.1s | body_len=18"}
+{"time": "22:43:05", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:43:05", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:05", "level": "info", "msg": "API 请求 → https://api.minimaxi.com/v1/v1/chat/completions | model=minimax-m2.7 | msg_len=22289"}
+{"time": "22:43:05", "level": "info", "msg": "API 响应 ← status=404 | 0.3s | body_len=18"}
+{"time": "22:43:05", "level": "error", "msg": "API 错误 404: 404 page not found"}
+{"time": "22:43:05", "level": "error", "msg": "API 最终失败 (重试4次): 404 Client Error: 404 Page not found for url: https://api.minimaxi.com/v1/v1/chat/completions"}
+{"time": "22:43:05", "level": "info", "msg": "知识点总结完成 | 成功 0 个"}
+{"time": "22:43:05", "level": "info", "msg": "网站构建完成 | 题目数: 42 | 知识点: 4"}
+{"time": "22:43:05", "level": "info", "msg": "✅ 任务完成！"}

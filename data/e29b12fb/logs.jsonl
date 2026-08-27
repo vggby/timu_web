@@ -1,0 +1,71 @@
+{"time": "14:39:52", "level": "info", "msg": "任务启动 | URL: https://www.cheko.cc/test/case?test_id=904552 | 题型: choice | 模型: gemini-3.1-pro-preview-thinking"}
+{"time": "14:39:52", "level": "info", "msg": "页面抓取完成 | HTML大小: 158881 字符"}
+{"time": "14:39:52", "level": "info", "msg": "开始解析 HTML 页面..."}
+{"time": "14:39:52", "level": "info", "msg": "题目解析完成 | 题目数: 19 | 知识点数: 1"}
+{"time": "14:39:52", "level": "info", "msg": "LLM 客户端初始化 | model=gemini-3.1-pro-preview-thinking | base_url=https://api.gptgod.online/v1 | concurrency=8"}
+{"time": "14:39:52", "level": "info", "msg": "开始生成题目解析 | 共 19 题 | 并发 8"}
+{"time": "14:39:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3381"}
+{"time": "14:39:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3188"}
+{"time": "14:39:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=4426"}
+{"time": "14:39:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3690"}
+{"time": "14:39:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3353"}
+{"time": "14:39:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3460"}
+{"time": "14:39:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=2775"}
+{"time": "14:39:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3050"}
+{"time": "14:40:27", "level": "info", "msg": "API 响应 ← status=200 | 34.8s | body_len=5833"}
+{"time": "14:40:27", "level": "info", "msg": "API 成功 | 回复 3018 字符"}
+{"time": "14:40:27", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=2954"}
+{"time": "14:40:29", "level": "info", "msg": "API 响应 ← status=200 | 36.6s | body_len=6298"}
+{"time": "14:40:29", "level": "info", "msg": "API 成功 | 回复 3051 字符"}
+{"time": "14:40:29", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3046"}
+{"time": "14:40:29", "level": "info", "msg": "API 响应 ← status=200 | 37.1s | body_len=7360"}
+{"time": "14:40:29", "level": "info", "msg": "API 成功 | 回复 3221 字符"}
+{"time": "14:40:29", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3455"}
+{"time": "14:40:30", "level": "info", "msg": "API 响应 ← status=200 | 37.9s | body_len=5707"}
+{"time": "14:40:30", "level": "info", "msg": "API 成功 | 回复 2713 字符"}
+{"time": "14:40:30", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3351"}
+{"time": "14:40:30", "level": "info", "msg": "API 响应 ← status=200 | 38.2s | body_len=6202"}
+{"time": "14:40:30", "level": "info", "msg": "API 成功 | 回复 3087 字符"}
+{"time": "14:40:30", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=2774"}
+{"time": "14:40:31", "level": "info", "msg": "API 响应 ← status=200 | 39.1s | body_len=6975"}
+{"time": "14:40:31", "level": "info", "msg": "API 成功 | 回复 3013 字符"}
+{"time": "14:40:31", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=2060"}
+{"time": "14:40:34", "level": "info", "msg": "API 响应 ← status=200 | 41.5s | body_len=7212"}
+{"time": "14:40:34", "level": "info", "msg": "API 成功 | 回复 3217 字符"}
+{"time": "14:40:34", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=2981"}
+{"time": "14:40:34", "level": "info", "msg": "API 响应 ← status=200 | 41.8s | body_len=6850"}
+{"time": "14:40:34", "level": "info", "msg": "API 成功 | 回复 3485 字符"}
+{"time": "14:40:34", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=4276"}
+{"time": "14:41:06", "level": "info", "msg": "API 响应 ← status=200 | 38.6s | body_len=6838"}
+{"time": "14:41:06", "level": "info", "msg": "API 成功 | 回复 3279 字符"}
+{"time": "14:41:06", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3231"}
+{"time": "14:41:06", "level": "info", "msg": "API 响应 ← status=200 | 35.2s | body_len=4981"}
+{"time": "14:41:06", "level": "info", "msg": "API 成功 | 回复 2367 字符"}
+{"time": "14:41:06", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=3161"}
+{"time": "14:41:06", "level": "info", "msg": "API 响应 ← status=200 | 37.7s | body_len=6769"}
+{"time": "14:41:06", "level": "info", "msg": "API 成功 | 回复 3164 字符"}
+{"time": "14:41:06", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=5484"}
+{"time": "14:41:09", "level": "info", "msg": "API 响应 ← status=200 | 38.7s | body_len=6655"}
+{"time": "14:41:09", "level": "info", "msg": "API 成功 | 回复 2938 字符"}
+{"time": "14:41:09", "level": "info", "msg": "API 响应 ← status=200 | 37.5s | body_len=7102"}
+{"time": "14:41:09", "level": "info", "msg": "API 成功 | 回复 3108 字符"}
+{"time": "14:41:10", "level": "info", "msg": "API 响应 ← status=200 | 41.0s | body_len=8071"}
+{"time": "14:41:10", "level": "info", "msg": "API 成功 | 回复 4004 字符"}
+{"time": "14:41:14", "level": "info", "msg": "API 响应 ← status=200 | 40.0s | body_len=6401"}
+{"time": "14:41:14", "level": "info", "msg": "API 成功 | 回复 2764 字符"}
+{"time": "14:41:18", "level": "info", "msg": "API 响应 ← status=200 | 43.8s | body_len=9581"}
+{"time": "14:41:18", "level": "info", "msg": "API 成功 | 回复 3049 字符"}
+{"time": "14:41:41", "level": "info", "msg": "API 响应 ← status=200 | 35.7s | body_len=6515"}
+{"time": "14:41:41", "level": "info", "msg": "API 成功 | 回复 3898 字符"}
+{"time": "14:41:48", "level": "info", "msg": "API 响应 ← status=200 | 41.9s | body_len=5951"}
+{"time": "14:41:48", "level": "info", "msg": "API 成功 | 回复 3765 字符"}
+{"time": "14:41:49", "level": "info", "msg": "API 响应 ← status=200 | 43.2s | body_len=7193"}
+{"time": "14:41:49", "level": "info", "msg": "API 成功 | 回复 2864 字符"}
+{"time": "14:41:49", "level": "info", "msg": "题目解析完成 | 成功 19 题"}
+{"time": "14:41:49", "level": "info", "msg": "开始生成知识点总结 | 共 1 个知识点"}
+{"time": "14:41:49", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/v1/chat/completions | model=gemini-3.1-pro-preview-thinking | msg_len=115920"}
+{"time": "14:42:50", "level": "info", "msg": "API 响应 ← status=200 | 61.7s | body_len=8872"}
+{"time": "14:42:50", "level": "info", "msg": "API 成功 | 回复 3924 字符"}
+{"time": "14:42:50", "level": "info", "msg": "知识点总结完成 | 成功 1 个"}
+{"time": "14:42:50", "level": "info", "msg": "网站构建完成 | 题目数: 19 | 知识点: 1"}
+{"time": "14:42:50", "level": "info", "msg": "✅ 任务完成！"}

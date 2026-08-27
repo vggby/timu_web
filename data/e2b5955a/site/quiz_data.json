@@ -1,0 +1,2579 @@
+{
+  "meta": {
+    "paper_name": "2013年11月系统架构真题",
+    "subject": 0,
+    "type": 0,
+    "item_count": 42
+  },
+  "questions": [
+    {
+      "id": 427,
+      "index": 1,
+      "sort": 3,
+      "knowledge_point": "关系数据库",
+      "prompt": "假设关系模式 R（U，F），属性集 U={A，B，C}，函数依赖集 F={A→B，B→C}。若将其分解为 ρ={R1(U1，F1)，R2(U2，F2)}，其中 U1={A，B}，U2={A，C}。那么，关系模式 R、R1、R2 分别达到了（）；分解 ρ（）。",
+      "difficulty": 0,
+      "tags": [
+        "必须掌握",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "1NF、2NF、3NF",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "1NF、3NF、3NF",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "2NF、2NF、3NF",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "2NF、3NF、3NF",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "2NF、3NF、3NF"
+          ],
+          "official_analysis": "本题考察的是**关系数据库范式与无损分解、函数依赖保持**。\nR 中存在传递依赖 A→B、B→C，故不满足 3NF，仅达 2NF；A→B、B→C根据传递率可知，A→C，所以R1=AB 与 R2=AC 的候选键均为 A，候选码为单码，无非键属性被非键决定情况，均达 3NF。\n选择选项 D。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "有损连接但保持函数依赖",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "既无损连接又保持函数依赖",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "有损连接且不保持函数依赖",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "无损连接但不保持函数依赖",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "无损连接但不保持函数依赖"
+          ],
+          "official_analysis": "本题考察的是**关系数据库范式与无损分解、函数依赖保持**。\n设 ρ = {R₁, R₂} 是 R 的一个分解，F 是 R 上的函数依赖集。那么分解 ρ 相对于 F 是无损级联分解的充要条件\n(R₁ ∩ R₂) → (R₁ − R₂) 或 (R₁ ∩ R₂) → (R₂ − R₁)。\n要注意的是，这两个条件只要有任意一个条件成立就可以了。\n满足无损条件{A}→{B} 或 {A}→{C} 成立；但 B→C 在分解后不被保持。\n选择选项 D。无损连接但不保持函数依赖"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 428,
+      "index": 2,
+      "sort": 4,
+      "knowledge_point": "关系数据库",
+      "prompt": "给定员工关系\nEMP（EmpID，Ename，sex，age，tel，DepID），\n其属性含义分别为：员工号、姓名、性别、年龄、电话、部门号；\n部门关系 DEP（DepID，Dname，Dtel，DEmpID），\n其属性含义分别为：部门号、部门名、电话、负责人号。若要求 DepID 参照部门关系 DEP 的主码 DepID，则可以在定义 EMP 时用（）进行约束。若要查询开发部的负责人姓名、年龄，则正确的关系代数表达式为（）。",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Primary Key (DepID) On DEP (DepID)",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Primary Key (DepID) On EMP (DepID)",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Foreign Key (DepID) References DEP (DepID)",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "Foreign Key (DepID) References EMP (DepID)",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "Foreign Key (DepID) References DEP (DepID)"
+          ],
+          "official_analysis": "本题考察的是**外键约束的定义方式与关系代数表达式（选择、投影、连接）的应用**。\n在模式中，EMP.DepID 应参照 DEP 的主键 DepID，定义时应使用外键约束；查询“开发部负责人姓名、年龄”需要先选出 Dname=“开发部”的部门，再与 EMP 进行连接，并加入 EmpID=DEmpID 的条件以锁定负责人，再投影出 Ename、age。\n\n**问题 1**：\n**A选项 Primary Key (DepID) On DEP (DepID)**：定义的是 DEP 的主键，不是在 EMP 中建立参照，错误。\n**B选项 Primary Key (DepID) On EMP (DepID)**：把 EMP 的 DepID 设为主键，与题意不符，错误。\n**C选项 Foreign Key (DepID) References DEP (DepID)**：在 EMP 中把 DepID 声明为外键，参照 DEP(DepID)，完全符合题意，正确。\n**D选项 Foreign Key (DepID) References EMP (DepID)**：把 EMP.DepID 参照 EMP 自身，不符合实际参照关系，错误。\n所以选择 C。\n\n**问题2**：\n为得到负责人需满足三个关键步骤：**选择部门**σ_{Dname='开发部'}(DEP)、**连接**与 EMP（自然连接在 DepID 上），再**施加负责人条件**EmpID = DEmpID，最后**投影姓名与年龄**。\n**A选项**：对 Emp × Dep 做选择“第一属性=开发部”，既无明确属性位置语义也缺少负责人条件，错误。\n**B选项**：先对 Dep 做选择 σ_{2=开发部}（第二属性 Dname），与 Emp 做自然连接（在公共属性 DepID 上），再用 σ_{1=9} 表示 EmpID（第1位）= DEmpID（第9位）锁定负责人，最后投影第2、4位（Ename、age），表达正确。\n**C选项**：Emp 与选出的 Dep 直接笛卡尔积后只投影 2、3 位，既无连接条件也无负责人条件，错误。\n**D选项**：对 Emp 先做投影再与 Dep 自然连接，仅限定部门，未施加 EmpID=DEmpID 的负责人条件，会得到该部门所有员工而非负责人，错误。\n所以选择 B。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "$\\pi_{2,4}(\\sigma_{1 = 开发部}(Emp \\times Dep))$",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "$\\pi_{2,4}(\\sigma_{1 = 9}(Emp \\bowtie \\sigma_{2 = 开发部}Dep))$",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "$\\pi_{2,3}(Emp \\times \\sigma_{2 = 开发部}(Dep))$",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "$\\pi_{2,3}(\\pi_{1,2,4,6}Emp \\bowtie \\sigma_{2 = 开发部}(Dep))$",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "$\\pi_{2,4}(\\sigma_{1 = 9}(Emp \\bowtie \\sigma_{2 = 开发部}Dep))$"
+          ],
+          "official_analysis": "本题考察的是**外键约束的定义方式与关系代数表达式（选择、投影、连接）的应用**。\n在模式中，EMP.DepID 应参照 DEP 的主键 DepID，定义时应使用外键约束；查询“开发部负责人姓名、年龄”需要先选出 Dname=“开发部”的部门，再与 EMP 进行连接，并加入 EmpID=DEmpID 的条件以锁定负责人，再投影出 Ename、age。\n\n**问题 1**：\n**A选项 Primary Key (DepID) On DEP (DepID)**：定义的是 DEP 的主键，不是在 EMP 中建立参照，错误。\n**B选项 Primary Key (DepID) On EMP (DepID)**：把 EMP 的 DepID 设为主键，与题意不符，错误。\n**C选项 Foreign Key (DepID) References DEP (DepID)**：在 EMP 中把 DepID 声明为外键，参照 DEP(DepID)，完全符合题意，正确。\n**D选项 Foreign Key (DepID) References EMP (DepID)**：把 EMP.DepID 参照 EMP 自身，不符合实际参照关系，错误。\n所以选择 C。\n\n**问题2**：\n为得到负责人需满足三个关键步骤：**选择部门**σ_{Dname='开发部'}(DEP)、**连接**与 EMP（自然连接在 DepID 上），再**施加负责人条件**EmpID = DEmpID，最后**投影姓名与年龄**。\n**A选项**：对 Emp × Dep 做选择“第一属性=开发部”，既无明确属性位置语义也缺少负责人条件，错误。\n**B选项**：先对 Dep 做选择 σ_{2=开发部}（第二属性 Dname），与 Emp 做自然连接（在公共属性 DepID 上），再用 σ_{1=9} 表示 EmpID（第1位）= DEmpID（第9位）锁定负责人，最后投影第2、4位（Ename、age），表达正确。\n**C选项**：Emp 与选出的 Dep 直接笛卡尔积后只投影 2、3 位，既无连接条件也无负责人条件，错误。\n**D选项**：对 Emp 先做投影再与 Dep 自然连接，仅限定部门，未施加 EmpID=DEmpID 的负责人条件，会得到该部门所有员工而非负责人，错误。\n所以选择 B。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 410,
+      "index": 3,
+      "sort": 3,
+      "knowledge_point": "关系数据库",
+      "prompt": "设关系模式R(U,F)，其中U为属性集，F是U上的一组函数依赖，那么函数依赖的公理系统（Armstrong公理系统）中的合并规则是指（）为F所蕴涵。",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "若A→B，B→C，则A→C",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "若Y⊆X⊆U，则X→Y",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "A→B，A→C，则A→BC",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "若A→B，C⊆B，则A→C",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "A→B，A→C，则A→BC"
+          ],
+          "official_analysis": "本题考察的是**Armstrong 公理系统中的函数依赖推理规则**。\n**A选项若 A→B，B→C，则 A→C**：这是**传递律**，是 Armstrong 公理系统的基本推理规则之一，但不是合并规则。\n**B选项若 Y⊆X⊆U，则 X→Y**：这是**自反律**，表示一个属性集对其自身的子集有函数依赖。\n**C选项 A→B，A→C，则 A→BC**：**正确**，这是**合并规则**，表示如果 A 能确定 B，且 A 能确定 C，那么 A 就能确定 BC。该规则可由自反律、增广律和传递律组合推出。\n**D选项若 A→B，C⊆B，则 A→C**：这是**分解规则**的逆形式（通常我们说 X→YZ 推出 X→Y 和 X→Z），但这种“反向包含式”的表述不严谨，且不是合并规则。\n因此，选项 **C 正确**。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 411,
+      "index": 4,
+      "sort": 4,
+      "knowledge_point": "关系数据库",
+      "prompt": "若关系模式R和S分别为：R（A，B，C，D），S（B，C，E，F），则关系R与S自然联结运算后的属性列有（）个，与表达方式$\\pi_{1,3,5,6}(\\sigma_{3 < 6}(R \\bowtie S))$等价的 SQL 语句为：SELECT （） FROM R , S WHERE （）;",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "4",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "6",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "7",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "8",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "6"
+          ],
+          "official_analysis": "本题考察的是**自然连接、选择与投影组合运算到SQL的等价转换**。\n\n**A选项 4**：自然连接R(A,B,C,D)与S(B,C,E,F)在同名属性B、C上相等连接后，去除重复列，结果应为A,B,C,D,E,F，共6列，此项过少，错误。\n**B选项 6**：自然连接后属性为A,B,C,D,E,F，共6个，正确。\n**C选项 7**：多算了1列，错误。\n**D选项 8**：相当于笛卡尔积未去重，错误。\n选择选项 B。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "A,R.C,E,F",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "A,C,S.B,S.E",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "A,C,S.B,S.C",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "R.A,R.C,S.B,S.C",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "A,R.C,E,F"
+          ],
+          "official_analysis": "本题考察的是**自然连接、选择与投影组合运算到SQL的等价转换**。\n\n自然连接后列序（按常规）为[1:A, 2:B, 3:C, 4:D, 5:E, 6:F]；π₁,₃,₅,₆即投影[A, C, E, F]。A、E、F在两个表中不重名，C来自R与S的同名列，SQL需消歧选R.C（或S.C，等价）。\n**A选项 A, R.C, E, F**：与投影一致，正确。\n**B选项 A, C, S.B, S.E**：含S.B而非E,F组合，且C未消歧，错误。\n**C选项 A, C, S.B, S.C**：包含不需要的S.B，且缺少E、F，错误。\n**D选项 R.A, R.C, S.B, S.C**：列集合不等于[A,C,E,F]，错误。\n选择选项 A。"
+        },
+        {
+          "label": "3",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "$R.B=S.B \\land R.C=S.C \\land R.C<S.B$",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "$R.B=S.B \\land R.C=S.C \\land R.C<S.F$",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "$R.B=S.B \\lor R.C=S.C \\lor R.C<S.B$",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "$R.B=S.B \\lor R.C=S.C \\lor R.C<S.F$",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "$R.B=S.B \\land R.C=S.C \\land R.C<S.F$"
+          ],
+          "official_analysis": "本题考察的是**自然连接、选择与投影组合运算到SQL的等价转换**。\n\nσ₃<₆是对连接结果第3列与第6列做选择，即C<F；自然连接等价于在笛卡尔积上加等值条件R.B=S.B AND R.C=S.C。\n**A选项**：将比较写成R.C<S.B，比较列错误。\n**B选项**：R.B=S.B AND R.C=S.C AND R.C<S.F，恰为自然连接加C<F，正确。\n**C选项**：使用OR而非AND，破坏自然连接与选择语义，错误。\n**D选项**：同样使用OR，错误。\n选择选项 B。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 414,
+      "index": 5,
+      "sort": 7,
+      "knowledge_point": "特殊数据库系统",
+      "prompt": "以下关于嵌入式数据库管理系统的描述不正确的是（）。",
+      "difficulty": 0,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "嵌入式数据库管理系统一般只为前端应用提供基本的数据支持",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "嵌入式数据库管理系统一般支持实时数据的管理",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "嵌入式数据库管理系统一般不支持多线程并发操作",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "嵌入式数据库管理系统一般只提供本机服务接口",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "嵌入式数据库管理系统一般不支持多线程并发操作"
+          ],
+          "official_analysis": "本题考察的是**嵌入式数据库管理系统（EDBMS）** 的基本特性。\nEDBMS 是针对嵌入式环境（如 PDA、车载设备、移动终端等）开发的轻量级数据库管理系统，主要特点是小巧高效、低资源占用、支持实时处理。\n**A选项**：嵌入式数据库管理系统通常作为前端应用的本地数据存储工具，为应用程序提供基本的数据支持，这一说法正确。\n**B选项**：EDBMS 运行在嵌入式设备中，常常需要支持实时数据的处理与管理（如车载导航、实时监控），这一说法正确。\n**C选项**：多数现代嵌入式数据库（如 SQLite、Berkeley DB 等）均支持多线程并发操作，以保证多应用或多任务环境下的数据一致性和高效访问，因此“不支持多线程并发操作”的说法错误。\n**D选项**：EDBMS 一般只提供本机服务接口，主要是为了减少复杂性与资源开销，这一说法正确。\n因此，正确答案是 **C**。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 363,
+      "index": 6,
+      "sort": 4,
+      "knowledge_point": "特殊数据库系统",
+      "prompt": "在分布式数据库中包括分片透明、复制透明、位置透明和逻辑透明等基本概念，其中：（）是指局部数据模型透明，即用户或应用程序无需知道局部场地使用的是哪种数据模型。",
+      "difficulty": 0,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "分片透明",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "复制透明",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "位置透明",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "逻辑透明",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "逻辑透明"
+          ],
+          "official_analysis": "本题考察的是**分布式数据库系统的四种透明性**。\n**A选项 分片透明**：用户不必关心数据是如何分片的，所有操作在全局关系层面完成，错误。\n**B选项 复制透明**：用户不必关心数据在各节点的复制情况，系统自动维护复制数据的一致性，错误。\n**C选项 位置透明**：用户不必知道所操作数据的存储位置，数据迁移不影响应用程序，错误。\n**D选项 逻辑透明**：又称局部映像透明，指用户无需了解局部数据库使用的数据模型或操纵语言，系统负责数据模型和语言的转换，正确。\n因此，选项 D 正确。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 364,
+      "index": 7,
+      "sort": 5,
+      "knowledge_point": "关系数据库",
+      "prompt": "若关系R、S如下图所示，则关系R与S进行自然连接运算后的元组个数和属性列数分别为（）；关系代数$ \\pi_{1,4}(\\sigma_{3 = 6}(R \\times S))$与关系代数表达式（）等价。\n﻿![#366px #202px](https://oss.cheko.cc/64dff492905bf009b5190d761585bbcabadb7293dc95d60966d22c464582f705.png)",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "6和6",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "4和6",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "3和6",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "3和4",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "3和4"
+          ],
+          "official_analysis": "本题考察的是**自然连接的语义与笛卡尔积上带位次引用的选择与投影等价改写**。\n**问题1**：自然连接在同名属性 C、D 上做等值连接，并去掉重复同名列。R 能与 S 匹配的元组为：(6,3,1,5) 与 (1,5)，(6,5,7,4) 与 (7,4)，(6,3,7,4) 与 (7,4)，共 **3** 个；连接后属性为 {A,B,C,D}，共 **4** 列。\n**A选项 6 和 6**：将匹配数和列数都夸大，错误。\n**B选项 4 和 6**：列数不去重同名属性，错误。\n**C选项 3 和 6**：元组数对，列数错，应为 4，错误。\n**D选项 3 和 4**：符合自然连接定义，正确。\n所以选 D\n\n**问题2**：在 R×S 中列次序为 (R.A, R.B, R.C, R.D, S.C, S.D)。谓词 **σ_{3=6}** 即 **R.C = S.D**；投影 **π_{1,4}** 即取 **R.A 与 R.D**，因此应写为 **π_{A, R.D}(σ_{R.C=S.D}(R×S))**，选 C。\n**A选项**：未限定同名列，表达式在 R×S 上歧义且与 3=6 不一致，错误。\n**B选项**：谓词为 S.C=R.D（应为 R.C=S.D），错误。\n**C选项**：谓词与投影均与位次等价，正确。\n**D选项**：谓词为 S.C=S.D，与原式不等价，错误。\n所以选 C。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "$\\pi_{A,D}(\\sigma_{C = D}(R \\times S))$",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "$\\pi_{A, R.D}(\\sigma_{S.C = R.D}(R \\times S))$",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "$\\pi_{A, R.D}(\\sigma_{R.C = S.D}(R \\times S))$",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "$\\pi_{R.A, R.D}(\\sigma_{S.C = S.D}(R \\times S))$",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "$\\pi_{A, R.D}(\\sigma_{R.C = S.D}(R \\times S))$"
+          ],
+          "official_analysis": "本题考察的是**自然连接的语义与笛卡尔积上带位次引用的选择与投影等价改写**。\n**问题1**：自然连接在同名属性 C、D 上做等值连接，并去掉重复同名列。R 能与 S 匹配的元组为：(6,3,1,5) 与 (1,5)，(6,5,7,4) 与 (7,4)，(6,3,7,4) 与 (7,4)，共 **3** 个；连接后属性为 {A,B,C,D}，共 **4** 列。\n**A选项 6 和 6**：将匹配数和列数都夸大，错误。\n**B选项 4 和 6**：列数不去重同名属性，错误。\n**C选项 3 和 6**：元组数对，列数错，应为 4，错误。\n**D选项 3 和 4**：符合自然连接定义，正确。\n所以选 D\n\n**问题2**：在 R×S 中列次序为 (R.A, R.B, R.C, R.D, S.C, S.D)。谓词 **σ_{3=6}** 即 **R.C = S.D**；投影 **π_{1,4}** 即取 **R.A 与 R.D**，因此应写为 **π_{A, R.D}(σ_{R.C=S.D}(R×S))**，选 C。\n**A选项**：未限定同名列，表达式在 R×S 上歧义且与 3=6 不一致，错误。\n**B选项**：谓词为 S.C=R.D（应为 R.C=S.D），错误。\n**C选项**：谓词与投影均与位次等价，正确。\n**D选项**：谓词为 S.C=S.D，与原式不等价，错误。\n所以选 C。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 314,
+      "index": 8,
+      "sort": 7,
+      "knowledge_point": "关系数据库",
+      "prompt": "给定关系模式R（A，B，C，D，E）、S（D，E，F，G）和π1,2,4,6（R⋈S），经过自然连接和投影运算后的属性列数分别为（）。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "9和4",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "7和4",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "9和7",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "7和7",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "7和4"
+          ],
+          "official_analysis": "本题考察的是**关系数据库中的自然连接与投影操作**。\n**自然连接（⋈）**是基于所有共同属性（此处是 D 和 E）做等值连接，并**去除重复的同名属性**。\nR 有属性：A, B, C, D, E，S 有属性：D, E, F, G\n自然连接 R ⋈ S 后的属性集合为：**A, B, C, D, E, F, G**，共 7 个属性。\n**π1,2,4,6（R⋈S）** 是对自然连接结果的投影操作，选出第1、2、4、6列。\n从上面的属性顺序来看：1 → A，2 → B，3 → C，4 → D，5 → E，6 → F，7 → G\n所以 π1,2,4,6（R⋈S） 的结果为属性：A, B, D, F，共 **4 列**。\n因此，选项 B 正确。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 315,
+      "index": 9,
+      "sort": 8,
+      "knowledge_point": "关系数据库",
+      "prompt": "给定关系R（A1，A2，A3，A4， A5）上的函数依赖集 F={A1→A2A5，A2→A3A4，A3→A2}，R的候选关键字为（）。函数依赖（）∈ F+。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "A1",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "A1A2",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "A1A3",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "A1A2A3",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "A1"
+          ],
+          "official_analysis": "本题考察的是**关系数据库函数依赖、候选码与闭包推导**的基本理论。\n**问题 1**：\n确定候选码可用属性闭包法。对 A1 取闭包：**A1+**，由 A1→A2A5 得到 A2、A5；由 A2→A3A4 得到 A3、A4；又因 A3→A2 已在闭包中，不新增属性。最终 A1+ = {A1,A2,A3,A4,A5}，覆盖全属性，因此 A1 是候选码。\n**A选项 A1**：A1 的闭包覆盖全属性，满足唯一标识元组的要求，正确。\n**B选项 A1A2**：包含冗余属性 A2，因 A1 已能唯一标识，A1A2 不是最小的键，不是候选码，错误。\n**C选项 A1A3**：同理包含冗余属性 A3，非最小，错误。\n**D选项 A1A2A3**：冗余更明显，非最小，错误。\n因此，候选关键字为 A1。\n\n**问题 2**：\n判断依赖是否属于 F+ 可用**阿姆斯特朗公理**与闭包推导。\n**A选项 A5→A1A2**：由 F 中无任何以 A5 为决定属性的依赖，且无法经传递推出 A1 或 A2，错误。\n**B选项 A4→A1A2**：F 中无以 A4 为决定属性的依赖，无法推出 A1 或 A2，错误。\n**C选项 A3→A2A4**：F 中直接有 A3→A2；又由 A2→A3A4，可联合得出 A3→A4；合并得到 **A3→A2A4**，成立，正确。\n**D选项 A2→A1A5**：虽有 A2→A3A4，但无法推出 A1 或 A5，错误。\n因此，属于 F+ 的依赖为 A3→A2A4。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "A5→A1A2",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "A4→A1A2",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "A3→A2A4",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "A2→A1A5",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "A3→A2A4"
+          ],
+          "official_analysis": "本题考察的是**关系数据库函数依赖、候选码与闭包推导**的基本理论。\n**问题 1**：\n确定候选码可用属性闭包法。对 A1 取闭包：**A1+**，由 A1→A2A5 得到 A2、A5；由 A2→A3A4 得到 A3、A4；又因 A3→A2 已在闭包中，不新增属性。最终 A1+ = {A1,A2,A3,A4,A5}，覆盖全属性，因此 A1 是候选码。\n**A选项 A1**：A1 的闭包覆盖全属性，满足唯一标识元组的要求，正确。\n**B选项 A1A2**：包含冗余属性 A2，因 A1 已能唯一标识，A1A2 不是最小的键，不是候选码，错误。\n**C选项 A1A3**：同理包含冗余属性 A3，非最小，错误。\n**D选项 A1A2A3**：冗余更明显，非最小，错误。\n因此，候选关键字为 A1。\n\n**问题 2**：\n判断依赖是否属于 F+ 可用**阿姆斯特朗公理**与闭包推导。\n**A选项 A5→A1A2**：由 F 中无任何以 A5 为决定属性的依赖，且无法经传递推出 A1 或 A2，错误。\n**B选项 A4→A1A2**：F 中无以 A4 为决定属性的依赖，无法推出 A1 或 A2，错误。\n**C选项 A3→A2A4**：F 中直接有 A3→A2；又由 A2→A3A4，可联合得出 A3→A4；合并得到 **A3→A2A4**，成立，正确。\n**D选项 A2→A1A5**：虽有 A2→A3A4，但无法推出 A1 或 A5，错误。\n因此，属于 F+ 的依赖为 A3→A2A4。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 316,
+      "index": 10,
+      "sort": 9,
+      "knowledge_point": "数据库设计",
+      "prompt": "假设某证券公司的股票交易系统中有正在运行的事务，此时，若要转储该交易系统数据库中的全部数据，则应采用（）方式。",
+      "difficulty": 1,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "静态全局转储",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "动态全局转储",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "静态增量转储",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "动态增量转储",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "动态全局转储"
+          ],
+          "official_analysis": "本题考察的是**数据库转储方式的分类与应用场景**。\n数据库转储是将数据库中全部或部分数据复制到外部存储介质中，以便在发生故障时进行恢复。转储方式主要按**操作期间是否允许事务运行**和**转储范围**来分类。\n**A选项 静态全局转储**：全局转储是转储数据库全部数据，静态方式要求转储期间禁止任何事务访问数据库，不能满足题干“有正在运行的事务”的条件，错误。\n**B选项 动态全局转储**：全局转储数据库全部数据，动态方式允许在转储期间继续进行事务处理，实现转储与事务并发执行，符合题干描述，正确。\n**C选项 静态增量转储**：增量转储只转储自上次转储以来发生变化的数据，且静态方式要求停止事务处理，不符合题干条件，错误。\n**D选项 动态增量转储**：增量转储且允许事务并发，但题干要求转储全部数据，而非部分变化数据，因此错误。\n因此，本题正确答案是 B。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 270,
+      "index": 11,
+      "sort": 7,
+      "knowledge_point": "关系数据库",
+      "prompt": "给定关系模式R（U，F），其中：属性集U={A1，A2，A3，A4，A5，A6}，函数依赖集F={A1→A2， A1→A3，A3→A4，A1A5→A6}。关系模式R的候选码为（），由于R存在非主属性对码的部分函数依赖，所以R属于（）。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "A1A3",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "A1A4",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "A1A5",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "A1A6",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "A1A5"
+          ],
+          "official_analysis": "本题考察的是**候选码的判定与范式（1NF/2NF）的判断**。\n候选码可通过**属性闭包**来验证；2NF要求**消除非主属性对任一候选码的部分函数依赖**，否则仅满足1NF。\n**问题1**：候选码判定\n**A选项 A1A3**：A1可推出A2、A3，且A3→A4，因此A1A3的闭包为{A1,A2,A3,A4}，缺少A5、A6，不能唯一标识元组，错误。\n**B选项 A1A4**：A4不产生新属性，A1的闭包为{A1,A2,A3,A4}，仍缺A5、A6，错误。\n**C选项 A1A5**：A1⇒A2、A3，A3⇒A4，且A1A5⇒A6，闭包为{A1,A2,A3,A4,A5,A6}覆盖全属性，且A1与A5单独都不是码，**最小且能唯一标识**，正确。\n**D选项 A1A6**：A6无派生，A1A6的闭包与A1类似，缺A5，错误。\n选择选项 C。\n\n**问题2**：范式判断\n**A选项 1NF**：题干指出**存在非主属性对码的部分函数依赖**（如A1⇒A2、A3，其中A2、A3为非主属性，对候选码A1A5仅依赖于其真子集A1），违反2NF的定义，因此仅能判定为1NF，正确。\n**B选项 2NF**：要求所有非主属性**完全函数依赖**于候选码；本题存在部分依赖，条件不满足，错误。\n**C选项 3NF**：需先满足2NF且消除传递依赖，显然不成立，错误。\n**D选项 BCNF**：比3NF更严格，远不满足，错误。\n选择选项 A。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "1NF",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "2NF",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "3NF",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "BCNF",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "1NF"
+          ],
+          "official_analysis": "本题考察的是**候选码的判定与范式（1NF/2NF）的判断**。\n候选码可通过**属性闭包**来验证；2NF要求**消除非主属性对任一候选码的部分函数依赖**，否则仅满足1NF。\n**问题1**：候选码判定\n**A选项 A1A3**：A1可推出A2、A3，且A3→A4，因此A1A3的闭包为{A1,A2,A3,A4}，缺少A5、A6，不能唯一标识元组，错误。\n**B选项 A1A4**：A4不产生新属性，A1的闭包为{A1,A2,A3,A4}，仍缺A5、A6，错误。\n**C选项 A1A5**：A1⇒A2、A3，A3⇒A4，且A1A5⇒A6，闭包为{A1,A2,A3,A4,A5,A6}覆盖全属性，且A1与A5单独都不是码，**最小且能唯一标识**，正确。\n**D选项 A1A6**：A6无派生，A1A6的闭包与A1类似，缺A5，错误。\n选择选项 C。\n\n**问题2**：范式判断\n**A选项 1NF**：题干指出**存在非主属性对码的部分函数依赖**（如A1⇒A2、A3，其中A2、A3为非主属性，对候选码A1A5仅依赖于其真子集A1），违反2NF的定义，因此仅能判定为1NF，正确。\n**B选项 2NF**：要求所有非主属性**完全函数依赖**于候选码；本题存在部分依赖，条件不满足，错误。\n**C选项 3NF**：需先满足2NF且消除传递依赖，显然不成立，错误。\n**D选项 BCNF**：比3NF更严格，远不满足，错误。\n选择选项 A。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 271,
+      "index": 12,
+      "sort": 8,
+      "knowledge_point": "关系数据库",
+      "prompt": "给定元组演算表达式$R^* = \\{ t \\mid (\\exists u)(R(t) \\land S(u) \\land t[3] < u[2]) \\}$，若关系 R、S 如下图所示，则（）。\n![](https://oss.cheko.cc/fccb10d3d41396081f32398044279fd990697d843046049428cb711b01ef4ed0.png)",
+      "difficulty": 0,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "R={(3，7，11)，(5，9，13)，(6，10，14)}",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "R={(3，7，11)，(4，5，6)，(5，9，13)，(6，10，14)}",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "R={(1，2，3)，(4，5，6)，(7，8，9)}",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "R={(1，2，3)，(4，5，6)，(7，8，9)，(10，11，12)}",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "R={(1，2，3)，(4，5，6)，(7，8，9)}"
+          ],
+          "official_analysis": "本题考察**关系数据库元组演算的选择与存在量词**的使用技巧。\n先看 $R(t) \\land S(u) \\land t[3] < u[2]) $，t 是 R 中的元组，且 u 是 S 中元组，且 t 中第三个列的数值小于 u 中第 2 个列的数值。\n因此，该元组演算表达式的意思是查询关系R和关系S中所有满足 t 元组中的第三个元素小于u元组中的第二个元素的元组组合。\nR(t)∧S(u) 是什么意思。t 是 R 中的元组，u 是 S 中的元组，限定了 t,u 元组的范围域。\n∃u 代表只要存在一个 u 满足后面的条件就行，比如元组 (7,8,9) 第三列 9 小于 S 元组（6，10，14）中的第二列10，所以是满足条件的。\nt│xxx 这里的 t 表示做 R 中元组的投影（取 R 的元素列）。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 272,
+      "index": 13,
+      "sort": 9,
+      "knowledge_point": "特殊数据库系统",
+      "prompt": "分布式数据库两阶段提交协议中的两个阶段是指（）。",
+      "difficulty": 1,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "加锁阶段、解锁阶段",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "获取阶段、运行阶段",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "表决阶段、执行阶段",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "扩展阶段、收缩阶段",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "表决阶段、执行阶段"
+          ],
+          "official_analysis": "本题考察的是**分布式数据库中的二阶段提交协议（Two-Phase Commit, 2PC）**，它是确保分布式事务一致性的经典算法。\n**二阶段提交的核心目标**：在多个分布式节点参与同一事务时，保证事务的**原子性**与**一致性**。\n- **角色**：\n\t- 协调者（Coordinator）：负责组织事务的提交或回滚。\n\t- 参与者（Participants）：实际执行事务操作的数据库节点。\n\n**两个阶段**：\n1. **表决阶段（准备阶段，Voting/Prepare Phase）**\n\t- 协调者向所有参与者发送“准备提交事务”的请求。\n\t- 参与者本地执行事务并记录 redo/undo 日志，但不提交。\n\t- 各参与者返回“同意提交”或“中止”的表决结果给协调者。\n2. **执行阶段（提交阶段，Commit Phase）**\n\t- 如果协调者收到了所有参与者的“同意提交”，则向所有参与者发送“提交”命令，参与者正式提交并释放锁资源。\n\t- 如果有任何一个参与者投“中止”，则协调者向所有参与者发送“回滚”命令，参与者执行回滚并释放锁资源。\n\n**A加锁/解锁阶段**：加锁解锁是事务执行的细节，不是2PC的阶段划分，错误。\n**B获取阶段/运行阶段**：不属于2PC的正式命名，错误。\n**C表决阶段/执行阶段**：准确对应“准备阶段”和“提交阶段”，正确。\n**D扩展阶段/收缩阶段**：这是两阶段锁协议（2PL）的概念，不是2PC，错误。\n选项选项 C。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 223,
+      "index": 14,
+      "sort": 4,
+      "knowledge_point": "关系数据库",
+      "prompt": "给定关系R（A,B,C,D,E）与S（A,B,C,F,G），那么与表达式$\\pi_{1,2,4,6,7}(\\sigma_{1 < 6}(R \\bowtie S))$等价的 SQL 语句如下：SELECT （） FROM R，S WHERE （）；",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "R.A，R.B，R.E，S.C，G",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "R.A，R.B，D，F，G",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "R.A，R.B，R.D，S.C，F",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "R.A，R.B，R.D，S.C，G",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "R.A，R.B，D，F，G"
+          ],
+          "official_analysis": "本题考察的是**关系代数到SQL的等价转换与自然连接后的属性顺序**。\n自然连接R ⋈ S会按公共属性合并A、B、C，其典型输出属性顺序为ABCDEFG。表达式中的σ{1<6}指在该顺序下的第1列小于第6列，即A<F；π{1,2,4,6,7}要求投影出第1、2、4、6、7列，即A、B、D、F、G。\n**问题 1**：\n**A选项 R.A，R.B，R.E，S.C，G**：投影包含E与C，但π{1,2,4,6,7}要求的是A、B、D、F、G，错误。\n**B选项 R.A，R.B，D，F，G**：正好对应A、B、D、F、G。D在R，F在S且两者不歧义，正确。\n**C选项 R.A，R.B，R.D，S.C，F**：包含C而非G，与目标列集不符，错误。\n**D选项 R.A，R.B，R.D，S.C，G**：包含C而非F，与目标列集不符，错误。\n所以选择 B。\n\n**问题 2**：\n**A选项 … OR …**：自然连接应使用等值连接条件的合取，不能用析取OR，且还混入A<R.S.F条件但整体逻辑错误，错误。\n**B选项 … OR …**：同样用OR，不是自然连接的语义，且比较成R.A<S.B也与σ{1<6}不符，错误。\n**C选项 R.A=S.A AND R.B=S.B AND R.C=S.C AND R.A<S.F**：三对公共属性等值实现自然连接，再加选择条件A<F，完全对应σ{1<6}(R ⋈ S)，正确。\n**D选项 … AND R.A<S.B**：最后的比较应是A与F而不是A与B，错误。\n所以选择 C。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "R.A=S.A OR R.B=S.B OR R.C=S.C OR R.A\\<S.F",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "R.A=S.A OR R.B=S.B OR R.C=S.C OR R.A\\<S.B",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "R.A=S.A AND R.B=S.B AND R.C=S.C AND R.A\\<S.F",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "R.A=S.A AND R.B=S.B AND R.C=S.C AND R.A\\<S.B",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "R.A=S.A AND R.B=S.B AND R.C=S.C AND R.A\\<S.F"
+          ],
+          "official_analysis": "本题考察的是**关系代数到SQL的等价转换与自然连接后的属性顺序**。\n自然连接R ⋈ S会按公共属性合并A、B、C，其典型输出属性顺序为ABCDEFG。表达式中的σ{1<6}指在该顺序下的第1列小于第6列，即A<F；π{1,2,4,6,7}要求投影出第1、2、4、6、7列，即A、B、D、F、G。\n**问题 1**：\n**A选项 R.A，R.B，R.E，S.C，G**：投影包含E与C，但π{1,2,4,6,7}要求的是A、B、D、F、G，错误。\n**B选项 R.A，R.B，D，F，G**：正好对应A、B、D、F、G。D在R，F在S且两者不歧义，正确。\n**C选项 R.A，R.B，R.D，S.C，F**：包含C而非G，与目标列集不符，错误。\n**D选项 R.A，R.B，R.D，S.C，G**：包含C而非F，与目标列集不符，错误。\n所以选择 B。\n\n**问题 2**：\n**A选项 … OR …**：自然连接应使用等值连接条件的合取，不能用析取OR，且还混入A<R.S.F条件但整体逻辑错误，错误。\n**B选项 … OR …**：同样用OR，不是自然连接的语义，且比较成R.A<S.B也与σ{1<6}不符，错误。\n**C选项 R.A=S.A AND R.B=S.B AND R.C=S.C AND R.A<S.F**：三对公共属性等值实现自然连接，再加选择条件A<F，完全对应σ{1<6}(R ⋈ S)，正确。\n**D选项 … AND R.A<S.B**：最后的比较应是A与F而不是A与B，错误。\n所以选择 C。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 224,
+      "index": 15,
+      "sort": 5,
+      "knowledge_point": "关系数据库",
+      "prompt": "在关系R（A1，A2，A3）和S（A2，A3，A4）上进行关系运算的4个等价的表达式E1、E2、E3和E4如下所示：\n$E_1 = \\pi_{A_1, A_4}(\\sigma_{A_2 < 2018 \\land A_4 = '95'}(R \\bowtie S))$\n$E_2 = \\pi_{A_1, A_4}(\\sigma_{A_2 < 2018}(R) \\bowtie \\sigma_{A_4 = '95'}(S))$\n$E_3 = \\pi_{A_1, A_4}(\\sigma_{A_2 < 2018 \\land R.A_3 = S.A_3 \\land A_4 = '95'}(R \\times S))$\n$E_4 = \\pi_{A_1, A_4}(\\sigma_{R.A_3 = S.A_3}(\\sigma_{A_2 < 2018}(R) \\times \\sigma_{A_4 = '95'}(S)))$\n如果严格按照表达式运算顺序执行，则查询效率最高的是表达式（）。",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "E1",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "E2",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "E3",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "E4",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "E2"
+          ],
+          "official_analysis": "本题考察的是**关系代数表达式的等价变换与代价优化原则**。\n核心原则是：**尽可能将选择（σ）下推到越接近数据源越好，尽可能避免先做笛卡儿积（×），优先使用连接（⋈），并减少中间结果规模**。题干四式在语义上应等价；常见等价关系为：**E1 与 E2 等价（选择下推到连接两端）**，**E3 与 E4 等价（连接转化为对笛卡儿积的选择，并尽量下推选择）**。在“严格按写出的运算顺序执行”的前提下，比较中间结果规模与操作类型，E2的执行代价最低。\n**A选项 E1**：先做连接 R ⋈ S，再整体选择 σ{A2<2018 ∧ A4='95'}。**先连接后选择会产生较大的中间结果**，因为连接在未过滤前参与元组更多，随后再过滤，**代价高于先选择再连接**，所以不是最优。\n**B选项 E2**：先对 R 与 S 分别执行选择 σ{A2<2018} 与 σ{A4='95'}，再做连接，然后投影。**这是标准的“选择下推 + 再连接”策略**，能**显著缩小参与连接的关系规模**，减少连接代价与中间结果，严格按序执行时**查询效率最高**，因此正确。\n**C选项 E3**：先做笛卡儿积 R × S，再一次性做包含等值连接条件与选择条件的总选择，最后投影。**笛卡儿积在未约束时会产生规模巨大的中间结果**，随后再用σ过滤，**代价通常最高**，因此最差。\n**D选项 E4**：先分别下推选择到 R 与 S，随后做笛卡儿积，再用 σ{R.A3=S.A3} 实现等值连接。相比 E3，**已经做了部分优化（先选择）**，中间结果小于 E3；但仍然**显式执行了笛卡儿积**再过滤为连接，**通常劣于直接连接的 E2**，因此不是最优。\n综上，按照代价最小化与中间结果最小化的优化原则，选择 B（E2）。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 225,
+      "index": 16,
+      "sort": 6,
+      "knowledge_point": "特殊数据库系统",
+      "prompt": "数据仓库中数据（）是指数据一旦进入数据仓库后，将被长期保留并定期加载和刷新，可以进行各种查询操作，但很少对数据进行修改和删除操作。",
+      "difficulty": 2,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "面向主题",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "集成性",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "相对稳定性",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "反映历史变化",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "相对稳定性"
+          ],
+          "official_analysis": "本题考察的是**数据仓库的四大特点**。\n数据仓库是为支持管理决策而建立的面向主题、集成的、相对稳定的、反映历史变化的数据集合。\n**A选项 面向主题**：指数据仓库按照特定分析主题（如客户、产品、销售）组织数据，而不是按业务过程组织，错误。\n**B选项 集成性**：指数据仓库中的数据来源于不同业务系统，需要进行统一编码、格式、单位等转换，消除不一致性，错误。\n**C选项 相对稳定性**：又称非易失性，数据进入数据仓库后主要用于查询分析，很少修改或删除，仅在定期加载时更新，这是题干描述的特点，正确。\n**D选项 反映历史变化**：指数据仓库保存了从过去到现在不同时间点的数据快照，用于分析趋势与变化，错误。\n因此，本题答案为 C。"
+        }
+      ],
+      "model_response": ""
+    },
+    {
+      "id": 184,
+      "index": 17,
+      "sort": 5,
+      "knowledge_point": "关系数据库",
+      "prompt": "数据库的安全机制中，通过提供（）供第三方开发人员调用进行数据更新 ，从而保证数据库的关系模式不被第三方所获取。",
+      "difficulty": 0,
+      "tags": [
+        "第二版教材",
+        "了解即可"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "索引",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "视图",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "存储过程",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "触发器",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "存储过程"
+          ],
+          "official_analysis": "本题考察的是**关系数据库的安全机制与封装手段**。\n数据库为了保证内部结构（如表结构、字段设计、主外键约束等）不暴露给外部用户，通常会通过封装方式向外提供操作接口。以下逐项分析各选项的作用和限制：\n**A选项索引**：索引主要用于**加速查询操作**，并不涉及对数据的更新，也无法提供安全机制来封装数据库结构。错误。\n**B选项视图**：视图是一种虚拟表，确实可以隐藏数据库的部分结构信息，具有一定的安全作用，但**并不是专门为数据更新而设计**，且大多数视图不能直接更新数据（特别是多表联合视图、聚合视图等）。所以不符合题干中“进行数据更新”的描述。错误。\n**C选项存储过程**：**正确**。存储过程可以将对数据的增删改查操作封装成一个可执行的过程，供外部程序调用，**既能进行数据更新，又能有效隐藏数据库表结构和业务逻辑**，从而提升安全性，是典型的数据库访问封装机制。是本题正确选项。\n**D选项触发器**：触发器是系统对数据变化的被动响应机制，适用于自动完成某些约束检查或日志记录，**不能作为第三方调用的数据更新接口**，不符合题干描述。错误。\n因此，**选择 C. 存储过程** 是最合理的答案。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。针对您5年Java/SpringBoot的开发背景，我将把这些数据库底层概念，**全部映射到您每天都在写的Java代码上**，并严格采用**“中文字面意思（顾名思义）”**为您拆解。\n\n这份笔记专为您定制，请查收：\n\n---\n\n# 📓 软考高级架构师·专属记忆笔记\n**📝 知识点：关系数据库 - 安全机制与封装**\n**🎯 考试要求程度：【了解即可】**（不需要会写SQL语句，只需要看到名词能选出对应的作用，当做常识记住即可，不用深挖！）\n\n---\n\n## 💡 核心记忆法：SpringBoot映射法\n作为Java开发，您一定懂这个道理：**我们绝对不会让前端直接去操作数据库表，而是让前端调用我们写的Controller/Service方法。**\n在数据库的世界里，**【存储过程】**扮演的就是您写的**Controller/Service方法**的角色！\n\n---\n\n## 🧠 选项“顾名思义”逐一拆解（绝不用专业词汇解释专业词汇）\n\n### ✅ 正确答案：C. 存储过程 (Stored Procedure)\n*   **顾名思义**：**【存】**储在数据库里的一个执行**【过程】**（也就是一段代码/方法）。\n*   **大白话解释**：它就像是你写好的一段Java方法，打包放在了数据库里。第三方只能传参数调用这个“方法”，根本不知道底层是哪张表、有几个字段。\n*   **为什么选它**：题干要求**“能更新数据”**且**“隐藏表结构”**。存储过程里面可以写增删改查逻辑，完美符合！\n\n### ❌ 干扰选项：A. 索引 (Index)\n*   **顾名思义**：按图**【索】**骥的**【引】**导目录。\n*   **大白话解释**：就像是一本书的**目录**。\n*   **为什么不选**：目录只能帮你找东西找得快，你总不能通过“调用目录”去修改书里的内容吧？它不负责更新数据。\n\n### ❌ 干扰选项：B. 视图 (View)\n*   **顾名思义**：只供**【视】**觉观看的**【图】**像。\n*   **大白话解释**：就像是商店的**玻璃橱窗**，或者Java里的**DTO（数据传输对象）**。它把几张表拼在一起给你看，隐藏了真实的仓库（表结构）。\n*   **为什么不选**：橱窗主要是用来**“看”**的！在数据库里，大部分视图是不能直接用来“更新/修改”数据的（尤其是复杂的视图）。题干明确说要“进行数据更新”，所以视图出局。\n\n### ❌ 干扰选项：D. 触发器 (Trigger)\n*   **顾名思义**：一**【触】**碰就会自动**【发】**作的机器。\n*   **大白话解释**：就像是**捕鼠夹**，或者Spring里的**拦截器/监听器**。\n*   **为什么不选**：捕鼠夹是**被动**的！第三方开发人员**不能主动去调用它**。只能是有人改了数据（触碰了），它才偷偷在后台自动执行。题干说“供第三方调用”，所以触发器出局。\n\n---\n\n## 🖼️ 字符图解记忆：存储过程的“保安”作用\n\n您可以把【存储过程】想象成数据库大门的**保安（黑盒）**：\n\n```text\n                 外部世界                   ||           数据库内部 (绝对机密)\n                                          ||\n[第三方开发人员]                            ||       +-------------------+\n      |                                   ||       | 真实的数据库表结构 |\n      | (1) 发送更新请求:                   ||       | - 用户表          |\n      | \"我要给张三加100块钱\"               ||       | - 账户表          |\n      V                                   ||       | - 资金流水表      |\n+-------------------------+               ||       +-------------------+\n|       【存储过程】        |  (2) 内部执行  ||                ^\n| (就像Controller方法)      | ----------------------------> | (增删改查)\n| 名字叫: AddMoney(张三,100)|               ||                |\n+-------------------------+               ||                |\n      |                                   ||                |\n      | (3) 返回结果: \"更新成功\"            ||                |\n      V                                   ||                |\n[第三方开发人员]                            ||                |\n(心里想：我只调了AddMoney，根本不知道里面长啥样) ||                |\n```\n\n---\n\n## 🎯 一句话口诀（考前默念）\n\n*   **要快查** 找 **目录（索引）**\n*   **要安全看** 找 **橱窗（视图）**\n*   **要暗中做事** 找 **捕鼠夹（触发器）**\n*   **要让外人安全改数据** 找 **包好的方法（存储过程）**\n\n---\n**👨‍🏫 顾问复习建议：**\n这道题在架构师考试中属于**送分题**。您只需要记住上面这四句口诀，以后看到这四个词，脑子里立刻浮现出“目录、橱窗、捕鼠夹、Java方法”，这类题您绝对不会再选错！不需要去背诵它们复杂的官方定义。"
+    },
+    {
+      "id": 185,
+      "index": 18,
+      "sort": 6,
+      "knowledge_point": "关系数据库",
+      "prompt": "给出关系R（U，F），U={A，B，C，D，E} ，F ={A→BC，B→D，D→E} 。以下关于F说法正确的是（）。若将关系R分解为ρ = {R1（U1，F1）， R2（U2，F2）}， 其中：U1={A，B，C} 、U2 = {B，D，E} ，则分解 ρ（）。",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "F蕴涵A→B、A→C，但 F 不存在传递依赖",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "F蕴涵E→A、A→C，故F存在传递依赖",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "F蕴涵A→D、E→A、A→C，但F不存在传递依赖",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "F蕴涵A→D、A→E、B→E，故F存在传递依赖",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "F蕴涵A→D、A→E、B→E，故F存在传递依赖"
+          ],
+          "official_analysis": "此题考察**Armstrong 公理系统** 的相关概念。\n**第一问**\n**对于 A 选项**，A→BC，可以得到 A→B，A→C，这是 Armstrong 推理分解规则。所以 A 选项的前半句描述是正确的，但根据 A→B，B→D，D→E，此时存在传递函数依赖，所以 A 选项的后半句描述错误，所以 A 选项错误。\n**对于 B 选项**，无法得到 E→A，故该选项描述错误。\n**对于 C 选项**，无法得到 E→A，并且集合中存在传递函数依赖，所以 C 选项描述错误。\n**对于 D 选项**，根据 A 选项的分析过程，A→B，B→D，D→E，根据传递律，可以得到 A→D，A→E，B→E，并且存在传递函数依赖，所以 D 正确。\n选择 D 选项。\n**第二问考察函数依赖和无损分解的相关知识**。\n首先根据 U1，保留函数依赖 A→BC，然后根据 U2，保留函数依赖 B→D，D→E。因此该分解保持函数依赖。判断是否无损分解，就是利用公式法首先计算交集 U1∩U2=B，然后计算差集 U1-U2={A，C}，U2-U1={D，E}。而 R 中存在函数依赖 B→D，B→E，所以该分解是无损分解。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "无损连接并保持函数依赖",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "无损连接但不保持函数依赖",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "有损连接并保持函数依赖",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "有损连接但不保持函数依赖",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "无损连接并保持函数依赖"
+          ],
+          "official_analysis": "此题考察**Armstrong 公理系统** 的相关概念。\n**第一问**\n**对于 A 选项**，A→BC，可以得到 A→B，A→C，这是 Armstrong 推理分解规则。所以 A 选项的前半句描述是正确的，但根据 A→B，B→D，D→E，此时存在传递函数依赖，所以 A 选项的后半句描述错误，所以 A 选项错误。\n**对于 B 选项**，无法得到 E→A，故该选项描述错误。\n**对于 C 选项**，无法得到 E→A，并且集合中存在传递函数依赖，所以 C 选项描述错误。\n**对于 D 选项**，根据 A 选项的分析过程，A→B，B→D，D→E，根据传递律，可以得到 A→D，A→E，B→E，并且存在传递函数依赖，所以 D 正确。\n选择 D 选项。\n**第二问考察函数依赖和无损分解的相关知识**。\n首先根据 U1，保留函数依赖 A→BC，然后根据 U2，保留函数依赖 B→D，D→E。因此该分解保持函数依赖。判断是否无损分解，就是利用公式法首先计算交集 U1∩U2=B，然后计算差集 U1-U2={A，C}，U2-U1={D，E}。而 R 中存在函数依赖 B→D，B→E，所以该分解是无损分解。"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家与记忆学习顾问。针对您作为5年经验的Java/SpringBoot开发者的背景，我将把这些枯燥的数据库理论转化为您日常写代码时最熟悉的逻辑。\n\n针对这道**“关系数据库-函数依赖与无损分解”**的真题，我为您定制了以下**【顾名思义记忆笔记】**。我们不背死概念，只看名字猜意思！\n\n---\n\n# 📓 软考高级架构师·专属记忆笔记\n**【核心考点】**：关系数据库 - 函数依赖、传递依赖、无损分解\n**【真题来源】**：2013年11月 Q6\n\n## 🧠 第一部分：专业名词“顾名思义”翻译字典\n*(绝对不用专业名词解释专业名词，全是大白话和Java思维)*\n\n| 课本上的高冷名词 | 顾名思义（字面意思） | Java程序员秒懂的解释 |\n| :--- | :--- | :--- |\n| **关系 (R)** | **关**联在一起的**系**统数据 | 就是数据库里的**一张表**，或者Java里的一个**实体类 (Entity)**。 |\n| **属性 (U)** | 属于它的特性 | 就是表里的**列 (Column)**，或者实体类里的**字段 (Field)**，比如A、B、C。 |\n| **函数依赖 (F)** | 像**函数**一样，输入x必定输出y，y**依赖**x | 记作 `A → B`。就像Java里的 `Map<A, B>`，**只要知道Key(A)，就能唯一确定Value(B)**。比如：身份证号 → 姓名。 |\n| **分解律** | 打包的东西可以**分**开**解**析 | 如果 `A → BC`，说明知道A就能知道B和C。拆开看就是：`A → B` 且 `A → C`。（知道身份证号，当然既能查到姓名，也能查到性别）。 |\n| **传递依赖** | 依赖关系可以像接力棒一样**传递** | `A → B`，`B → D`，所以 `A → D`。**（老板A管经理B，经理B管员工D，等于老板A能管员工D）**。 |\n| **保持函数依赖** | 拆表后，原来的规矩（依赖）**保持**住了没丢 | 把一张大表拆成两张小表，原来F里规定的那些 `A→B` 的规矩，在小表里还能不能找到。能找到就是“保持”了。 |\n| **无损连接(分解)** | 拆开再拼起来，**无**数据**损**失，也**无**多余假数据 | 把大表拆成两张小表，用 `JOIN` 连起来后，数据行数和内容跟原来**一模一样**。 |\n\n---\n\n## 🛠 第二部分：真题秒杀推演（跟着逻辑走，不用死记）\n\n### 🎯 子题1：破解“传递依赖”\n**题干已知**：规矩库 F = {A→BC, B→D, D→E}\n*   **第一步：用“分解律”拆包**\n    看到 `A→BC`，立刻拆成 `A→B` 和 `A→C`。\n*   **第二步：用“传递依赖”顺藤摸瓜**\n    现在我们有：`A→B`，题干还有 `B→D`，`D→E`。\n    连起来看：`A → B → D → E`。\n    所以：A能决定D (`A→D`)，A能决定E (`A→E`)，B能决定E (`B→E`)。\n*   **结论**：F里蕴含了 A→D、A→E、B→E，并且这明显是顺藤摸瓜传过去的，所以**存在传递依赖**。\n*   **选D！**\n\n### 🎯 子题2：破解“无损分解”与“保持依赖”\n**题干已知**：大表拆成了两张小表：U1={A,B,C}，U2={B,D,E}。\n\n*   **第一问：保持函数依赖了吗？**\n    *   看U1{A,B,C}：能装下原规矩 `A→BC` 吗？能！A,B,C都在U1里。\n    *   看U2{B,D,E}：能装下原规矩 `B→D` 和 `D→E` 吗？能！B,D,E都在U2里。\n    *   **结论**：原规矩全都在，**保持了函数依赖**。\n\n*   **第二问：是无损连接吗？（⭐核心记忆公式）**\n    *   *大白话公式*：**两表的“公共列”，必须是其中一张表的“主键”（能决定该表独有的其他列）。**\n    *   **算交集（找公共列）**：U1 和 U2 都有谁？是 **B**。\n    *   **算差集（找独有列）**：U2 独有的是 **{D, E}**。\n    *   **查规矩**：公共列 B，能决定 U2 的独有列 {D, E} 吗？\n    *   根据刚才的顺藤摸瓜：`B→D` 且 `D→E`，所以 `B→DE`。**成立！**\n    *   **结论**：公共列B是U2的“主键”，所以拼表时不会错乱，是**无损连接**。\n    *   **选A！**\n\n---\n\n## 🖼 第三部分：字符图辅助记忆（无损分解的本质）\n\n为什么“公共列能决定独有列”就是无损的？\n想象一下数据库的 `LEFT JOIN`，如果用来连接的字段（公共列）在右表里不是唯一的（不是主键），就会产生笛卡尔积（多出假数据，这就是“有损”）。\n\n```text\n[大表 R] 拆分前\n+---+---+---+---+---+\n| A | B | C | D | E |\n+---+---+---+---+---+\n\n      拆分后 (通过公共列 B 桥连)\n      \n[小表 R1]                 [小表 R2]\n+---+---+---+             +---+---+---+\n| A | B | C |             | B | D | E |\n+---+---+---+             +---+---+---+\n      |                     |\n      +-------- JOIN -------+\n                 |\n        【关键判断点：B在R2中是老大吗？】\n        因为 B → D, D → E (即 B → DE)\n        说明在 R2 中，一个 B 只对应一组 D和E。\n        B 就像是 R2 的主键！\n        所以 JOIN 拼回去时，绝对不会产生重复的假数据！\n        这就是【无损】！\n```\n\n---\n\n## 🎯 第四部分：考试复习到什么程度就够了？\n\n作为架构师考试，您**不需要**去背复杂的数学证明公式，只需要掌握以下**“肌肉记忆”**即可拿分：\n\n1.  **看到“Armstrong公理”**：脑子里只闪过两个词——**“拆开”**（A→BC 拆成 A→B, A→C）和**“传递”**（A→B→C 就是 A→C）。\n2.  **看到问“是否保持函数依赖”**：直接看拆开的小表，能不能把题干给的 `X→Y` 这种箭头完整地包进去。包进去了就是保持。\n3.  **看到问“是否无损分解”**（必考必拿分）：\n    *   **第一步**：找出两个小表的**交集**（公共字母）。\n    *   **第二步**：找出两个小表各自的**差集**（独有字母）。\n    *   **第三步**：看**交集**能不能推导出其中一个**差集**（利用题干给的箭头推导）。能推导出来，就是**无损**；推不出来，就是有损。\n\n**复习建议**：把上面这3条“肌肉记忆”在草稿纸上自己默写一遍，然后随便找两道历年真题的“无损分解”套一下这个三步曲，只要能套对，这个知识点就可以**直接翻篇，不用再看了**！把精力留给后面的架构设计大题。"
+    },
+    {
+      "id": 186,
+      "index": 19,
+      "sort": 7,
+      "knowledge_point": "特殊数据库系统",
+      "prompt": "分布式数据库系统除了包含集中式数据库系统的模式结构之外，还增加了几个模式级别，其中（）定义分布式数据库中数据的整体逻辑结构，使得数据使用方便，如同没有分布一样。",
+      "difficulty": 0,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "分片模式",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "全局外模式",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "分布模式",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "全局概念模式",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "全局概念模式"
+          ],
+          "official_analysis": "本题考察的是**分布式数据库系统的模式结构**。\n**A选项分片模式**：用于描述如何将全局数据逻辑地划分为若干片段，但不描述整体逻辑结构，因此不符合题意。\n**B选项全局外模式**：位于全局概念模式之上，针对不同应用提供不同的视图，类似于传统数据库中的外模式，不能描述整个系统的逻辑结构。\n**C选项分布模式**：在标准定义中并不是一个正式的模式层次，指的是数据的分布方式，但题干所述内容与此无关。\n**D选项全局概念模式**：是描述整个分布式数据库中所有数据的**逻辑结构**的模式层次，使用户感知不到数据的物理分布，符合题干描述。\n因此，选项 D 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家。针对您5年Java/SpringBoot开发经验的背景，我为您量身定制了这套**“顾名思义+代码映射”**的记忆笔记。\n\n我们不背干巴巴的定义，我们把这些概念映射到您每天都在写的Java代码和架构设计中去！\n\n---\n\n# 📒 软考高级架构师专属记忆笔记：分布式数据库模式结构\n\n## 🌟 一、 核心记忆图谱（字符图）\n\n请把这个结构想象成我们做**微服务/分库分表**时的架构分层：\n\n```text\n====================================================================\n                      【分布式数据库模式分层图】\n====================================================================\n\n[ 1. 全局外模式 ]  --> 顾名思义：给【外】面不同业务看的长相\n        |              (类似Java中的 VO/DTO，不同接口返回不同字段)\n        |\n[ 2. 全局概念模式] --> 顾名思义：【全局】的【概念】长啥样 (★本次考点)\n        |              (类似Java中的 Entity实体类，不管存哪，它是个完整的表)\n        |\n[ 3. 分片模式   ]  --> 顾名思义：怎么把大表【切片】\n        |              (类似ShardingSphere里的 分表规则，按月分还是按ID分)\n        |\n[ 4. 分布/分配模式] -> 顾名思义：切好的片【分布】在哪个机器上\n        |              (类似 application.yml 里的 多数据源IP配置)\n        |\n[ 5. 局部数据库 ]  --> 具体的 MySQL 数据库\n====================================================================\n```\n\n---\n\n## 🧠 二、 顾名思义 & 大白话名词解释（绝不用专业词汇解释专业词汇）\n\n为了照顾您的学习偏好，我们逐个把名字拆开来记：\n\n### 1. 全局概念模式 (Global Conceptual Schema) —— 本题答案\n*   **拆字顾名思义**：\n    *   **全局** = 整体的、全部的。\n    *   **概念** = 脑子里的想法、逻辑上的样子（不是物理上真实存在的硬盘文件）。\n    *   **连起来** = **整体在脑子里的样子**。\n*   **大白话解释**：就像你写了一个包含100个字段的 `UserEntity.java`。在你写代码的时候，你觉得这就是一个完整的表，你**感觉不到**它其实被拆分到了北京和上海的两个数据库里。\n*   **做题秒杀词**：看到题干里有 **“整体”**、**“逻辑结构”**、**“如同没有分布一样（感觉不到被拆了）”** -> 直接选【全局概念模式】。\n\n### 2. 分片模式 (Fragmentation Schema)\n*   **拆字顾名思义**：\n    *   **分片** = 切片、切块。\n*   **大白话解释**：就是决定怎么“切西瓜”。比如一个订单表太大，我们决定“按月份切”或者“按地区切”。它只管**怎么切**，不管切完放在哪。\n*   **做题秒杀词**：看到题干里有 **“划分”**、**“片段”** -> 选【分片模式】。\n\n### 3. 全局外模式 (Global External Schema)\n*   **拆字顾名思义**：\n    *   **外** = 给外面人（外部应用/用户）看的。\n*   **大白话解释**：就像你写的 `UserVO.java`。前端A只需要用户的名字，前端B只需要用户的年龄。你给他们提供不同的“视图”，他们只能看到你想让他们看的部分。\n*   **做题秒杀词**：看到题干里有 **“不同应用”**、**“视图”**、**“用户视图”** -> 选【全局外模式】。\n\n### 4. 分布模式 / 分配模式 (Distribution / Allocation Schema)\n*   **拆字顾名思义**：\n    *   **分布/分配** = 东西具体放在哪个位置。\n*   **大白话解释**：西瓜切好了（分片），现在决定把第一块放在北京机房的服务器，第二块放在上海机房的服务器。这就是配置具体的IP地址和物理位置。\n*   **做题秒杀词**：看到题干里有 **“物理位置”**、**“节点分配”** -> 选【分布/分配模式】。\n\n---\n\n## 🎯 三、 考试复习深度指南（要掌握到什么程度？）\n\n对于《系统架构设计师》考试中的这个知识点，您**不需要**去背诵长篇大论的定义，只需要达到以下程度即可拿分：\n\n1.  **层级顺序要眼熟**：知道从上到下是 `外 -> 概念 -> 分片 -> 分配`。（口诀：**外人看概念，切片再分配**）。\n2.  **玩连连看游戏（核心考法）**：\n    *   看到“整体逻辑/像没分布” 连线 `全局概念模式`\n    *   看到“怎么划分/切块” 连线 `分片模式`\n    *   看到“物理位置/放哪台机” 连线 `分布/分配模式`\n    *   看到“特定用户/局部视图” 连线 `全局外模式`\n\n**针对本题的实战演练：**\n题干说：“定义...**整体逻辑结构**...如同**没有分布**一样”。\n大脑检索：整体 = 全局；逻辑 = 脑子里的想法 = 概念。\n得出结论：全局概念模式。选 D！\n\n---\n*💡 专家寄语：作为5年经验的Java老兵，您其实每天都在和这些概念打交道（分库分表、实体类、VO类）。软考只是把您平时的经验换上了一层“学术的外衣”。扒掉这层外衣，用您最熟悉的日常开发去映射它，记忆就会变得极其牢固！*"
+    },
+    {
+      "id": 135,
+      "index": 20,
+      "sort": 5,
+      "knowledge_point": "关系数据库",
+      "prompt": "通常在设计关系模式时，派生属性不会作为关系中的属性来存储。按照这个原则，假设原设计的学生关系模式为Students（学号，姓名，性别，出生日期，年龄，家庭地址），那么该关系模式正确的设计应为（）。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "Students (学号，性别，出生日期，年龄，家庭地址)",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "Students (学号，姓名，性别，出生日期，年龄)",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "Students (学号，姓名，性别，出生日期，家庭地址)",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "Students (学号，姓名，出生日期，年龄，家庭地址)",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "Students (学号，姓名，性别，出生日期，家庭地址)"
+          ],
+          "official_analysis": "本题考察的是**关系数据库模式设计中派生属性的处理原则**。\n派生属性是指能够通过其他属性计算得到的属性，不应直接存储在关系模式中，而应在查询时动态计算。\n**A选项**：缺少姓名属性，且保留了年龄这个派生属性，不符合要求，错误。\n**B选项**：虽然有姓名，但依然保留了年龄属性，属于派生属性，应删除，错误。\n**C选项**：包含学号、姓名、性别、出生日期、家庭地址，去除了年龄属性，符合派生属性不存储的原则，正确。\n**D选项**：包含了年龄属性，违反了不存储派生属性的设计规范，错误。\n因此，选择 C。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考指导专家。看到您有5年的Java/SpringBoot开发经验，这太棒了！这意味着您对数据库表设计和实体类（Entity）已经非常熟悉。\n\n针对您“**英语不好**”、“**喜欢顾名思义**”以及“**拒绝用专业名词解释专业名词**”的需求，我为您量身定制了这份**【系统架构设计师-关系数据库】**的精美记忆笔记。我们将把枯燥的理论直接映射到您每天都在写的Java代码和MySQL表设计上！\n\n---\n\n# 📓 软考架构师通关笔记：关系数据库之「派生属性」\n\n## 一、 核心名词“顾名思义”大白话翻译\n\n在看这道题之前，我们先把题目里装腔作势的词汇扒掉外衣，换成您每天都在用的词：\n\n*   **关系模式** ➡️ **【顾名思义：关系=表格，模式=样子】**。大白话：**数据库表结构**（就是您在Navicat里建表时的那些列）。\n*   **属性** ➡️ **【顾名思义：属于这个表的心性/特征】**。大白话：**表里的字段/列**（Column）。\n*   **派生属性** ➡️ **【顾名思义：“派”=衍生/分派，“生”=生成】**。大白话：**被别的字段“生”出来的字段**。它自己没有独立存在的价值，只要有它“爹”（源字段），就能把它算出来。\n\n---\n\n## 二、 核心记忆法：Java程序员秒懂记忆\n\n**💡 记忆口诀：能算出来的，坚决不存库！**\n\n结合您的SpringBoot经验来记：\n假设您写了一个 `StudentEntity.java`。\n里面有 `出生日期 (birthDate)`。\n那么 `年龄 (age)` 还需要在 MySQL 里建一个 `age` 字段存起来吗？\n**绝对不需要！**\n因为只要到了明年，存库的 `age` 就全错了，您还得写个定时任务每年去 `update` 一次，这在架构设计上是极其愚蠢的。\n\n**正确的做法是：**\n数据库（关系模式）里**只存【出生日期】**。\n在Java代码里写一个 `getAge()` 方法，用 `当前时间 - 出生日期` 动态算出来返回给前端。\n\n这个在Java里不用存库、靠算出来的东西，在软考里就叫**【派生属性】**！\n\n---\n\n## 三、 字符图解记忆\n\n```text\n[ 数据库表 (关系模式) ]                  [ Java后端 (SpringBoot) ]\n+-------------------+                  +-----------------------+\n| 学号 (必须存)     |                  |                       |\n| 姓名 (必须存)     |                  |                       |\n| 性别 (必须存)     |  ==== 读取 ===>  |                       |\n| 出生日期 (必须存) |                  |  getAge() {           |\n| 家庭地址 (必须存) |                  |    return 今年 - 出生; |\n+-------------------+                  |  }                    |\n                                       +-----------------------+\n       ❌ 绝对不要建【年龄】列！                 ✅ 年龄在这里“派生”出来\n       (建了就是冗余，就是给自己挖坑)\n```\n\n---\n\n## 四、 题目秒杀解析\n\n**题目重现：**\n原设计：Students（学号，姓名，性别，出生日期，**年龄**，家庭地址）\n问：正确设计是什么？\n\n**解题动作：**\n1. 扫描括号里的字段。\n2. 发现【出生日期】和【年龄】同时存在！\n3. 触发记忆口诀：“**年龄是被出生日期生出来的（派生属性），能算出来的坚决不存！**”\n4. 拿起笔，把【年龄】划掉。\n5. 剩下：学号，姓名，性别，出生日期，家庭地址。\n6. 对照选项，**直接选 C**。\n\n*(A缺了姓名，B和D都还留着年龄这个祸害，统统排除)*\n\n---\n\n## 五、 🎯 考试复习边界（掌握到什么程度就能拿分？）\n\n对于**【派生属性】**这个知识点，您**不需要**去背诵复杂的数据库范式理论，只需要掌握到以下程度即可在架构师考试中拿满分：\n\n1.  **看到名词能反应过来**：看到“派生属性”，脑子里立刻弹出“**年龄**”、“**总价**（由单价*数量算出来）”这两个经典例子。\n2.  **做题条件反射**：在做数据库设计选择题时，只要选项的括号里同时出现了**【源头字段】**和**【计算结果字段】**，立刻把【计算结果字段】叉掉。\n    *   *常见套路 1：有【出生日期】，必删【年龄】。*\n    *   *常见套路 2：有【单价】和【数量】，必删【总金额】。*\n\n只要记住这两种套路，这类送分题您只需 5 秒钟就能选出正确答案！\n\n---\n*祝您备考顺利！如果还有其他觉得晦涩难懂的软考概念，随时告诉我，我继续用Java大白话给您翻译！*"
+    },
+    {
+      "id": 136,
+      "index": 21,
+      "sort": 6,
+      "knowledge_point": "关系数据库",
+      "prompt": "给出关系R(U，F)，U={A，B，C，D，E}， F={A→B，D→C，BC→E，AC→B}，求属性闭包的等式成立的是（） 。R的候选关键字为（）。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "$(A)^+_F = U$",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "$(B)^+_F = U$",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "$(AC)^+_F = U$",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "$(AD)^+_F = U$",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "$(AD)^+_F = U$"
+          ],
+          "official_analysis": "此题考察**关系数据库的基本理论**。\n**问题 1**：考察属性闭包的计算方法。\n关系数据库中的 \\[X\\]+F=Y 闭包求法包括以下三个步骤：（1）将最终结果属性集设为Y，并将Y初始化为空。（2）检查F中的每一个函数依赖 A→B，如果属性集 A 中所有属性均在 Y 中，而B中有的属性不在 Y 中，则将其加入到 Y 中。（3）重复第二步，直到没有属性可以添加到属性集 Y 中为止，得到的 Y 就是 X 的闭包。\nA选项（A）+ F根据 A→B 可得（A）+ F = {A，B} ，B选项（B）+ F 因为不存在B为左侧决定因素的函数依赖，所以（B）+ F = {B} ，C 选项（AC）+ F 根据 A→B，BC→E，AC→B 可得（AC）+ F ={A，B，C，E} ，D 选项（AD）+ F 根据 A→B，D→C， BC→E 可得（AD）+ F ={A，B，C，D，E} = U。所以选 D 选项。\n\n**问题 2**：考察候选码的计算方法。\n如果有属性或属性组能唯一标识元组，则它就是候选码。候选码的计算分方法有分析法和作图法。个人建议用作图法。作图法就是根据题目给出的函数依赖画出有向图。然后从起点出发找，看是否能遍历所有节点。一个不行再试另一个起点。最后的结果就是候选码。如下图所示。从图很直观地可以看出，入度为零的结点是 A 与 D，从这两个结点的组合出发，能遍历全图，所以候选码是 AD。\n![#317px #157px](https://oss.cheko.cc/81d7ff92ad77d7bd2f8c1be45198fceccc84a568af46517f2a538436884a9538.png)\n可以看到属性闭包也可以通过先做出有向图，然后从某个点出发遍历得到。比如 A 在 F 上的闭包从图中看出就是 (A，D)。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "AD",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "AB",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "AC",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "BC",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "AD"
+          ],
+          "official_analysis": "此题考察**关系数据库的基本理论**。\n**问题 1**：考察属性闭包的计算方法。\n关系数据库中的 \\[X\\]+F=Y 闭包求法包括以下三个步骤：（1）将最终结果属性集设为Y，并将Y初始化为空。（2）检查F中的每一个函数依赖 A→B，如果属性集 A 中所有属性均在 Y 中，而B中有的属性不在 Y 中，则将其加入到 Y 中。（3）重复第二步，直到没有属性可以添加到属性集 Y 中为止，得到的 Y 就是 X 的闭包。\nA选项（A）+ F根据 A→B 可得（A）+ F = {A，B} ，B选项（B）+ F 因为不存在B为左侧决定因素的函数依赖，所以（B）+ F = {B} ，C 选项（AC）+ F 根据 A→B，BC→E，AC→B 可得（AC）+ F ={A，B，C，E} ，D 选项（AD）+ F 根据 A→B，D→C， BC→E 可得（AD）+ F ={A，B，C，D，E} = U。所以选 D 选项。\n\n**问题 2**：考察候选码的计算方法。\n如果有属性或属性组能唯一标识元组，则它就是候选码。候选码的计算分方法有分析法和作图法。个人建议用作图法。作图法就是根据题目给出的函数依赖画出有向图。然后从起点出发找，看是否能遍历所有节点。一个不行再试另一个起点。最后的结果就是候选码。如下图所示。从图很直观地可以看出，入度为零的结点是 A 与 D，从这两个结点的组合出发，能遍历全图，所以候选码是 AD。\n![#317px #157px](https://oss.cheko.cc/81d7ff92ad77d7bd2f8c1be45198fceccc84a568af46517f2a538436884a9538.png)\n可以看到属性闭包也可以通过先做出有向图，然后从某个点出发遍历得到。比如 A 在 F 上的闭包从图中看出就是 (A，D)。"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家。了解到您有5年的Java/SpringBoot开发经验，这非常棒！这意味着您对数据库表结构和业务逻辑已经有了很深的直觉。\n\n针对您英语不好、喜欢**“顾名思义”**、且需要**“大白话解释”**的学习偏好，我为您量身定制了这份关于**【关系数据库：属性闭包与候选码】**的精美记忆笔记。我们将用Java程序员最熟悉的思维来破解这道题！\n\n---\n\n# 📓 软考高级架构师·专属记忆笔记\n## 核心考点：属性闭包与候选码计算 (2013年11月-Q6)\n\n### 💡 第一部分：专业名词“顾名思义”大白话翻译\n我们先用大白话把题目里的“天书”翻译成您日常开发中的概念，**绝对不用专业名词解释专业名词**：\n\n*   **关系 R (Relation)**\n    *   **顾名思义**：就是一张**“数据库表”**。\n    *   **大白话**：别管什么关系不关系，它就是一张MySQL里的Table。\n*   **属性 U (Attribute)**\n    *   **顾名思义**：表里面属于它的**“性质/字段”**。\n    *   **大白话**：就是表的**“列名”**。题目里的 `U={A,B,C,D,E}`，你就当成这张表有5个字段：字段A、字段B、字段C、字段D、字段E。\n*   **函数依赖 F (Functional Dependency, 比如 A→B)**\n    *   **顾名思义**：像函数一样，给一个输入，就**“必定依赖”**出一个输出。\n    *   **大白话**：就是**“顺藤摸瓜的线索”**。`A→B` 的意思是：只要我知道了字段A的值，我就能唯一确定字段B的值。\n    *   *Java秒懂*：就像 `map.get(A)` 一定能拿到 `B`。\n*   **属性闭包 (Closure，符号是 $[X]^+_F$)**\n    *   **顾名思义**：**“闭”**=完结/全部，**“包”**=打包。把能顺藤摸瓜找到的所有字段**“全部打包”**在一起。\n    *   **大白话**：**“滚雪球”**。给你一个初始字段（比如A），根据线索（F），看看你的雪球最大能滚多大，能把多少个字段卷进来。\n    *   *Java秒懂*：就像Maven的**传递依赖**。你只在pom.xml里引入了A，但A依赖B，B依赖C，最后Maven给你“打包”下载了A, B, C。这个{A,B,C}就是A的闭包！\n*   **候选码 (Candidate Key)**\n    *   **顾名思义**：有资格**“候选”**当主键的**“号码/字段”**。\n    *   **大白话**：**“全村的希望”**。它是最小的起始字段集合，只要有了它，就能顺藤摸瓜把表里**所有**字段（A,B,C,D,E）都找出来。\n\n---\n\n### 🚀 第二部分：解题必杀技 —— “找源头”作图法\n\n这道题根本不需要死记硬背复杂的数学公式，我们用**“画箭头找源头”**的方法，10秒钟就能看破玄机！\n\n#### 1. 题目线索（依赖关系 F）翻译：\n*   `A→B` ：有A就能找到B\n*   `D→C` ：有D就能找到C\n*   `BC→E`：必须**同时**有B和C，才能找到E\n*   `AC→B`：必须**同时**有A和C，才能找到B\n\n#### 2. 字符图解（顺藤摸瓜图）：\n我们把线索画成箭头，箭头指向谁，谁就是“小弟”（被推导出来的）。\n\n```text\n      (源头1) A --------> B\n                          |\n                          v (B和C结合)\n      (源头2) D --------> C --------> E\n```\n\n#### 3. 破题口诀：【找“入度为0”的节点】\n*   **顾名思义**：“入度”就是**“射入的箭头数量”**。入度为0，就是**没有箭头指向它**。\n*   **大白话**：没有箭头指向它，说明**没有任何人能推导出它**。它就是“老祖宗”（源头）。\n*   **看图找源头**：\n    *   A：没有箭头指向A。A是源头！\n    *   D：没有箭头指向D。D是源头！\n    *   B、C、E：都有箭头指向它们，它们都是小弟。\n*   **结论**：既然A和D谁也推导不出来，那么**想找齐所有人，一开始的手里必须同时拥有 A 和 D**。所以，**候选码必定包含 AD**！\n\n---\n\n### 🎯 第三部分：实战解题演示\n\n#### 解决子题2：求候选码（先做这题更简单）\n根据我们上面的口诀，找没有箭头指向的字母。\n在 `F={A→B, D→C, BC→E, AC→B}` 中，看箭头右边的字母：有 B, C, E。\n说明 B, C, E 都能被别人找出来。\n**唯独 A 和 D 从来没出现在箭头右边！**\n所以 A 和 D 是源头，必须选！\n**答案直接秒选 A (AD)**。\n\n#### 解决子题1：求属性闭包的等式成立的是？\n题目问：下面哪个选项的“雪球”滚到最后，能等于 U（也就是包含A,B,C,D,E全部）？\n既然我们刚才算出候选码是 AD，意思就是“只有AD能找齐所有人”。我们来验证一下 D选项 `(AD)+` 的滚雪球过程：\n\n1.  **初始雪球**：手里有 `{A, D}`\n2.  **用线索 A→B**：手里有A，抓到了B。雪球变大：`{A, D, B}`\n3.  **用线索 D→C**：手里有D，抓到了C。雪球变大：`{A, D, B, C}`\n4.  **用线索 BC→E**：手里现在有B和C了，抓到了E。雪球变大：`{A, D, B, C, E}`\n5.  **结果**：找齐了！等于 U。\n**答案选 D**。\n\n---\n\n### 🛑 第四部分：考试复习到什么程度就够了？\n\n作为架构师考试，对于【关系数据库的闭包和候选码】这个知识点，您**不需要**去学复杂的离散数学证明，**只需要掌握以下两步（达到这个程度100%能拿分）**：\n\n1.  **会找“源头”（入度为0的属性）**：\n    *   **考试技巧**：直接看题目给的 `F={...}`，把所有在箭头 `→` **右边**出现过的字母划掉。剩下的从来没在右边出现过的字母，就是核心源头！候选码里**一定**包含它们。\n2.  **会“滚雪球”（验证闭包）**：\n    *   **考试技巧**：拿着你找到的源头字母，对照着 `F` 里的线索，一个一个往里加新字母，看看最后能不能把所有字母都凑齐。能凑齐，它就是候选码；凑齐的这个过程，就叫求闭包。\n\n**日常复习小测验（在脑子里过一遍）：**\n*   闭包是什么？ -> 滚雪球打包，看能顺藤摸瓜找出多少字段。\n*   候选码是什么？ -> 全村的希望，能滚出所有字段的最小起始源头。\n*   怎么找候选码？ -> 找从来没在箭头右边出现过的字母！\n\n祝您备考顺利！用程序员的逻辑思维降维打击这些理论题，您一定没问题！如果还有其他难记的知识点，随时告诉我。"
+    },
+    {
+      "id": 147,
+      "index": 22,
+      "sort": 7,
+      "knowledge_point": "特殊数据库系统",
+      "prompt": "在分布式数据库中有分片透明、复制透明、位置透明和逻辑透明等基本概念。其中，（）是指用户无需知道数据存放的物理位置。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "分片透明",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "逻辑透明",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "位置透明",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "复制透明",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "位置透明"
+          ],
+          "official_analysis": "本题考察的是**分布式数据库的四种透明性**的基本概念。\n分布式数据库系统通常具备四种透明性：分片透明性、复制透明性、位置透明性和局部映像透明性（又称逻辑透明性），它们共同目的是让用户在使用数据时无需关心底层数据的组织与存储方式。\n**A选项 分片透明**：指用户在进行数据操作时，不必关心数据是如何分片的，也无需了解分片位置，系统会自动定位到相应的数据片段并执行操作。它解决的是数据**拆分结构的透明性**，而不是位置问题，因此不符合题意。\n**B选项 逻辑透明**：又称局部映像透明性，指用户不必关心各站点局部数据库使用的具体数据模型与操纵语言，系统会自动进行数据模型和操作语言的映射与转换。这是数据模型层面的抽象，不涉及物理位置，因此不符合题意。\n**C选项 位置透明**：指用户不需要知道数据的物理存放位置，系统会自动定位到存储数据的站点并完成操作。当数据位置发生变化时（如从一个站点迁移到另一个站点），应用程序无需修改。这正是题干描述的含义，因此正确。\n**D选项 复制透明**：指用户不必关心数据在不同节点的复制情况，系统会自动完成复制数据的更新与维护。它解决的是数据**冗余副本的透明性**，而非物理位置问题，因此不符合题意。\n因此，本题选择 C。"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家。针对您5年Java/SpringBoot开发经验的背景，以及“一定要用中文顾名思义”、“不搞专业词汇堆砌”、“英语不好”的需求，我为您量身定制了这份**《分布式数据库透明性》**的精美记忆笔记。\n\n在IT里，“透明”这个词和生活中的意思正好相反。生活中透明是“看得清”，**在计算机里，“透明”的意思是“像玻璃一样穿透过去，你根本看不见它，所以你完全不用管它”**。\n\n请您查收这份为您定制的记忆笔记：\n\n---\n\n# 📒 软考架构师专属记忆笔记：分布式数据库的“四大透明性”\n\n## 🌟 核心心法：什么是“透明”？\n> **顾名思义**：透明 = **看不见 = 不用管 = 系统替你干了**。\n> 考试题干里只要出现“**用户无需知道/不必关心...**”，就是在考“透明性”。\n\n## 🖼️ 字符图解：四大透明性层级图\n（从上到下，级别越来越低，底层细节越来越多，但对用户都“透明/不可见”）\n\n```text\n[ 你的Java/SpringBoot应用 ]  <-- 你只管写CRUD，下面全不用管\n      │\n      ▼\n====================================================\n【1. 分片透明】 ✂️ 怎么切的？不用管！ (最高级)\n====================================================\n      │\n      ▼\n====================================================\n【2. 复制透明】 👯 有几个备份？不用管！\n====================================================\n      │\n      ▼\n====================================================\n【3. 位置透明】 📍 放在哪个机房？不用管！ (本题考点)\n====================================================\n      │\n      ▼\n====================================================\n【4. 逻辑透明】 🗣️ 底层说啥方言？不用管！ (最低级)\n====================================================\n      │\n      ▼\n[ 北京机房(MySQL) ]   [ 上海机房(Oracle) ]   [ 广州机房(SQLServer) ]\n```\n\n---\n\n## 🧠 “顾名思义”逐个击破（绝对不用专业词汇解释）\n\n### 1. 位置透明 (本题答案 C)\n*   **顾名思义**：**位置** = 在哪儿。**位置透明** = **不用管数据放在哪儿**。\n*   **大白话解释**：就像你用手机点外卖，你只管点“宫保鸡丁”，你不需要知道这盘菜是在北京厨房炒的还是上海厨房炒的（物理位置），外卖小哥（系统）会自动给你送来。\n*   **Java秒懂**：就像微服务里的 `Nacos` 或 `Eureka`。你调服务只用写服务名（如 `order-service`），根本不用写对方的IP地址（物理位置）。\n*   **做题找关键词**：题干里看到 **“物理位置”、“存放地点”、“站点”** -> 秒选 **位置透明**。\n\n### 2. 分片透明 (选项 A)\n*   **顾名思义**：**分片** = 切成小块。**分片透明** = **不用管数据是怎么切块的**。\n*   **大白话解释**：一张100万人的大表，被切成了10个小表。你查询的时候，不需要自己去拼凑这10个小表，你只管查，系统会自动帮你把碎片拼好给你。\n*   **Java秒懂**：就像用了 `ShardingSphere` 或 `MyCat`（分库分表中间件）。你代码里写的还是 `select * from user`，中间件会自动帮你去查 `user_01`, `user_02`。\n*   **做题找关键词**：题干里看到 **“分片”、“怎么拆分的”、“分片条件”** -> 秒选 **分片透明**。\n\n### 3. 复制透明 (选项 D)\n*   **顾名思义**：**复制** = 搞了几个备份。**复制透明** = **不用管数据有几个备份，也不用管它们怎么同步**。\n*   **大白话解释**：你存了一份文件，系统为了安全偷偷在别的电脑上也复制了3份。你修改文件时，只需要改一次，系统会自动把另外3份也改了，你完全不用操心。\n*   **Java秒懂**：就像 MySQL 的 **主从复制**。你只管往数据库里写数据，至于数据怎么同步到从库（备份），你写代码的时候根本不用管。\n*   **做题找关键词**：题干里看到 **“复制”、“副本”、“冗余”、“更新同步”** -> 秒选 **复制透明**。\n\n### 4. 逻辑透明 / 局部映像透明 (选项 B)\n*   **顾名思义**：**逻辑** = 底层用的啥规矩/方言。**逻辑透明** = **不用管底层具体用的是什么数据库软件**。\n*   **大白话解释**：不管底层是存放在Excel里、TXT文档里，还是专业的数据库里，你用起来感觉都一样。系统帮你把你的命令翻译成了它们能听懂的“方言”。\n*   **Java秒懂**：就像用了 `Hibernate` 或 `JPA`。你只管写 Java 对象操作，底层到底是 MySQL 还是 Oracle，你不用管，框架会自动帮你翻译成对应的 SQL 方言。\n*   **做题找关键词**：题干里看到 **“数据模型”、“操纵语言”、“局部数据库”** -> 秒选 **逻辑透明**。\n\n---\n\n## 🎯 考场通关指南（复习到什么程度就能拿分？）\n\n对于系统架构设计师的上午选择题，这个知识点**绝对不需要你默写定义**！\n你只需要达到**“连连看”**的程度即可拿满分：\n\n1.  看到 **“物理位置”** 连线 👉 **位置透明**\n2.  看到 **“切分/分片”** 连线 👉 **分片透明**\n3.  看到 **“副本/备份”** 连线 👉 **复制透明**\n4.  看到 **“模型/语言”** 连线 👉 **逻辑透明**\n\n**本题实战演练：**\n回头看题干：“是指用户无需知道数据存放的**物理位置**”。\n大脑触发条件反射：物理位置 -> 在哪儿 -> 位置透明。\n直接选 C，耗时3秒，拿下1分！\n\n---\n*祝您备考顺利！如果还有其他觉得难背的知识点（比如架构风格、设计模式等），随时告诉我，我继续用这种“顾名思义+Java大白话”的方式帮您拆解！*"
+    },
+    {
+      "id": 82,
+      "index": 23,
+      "sort": 6,
+      "knowledge_point": "数据库设计",
+      "prompt": "某企业开发信息管理系统平台进行 E-R 图设计，人力部门定义的是员工实体具有属性员工号、姓名、性别、出生日期、联系方式和部门，培训部门定义的培训师实体具有属性培训师号，姓名和职称，其中 职称 = {初级培训师，中级培训师，高级培训师}，这种情况属于（），在合并 E-R 图时，解决这一冲突的方法是（）",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "属性冲突",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "结构冲突",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "命名冲突",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "实体冲突",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "结构冲突"
+          ],
+          "official_analysis": "本题考察的是**E-R 图集成中的冲突类型与解决方法**。\nE-R 图在合并时，可能出现属性冲突、命名冲突、结构冲突等多种问题。\n**小题1**：\n**A选项 属性冲突**：指同一属性在不同局部 E-R 图中属性域或取值范围不一致，本题不涉及这种情况，错误。\n**B选项 结构冲突**：指同一现实世界对象在不同应用中被抽象为不同的实体，或同一实体在不同局部 E-R 图中属性个数、排列顺序不同。本题中“培训师”是“员工”的一种，培训部门将其单独抽象为实体，而人力部门将其归入员工实体，这是典型的结构冲突，正确。\n**C选项 命名冲突**：指同名异义或异名同义的问题，本题并不存在，错误。\n**D选项 实体冲突**：不是标准分类，本题不适用，错误。\n因此，正确答案是 B。\n**小题2**：\n**A选项 保持不变**：无法消除结构冲突，错误。\n**B选项 保留员工实体、删除培训师实体**：若直接删除培训师实体，会丢失“职称”属性，错误。\n**C选项 员工实体中加入职称属性，删除培训师实体**：将培训师作为员工的一种类别，用“职称”属性加以区分，既保留了所有信息，又消除了结构冲突，正确。\n**D选项 将培训师实体所有属性并入员工实体，删除培训师实体**：与 C 类似，但未明确“职称”属性是关键合并条件，描述不够准确，错误。\n因此，正确答案是 C。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "员工实体和培训师实体均保持不变",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "保留员工实体、删除培训师实体",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "员工实体中加入职称属性，删除培训师实体",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "将培训师实体所有属性并入员工实体，删除培训师实体",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "员工实体中加入职称属性，删除培训师实体"
+          ],
+          "official_analysis": "本题考察的是**E-R 图集成中的冲突类型与解决方法**。\nE-R 图在合并时，可能出现属性冲突、命名冲突、结构冲突等多种问题。\n**小题1**：\n**A选项 属性冲突**：指同一属性在不同局部 E-R 图中属性域或取值范围不一致，本题不涉及这种情况，错误。\n**B选项 结构冲突**：指同一现实世界对象在不同应用中被抽象为不同的实体，或同一实体在不同局部 E-R 图中属性个数、排列顺序不同。本题中“培训师”是“员工”的一种，培训部门将其单独抽象为实体，而人力部门将其归入员工实体，这是典型的结构冲突，正确。\n**C选项 命名冲突**：指同名异义或异名同义的问题，本题并不存在，错误。\n**D选项 实体冲突**：不是标准分类，本题不适用，错误。\n因此，正确答案是 B。\n**小题2**：\n**A选项 保持不变**：无法消除结构冲突，错误。\n**B选项 保留员工实体、删除培训师实体**：若直接删除培训师实体，会丢失“职称”属性，错误。\n**C选项 员工实体中加入职称属性，删除培训师实体**：将培训师作为员工的一种类别，用“职称”属性加以区分，既保留了所有信息，又消除了结构冲突，正确。\n**D选项 将培训师实体所有属性并入员工实体，删除培训师实体**：与 C 类似，但未明确“职称”属性是关键合并条件，描述不够准确，错误。\n因此，正确答案是 C。"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家。了解到您有5年的Java/SpringBoot开发经验，这太棒了！这意味着我们完全可以用您每天都在写的**Java代码和面向对象思想**来降维打击这道数据库设计题。\n\n针对您“英语不好”、“喜欢顾名思义”、“需要精美笔记”的需求，我为您量身定制了这份**《E-R图合并冲突记忆笔记》**。\n\n---\n\n# 📓 软考架构师通关笔记：E-R图合并的“三大冲突”\n\n## 💡 零术语概念翻译（用Java秒懂数据库术语）\n在开始背诵前，我们先把数据库术语翻译成您每天都在敲的Java概念：\n*   **E-R图** = 数据库表结构设计图（或者理解为您的 `Entity` 实体类设计图）。\n*   **实体 (Entity)** = **Java里的一个类 (Class)**，比如 `Employee.java`。\n*   **属性 (Attribute)** = **Java类里的一个字段 (Field)**，比如 `private String name;`。\n*   **局部E-R图合并** = 两个微服务要合并成一个单体，或者两个程序员写的实体类要合并到一起，发现两边设计得不一样，打架了。\n\n---\n\n## 🧠 核心考点：顾名思义记忆法\n\n考试只会考三种冲突，我们通过**“看名字猜意思”**来死死记住它们：\n\n### 1. 命名冲突 (名字打架)\n*   **顾名思义**：纯粹是**“名字”**没起好，或者叫法不同。\n*   **大白话解释**：\n    *   同名异义：都叫 `id`，张三指的是“身份证号”，李四指的是“工号”。\n    *   异名同义：张三叫 `telephone`，李四叫 `phone`，其实都是电话。\n*   **Java代入**：变量名起得不一样。\n\n### 2. 属性冲突 (类型/单位打架)\n*   **顾名思义**：名字虽然一样，但**“属性的内在特征”**（类型、范围、单位）不一样。\n*   **大白话解释**：都叫“体重”，张三用的是“公斤(kg)”，李四用的是“斤”；或者张三用的是整数型 `int`，李四用的是浮点型 `double`。\n*   **Java代入**：字段的数据类型不一样（`Integer` vs `String`）。\n\n### 3. 结构冲突 (级别/长相打架) —— 🌟 本题考点！\n*   **顾名思义**：事物的**“层级结构”**或**“整体长相”**发生了变化。\n*   **大白话解释**（记住这两种情况就是满分）：\n    1.  **降维/升维打击（最常考）**：同一个东西，张三把它当成一个**类（实体）**，李四把它当成一个**字段（属性）**。\n    2.  **长相不同**：同一个类，张三里面写了5个字段，李四里面写了8个字段。\n*   **Java代入**：张三写了一个 `class 培训师`，李四觉得没必要，只在 `class 员工` 里加了一个字段 `private String 职称;`。**类 vs 字段，这就是结构冲突！**\n\n---\n\n## 🛠️ 真题实战解析 (2013年11月 题6)\n\n### 场景还原：\n*   **人力部门**：建了一个 `class 员工`。\n*   **培训部门**：建了一个 `class 培训师`，里面有“职称”字段。\n\n### 第一问：这是什么冲突？\n*   **分析**：培训师本质上也是员工。培训部门把它当成了**实体（类）**，而人力部门眼里只有员工。同一个对象，一边是独立实体，一边被归入其他实体。**层级结构**不一样了。\n*   **秒杀**：选 **B. 结构冲突**。\n\n### 第二问：怎么解决这个冲突？\n*   **分析**：既然要合并，我们要用最简洁的代码。培训师只是员工的一种，没必要单独建一个表（类）。我们只需要在“员工”里加一个字段来区分即可。\n*   **秒杀**：选 **C. 员工实体中加入职称属性，删除培训师实体**。（把培训师降维成一个字段，完美解决）。\n\n---\n\n## 🖼️ 字符图辅助记忆：合并过程演示\n\n```text\n【合并前：结构冲突打架中 ⚔️】\n\n人力部门 (Java代码)                 培训部门 (Java代码)\n==================                 ==================\nclass 员工 {                       class 培训师 {\n  String 员工号;                     String 培训师号;\n  String 姓名;                       String 姓名;\n  ...                                String 职称; // 初/中/高级\n}                                  }\n\n        👇 架构师出手解决冲突 👇\n\n【合并后：消除结构冲突 🕊️】\n(保留大类，把小类变成大类里的一个属性)\n\nclass 员工 {\n  String 员工号;\n  String 姓名;\n  ...\n  String 职称;  <--- 【新增属性：用来替代原来的培训师实体】\n}\n// 培训师实体？直接 Delete 删除！\n```\n\n---\n\n## 🎯 考试复习底线（掌握到什么程度就能拿分？）\n\n对于**E-R图合并冲突**这个知识点，您**不需要**去背诵长篇大论的理论，只需要达到以下程度即可在考场上拿满分：\n\n1.  **看到题干描述，能对号入座选出是哪种冲突：**\n    *   看到“单位不同、类型不同” ➡️ 选**属性冲突**。\n    *   看到“同名异义、异名同义” ➡️ 选**命名冲突**。\n    *   看到“同一对象，这里是实体，那里是属性” 或 “包含的属性个数不同” ➡️ 选**结构冲突**。\n2.  **知道怎么解决结构冲突：**\n    *   记住口诀：**“大包小，删实体，加属性”**。（把小概念打包进大概念，删除小概念的实体，把它变成大概念里的一个属性）。\n\n只要记住以上两点，这个知识点的分数就已经稳稳装进您的口袋了！祝您备考顺利，一次通关！如果还有其他难记的知识点，随时发给我。"
+    },
+    {
+      "id": 86,
+      "index": 24,
+      "sort": 8,
+      "knowledge_point": "特殊数据库系统",
+      "prompt": "基于网络的数据库系统（Netware Database System，NDB）是基于 4G/5G 的移动通信之上，在逻辑上可以把嵌入式设备看作远程服务器的一个客户端。以下有关 NDB 的摘述中，不正确的是（）",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "了解即可"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "NDB 主要由客户端、通信协议和远程服务器等三部分组成",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "NDB 的客户端主要负责提供接口给嵌入式程序，通信协议负责规范客户端与远程服务器之间的通信，远程服务器负责维护服务器上的数据库\n数据。",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "NDB 具有客户端小、支持可剪裁性、代码可重用等特点",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "NDB 是以文件方式存储数据库数据。即数据按照一定格式储存在磁盘中，使用时由应用程序通过相应的驱动程序甚至直接对数据文件进行读写",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "NDB 是以文件方式存储数据库数据。即数据按照一定格式储存在磁盘中，使用时由应用程序通过相应的驱动程序甚至直接对数据文件进行读写"
+          ],
+          "official_analysis": "本题考察的是**嵌入式数据库与基于网络的数据库系统的区别**。\nNDB 是一种通过网络（如 4G/5G）访问远程数据库的架构，客户端负责与嵌入式程序对接，通信协议负责定义与远程服务器交互的规则，服务器端维护实际的数据库数据。\n**A选项**：正确，NDB 架构由客户端、通信协议和远程服务器组成，这符合其基本结构。\n**B选项**：正确，客户端提供访问接口，通信协议用于交互规范，远程服务器进行数据管理，这正是 NDB 的工作分工。\n**C选项**：正确，NDB 的客户端模块轻量化、可裁剪、代码可复用，符合其在嵌入式环境的设计要求。\n**D选项**：错误，该描述是**基于文件的数据库系统**的特点，而非 NDB。NDB 数据存储在远程服务器的数据库中，客户端不直接操作数据文件。\n因此，选项 D 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家。看到您有5年的Java和Spring Boot开发经验，这太棒了！系统架构设计师考试中很多概念，其实就是您日常开发中用到的东西，只是换了个“学术化”的名字。\n\n针对您英语不好、喜欢**“顾名思义”**的中文内核记忆法，我为您量身定制了这份精美的复习笔记。我们将用您最熟悉的Spring Boot开发经验，把这道题彻底拿下！\n\n---\n\n# 📓 软考架构师专属记忆笔记：特殊数据库系统\n\n### 🎯 考试要求与复习深度\n*   **复习深度：【了解即可】**（根据第二版教材大纲，不需要死记硬背底层原理，只需要能**区分名字**，知道谁是谁即可。遇到选择题能用“顾名思义”法排除错误选项就能拿分）。\n\n---\n\n### 💡 核心概念“顾名思义”翻译（拒绝专业术语套娃）\n\n为了让您秒懂，我们先把题目里的词汇“翻译”成大白话和您熟悉的Java概念：\n\n1.  **嵌入式设备 (Embedded Device)**\n    *   **顾名思义：** “嵌”入到某个机器“里”面的小电脑。\n    *   **大白话：** 不是我们用的笔记本电脑，而是像**智能手表、扫地机器人、共享单车锁**这种小玩意儿。它们内存很小，算力很弱。\n2.  **基于网络的数据库系统 (NDB - Network Database)**\n    *   **顾名思义：** 数据存在**“网络”**另一头的数据库里，本地没有数据。\n    *   **Java秒懂：** 就相当于您的 **Spring Boot 项目（连着外网） + 远端的阿里云 MySQL**。\n3.  **基于文件的数据库系统 (File Database)**\n    *   **顾名思义：** 数据直接存成一个**“文件”**，放在本地硬盘里。\n    *   **Java秒懂：** 就相当于您在本地电脑上写代码，直接用 `FileReader` 去读写一个本地的 `data.txt` 或者 `data.csv`。\n4.  **可剪裁性 (Tailorability)**\n    *   **顾名思义：** 像裁缝做衣服一样，可以**“剪掉”**多余的布料。\n    *   **大白话：** 因为智能手表（嵌入式设备）内存太小，装不下完整的数据库软件，所以要把不需要的功能“剪掉”，只保留最基础的联网功能。\n\n---\n\n### 🖼️ 字符图解记忆：网络 VS 文件\n\n请看下面这两张图，这就是这道题的核心考点（对比两者的区别）：\n\n#### 1. 基于【网络】的数据库 (题目中的 NDB)\n数据在远方，必须通过网络（4G/5G）去拿。\n\n```text\n[扫地机器人/智能手表] (本地)                      [阿里云机房] (远端)\n+-------------------+                           +-------------------+\n| 1. 客户端 (Client)| ===== 2. 通信协议 ======> | 3. 远程服务器     |\n| (只负责发请求)    |      (比如TCP/IP)         | (存着真正的数据库)|\n+-------------------+                           +-------------------+\n  ↑ \n(很小、可剪裁，因为不用存数据)\n```\n\n#### 2. 基于【文件】的数据库 (选项D描述的东西)\n数据就在自己肚子里，直接读写本地硬盘。\n\n```text\n[本地电脑/设备]\n+---------------------------------------+\n| 应用程序 (App)                        |\n|      ↓ (直接读写)                     |\n| 本地磁盘 (Disk) -> [数据文件 data.db] |\n+---------------------------------------+\n(不需要网络，直接操作文件)\n```\n\n---\n\n### 🧠 选项逐一破解与记忆口诀\n\n题目问：关于基于网络的数据库（NDB），哪个是**不正确**的？\n\n*   **A选项：NDB由客户端、通信协议、远程服务器组成。**\n    *   **记忆：** 顾名思义，“网络”必须有两头（客户端、服务器）和中间的线（协议）。正确。\n*   **B选项：客户端提供接口，协议管通信，服务器管数据。**\n    *   **记忆：** 就像您写代码：Controller（接口） -> FeignClient（通信） -> 远端数据库（数据）。各司其职。正确。\n*   **C选项：客户端小、支持可剪裁、代码可重用。**\n    *   **记忆：** 扫地机器人内存小，所以客户端必须“小”，多余功能必须能“剪裁”掉。正确。\n*   **D选项：以文件方式存储，直接对数据文件进行读写。**\n    *   **破题秒杀：** 看到**“文件方式”**和**“直接读写”**，立刻想到这是**【基于文件的数据库】**！\n    *   **顾名思义法：** 既然叫“基于**网络**的数据库”，数据肯定在网络那头，怎么可能在本地“直接读写文件”呢？这就好比您连着阿里云的MySQL，您是不可能在本地C盘找到那个数据文件的。**所以D是错的，选D！**\n\n---\n\n### 🌟 终极记忆胶囊（考前看一眼）\n\n> **网络库（NDB）** = 异地恋（数据在远方，靠网络协议联系，本地只留个小客户端）。\n> **文件库** = 同居（数据就在本地硬盘里，直接推门/读写文件就能见）。\n> \n> **做题技巧：** 看到“网络数据库”，找“远程”、“协议”、“客户端”；看到“直接读写文件”、“磁盘”，直接判定为“文件数据库”，两者互斥！\n\n用这种“顾名思义”和代入日常Java开发的方法，是不是瞬间就记住了？如果还有其他觉得生涩难懂的架构师概念，随时发给我，我继续为您“翻译”！"
+    },
+    {
+      "id": 20,
+      "index": 25,
+      "sort": 5,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "采用三级模式结构的数据库系统中，如果对一个表创建聚簇索引，那么改变的是数据库的（）",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "外模式",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "模式",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "内模式",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "用户模式",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "内模式"
+          ],
+          "official_analysis": "本题考察的是**数据库三级模式结构中的各个模式含义及其应用**。\n数据库的三级模式包括**外模式、模式和内模式**，是数据库系统体系结构的核心内容。\n**A选项外模式**：也称为子模式或用户模式，是用户看到并使用的数据库视图，是数据库与用户之间的接口。外模式定义了用户能看到和操作的数据子集，不涉及数据的存储方式，因此不是正确答案。\n**B选项模式**：是数据库的逻辑结构，是数据库中所有数据的逻辑视图和整体结构的描述，包括各个数据项之间的逻辑关系。虽然涉及表结构，但并不涉及聚簇索引这种物理存储结构，因此不是正确答案。\n**C选项内模式**：描述的是数据在物理层的存储方式，包括文件的组织方式、索引结构（如聚簇索引和非聚簇索引）、数据的压缩方式等。聚簇索引属于数据的物理组织结构，因此修改聚簇索引改变的是数据库的内模式，这是正确答案。\n**D选项用户模式**：不是数据库三级模式结构中的术语，属于干扰项，排除。\n因此，选项 C 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。看到您有5年的Java/SpringBoot开发经验，这太棒了！这意味着您已经具备了极强的逻辑思维。\n\n针对您“英语不好”且“喜欢顾名思义”的特点，我将把枯燥的数据库理论，**全部翻译成您每天都在写的Java代码和生活大白话**。\n\n下面为您定制这道题的专属记忆笔记：\n\n---\n\n# 📓 软考架构师专属记忆笔记：数据库三级模式\n\n## 🖼️ 一、 字符图解：三级模式到底是个啥？\n\n您可以把数据库想象成一家**“大饭店”**，三级模式就是饭店的三个层面：\n\n```text\n[外部用户] (食客A)       [外部用户] (食客B)\n      |                       |\n======|=======================|======\n      V                       V\n【外模式】(菜单A：素食)   【外模式】(菜单B：肉食)  <-- 顾名思义：给【外】人看的表面样子\n=====================================\n                  |\n                  V\n【 模 式 】(饭店总菜谱：所有菜品清单)          <-- 顾名思义：标准的【模】板/全貌\n=====================================\n                  |\n                  V\n【内模式】(厨房冰柜：肉放哪层，菜怎么打包)      <-- 顾名思义：最【内】部的物理存放方式\n=====================================\n                  |\n                  V\n           [ 物理硬盘 / 操作系统 ]\n```\n\n---\n\n## 🧠 二、 核心概念“顾名思义”记忆法（结合您的Java经验）\n\n我们不背书，直接看字面意思和您的日常开发对应：\n\n### 1. 外模式 (又叫：用户模式 / 子模式)\n*   **顾名思义**：给**“外”**部用户看的模式。\n*   **大白话解释**：就像不同的人看同一个东西，看到的不一样。老板看财务报表，员工看工资条。\n*   **Java秒懂**：这就是您写的 **`VO (View Object)`** 或者 **`DTO`**。数据库里对应的是**“视图 (View)”**。为了安全或方便，您只给前端返回部分字段。\n\n### 2. 模式 (又叫：逻辑模式 / 概念模式)\n*   **顾名思义**：整个数据库的标淮**“模”**板。\n*   **大白话解释**：这个数据库到底有几张表？每张表有几个字段？字段是数字还是文字？\n*   **Java秒懂**：这就是您写的 **`Entity` 实体类**，或者是您建表时写的 `CREATE TABLE` 语句。它描述了数据的整体逻辑结构。\n\n### 3. 内模式 (又叫：物理模式)\n*   **顾名思义**：数据在最**“内”**部（硬盘里）是怎么存的。\n*   **大白话解释**：数据存在哪个盘？是用什么格式压缩的？有没有建目录（索引）方便找？\n*   **Java秒懂**：这就好比您配置的 **`application.yml` 里的底层存储参数**，或者数据库底层的 **B+树结构**。用户和程序员平时根本看不见它。\n\n---\n\n## 🔍 三、 题目专业名词“大白话”翻译（绝不用专业词解释专业词）\n\n题目中出现了一个吓人的词：**聚簇索引**。\n\n*   **索引**：就是一本书的**“目录”**。为了找数据快一点。\n*   **聚簇**：顾名思义，就是**“聚”**集在一起，一**“簇”**一簇的。\n*   **聚簇索引**：就是**把真正的数据，按照目录的顺序，在硬盘上挨个摆放整齐**。（就像新华字典，目录是拼音A到Z，正文的纸张也是按A到Z装订的，字和目录物理上绑死在一起）。\n\n**推理**：既然“聚簇索引”决定了数据在**硬盘上怎么摆放**，那它肯定是属于最底层的、管物理存储的——**内模式**！\n\n---\n\n## 🎯 四、 考试复习底线（掌握到什么程度就能拿分？）\n\n对于系统架构设计师考试，这个知识点**绝对不需要**您去深究底层原理，您只需要在脑子里建立**“关键词连连看”**的条件反射即可：\n\n| 看到题干里的这些词... | 闭着眼睛选这个答案！ |\n| :--- | :--- |\n| **视图** (View)、用户、局部数据、安全保密 | 👉 **外模式** |\n| **表** (Table)、基本表、全局逻辑、所有数据 | 👉 **模式** |\n| **物理**、存储、**索引**、B+树、压缩、聚簇 | 👉 **内模式** |\n\n### 💡 顺口溜记忆：\n**外看视图内管存，中间模式建张表。**\n*(外模式对应视图，内模式对应存储/索引，模式对应建表)*\n\n---\n\n## ✅ 五、 回到真题秒杀\n\n**题干**：如果对一个表创建**聚簇索引**，那么改变的是数据库的（）\n**您的思考过程**：\n1. 看到“聚簇索引”。\n2. 想到“索引”是管数据在硬盘上怎么存的。\n3. 硬盘存储 = 最内部的事情 = **内模式**。\n4. 选 C。\n\n**干扰项排除**：\nD选项“用户模式”其实就是“外模式”的别名，题目故意拆成两个选项（A和D），在单选题里，如果两个选项意思一样，那肯定都不选！\n\n---\n*祝您备考顺利！如果还有其他觉得难背的知识点，随时发给我，我们继续用“顾名思义+Java大白话”把它拿下！*"
+    },
+    {
+      "id": 21,
+      "index": 26,
+      "sort": 6,
+      "knowledge_point": "数据库设计",
+      "prompt": "假设系统中有正在运行的事务，若要转储全部数据库，则应采用（）方式",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "静态全局转储",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "动态增量转储",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "静态增量转储",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "动态全局转储",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "动态全局转储"
+          ],
+          "official_analysis": "本题考察的是**数据库转储方式**的相关概念。\n**A选项静态全局转储**：在转储期间不允许对数据库进行任何存取或修改操作，必须等待所有事务完成后才能进行，不适合当前题目中“有正在运行的事务”的情况。\n**B选项动态增量转储**：允许转储和事务并发执行，但只转储自上次转储以来发生变化的数据，不是题干中要求的“全部转储”。\n**C选项静态增量转储**：同样在转储期间禁止访问数据库，并且只保存部分变化数据，不满足题干条件。\n**D选项动态全局转储**：在转储期间允许用户事务并发运行，并对整个数据库进行转储，能够满足在有运行事务的情况下完成全部数据库备份的需求。\n因此，选项 D 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。针对您5年Java/SpringBoot开发经验的背景，我将把这些枯燥的学术概念，转化为您日常开发和生活中最熟悉的场景。\n\n针对这道题，我们采用**“顾名思义拆字法”**和**“生活场景映射法”**来生成您的专属记忆笔记。\n\n---\n\n# 📝 架构师备考笔记：数据库的“盘点”艺术（转储机制）\n\n## 💡 核心破局点：把学术词汇翻译成“大白话”\n在软考中，很多词汇只是为了显得专业，其实本质极其简单。\n*   **转储** = **备份**（就是把数据Copy一份存起来）。\n*   **事务** = **正在干的活**（比如用户正在下单、正在修改密码）。\n\n---\n\n## 🧠 顾名思义记忆法（核心背诵区）\n\n这道题考的是备份的组合拳，一共就两个维度，我们直接**看字面意思**：\n\n### 维度一：看“营业状态”（动 vs 静）\n*   🏃‍♂️ **动态（动）**：**动**态 = 边活**动**边备份。\n    *   *大白话*：**开门营业**。超市一边卖货，老板一边盘点。允许顾客买东西（允许事务运行）。\n    *   *Java秒懂*：SpringBoot项目不停机，直接热备份。\n*   🛑 **静态（静）**：**静**态 = 安**静**下来再备份。\n    *   *大白话*：**关门停业**。超市挂上“盘点中暂停营业”的牌子。谁也不许买东西（不允许事务运行）。\n    *   *Java秒懂*：把Tomcat/Jar包直接停了（Kill进程），然后再去Copy数据库文件。\n\n### 维度二：看“盘点范围”（全局 vs 增量）\n*   🌍 **全局（全）**：**全**局 = **全**部都要。\n    *   *大白话*：**彻底大盘点**。不管旧货新货，超市里所有的商品全部数一遍。\n    *   *Java秒懂*：`SELECT * FROM 所有表`，或者把整个数据库文件夹打包ZIP。\n*   ➕ **增量（增）**：**增**量 = 只管新**增**加的。\n    *   *大白话*：**只盘点新货**。昨天已经盘点过了，今天只数今天新进的货。\n    *   *Java秒懂*：Git里的 `git diff`，只备份修改过的代码。\n\n---\n\n## 🎯 解题实战（秒杀技巧）\n\n回到您的题目，我们像做连线题一样拆解题干：\n1.  题干说：“**有正在运行的事务**” ➡️ 说明超市在营业 ➡️ 对应**【动态】**\n2.  题干说：“**转储全部数据库**” ➡️ 说明要盘点所有货 ➡️ 对应**【全局】**\n*   **组合结果**：**动态全局转储**（选 D）\n\n---\n\n## 📊 字符图记忆矩阵（建议在脑海中拍张照）\n\n您可以把这四种方式想象成一个十字象限图：\n\n```text\n                 【备份范围】\n                 全部都要(全局)     只备新货(增量)\n               +----------------+----------------+\n        关门停业| A. 静态全局    | C. 静态增量    |\n        (静态)  | (最安全但停机) | (停机且省空间) |\n        【状   +----------------+----------------+\n        态】边营| D. 动态全局    | B. 动态增量    |\n        业边备  | (不停机全量备) | (不停机且省空) |\n        (动态)  +----------------+----------------+\n```\n\n---\n\n## 🚦 考点复习深度指南（要掌握到什么程度？）\n\n作为架构师考试，对于这个知识点，您**不需要**去背底层的实现原理（比如不需要知道Redo Log怎么写、不需要知道锁怎么加）。\n\n**您只需要达到以下程度即可拿满分：**\n1.  **看到“停机/不允许操作” ➡️ 条件反射选“静态”。**\n2.  **看到“不停机/并发执行/有运行事务” ➡️ 条件反射选“动态”。**\n3.  **看到“全部/整个” ➡️ 条件反射选“全局（或叫海量）”。**\n4.  **看到“变化/更新/部分” ➡️ 条件反射选“增量”。**\n\n**避坑提示**：考试时有时候会把“全局”叫作“海量”（海量转储），您只要知道“海量”就是“全部”的意思即可，顾名思义，海量就是数据很多，全都要。\n\n---\n*👨‍💻 顾问寄语：用程序员的思维解题，把“转储”当成“Copy”，把“静态”当成“停机”，这道题就变成了送分题。祝您复习顺利！如果还有其他难记的知识点，随时发给我！*"
+    },
+    {
+      "id": 22,
+      "index": 27,
+      "sort": 7,
+      "knowledge_point": "关系数据库",
+      "prompt": "给定关系模式R（U，F），其中U为属性集，F是U上的一组函数依赖，那么函数依赖的公理系统 （Armstrong 公理系统）中的分解规则是指（）为 F 所蕴涵",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "若 X→Y，Y→Z，则 X→Z",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "若 Y⊆X⊆U，则 X→Y",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "若 X→Y，Z⊆Y，则 X→Z",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "若 X→Y，Y→Z，则 X→YZ",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "若 X→Y，Z⊆Y，则 X→Z"
+          ],
+          "official_analysis": "此题考察**Armstrong 公理系统**的相关概念。\n设关系模式 R\\<U，F\\>，其中 U 为属性集，F 是 U 上的一组函数依赖，则有：\n① A1自反律：若 Y⊆X⊆U，则 X→Y 为 F 所蕴含；\n② A2增广律：若 X→Y为 F 所蕴含，且 Z⊆U，则 XZ→YZ 为 F 所蕴含；\n③ A3传递律：若 X→Y，Y→Z 为 F 所蕴含，则 X→Z 为 F 所蕴含。\n\n根据上面三条推理规则，又可推出下面三条推理规则：\n④ 合并规则：若 X→Y，X→Z，则X→YZ 为 F 所蕴含；\n⑤ 伪传递规则：若 X→Y，WY→Z，则 XW→Z 为 F 所蕴含；\n⑥ 分解规则：若 X→Y，Z⊆Y，则 X→Z 为 F 所蕴含。\n\n注意，题干提到的是分解规则是什么。所以选择选项 C。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。针对您5年Java/SpringBoot开发经验的背景，我将把枯燥的数据库理论转化为您每天都在写的代码逻辑。\n\n针对这道题，我们不需要去死记硬背数学公式，我们要用**“顾名思义法”**和**“Java对象逻辑”**来秒杀它。\n\n以下为您定制的专属高分记忆笔记：\n\n---\n\n# 📓 架构师通关笔记：Armstrong 公理系统（关系数据库）\n\n## 🎯 考试要求（复习到什么程度？）\n**【复习红线】**：**不需要**会证明！**不需要**做复杂的数学推导！\n**【通关标准】**：看到中文名字（如“分解规则”），能选出对应的字母公式；或者看到字母公式，能叫出它的中文名字。**做到“名”与“形”的连线匹配即可。**\n\n---\n\n## 🧱 基础概念“说人话”翻译（拒绝专业词汇套娃）\n\n在看规则前，我们先把题目里的“火星文”翻译成您熟悉的Java概念：\n\n*   **函数依赖 (X → Y)**：\n    *   **顾名思义**：Y的值**依赖**X来决定。\n    *   **Java秒懂**：把它当成一个查询方法 `Y = findById(X)`。只要输入参数X确定了，返回的结果Y就一定是唯一确定的。（例如：输入身份证号X，查出来的姓名Y是唯一的）。\n*   **包含于 (Z ⊆ Y)**：\n    *   **顾名思义**：Z是Y的**一部分**（子集）。\n    *   **Java秒懂**：Y是一个完整的实体类 `User`，Z是里面的一个属性 `User.getName()`。\n\n---\n\n## 🧠 核心考点：六大规则的“顾名思义”记忆法\n\n我们把这6个规则当成6个Java工具类方法，看名字就知道它在干嘛：\n\n### 1. 自反律 (Reflexivity)\n*   **顾名思义**：**自**己**反**过来推导自己的一部分。\n*   **公式**：若 `Y ⊆ X`，则 `X → Y`\n*   **Java秒懂**：如果你有一个完整的 `User` 对象(X)，你当然能获取到 `User` 里面的 `Age` 属性(Y)。大包小，理所当然。\n\n### 2. 增广律 (Augmentation)\n*   **顾名思义**：**增**加、扩**广**。等式两边同时增加一样的筹码。\n*   **公式**：若 `X → Y`，则 `XZ → YZ`\n*   **Java秒懂**：如果 `订单ID(X)` 能查出 `商品名(Y)`；那么 `订单ID + 用户ID (XZ)`，肯定能查出 `商品名 + 用户ID (YZ)`。两边同时加上Z，逻辑依然成立。\n\n### 3. 传递律 (Transitivity)\n*   **顾名思义**：像接力棒一样**传递**。\n*   **公式**：若 `X → Y`，`Y → Z`，则 `X → Z`\n*   **Java秒懂**：Service层(X)调用了Manager层(Y)，Manager层(Y)调用了Dao层(Z)。那么相当于Service层(X)间接调用了Dao层(Z)。\n\n### 4. 合并规则 (Union)\n*   **顾名思义**：把相同条件推导出的不同结果**合并**打包。\n*   **公式**：若 `X → Y`，`X → Z`，则 `X → YZ`\n*   **Java秒懂**：`身份证(X)`能查出`姓名(Y)`，`身份证(X)`也能查出`性别(Z)`。那我干脆写个接口，用`身份证(X)`直接返回一个包含`[姓名, 性别](YZ)`的DTO对象。\n\n### 5. 伪传递规则 (Pseudo-transitivity)\n*   **顾名思义**：**伪**装的传递。中间人带了个“挂件”。\n*   **公式**：若 `X → Y`，`WY → Z`，则 `XW → Z`\n*   **Java秒懂**：X能替换Y。既然 `W + Y` 能得到 `Z`，那我把里面的 `Y` 替换成 `X`，变成 `W + X`，照样能得到 `Z`。\n\n### 6. 分解规则 (Decomposition) 👉 **【本题考点】**\n*   **顾名思义**：把大的结果**拆分、分解**成小的。\n*   **公式**：若 `X → Y`，`Z ⊆ Y`，则 `X → Z`\n*   **Java秒懂**：如果 `订单号(X)` 能查出 `完整的订单详情大礼包(Y)`，而 `商品单价(Z)` 只是大礼包里的一件物品(`Z ⊆ Y`)。那么我用 `订单号(X)` 肯定也能单独查出 `商品单价(Z)`。\n\n---\n\n## 🖼️ 字符图解：分解规则 (Decomposition)\n\n```text\n[输入参数]           [返回的大对象]\n   X     ────推导────>     Y\n                           │\n                           ├─ 包含属性 A\n                           ├─ 包含属性 B\n                           └─ 包含属性 Z  <-- (因为 Z ⊆ Y)\n\n既然 X 能拿到整个 Y，那 X 当然能拿到 Y 里面的 Z！\n结论： X ────推导────> Z  (这就是\"分解\"！)\n```\n\n---\n\n## 🎯 真题秒杀解析\n\n回到您的2013年真题：**题目问的是“分解规则”**。\n大脑立刻触发关键词：**分解 = 把大结果拆成小结果**。\n\n*   **A. 若 X→Y，Y→Z，则 X→Z**\n    *   *顾问诊断*：X传给Y，Y传给Z。这叫**传递律**。排除。\n*   **B. 若 Y⊆X⊆U，则 X→Y**\n    *   *顾问诊断*：Y是X的一部分，X推导出Y。自己推自己的一部分，这叫**自反律**。排除。\n*   **C. 若 X→Y，Z⊆Y，则 X→Z**\n    *   *顾问诊断*：X推导出大对象Y，Z是Y的一部分，所以X能推导出Z。把Y**分解**出了Z。这就是**分解规则**！**正确！**\n*   **D. 若 X→Y，Y→Z，则 X→YZ**\n    *   *顾问诊断*：这个选项其实是把传递律和合并规则杂糅了（实际上如果X→Y且Y→Z，根据传递律X→Z，再根据合并规则X→YZ是成立的），但它体现的是把Y和Z**合并**在一起，不是分解。排除。\n\n**最终答案：C**\n\n---\n**💡 顾问备考小贴士：**\n作为程序员，遇到这种字母题，**千万不要当成数学题去背**。在草稿纸上把 `X` 写成 `ID`，把 `Y` 写成 `User`，把 `Z` 写成 `Name`，代入进去读一遍，答案自己就浮现出来了！您试试看，是不是瞬间就记住了？"
+    },
+    {
+      "id": 23,
+      "index": 28,
+      "sort": 8,
+      "knowledge_point": "关系数据库",
+      "prompt": "给定关系R（A,B,C,D）和S（A,C,E,F），以下（）与$\\sigma_{R.B > S.E}(R \\bowtie S)$等价",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "$\\sigma_{2 > 7}(R \\times S)$",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "$\\pi_{1,2,3,4,7,8}(\\sigma_{1 = 5 \\land 2 > 7 \\land 3 = 6}(R \\times S))$",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "$\\sigma_{2 > '7'}(R \\times S)$",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "$\\pi_{1,2,3,4,7,8}(\\sigma_{1 = 5 \\land 2 > '7' \\land 3 = 6}(R \\times S))$",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "$\\pi_{1,2,3,4,7,8}(\\sigma_{1 = 5 \\land 2 > 7 \\land 3 = 6}(R \\times S))$"
+          ],
+          "official_analysis": "本题考察的是**关系代数中自然连接与选择、投影的等价变换**。\n自然连接 R ⋈ S 等价于在笛卡尔积 R × S 上施加同名属性相等的选择，再去掉重复同名属性进行投影，即 $σ_{1=5 ∧ 3=6}(R × S) $之后再做 π 去除重复列。\n\n题干还包含选择条件，对应序号条件为$ σ_{2 > 7}$。将三者合并即得到等价表达式$ π_{1,2,3,4,7,8}(σ_{1=5 ∧ 2>7 ∧ 3=6}(R × S))$。\n\n**A选项**：仅有 σ_{2>7}(R × S)，缺少自然连接所需的等值条件（1=5、3=6）以及最终的投影，不等价。\n**B选项**：包含自然连接所需的两个等值条件（1=5、3=6），包含题干的选择条件（2>7），并在最后通过 π_{1,2,3,4,7,8} 去掉重复同名列，完全等价。\n**C选项**：条件写作 2>'7' 将 7 当作字符常量，类型不匹配，且同样缺少自然连接的等值条件与投影，不等价。\n**D选项**：虽含有等值连接条件与投影，**但将 7 写成字符常量 '7'（应为数值 7）**，与题干语义不符，故不等价。\n因此，选项 B 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。作为一名有5年经验的Java/SpringBoot开发老兵，您的逻辑思维和代码理解能力绝对是优势。\n\n针对这道**关系代数**的题目，很多程序员会被一堆希腊字母（$\\sigma, \\pi, \\bowtie$）吓退。但实际上，**关系代数就是没有写成SQL语句的SQL底层执行逻辑**。\n\n我们用**“顾名思义法”**和**“Java/SQL映射法”**，为您定制了这份精美的记忆笔记，保证您看一遍就能记住，并且知道在考场上如何秒杀这类题。\n\n---\n\n# 📓 软考架构师通关笔记：关系代数符号与等价变换\n\n## 💡 一、 核心符号“顾名思义”记忆法（拒绝死记硬背）\n\n对于英语不好、不想记学术名词的同学，我们直接看字面意思和符号长相：\n\n### 1. $\\times$ 笛卡尔积 —— 顾名思义：【无脑乘积】\n*   **怎么记**：乘号 $\\times$ 就是把两张表的所有数据**无脑交叉组合**。\n*   **Java秒懂**：两个嵌套的 `for` 循环，没有任何 `if` 判断。\n*   **SQL秒懂**：`SELECT * FROM R, S`\n\n### 2. $\\sigma$ (Sigma) 选择 —— 顾名思义：【按条件选行】\n*   **怎么记**：$\\sigma$ 长得像一个**哨子**。吹哨子叫停，符合条件的行（数据记录）才能通过。\n*   **Java秒懂**：Java 8 Stream 的 `.filter(条件)`\n*   **SQL秒懂**：`WHERE` 语句（比如 `WHERE age > 18`）\n\n### 3. $\\pi$ (Pi) 投影 —— 顾名思义：【光照投影留列】\n*   **怎么记**：$\\pi$ 长得像一张**桌子的腿**，是一根一根竖着的。它代表**竖着的“列”（字段）**。投影就像从天上打一束光，只留下你想要的几根柱子（列）。\n*   **Java秒懂**：Java 8 Stream 的 `.map(提取某几个字段)`\n*   **SQL秒懂**：`SELECT 字段1, 字段2`（注意不是SELECT *）\n\n### 4. $\\bowtie$ 自然连接 —— 顾名思义：【自然而然地连起来】\n*   **怎么记**：$\\bowtie$ 长得像一个**蝴蝶结**，把两张表绑在一起。既然是“自然”，就是**两张表里名字相同的字段，自然而然就相等了**，而且合并后，**重复名字的字段只保留一个**。\n*   **Java秒懂**：把两个实体类按相同的属性名合并，去掉重复的属性。\n*   **SQL秒懂**：`INNER JOIN ... USING(同名字段)`\n\n---\n\n## 🛠 二、 题目图解与推导（跟着步骤走，像Debug一样简单）\n\n**题干翻译**：求 $\\sigma_{R.B > S.E}(R \\bowtie S)$ 的等价底层表达式。\n**大白话**：先把 R 和 S 按同名字段自然连接（$\\bowtie$），然后再过滤（$\\sigma$）出 R表的B字段 > S表的E字段 的数据。\n\n### 第一步：给字段排座位（打上数字编号）\n考试时，底层表达式喜欢用数字代替字段名。我们画个图排个号：\n\n```text\n表 R (4个字段)          表 S (4个字段)\n+---+---+---+---+      +---+---+---+---+\n| A | B | C | D |      | A | C | E | F |\n+---+---+---+---+      +---+---+---+---+\n  ↓   ↓   ↓   ↓          ↓   ↓   ↓   ↓\n  1   2   3   4          5   6   7   8\n```\n\n### 第二步：拆解“自然连接” $\\bowtie$ (蝴蝶结)\n自然连接干了两件事：\n1.  **找同名，加条件**：R和S都有 `A` 和 `C`。所以条件是 `R.A = S.A` 且 `R.C = S.C`。\n    *   换成数字就是：**`1 = 5` 且 `3 = 6`**\n2.  **去重复，留列名**：合并后，S表的 `A` (5) 和 `C` (6) 是多余的，扔掉。\n    *   剩下的列（投影 $\\pi$）是：**`1, 2, 3, 4, 7, 8`**\n\n### 第三步：加上题干的额外过滤条件 $\\sigma$ (哨子)\n题干要求：`R.B > S.E`\n*   查上面的座位表：B是2，E是7。\n*   换成数字就是：**`2 > 7`**\n\n### 第四步：组装代码 (像写SQL一样)\n1.  **FROM**：先无脑组合两张表 $\\rightarrow$ `(R × S)`\n2.  **WHERE**：加上所有过滤条件（自然连接的条件 + 题干的条件） $\\rightarrow$ `σ_{1=5 ∧ 3=6 ∧ 2>7}`\n3.  **SELECT**：只保留去重后的列 $\\rightarrow$ `π_{1,2,3,4,7,8}`\n\n**最终组装结果**：$\\pi_{1,2,3,4,7,8}(\\sigma_{1 = 5 \\land 2 > 7 \\land 3 = 6}(R \\times S))$  👉 **完美对应选项 B！**\n\n---\n\n## 🚫 三、 避坑指南（为什么其他选项错？）\n\n*   **A选项**：只有 `2>7`，忘了自然连接还要匹配同名字段（1=5, 3=6），也忘了去重列。**（漏逻辑）**\n*   **C选项**：写成了 `2>'7'`。注意！这里的 `7` 代表的是**第7列**（S表的E字段），如果加了单引号 `'7'`，就变成字符串常量了！意思是“第2列的值大于字符串'7'”，完全改变了题意。**（类型错误，Java程序员最懂这个痛）**\n*   **D选项**：和C一样，犯了加单引号 `'7'` 的致命错误。\n\n---\n\n## 🎯 四、 考试复习边界（掌握到什么程度就能拿分？）\n\n作为架构师考试，您**不需要**去死磕关系代数的高深数学证明，只需要达到以下程度即可稳拿这1-2分：\n\n1.  **看到符号能条件反射**：\n    *   $\\sigma$ = WHERE (过滤行)\n    *   $\\pi$ = SELECT (挑出列)\n    *   $\\bowtie$ = 找同名字段相等 + 删掉重复列\n2.  **会给字段编号**：像上面那样，把两张表的字段从左到右 1,2,3,4,5... 编号。\n3.  **警惕单引号陷阱**：数字代表**列号**，带单引号代表**具体的值**。考试极爱在这里挖坑！\n\n**每日一测记忆**：\n下次看到 $\\pi$ ，心里默念：“这是桌子腿，竖着的，代表选列”。\n看到 $\\sigma$ ，心里默念：“这是哨子，吹停不合格的，代表选行”。\n\n祝您备考顺利！有任何其他难记的知识点，随时发给我，我帮您“Java化”、“大白话化”！"
+    },
+    {
+      "id": 1123,
+      "index": 29,
+      "sort": 3,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "如果函数依赖A->B,B->C，则属于哪一范式（），哪一种范式去除多值依赖（）。",
+      "difficulty": 0,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "1NF",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "2NF",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "3NF",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "BCNF",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "2NF"
+          ],
+          "official_analysis": "本题考察的是**数据库范式的基本概念**。\n**问题1**：\n在已知函数依赖 A→B，B→C 的情况下，可以推出 A→C，这是一种**传递依赖**。\n并且由于候选码是 A，是单码，不存在部分依赖，所以满足 2NF。\n所以选择 B。\n\n**问题2**：\n考察的是**哪一种范式去除多值依赖**。\n**A选项 2NF**：消除部分依赖，不涉及多值依赖，错误。\n**B选项 3NF**：消除传递依赖，不涉及多值依赖，错误。\n**C选项 4NF**：要求在满足 BCNF 的前提下进一步消除多值依赖，这是标准答案，正确。\n**D选项 BCNF**：主要解决的是候选键与决定因素关系，不涉及多值依赖，错误。\n所以选择 C。"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "2NF",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "3NF",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "4NF",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "BCNF",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "4NF"
+          ],
+          "official_analysis": "本题考察的是**数据库范式的基本概念**。\n**问题1**：\n在已知函数依赖 A→B，B→C 的情况下，可以推出 A→C，这是一种**传递依赖**。\n并且由于候选码是 A，是单码，不存在部分依赖，所以满足 2NF。\n所以选择 B。\n\n**问题2**：\n考察的是**哪一种范式去除多值依赖**。\n**A选项 2NF**：消除部分依赖，不涉及多值依赖，错误。\n**B选项 3NF**：消除传递依赖，不涉及多值依赖，错误。\n**C选项 4NF**：要求在满足 BCNF 的前提下进一步消除多值依赖，这是标准答案，正确。\n**D选项 BCNF**：主要解决的是候选键与决定因素关系，不涉及多值依赖，错误。\n所以选择 C。"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家。针对您作为5年经验的Java/SpringBoot开发者的背景，我非常理解您平时习惯了面向对象和框架思维，面对数据库底层这些枯燥的理论概念（尤其是带英文缩写的）会觉得头疼。\n\n别担心，架构师考试对这部分的**要求并不深**。您**绝对不需要**去推导复杂的数学公式，也**不需要**去写底层的关系代数。\n\n🎯 **考试掌握程度要求：**\n**“连连看”级别**。您只需要看到“某个范式（如3NF）”，能条件反射出它“消除了什么毛病（如传递依赖）”即可。这是一道纯粹的**概念对应题**。\n\n下面我为您量身定制了这份**【顾名思义·大白话记忆笔记】**，请查收：\n\n---\n\n# 📓 软考架构师通关笔记：数据库范式（必考送分题）\n\n## 一、 拒绝黑话：专业名词“顾名思义”翻译字典\n*(绝对不用专业名词解释专业名词，全用您熟悉的Java开发和生活常识解释)*\n\n*   **函数依赖 (A -> B)**\n    *   **顾名思义**：**“靠你决定”**。\n    *   **大白话**：就像Java里的一个方法 `getB(A)`，只要输入A，就一定能得到唯一的B。比如：`身份证号 -> 姓名`。有了身份证号，姓名就确定了。\n*   **候选码 / 主键**\n    *   **顾名思义**：**“唯一标识”**。\n    *   **大白话**：就是您在SpringBoot实体类里加了 `@Id` 注解的那个字段。能唯一确定一条数据的字段。\n*   **部分依赖**\n    *   **顾名思义**：**“只靠一半”**。\n    *   **大白话**：只有当您的主键是**联合主键**（比如 学号+课程号 两个字段一起当主键）时才会发生。某个普通字段（比如 学生姓名），它其实只靠“学号”就能查出来，根本不需要“课程号”。这就叫“只靠了一半的主键”。\n*   **传递依赖**\n    *   **顾名思义**：**“中间商赚差价 / 传话筒”**。\n    *   **大白话**：A决定B，B决定C。比如：`员工 -> 部门 -> 部门经理`。员工其实是通过部门才认识经理的，这就是传递。\n*   **多值依赖**\n    *   **顾名思义**：**“一对多，且各玩各的”**。\n    *   **大白话**：一个开发者有多个“编程语言”（Java, Python），同时有多个“业余爱好”（唱歌，跳舞）。语言和爱好之间毫无关系，但非要塞在同一张表里，导致数据疯狂重复组合。\n\n---\n\n## 二、 核心记忆口诀：范式升级打怪图\n*(请把范式想象成代码重构的过程，越往后表拆得越细，数据越不冗余)*\n\n### 💡 顾名思义记忆法（核心背诵区）：\n*   **1NF（第一范式）**：**“一”** -> **一**个格子里不能有多个值。（列不可分，不能有List/Array）。\n*   **2NF（第二范式）**：**“二”** -> 针对**两**个字段以上的联合主键 -> 消除**部分**依赖。（如果是单主键，直接保送2NF！）。\n*   **3NF（第三范式）**：**“三”** -> A、B、C **三**者之间的关系 -> 消除**传递**依赖（拒绝中间商）。\n*   **BCNF（巴斯-科德范式）**：**“B(Boss)C”** -> 老板范式 -> 消除**主键内部**的互相依赖。\n*   **4NF（第四范式）**：**“四”** -> 谐音**“事(多)”** -> 消除**多值**依赖。\n\n### 📊 字符图：范式过滤漏斗\n```text\n[原始大宽表]\n   │\n   ├─ 过滤：保证每个字段都是基本类型 (不能是集合)\n   ↓\n【 1NF 】(最基础的表)\n   │\n   ├─ 过滤：干掉“部分依赖” (把联合主键里只靠一半的字段拆出去)\n   │  ⭐ 秘籍：如果表里只有一个主键(单码)，它天生就是2NF！\n   ↓\n【 2NF 】\n   │\n   ├─ 过滤：干掉“传递依赖” (把 A->B->C 里的 B和C 拆成新表)\n   │  ⭐ 题目1卡在这里：因为它有传递依赖，所以没资格升到3NF，只能停在2NF。\n   ↓\n【 3NF 】(日常Java开发建表到这里就够了)\n   │\n   ├─ 过滤：干掉“主键内部打架”\n   ↓\n【 BCNF 】\n   │\n   ├─ 过滤：干掉“多值依赖” (把毫无关系的一对多属性，彻底拆成两张表)\n   │  ⭐ 题目2答案：4NF专门对付多值依赖。\n   ↓\n【 4NF 】\n```\n\n---\n\n## 三、 真题秒杀解析（代入我们的口诀）\n\n**题干回顾：**\n如果函数依赖 A->B, B->C，则属于哪一范式（子题1），哪一种范式去除多值依赖（子题2）。\n\n**【子题1 秒杀过程】：**\n1.  **看条件**：`A->B, B->C`。看到这个，立刻想到口诀**“三者关系 -> 传递依赖（中间商）”**。\n2.  **定级别**：既然存在“传递依赖”，说明它**还没有**消除传递依赖，所以它**绝对不是3NF**（因为3NF里不允许有传递依赖）。\n3.  **往下退一格**：它不是3NF，那它是2NF吗？题目说 `A->B`，说明A是唯一的源头（单主键）。根据我们的秘籍：**“单主键直接保送2NF”**（因为只有一个主键，不可能存在“只靠一半”的部分依赖）。\n4.  **得出结论**：它满足2NF，但不满足3NF。所以它属于 **2NF**。选 **B**。\n\n**【子题2 秒杀过程】：**\n1.  **看关键字**：题目问“去除**多值**依赖”。\n2.  **想口诀**：**“四”** -> 谐音**“事(多)”** -> 消除**多值**依赖。\n3.  **得出结论**：直接选 **4NF**。选 **C**。\n\n---\n\n## 🎯 考前复习建议（针对架构师考试）：\n您只需要把下面这 4 行字抄在便利贴上，贴在显示器旁边，考前看一眼，这2分就稳拿了：\n\n> **单主键 = 保底2NF**\n> **消部分 = 升2NF**\n> **消传递 = 升3NF**\n> **消多值 = 升4NF**\n\n祝您备考顺利！作为Java老兵，这种死记硬背的题咱们用口诀秒杀，把精力留给后面的架构设计大题！如果还有其他难记的知识点，随时发给我！"
+    },
+    {
+      "id": 1125,
+      "index": 30,
+      "sort": 5,
+      "knowledge_point": "关系数据库",
+      "prompt": "在数据库语句中，having通常与（）子句连用。",
+      "difficulty": 2,
+      "tags": [
+        "了解即可",
+        "超纲"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "where",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "select",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "group by",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "order by",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "group by"
+          ],
+          "official_analysis": "本题考察的是**SQL语句的语法**。\n**A选项where**：WHERE子句用于在查询中筛选行数据，通常在GROUP BY之前使用，过滤数据行。它与HAVING有所不同，因为WHERE在数据分组前进行过滤，而HAVING是在分组后的数据上进行过滤。\n**B选项select**：SELECT子句用于选择查询的字段，它与HAVING子句并没有直接关系。HAVING不是与SELECT子句一起使用的，而是与GROUP BY子句结合使用来对分组后的数据进行过滤。\n**C选项group by**：GROUP BY子句用于将查询结果按指定字段进行分组，HAVING子句通常与GROUP BY一起使用，过滤分组后的数据。HAVING的作用类似于WHERE，但它作用于已经分组的数据。\n**D选项order by**：ORDER BY子句用于排序查询结果，通常在WHERE和GROUP BY之后使用。它与HAVING没有直接关系，HAVING与GROUP BY更为紧密。\n因此，选项 C 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考指导专家与记忆顾问。了解到您是一位有5年经验的Java/SpringBoot开发老兵，平时主要和代码打交道。对于系统架构设计师考试中的数据库基础知识，我们不需要去死记硬背枯燥的理论，而是要**把它们映射到我们熟悉的日常逻辑中**。\n\n针对这道题，官方标签是**“了解即可超纲”**，这意味着**绝对不要花超过3分钟去深究**，只要记住一个核心的“条件反射”即可拿分。\n\n下面为您定制了专属的【精美记忆笔记】，请查收：\n\n---\n\n# 📓 软考架构师专属记忆笔记：SQL的“成团”逻辑\n\n## 🎯 核心考点：HAVING 到底跟谁混？\n**一秒钟记忆口诀**：**“没组（Group）你哈（Having）个啥？”**\n\n### 🧠 顾名思义记忆法（专治英语不好）\n\n我们把写SQL查询，想象成**公司组织部门团建（吃饭）**：\n\n1. **WHERE（定位/挑人）**：\n   * **顾名思义**：Where翻译为“哪里”，引申为“定位到具体的个人”。\n   * **大白话**：团建前先统计，**“请假的人不准去”**。这是针对**单个人**的筛选。\n\n2. **GROUP BY（分组/成团）**：\n   * **顾名思义**：Group就是“群/组”。\n   * **大白话**：到了餐厅，**“按部门坐，Java组一桌，前端组一桌”**。把零散的人变成了**团队**。\n\n3. **HAVING（拥有/团规）**：\n   * **顾名思义**：Having翻译为“拥有”，引申为“拥有团队后才能用的规则”。\n   * **大白话**：餐厅规定，**“拥有（Having）5人以上的桌子，才送果盘”**。这是针对**整个团队（桌）**的筛选。\n   * **死磕记忆点**：你必须先**成团（Group By）**，才能**拥有（Having）**团队特权！所以 **HAVING 永远和 GROUP BY 绑定在一起！**\n\n4. **ORDER BY（排序/排队）**：\n   * **顾名思义**：Order就是“秩序/顺序”。\n   * **大白话**：吃完饭买单，**“按桌号从小到大排队结账”**。\n\n---\n\n### 🖼️ 字符图解：SQL执行的“流水线”\n\n作为Java程序员，您可以把它理解为Java 8的 `Stream API` 处理流程：\n`List -> filter(Where) -> Collectors.groupingBy(Group By) -> filter(Having)`\n\n```text\n[原始员工数据] \n      │\n      ▼\n 1. 挑人 (WHERE) ───────> 踢掉请假的 (过滤单行)\n      │\n      ▼\n 2. 成团 (GROUP BY) ────> 按部门坐好 (打包分组)  <--【HAVING的亲爹】\n      │\n      ▼\n 3. 团规 (HAVING) ──────> 踢掉人数不够的桌子 (过滤分组) <--【永远跟着亲爹】\n      │\n      ▼\n 4. 拿结果 (SELECT) ────> 把剩下的桌号抄下来 (提取字段)\n      │\n      ▼\n 5. 排队 (ORDER BY) ────> 按桌号排个序 (最终排序)\n```\n\n---\n\n### 🚫 告别专业名词：选项大白话翻译\n\n*   **A. where (挑人)**：在分桌子**之前**，把不符合条件的人踢出去。\n*   **B. select (拿结果)**：你要看什么信息（比如只要看部门名字），就拿什么。\n*   **C. group by (成团)**：把有相同特征的数据捏在一起。**（HAVING的唯一合法伴侣）**\n*   **D. order by (排队)**：所有事情都干完了，最后排个高矮胖瘦。\n\n---\n\n### 🚦 备考复习边界（到什么程度就可以上考场？）\n\n**【复习深度：极浅（1颗星）】**\n由于此题是**“了解即可超纲”**，您**不需要**去复习复杂的SQL嵌套查询、不需要去背SQL的底层执行计划。\n\n**您只需要在脑海中建立一个条件反射：**\n在考场上，只要看到题目里有 **`HAVING`** 这个词，眼睛直接去选项里找 **`GROUP BY`**。\n记住：**“先Group（分组），后Having（拥有）”**。看到Having选Group By，拿了这1分直接看下一题，绝不拖泥带水！\n\n祝您备考顺利！作为5年经验的Java老兵，这种逻辑题对您来说绝对是小菜一碟，保持自信！需要记忆下一个知识点随时告诉我。"
+    },
+    {
+      "id": 1136,
+      "index": 31,
+      "sort": 16,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "数据库系统的三级模式中，（）用以描述用户（包括程序员和终端用户）看到或使用的那部分数据的逻辑结构，是数据库用户的数据视图，是与某一应用有关的数据的逻辑表示。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "内模式",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "概念模式",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "外模式",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "物理模式",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "外模式"
+          ],
+          "official_analysis": "本题考察的是**数据库系统的三级模式结构**，即外模式、概念模式和内模式的基本概念。\n**A选项 内模式**：内模式描述的是数据库中数据的物理存储结构和存储方式。它定义了数据的物理存储方式、存储记录的类型、物理顺序和索引等。内模式是数据库系统中与数据存储和优化相关的部分，并不涉及用户对数据的逻辑视图，因此不符合题意。\n**B选项 概念模式**：概念模式描述了数据库中全体数据的逻辑结构和特征，是所有用户的公共数据视图。它是数据库的整体结构，涉及到数据库的完整性、约束等，但并不专门描述特定用户或应用程序的数据视图。因此，概念模式不是题干中所描述的部分。\n**C选项 外模式**：外模式（也称为子模式或用户模式）描述了数据库中用户（包括程序员和终端用户）所看到或使用的那部分数据的逻辑结构。它定义了用户可以访问的部分数据，并与具体应用程序或用户需求相关。外模式通常与用户的需求和视图紧密相关，是题干中所要求的部分，因此**C选项**是正确的。\n**D选项 物理模式**：物理模式与内模式类似，主要关注数据在磁盘等存储介质上的物理布局和存储方式，不涉及用户视图或数据的逻辑结构。因此，这个选项不符合题意。\n综上所述，**C选项**“外模式”是正确的，它描述了用户所看到的数据逻辑结构。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。针对您5年Java/SpringBoot开发经验的背景，我将把这些枯燥的数据库理论，转化为您每天都在写的代码逻辑，并严格采用**“顾名思义（看字面猜意思）”**的纯中文内核记忆法，帮您一次性把这个知识点焊死在脑子里！\n\n下面为您定制的专属高分记忆笔记：\n\n---\n\n# 📓 软考架构师通关笔记：数据库三级模式\n\n## 💡 一、 核心记忆法：顾名思义（结合Java开发经验）\n\n我们把数据库想象成一个**“公司”**，从外到内有三层人看它：\n\n### 1. 【外】模式 (又叫：用户模式 / 子模式)\n*   **顾名思义**：**“外”**就是**“外部人员”**（用户、前端、写Java业务代码的你）看到的样子。\n*   **大白话**：外部人员不需要、也不允许看到公司所有的机密。你只需要看到跟你相关的部分。\n*   **Java秒懂**：相当于你写的 **`VO (View Object)`** 或 **`DTO`**。数据库里有100个字段，但你给前端的接口只返回3个字段。这3个字段组成的视图，就是“外模式”。\n*   **题干关键词**：用户看到、程序员使用、局部、视图。\n\n### 2. 【概念】模式 (又叫：模式 / 逻辑模式)\n*   **顾名思义**：**“概念”**就是**“整体概念/全局设计”**。\n*   **大白话**：这是公司老板或架构师脑子里的“公司全貌”。它包含了公司所有的部门和人员名单。\n*   **Java秒懂**：相当于你写的 **`Entity` 实体类**，或者你在 Navicat 里建的那张**完整的表结构**。它包含了所有字段和表之间的关联。\n*   **题干关键词**：全体数据、全局、公共视图。\n\n### 3. 【内】模式 (又叫：物理模式)\n*   **顾名思义**：**“内”**就是**“最内部/最底层”**。\n*   **大白话**：公司的档案室，文件到底是放在A柜子还是B柜子，是用纸质存还是U盘存。\n*   **Java秒懂**：相当于 MySQL 底层的 **`.ibd` 数据文件**、**B+树索引**怎么存在服务器的**硬盘**上。作为Java开发，你平时根本不关心这个，那是DBA（数据库管理员）和操作系统管的事。\n*   **题干关键词**：物理存储、存储方式、索引、磁盘。\n\n---\n\n## 🖼️ 二、 字符图解：一看就懂的层级关系\n\n```text\n=========================================================\n                 【数据库三级模式图】\n=========================================================\n\n[外部] 👨‍💻 终端用户 / Java程序员 (你)\n          |\n          | (只看自己需要的局部数据)\n          V\n+-------------------------------------------------------+\n|                     【外模式】                        |  <-- 考点：用户看到的逻辑结构\n|  (张三的视图)      (李四的视图)      (王五的接口)     |\n+-------------------------------------------------------+\n          |\n          | (汇总成一个完整的整体)\n          V\n+-------------------------------------------------------+\n|                    【概念模式】                       |  <-- 考点：全体数据的逻辑结构\n|        (完整的数据库表：包含所有字段、约束)           |\n+-------------------------------------------------------+\n          |\n          | (最终怎么存到机器里)\n          V\n+-------------------------------------------------------+\n|                     【内模式】                        |  <-- 考点：物理存储、硬盘\n|        (硬盘上的文件、B+树、数据块、物理索引)         |\n+-------------------------------------------------------+\n```\n\n---\n\n## 📖 三、 扫盲区：把专业名词翻译成大白话\n\n为了防止您被题目里的其他词汇绕晕，这里做“非专业名词”解释：\n\n*   **逻辑结构**：就是“人脑子里想的结构”或者“画在纸上的表格”。比如你脑子里想“这是一个用户表，有账号和密码”，这就是逻辑结构。它不涉及电脑怎么存。\n*   **物理结构**：就是“电脑硬盘上真实存在的状态”。比如这段数据在硬盘的第几个扇区，占了几个字节。\n*   **终端用户**：就是用你开发的APP或网站的普通人（比如点外卖的顾客）。\n*   **视图 (View)**：就是“看数据的角度”。就像盲人摸象，摸到腿的以为是大柱子（外模式），但大象整体是个动物（概念模式）。\n\n---\n\n## 🎯 四、 考试通关标准（复习到什么程度？）\n\n对于系统架构设计师考试，这个知识点**不需要您会写任何代码，也不需要深入研究底层原理**。您只需要达到**“条件反射连连看”**的程度即可拿分！\n\n**考试时，看到题干里的【关键词】，直接秒选：**\n\n1.  看到 **“用户”**、**“程序员”**、**“局部”**、**“看到或使用”** ➡️ 闭眼选 **【外模式】**\n2.  看到 **“全体数据”**、**“全局”**、**“公共”** ➡️ 闭眼选 **【概念模式】**\n3.  看到 **“物理”**、**“存储”**、**“磁盘”**、**“索引”** ➡️ 闭眼选 **【内模式】**\n\n---\n\n## ✌️ 五、 回顾您的真题\n\n**题干：** 数据库系统的三级模式中，（）用以描述**用户（包括程序员和终端用户）看到或使用**的那部分数据的逻辑结构...\n\n**解题思路：**\n1. 提取关键词：“用户”、“程序员”、“看到或使用”。\n2. 触发顾名思义记忆法：谁在数据库的外面看？是外部人员（用户和程序员）。\n3. 对应模式：**外模式**。\n4. 答案：**C**。\n\n*怎么样？用这种“顾名思义”和“Java开发代入”的方法，是不是瞬间就记住了？如果还有其他觉得难背的知识点，随时发给我，我继续为您定制“大白话记忆法”！*"
+    },
+    {
+      "id": 1183,
+      "index": 32,
+      "sort": 10,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "事务是数据库系统中不可分割的逻辑工作单位，（）不属于事务的特性。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "持久性",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "原子性",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "一致性",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "并发性",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "并发性"
+          ],
+          "official_analysis": "本题考察的是**数据库事务的ACID特性**。\n事务（Transaction）是数据库操作的基本单位，具有四个基本特性，即ACID原则：\n**A选项持久性（Durability）**：表示一旦事务提交，其所做的修改会永久保存在数据库中，即使系统发生故障也不会丢失，属于事务的基本特性。\n**B选项原子性（Atomicity）**：指事务是一个不可分割的操作单元，要么全部执行成功，要么全部失败回滚，属于事务的基本特性。\n**C选项一致性（Consistency）**：表示事务执行前后，数据库必须从一个一致性状态转换到另一个一致性状态，属于事务的基本特性。\n**D选项并发性**：并发性是数据库系统的一个重要特性，指多个事务可以同时执行，但它**不是事务本身的特性**。并发控制是数据库管理系统需要实现的机制，以保证在多事务同时进行时仍能保持数据一致性和隔离性。\n因此，选项 D 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考指导专家。看到您有5年的Java和Spring Boot开发经验，这太棒了！在日常开发中，您肯定经常使用 `@Transactional` 注解，这正是我们今天要攻克的知识点。\n\n针对您“英语不好”且喜欢“**中文顾名思义**”的记忆偏好，我为您量身定制了这份**无生僻专业词汇、纯靠字面意思联想**的精美记忆笔记。\n\n---\n\n# 🌟 架构师备考专属笔记：数据库事务的四大特性 🌟\n\n## 💡 一、 概念白话翻译（绝不用专业词汇解释专业词汇）\n\n在学习特性前，我们先搞懂什么是**“事务”**。\n👉 **顾名思义**：“事”就是事情，“务”就是任务。**事务 = 必须一口气做完的一整套任务。**\n> **结合您的Spring Boot经验**：\n> 想象您写了一个“用户下单”的接口，里面有两步：1. 扣减商品库存；2. 生成用户订单。\n> 这两步必须绑在一起，要么都成功，要么都失败（回滚）。这个“绑定在一起的整体”，就叫一个**事务**。\n\n---\n\n## 🧠 二、 顾名思义 · 核心记忆法（重点背诵区）\n\n官方说事务有四个特性（简称ACID，英语不好没关系，我们直接记中文）。请看着汉字字面意思来记：\n\n### 1. 原子性 (Atomicity) —— 对应选项B\n*   **顾名思义**：在初中物理里，“**原子**”是物质**不可再分**的最小单位。\n*   **大白话**：这个任务是个“原子”，不能被劈开。要么全做完，要么全不做。绝对不存在“只做了一半”的情况。\n\n### 2. 一致性 (Consistency) —— 对应选项C\n*   **顾名思义**：“**一致**”就是一样、吻合、规矩没变。\n*   **大白话**：做任务之前和做任务之后，世界的“总规矩”保持一致。\n    *   *举例*：张三给李四转账100块。转账前两人总共有500块，转账后两人总共还得是500块。总金额“一致”，不能凭空消失或多出来。\n\n### 3. 隔离性 (Isolation) —— 题目未提，但考试必考\n*   **顾名思义**：“**隔离**”就是把你和我关在不同的房间，互相看不见。\n*   **大白话**：大家都在用数据库，你的 `@Transactional` 和我的 `@Transactional` 同时运行时，互相不能捣乱，就像被“隔离”了一样。\n\n### 4. 持久性 (Durability) —— 对应选项A\n*   **顾名思义**：“**持久**”就是时间长、永久保留。\n*   **大白话**：只要代码里执行了 `commit`（提交成功），数据就**持久**地写死在硬盘上了。就算下一秒机房停电、服务器爆炸，数据也不会丢。\n\n---\n\n## 🚫 三、 为什么选 D (并发性) ？（防坑指南）\n\n*   **并发性**的顾名思义：“**并**”=一起，“**发**”=发生。多个人一起发生动作。\n*   **为什么它不是事务的特性？**\n    *   “原子、一致、隔离、持久”是用来形容**“单个事务本身长什么样”**的（就像形容一个人很高、很瘦）。\n    *   “并发”是用来形容**“整个系统有多热闹”**的（就像形容大街上人很多）。\n    *   所以，并发性是**数据库系统**的能力，而不是**单个事务**的特性！\n\n---\n\n## 🖼️ 四、 字符图解记忆（建议在脑海中拍张照）\n\n```text\n       【 数据库事务 (就像一个坚固的保险箱) 】\n                 |\n  +--------------+--------------+\n  |                             |\n[原]子性                      [一]致性\n(不可劈开，全有或全无)         (规矩不变，总账要平)\n  |                             |\n[隔]离性                      [持]久性\n(互不干扰，各玩各的)           (落盘生根，停电不怕)\n\n记忆口诀：原一隔持 (谐音：愿意搁池 -> 愿意把数据搁在数据库连接池里)\n```\n\n---\n\n## 🎯 五、 考试通关指南（复习到什么程度？）\n\n作为系统架构设计师的考生，对于这个知识点，您**不需要**去背诵底层的实现原理（比如什么Redo log, Undo log，除非考到非常深的下午题，但上午选择题不需要）。\n\n**您只需要达到以下程度即可拿分：**\n1.  **看到中文名称，能选出对应的白话描述**（例如：看到“原子性”，脑子里立刻反应出“不可分割、全有或全无”）。\n2.  **能在一堆词语中，一眼揪出那个“假冒伪劣”的特性**。\n    *   *真特性只有四个*：原、一、隔、持。\n    *   *常见的假冒选项*：并发性、可用性、可靠性、安全性。（只要不是“原一隔持”，统统是错的！）\n\n**今日小测验（在心里回答）：**\n如果题目问：“一旦事务提交，数据就不会丢失”，这叫什么性？\n*(答案：持久性。因为“不丢失”=“持久”)*\n\n祝您备考顺利！如果有其他觉得难记的知识点，随时发给我，我继续为您“顾名思义”！"
+    },
+    {
+      "id": 1184,
+      "index": 33,
+      "sort": 11,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "若关系R有m个元组，关系S有n个元组，则R和S的笛卡尔积有（）个元组。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "n",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "m",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "m+n",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "m\\*n",
+              "is_correct": true
+            }
+          ],
+          "correct_letters": [
+            "D"
+          ],
+          "correct_texts": [
+            "m\\*n"
+          ],
+          "official_analysis": "本题考察的是**关系代数中笛卡尔积的基本概念**。\n笛卡尔积是关系代数中的一种二元操作，用于将两个关系中的每一个元组进行组合，生成一个新的关系。设关系R有m个元组，关系S有n个元组，则R×S表示所有可能的有序对 (r, s)，其中r∈R，s∈S。\n**A选项 n**：只表示了S中的元组数，与笛卡尔积的结果无关，错误。\n**B选项 m**：只表示了R中的元组数，也不正确。\n**C选项 m+n**：表示的是两关系元组数的总和，而不是它们之间的组合数，错误。\n**D选项 m×n**：正确地表示了笛卡尔积中结果元组的数量。每个R中的元组都与S中的n个元组组合，总共生成m×n个元组，正确。\n因此，选项 D 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。针对您5年Java/SpringBoot开发经验的背景，我将把这些枯燥的数据库理论，全部转化为您每天都在写的代码逻辑和最直白的中文大白话。\n\n针对这道题，我为您制作了以下专属记忆笔记，请查收：\n\n---\n\n# 📓 软考架构师专属记忆笔记：数据库笛卡尔积\n\n## 💡 一秒破题：顾名思义记忆法\n\n遇到这道题，你只需要盯住三个字：**“元组”** 和 **“积”**。\n\n*   **【积】**：小学数学我们就学过，“积”就是**乘积（乘法）**。所以看到“笛卡尔**积**”，闭着眼睛选带有**乘号（$\\times$）**的选项！$m$ 和 $n$ 的积，就是 $m \\times n$。\n*   **【元组】**：顾名思义，“**元**素**组**成的一行数据”。在数据库里就是**“一行数据”**。\n\n---\n\n## ☕ Java程序员秒懂：概念大白话翻译\n\n为了不背专业名词，我们把题目翻译成你天天写的 Java 代码：\n\n| 软考装逼词汇 | 顾名思义大白话 | 对应你的 Java/SpringBoot 日常 |\n| :--- | :--- | :--- |\n| **关系 (Relation)** | 有关系的数据放在一起，就是**“一张表”** | 数据库里的一张表，或者代码里的一个 `List<Entity>` |\n| **元组 (Tuple)** | 元素组成的一组，就是表里的**“一行数据”** | `List` 里面的一个 `Entity` 对象实例 |\n| **笛卡尔积** | 两个表的数据**“无脑全排列组合”** | **双层嵌套的 `for` 循环** |\n\n**👨‍💻 你的代码逻辑再现：**\n题目说：表R有 $m$ 行，表S有 $n$ 行，求笛卡尔积有多少行？\n这就相当于你写了下面这段代码：\n\n```java\n// 表R有 m 个对象，表S有 n 个对象\nfor (Object r : listR) {          // 外层循环跑 m 次\n    for (Object s : listS) {      // 内层循环跑 n 次\n        // 笛卡尔积就是把它们拼在一起\n        resultList.add(r + s);    // 这行代码总共执行了 m * n 次！\n    }\n}\n```\n**结论：** 双层 `for` 循环的执行次数 = 外层次数 $\\times$ 内层次数 = $m \\times n$。选 D！\n\n---\n\n## 📊 字符图解：无脑连连看\n\n假设 表R 有 2 行（m=2），表S 有 3 行（n=3）。\n笛卡尔积就是让 R 里面的每一行，都去和 S 里面的每一行牵手。\n\n```text\n  表R (2行)         表S (3行)               笛卡尔积结果 (2 * 3 = 6行)\n  +----+           +----+                  +---------+\n  | R1 | ────┬───> | S1 |                  | R1 , S1 |\n  +----+     ├───> | S2 |                  | R1 , S2 |\n             └───> | S3 |                  | R1 , S3 |\n                                   ===>    +---------+\n  +----+     ┌───> | S1 |                  | R2 , S1 |\n  | R2 | ────┼───> | S2 |                  | R2 , S2 |\n  +----+     └───> | S3 |                  | R2 , S3 |\n                                           +---------+\n```\n\n---\n\n## 🎯 考点复习边界（架构师考试要掌握到什么程度？）\n\n作为架构师考生，对于“关系代数”这一块，**绝对不需要**你去死记硬背那些复杂的数学符号（比如 $\\sigma, \\pi, \\bowtie$ 的严谨数学定义），你只需要掌握到以下程度即可拿分：\n\n1.  **算行数（元组数）：**\n    *   看到 **“积”**（笛卡尔积）：行数相**乘** ($m \\times n$)。\n    *   看到 **“并”**（并集）：行数相**加**（最多 $m+n$ 行，类似 `list.addAll()`）。\n2.  **算列数（属性数）：**\n    *   笛卡尔积的列数 = R的列数 **+** S的列数（两张表左右拼在一起，字段变多了）。\n3.  **知道名词对应关系：**\n    *   关系 = 表\n    *   元组 = 行（记录）\n    *   属性 = 列（字段）\n\n**✅ 备考建议：** 这个知识点属于“送分题”，看完这个笔记，以后在真题里只要看到“笛卡尔积”和“元组”，脑子里直接反射出**“双层for循环”**和**“乘法”**，直接选相乘的选项，这部分就可以翻篇了，不用再花时间看教材！"
+    },
+    {
+      "id": 1206,
+      "index": 34,
+      "sort": 33,
+      "knowledge_point": "关系数据库",
+      "prompt": "在关系数据库中，只消除非主属性对码的部分依赖的范式是 （）。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "BCNF",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "1NF",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "2NF",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "3NF",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "2NF"
+          ],
+          "official_analysis": "本题考察的是**关系数据库中的范式及其对应的规范化目标**。\n**A选项BCNF（Boyce-Codd范式）**：错误。BCNF 是对 3NF 的进一步加强，要求每个决定因素都是候选键，解决的是主属性对码的依赖问题。\n**B选项1NF**：错误。第一范式要求属性值必须是原子性的，不可再分，是最基本的要求，不涉及对“依赖”的处理。\n**C选项2NF**：正确。第二范式在满足1NF的基础上，要求所有**非主属性必须完全依赖于候选键**，也就是**消除了非主属性对码的部分依赖**。若有非主属性只依赖于组合主键的一部分，则违反2NF。\n**D选项3NF**：错误。第三范式在满足2NF的基础上，进一步要求非主属性不能传递依赖于候选键，解决的是“传递依赖”问题，而非“部分依赖”。\n因此，正确答案为 C。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。针对您5年Java/SpringBoot开发经验，且偏好**“中文顾名思义”**和**“拒绝专业名词套娃”**的学习特点，我为您量身定制了这套《数据库范式》记忆笔记。\n\n作为Java开发者，您平时写Entity实体类和建MySQL表时其实都在用这些知识，我们现在只是把您的日常经验转化为考试得分点。\n\n---\n\n# 📓 软考高级架构师·专属记忆笔记\n## 核心考点：关系数据库——四大范式（Normal Forms）\n\n### 💡 零行话·大白话概念翻译（先懂概念再背诵）\n为了不“用专业名词解释专业名词”，我们先把题目里的词翻译成您熟悉的Java/数据库日常大白话：\n\n*   **关系数据库**：就是您平时用的 MySQL，数据像 Excel 表格一样一行一列的。\n*   **范式（Normal Form）**：**“范”**指规范，**“式”**指格式。就是**建表的规矩**。规矩级别越高（1->2->3），表设计得越好，越不容易出现数据冗余（重复）和更新报错。\n*   **码 / 候选键**：相当于您数据库表里的 **主键（Primary Key）**。能唯一确定一行数据的字段（可能是1个字段，也可能是2个字段组合，比如 `学号+课程号`）。\n*   **主属性**：组成“码”的字段。相当于**“核心骨干”**。\n*   **非主属性**：除了“码”之外的其他普通字段。相当于**“普通员工”**。\n*   **依赖**：就是“谁决定谁”。比如知道“身份证号”，就能确定“姓名”，这就叫姓名**依赖**于身份证号。\n\n---\n\n### 🧠 核心记忆法：中文“顾名思义”口诀\n\n考试考范式，本质就是考**“第X范式消除了什么毛病”**。请记住这个递进的阶梯：\n\n```text\n[最基础] 1NF ──> 2NF ──> 3NF ──> BCNF [最严格]\n```\n\n#### 1️⃣ 第一范式 (1NF) —— 顾名思义：【一就是一，不可再分】\n*   **消除什么**：消除表中有表（字段里塞了集合）。\n*   **大白话**：每个字段必须是**原子**的。比如“联系方式”不能填“手机:138, 邮箱:a@b.com”，必须拆成两个独立字段。\n*   **Java秒懂**：Entity类里的属性只能是基本类型或String，不能是 `List<String>`。\n\n#### 2️⃣ 第二范式 (2NF) —— 顾名思义：【二代表“两个”，不能只靠其中“一部分”】\n*   **消除什么**：消除**非主属性**对码的**部分依赖**。（**本题考点！**）\n*   **大白话**：如果主键是由**两个**字段组合而成的（比如 `学号+课程号`），那么普通字段（比如 `学生姓名`）不能只归其中一个管（姓名只跟学号有关，跟课程号无关，这就叫**部分依赖**）。必须拆表！\n*   **记忆钩子**：看到**“第二”**，想到**“两个组合键”**，不能只依赖**“一部分”**。\n\n#### 3️⃣ 第三范式 (3NF) —— 顾名思义：【拒绝“第三者”插足】\n*   **消除什么**：消除**非主属性**对码的**传递依赖**。\n*   **大白话**：A决定B，B决定C，导致C间接（传递）依赖A。比如表里有 `员工号(主键)` -> `部门号` -> `部门名称`。部门名称其实是跟着部门号走的，这就是“第三者插足”。必须把部门单独拆一张表。\n*   **记忆钩子**：看到**“第三”**，想到**“第三者/中间商”**，消除**“传递”**。\n\n#### 4️⃣ BCNF (巴斯-科德范式) —— 顾名思义：【B = Boss (老板)，老板也要守规矩】\n*   **消除什么**：消除**主属性**对码的部分和传递依赖。\n*   **大白话**：前面2和3都是在规范“普通员工（非主属性）”，BCNF是连“核心骨干/老板（主属性）”内部的依赖关系也要管。\n*   **记忆钩子**：**B**CNF的**B**就是**Boss**，解决的是**主属性（Boss）**的问题。\n\n---\n\n### 🗺️ 字符图解记忆（建议截图保存）\n\n```text\n【范式升级打怪图】\n\n          (Boss也要守规矩)\n          消除主属性的依赖\n             +-------+\n             | BCNF  | \n             +-------+\n                ^\n                | (拒绝第三者)\n                | 消除非主属性的【传递依赖】\n             +-------+\n             |  3NF  | \n             +-------+\n                ^\n                | (不能只靠一部分)\n                | 消除非主属性的【部分依赖】  <--- 【2013年真题考点在这里！】\n             +-------+\n             |  2NF  | \n             +-------+\n                ^\n                | (一就是一)\n                | 保证字段【不可再分】\n             +-------+\n             |  1NF  | \n             +-------+\n```\n\n---\n\n### 🎯 架构师考试复习底线（学到什么程度能拿分？）\n\n对于系统架构设计师考试，您**不需要**去手写复杂的SQL拆表，也**不需要**去证明数学定理。您只需要做到以下**“条件反射”**即可拿满这部分的单选题分数：\n\n1.  **看到“不可再分 / 原子性”** ➡️ 选 **1NF**\n2.  **看到“部分依赖”** ➡️ 选 **2NF** （本题题干原话）\n3.  **看到“传递依赖”** ➡️ 选 **3NF**\n4.  **看到“主属性的依赖 / 决定因素都是候选键”** ➡️ 选 **BCNF**\n\n**本题秒杀逻辑**：\n题干问：“只消除非主属性对码的**部分依赖**”。\n大脑触发关键词：**部分** -> 不能只靠一部分 -> 对应组合键 -> 对应**第二**范式（2NF）。\n直接选 C！\n\n---\n*祝您备考顺利！如果对其他知识点（如设计模式、架构风格等）也需要这种“顾名思义”的翻译，随时告诉我！*"
+    },
+    {
+      "id": 1207,
+      "index": 35,
+      "sort": 34,
+      "knowledge_point": "关系数据库",
+      "prompt": "在数据库设计的（）阶段进行关系反规范化。",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "需求分析",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "概念设计",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "逻辑设计",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "物理设计",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "逻辑设计"
+          ],
+          "official_analysis": "本题考察的是**数据库设计流程中各阶段的具体任务**。\n数据库设计通常分为四个主要阶段：\n- **需求分析阶段**：了解用户业务需求，获取数据需求，不涉及数据结构的设计。\n- **概念设计阶段**：使用E-R模型等抽象工具构建概念模型，描述数据实体及其联系。\n- **逻辑设计阶段**：将概念模型（如E-R图）转换为具体的逻辑模型（如关系模式），并进行**关系模式的规范化与反规范化**，以满足性能与实际应用需求。\n- **物理设计阶段**：确定存储结构、索引设计等物理实现细节，提升数据操作效率。\n\n**A选项需求分析**：错误，此阶段尚未进入数据结构设计层面。\n**B选项概念设计**：错误，此阶段仅建立抽象模型，不涉及关系模型优化。\n**C选项逻辑设计**：正确。反规范化操作通常在此阶段执行，以在满足功能需求的同时优化性能。\n**D选项物理设计**：错误，此阶段重点是存储结构与物理实现，反规范化不是重点任务。\n因此，正确答案为 C。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考指导专家。针对您5年Java/SpringBoot开发经验的背景，以及“必须用中文顾名思义”、“拒绝专业名词套娃”、“英语不好”的学习偏好，我为您量身定制了这套**《数据库设计4阶段——秒记笔记》**。\n\n我们将把枯燥的理论，映射到您日常熟悉的CRUD（增删改查）开发工作中去。\n\n---\n\n# 📒 架构师通关秘籍：数据库设计阶段与反规范化\n\n## 🗺️ 一、 核心记忆图谱（字符图）\n\n请把数据库设计想象成**“给公司开发一个新系统，从接需求到最终上线”**的4个步骤：\n\n```text\n 阶段1: 听老板吹牛    ->  阶段2: 白板画草图    ->  阶段3: 敲定表结构    ->  阶段4: 搞定服务器\n【需求分析】         -> 【概念设计】         -> 【逻辑设计】         -> 【物理设计】\n   ↓                    ↓                    ↓                    ↓\n 搞清要干啥           画出实体和关系         变成二维表、拆表/合表    建索引、分库分表\n (无技术含量)         (E-R图)              (规范化/反规范化)      (存储结构)\n```\n\n---\n\n## 🧠 二、 顾名思义：为什么选 C (逻辑设计)？\n\n我们要记住的核心是：**反规范化 在 逻辑设计 阶段。**\n\n💡 **【顾名思义记忆法】**\n*   **逻辑（Logic）：** 什么是逻辑？就是**“代码怎么写，表怎么建”的规则**。作为Java程序员，您在写SpringBoot的 `@Entity` 或者设计 MySQL 的表字段时，就是在盘算“业务逻辑”。\n*   **规范化/反规范化：** 说白了就是**“拆表”**（规范化，避免数据冗余）和**“合表”**（反规范化，为了查询快，故意把几张表捏在一起）。\n*   **连词成句：** “决定是拆表还是合表（反规范化），完全取决于我们的业务**逻辑**怎么查最方便，所以它属于**逻辑设计**。”\n\n---\n\n## 📖 三、 告别天书：专业名词“大白话”翻译\n\n为了不让专业名词互相解释，我用您日常开发的场景来翻译：\n\n**1. 需求分析（需 = 需要，求 = 要求）**\n*   **大白话：** 产品经理或老板告诉你“我们需要一个商城系统，能买东西”。\n*   **记住一点：** 这个阶段连代码的影子都没有，纯聊天，**绝对不涉及**表怎么建。\n\n**2. 概念设计（概 = 大概，念 = 念头/想法）**\n*   **大白话：** 脑子里有个大概的想法了。大家在会议室白板上画圈圈和线（这就是所谓的 **E-R图**，E就是实体比如“用户”，R就是关系比如“购买”）。\n*   **记住一点：** 只是画草图，还没真正在MySQL里建表。\n\n**3. 逻辑设计（逻 = 盘算，辑 = 整理）**\n*   **大白话：** 把白板上的草图，变成数据库里实实在在的二维表（有行有列）。\n*   **规范化：** 发现一张表字段太多，为了不重复存数据，把它**拆**成两张表。\n*   **反规范化：** 发现拆表后，每次Java写查询都要 `JOIN` 好几张表，太慢了！为了性能，干脆又把它们**合**并成一张大表。\n*   **记住一点：** 拆表和合表（规范化/反规范化）都是在这个阶段干的！\n\n**4. 物理设计（物 = 物理硬件，理 = 管理）**\n*   **大白话：** 表结构已经定死了，现在考虑怎么存到硬盘上最快。比如加个索引（Index）、做个表分区。\n*   **记住一点：** 只要看到“存储”、“索引”、“硬盘”，就是物理设计。\n\n---\n\n## 🎯 四、 考场通关底线（复习到什么程度就能拿分？）\n\n针对这道题和这个知识点，您**不需要**去背诵长篇大论，只需要在脑子里建立以下**条件反射（看到左边，立刻选右边）**：\n\n1.  看到题干问 **“E-R图 / 实体联系”** ➡️ 闭眼选 **【概念设计】**\n2.  看到题干问 **“规范化 / 反规范化 / 关系模式”** ➡️ 闭眼选 **【逻辑设计】**\n3.  看到题干问 **“索引 / 存储结构”** ➡️ 闭眼选 **【物理设计】**\n\n**本题秒杀思路：**\n题目问“反规范化”在哪？\n脑内回放：反规范化 = 故意合表 = 决定表怎么建 = 盘算业务逻辑 = **逻辑设计 (C)**。搞定！\n\n---\n*💡 专家寄语：作为有5年经验的Java老兵，您其实每天都在做这些事，只是软考给它们穿上了“学术的外衣”。扒掉外衣，用您熟悉的建表逻辑去套，架构师考试的数据库部分对您来说就是送分题！*"
+    },
+    {
+      "id": 1286,
+      "index": 36,
+      "sort": 14,
+      "knowledge_point": "关系数据库",
+      "prompt": "现有一个学生信息数据库表，其中有一列 \"性别\"，该列规定只能填写 \"男\" 或者 \"女\"。请问这体现了以下哪种完整性约束？（）",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "实体完整性",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "参照完整性",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "用户定义完整性",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "以上都不是",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "用户定义完整性"
+          ],
+          "official_analysis": "此题考察数据库中的完整行约束。\n根据题目中的描述，**学生信息数据表**中的“性别”列只能填入“男”或“女”，该列的约束条件是**固定的枚举值**。在这种情况下，我们需要判断该列的**完整性约束**。\n**完整性约束**是指数据库中确保数据的准确性和一致性的一种规则。在这里，**性别列**的约束为固定的两种值（男或女），这属于一种**用户定义的完整性约束**，因为是用户根据业务需求定义了该列只能有这两个取值。\n**A. 实体完整性**：实体完整性是指数据库中的每个实体（即表的每一行）必须是唯一的，通常涉及主键的设置，确保每条记录的唯一性。该选项不符合题意。\n**B. 参照完整性**：参照完整性是指一个表中的外键值必须对应另一个表的主键值。它用于保持表与表之间的数据一致性。这个选项不适用于描述**性别列**的固定取值。\n**C. 用户定义完整性**：用户定义完整性是指数据库中可以由用户根据实际业务需求定义的特定规则或约束。在这里，性别列只允许取\"男\"或\"女\"的值，这正是用户自定义的约束规则，因此这是正确的答案。\n**D. 以上都不是**：这个选项显然不正确，因为C选项是正确的。\n正确答案：**C. 用户定义完整性**"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家。看到您有5年的Java和SpringBoot开发经验，这太棒了！作为程序员，您的逻辑思维已经非常强，我们现在要做的就是**把枯燥的软考理论，翻译成您每天都在写的Java代码逻辑，并用纯中文的“顾名思义”法死死钉在您的脑子里。**\n\n针对这道关于“数据库完整性约束”的题目，我为您定制了以下专属记忆笔记。\n\n---\n\n# 📓 软考架构师专属记忆笔记：数据库三大完整性约束\n\n## 一、 核心概念“大白话”翻译（拒绝专业词汇套娃）\n\n在背诵之前，我们先把题目里的词汇翻译成大白话：\n*   **完整性约束**：顾名思义，“完整”就是数据没毛病，“约束”就是定规矩。连起来就是：**为了防止别人在表格里乱填垃圾数据，而定下的规矩。**\n*   **表**：就当成咱们日常用的 Excel 表格。\n*   **列**：Excel 表格里的一竖溜（比如“姓名”列、“性别”列）。\n*   **行**：Excel 表格里的一横排（代表一个具体的人的所有信息）。\n\n---\n\n## 二、 顾名思义记忆法（核心背诵区）\n\n数据库的规矩（完整性）只有三种，我们通过**看名字猜意思**来秒记，并结合您的Java经验：\n\n### 1. 实体完整性 (Entity Integrity)\n*   **顾名思义**：“实体”就是一个具体存在的东西（比如张三这个人）。怎么证明张三是独一无二的张三？必须要有**身份证号**，且身份证号**不能是空的**，也**不能和别人重复**。\n*   **大白话**：管“行”的规矩。每行数据必须有个唯一的编号（主键）。\n*   **Java秒懂**：您写SpringBoot时，每个 `@Entity` 实体类是不是都必须加一个 `@Id` 注解？这就是实体完整性！\n\n### 2. 参照完整性 (Referential Integrity)\n*   **顾名思义**：“参照”就是参考、抄作业。你抄别人的作业，那个被抄的人**必须是真实存在的**。比如员工表里写了“所属部门是研发部”，那部门表里就必须真的有个“研发部”，不能凭空捏造。\n*   **大白话**：管“表和表之间关系”的规矩。填进去的关联编号，必须在另一张表里能找到（外键）。\n*   **Java秒懂**：就像Java里的对象引用（Reference）。对象A里面引用了对象B，如果对象B不存在，就会报空指针异常（NullPointerException）。\n\n### 3. 用户定义完整性 (User-defined Integrity) —— **本题考点**\n*   **顾名思义**：“用户定义”就是**产品经理（用户）提的奇葩业务规矩**。比如产品经理说：“性别只能填男女啊，填个武装直升机算怎么回事！”、“年龄必须大于0岁啊！”。\n*   **大白话**：管“具体某个格子填什么值”的规矩。符合具体业务逻辑的限制。\n*   **Java秒懂**：您在写接口参数校验时，用的 `@Min(0)`、`@Pattern(regexp=\"男|女\")`、`@NotBlank` 等校验注解，全都是用户定义完整性！\n\n---\n\n## 三、 字符图谱（建议截图或抄写一遍）\n\n```text\n【防止填错数据的三大规矩（完整性约束）】\n\n      ┌──────────────────────────────────────────────────┐\n      │ 1. 实体完整性                                    │\n      │ 顾名思义：证明\"实体\"是唯一的                     │\n      │ 考试找词：主键、唯一、不能为编号空               │\n      │ 举个栗子：学号不能重复                           │\n      └──────────────────────────────────────────────────┘\n                                \n      ┌──────────────────────────────────────────────────┐\n      │ 2. 参照完整性                                    │\n      │ 顾名思义：\"参照\"的东西必须存在                   │\n      │ 考试找词：外键、另一张表、关联                   │\n      │ 举个栗子：填写的班级编号，必须在班级表里真实存在 │\n      └──────────────────────────────────────────────────┘\n                                \n      ┌──────────────────────────────────────────────────┐\n      │ 3. 用户定义完整性  <--- 【本题答案】             │\n      │ 顾名思义：\"用户(业务)\"自己定的特殊规矩           │\n      │ 考试找词：性别男女、年龄范围、具体条件           │\n      │ 举个栗子：性别只能填\"男\"或\"女\"                   │\n      └──────────────────────────────────────────────────┘\n```\n\n---\n\n## 四、 架构师考试复习底线（掌握到什么程度就能拿分？）\n\n对于系统架构设计师考试，这个知识点**绝对不需要**您去背诵复杂的SQL创建语句。您只需要达到**“条件反射连连看”**的程度即可拿满分：\n\n**考试通关秘籍（看到左边，选右边）：**\n1. 题干里提到 **“主键”、“唯一”、“非空”** ➡️ 闭眼选 **【实体完整性】**\n2. 题干里提到 **“外键”、“两张表”、“部门表和员工表”** ➡️ 闭眼选 **【参照完整性】**\n3. 题干里提到 **“只能是男或女”、“年龄在0-150之间”、“成绩不能是负数”** ➡️ 闭眼选 **【用户定义完整性】**\n\n**回到本题：**\n题目说“性别只能填写男或者女”，这显然是具体的业务规矩，既不是主键（实体），也不是关联其他表（参照），而是产品经理定的业务规则，所以秒选 **C. 用户定义完整性**。\n\n---\n*💡 学习顾问寄语：把数据库想象成您平时写的Java代码，主键是`@Id`，外键是对象引用，业务限制是校验注解。用您最熟悉的知识去降维打击软考概念，您会发现架构师的理论其实非常亲切！*"
+    },
+    {
+      "id": 1302,
+      "index": 37,
+      "sort": 30,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "给定关系模式R（A，C，D，E）、S（C，D，E），经过自然连接后的属性列数为（）。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "2",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "4",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "7",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "8",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "4"
+          ],
+          "official_analysis": "本题考察的是**关系代数中的自然连接**。\n**自然连接**是一种特殊的等值连接，它不仅要求两个关系中参与连接的属性同名，还**会自动去除重复的同名属性列**，最终结果只保留一份。R 的属性为：A、C、D、E，S 的属性为：C、D、E\n它们的**同名属性是 C、D、E**，所以自然连接时这三个属性将用于连接。\n结果中会包含以下属性：R 中独有的属性：A，公共属性：C、D、E（仅保留一份）\n因此，连接后的列为：A、C、D、E ， 共 **4 列**\n所以，选择选项 B。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。得知您是一位有5年经验的Java/SpringBoot开发老兵，这太棒了！在日常开发中，您肯定经常处理实体类（Entity）、数据库表（Table）和各种集合（List/Set）。\n\n针对您觉得难记的**“数据库关系代数”**，我们将彻底抛弃枯燥的学术定义，直接用**“中文顾名思义”**和**“Java开发日常”**来为您打造这份专属记忆笔记。\n\n---\n\n# 📓 架构师通关专属笔记：关系代数之【自然连接】\n\n## 💡 一、 核心记忆法：顾名思义（绝招）\n\n遇到**“自然连接”**这四个字，请立刻在脑海中拆解为这句口诀：\n👉 **“自”动去重，“然”后拼接**\n\n*   **为什么叫“自然”？**\n    就像现实生活中两家人结婚（合并），男方带了一台电视机，女方也带了一台电视机。搬进新家时，**“自然”**的做法是只留一台电视机在客厅，另一台处理掉，绝不会在客厅摆两台一模一样的电视。\n*   **映射到这道题：**\n    表R有列 `C, D, E`，表S也有列 `C, D, E`。把它们拼在一起时，**“自然”**的做法就是把重复的 `C, D, E` 融合掉，只保留一份！\n\n---\n\n## 🗣️ 二、 术语大白话翻译（拒绝专业词汇套娃）\n\n为了让您彻底理解，我们把题目里的词汇翻译成您每天都在用的东西：\n\n1.  **关系模式 R（A，C，D，E）**\n    *   **大白话：** 就是一个**数据库表头**，或者一个 **Java实体类（Entity）**。\n    *   **翻译：** 有一个叫 `R` 的表，里面有4个字段（列），名字分别叫 `A`、`C`、`D`、`E`。\n2.  **属性列**\n    *   **大白话：** 就是数据库表里的**“列（Column）”**，或者 Java 类里的**“属性/字段（Field）”**。\n3.  **自然连接（符号通常像个蝴蝶 ⨝）**\n    *   **大白话：** 把两个表横向拼在一起。拼接的条件是**“名字相同的列，值必须相等”**，并且拼完之后，**名字相同的列只保留一个**。\n\n---\n\n## 🖼️ 三、 字符图解推演（一看就懂）\n\n我们用字符图来看看这道题是怎么变成 4 列的：\n\n```text\n【准备阶段：看表头】\n表 R 的列： [ A ]  [ C ]  [ D ]  [ E ]\n表 S 的列：        [ C ]  [ D ]  [ E ]\n\n【执行“自然连接”：自动去重，然后拼接】\n步骤1：找同名列。发现 C、D、E 名字一模一样！\n步骤2：融合它们！（就像 Java 里的 Set 集合，不允许重复元素）\n\n      [ A ]      [ C ]      [ D ]      [ E ]\n        |          |          |          |\n      (R独有)   (R和S融合) (R和S融合) (R和S融合)\n        |          |          |          |\n        V          V          V          V\n结果：[ A ]      [ C ]      [ D ]      [ E ]\n\n【数一数】：1、2、3、4。 一共 4 列！答案选 B。\n```\n\n---\n\n## 🎯 四、 考点复习边界（掌握到什么程度就能拿分？）\n\n作为架构师考试，对于“关系代数”的列数计算，您**不需要**去背复杂的数学公式，也**不需要**管里面的数据到底长什么样。您只需要掌握以下**三个层次的算术题**即可通关：\n\n### 必考三兄弟（列数计算秘籍）：\n\n1.  **笛卡尔积（符号是 × ）**\n    *   **顾名思义：** 笛卡尔是个数学家，最喜欢**“简单粗暴全都要”**。\n    *   **列数算法：** `表1的列数 + 表2的列数`。（如果有同名列，不管，直接并排摆着）。\n    *   *如果本题考笛卡尔积：4列 + 3列 = 7列。*\n2.  **等值连接（符号是 ⨝ 下面带个条件，比如 R.C = S.C）**\n    *   **顾名思义：** 只要值**“相等”**就**“连接”**，但**不**负责打扫卫生（不去重）。\n    *   **列数算法：** 和笛卡尔积一样，`表1的列数 + 表2的列数`。\n    *   *如果本题考等值连接：4列 + 3列 = 7列。*\n3.  **自然连接（符号是 ⨝ 下面没条件）** 🌟**本题考点**🌟\n    *   **顾名思义：** **“自”动去重，“然”后拼接**。\n    *   **列数算法：** `表1的列数 + 表2的列数 - 重复的同名列数`。\n    *   *本题算法：4列(R) + 3列(S) - 3列(重复的CDE) = 4列。*\n\n**✅ 您的复习终点：**\n只要看到题目问**“自然连接后的属性列数”**，立刻在草稿纸上把两个括号里的字母写上下两排，把相同的字母圈起来当成一个，剩下的字母数一数有几个，选答案，拿分走人！\n\n---\n*💡 顾问寄语：架构师上午的选择题往往就是这种“窗户纸”知识，捅破了就非常简单。用Java程序员的思维去理解，把“自然连接”当成 `Map.putAll()` 时 Key 的覆盖去重，您永远都不会再忘！还需要我为您拆解其他知识点吗？*"
+    },
+    {
+      "id": 1303,
+      "index": 38,
+      "sort": 31,
+      "knowledge_point": "关系数据库",
+      "prompt": "对关系实施的各种操作，包括选择、投影、连接、并、交、差、增、删、改等，这些关系操作可以用代数运算的方式表示，其特点是操作的对象和结果都是（）操作。",
+      "difficulty": 0,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "记录",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "元组",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "集合",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "列",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "集合"
+          ],
+          "official_analysis": "本题考察的是**关系数据库中关系代数操作的基本概念**。\n关系数据库使用集合论中的概念，关系可以看作是元组的集合。关系代数提供了一系列操作，这些操作以关系作为输入，并产生一个新的关系作为输出。\n**A选项记录**：记录是关系中的单行数据，等价于元组。虽然它是关系的一部分，但关系代数操作并不是以单条记录为单位进行运算的，因此此项错误。\n**B选项元组**：元组是关系中的一行数据，即记录，但关系代数操作是以“关系”作为整体输入和输出的，操作不是以单个元组为单位，因此此项错误。\n**C选项集合**：关系在数学上定义为元组的集合。关系代数中的各种操作，例如选择、投影、连接、并、交、差等，都是以关系（集合）为操作对象，并输出新的关系（集合），因此此项正确。\n**D选项列**：列是关系的属性，虽然投影操作涉及列，但投影操作的结果仍是一个新的关系，即元组的集合，不是单独的列。因此此项错误。\n因此，选项 C 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。了解到您有5年的Java和SpringBoot开发经验，这太棒了！作为程序员，我们每天都在和数据库打交道。\n\n针对您英语不好、喜欢“顾名思义”以及需要大白话解释的需求，我为您量身定制了这份**【系统架构设计师-关系数据库】**的专属记忆笔记。我们将把枯燥的理论映射到您最熟悉的Java代码中去。\n\n---\n\n# 🌟 架构师备考专属记忆笔记 🌟\n\n## 🏷️ 核心考点：关系代数操作的对象和结果\n\n### 1. 🧠 知识点大白话翻译（用Java秒懂）\n不要被“关系代数”、“元组”这些学术词汇吓到，我们用您天天写的Java代码来对应：\n\n*   **关系（Relation）** = **数据库里的一张表** = Java里的 `List<User>` 或者 `Set<User>`（一个集合）。\n*   **元组（Tuple）/ 记录（Record）** = **表里的一行数据** = Java里的 `User user1 = new User();`（一个具体的对象）。\n*   **列（Column）/ 属性** = **表里的一个字段** = Java里的 `user1.getName();`（对象的一个属性）。\n\n**题目在问什么？**\n题目问：当你对数据库进行查询（选择）、关联（连接）等操作时，你操作的是什么？得到的是什么？\n\n**Java程序员的直觉：**\n当你用 Java Stream API 去过滤一个列表时：\n`List<User> result = userList.stream().filter(u -> u.getAge()>18).collect(Collectors.toList());`\n你输入的是一个 `List`（集合），输出的也是一个 `List`（集合）。\n在数据库里同理：**你对着一张表（集合）写SQL，查出来的结果依然是一张虚拟表（集合）。**\n\n---\n\n### 2. 💡 “顾名思义”专属记忆法\n\n为了让您看到词就能选对，我们来拆解汉字：\n\n*   **【集合】（正确答案）**\n    *   **顾名思义**：“集”是聚集，“合”是合拢。一堆数据聚集在一起。\n    *   **记忆口诀**：**“操作一张表，得到一张表；表就是一堆数据的【集合】。”** 只要是关系操作（SQL），永远是“一堆进，一堆出”。\n*   **【元组】与【记录】（错误干扰项）**\n    *   **顾名思义**：“元”是基本元素，“组”是组合；“记录”就是记下来的一笔。它们都只代表**“单行数据”**。\n    *   **排除逻辑**：你写SQL `SELECT * FROM table`，数据库不可能规定只允许你查一行，也不可能永远只返回一行。所以操作对象绝不是单行（元组/记录）。\n*   **【列】（错误干扰项）**\n    *   **顾名思义**：就是竖着的一排（字段）。\n    *   **排除逻辑**：你查出来的结果，哪怕只有一个字段（比如 `SELECT name FROM table`），它也是包含了好几行名字的“一张单列的表”，本质上还是一个【集合】，而不是孤立的列。\n\n---\n\n### 3. 🖼️ 字符图解记忆（右脑图像记忆）\n\n请在脑海中印下这幅图：操作的永远是外面的大框（集合），而不是里面的单行（元组）。\n\n```text\n  输入：关系 (集合)                       输出：新的关系 (集合)\n +-------------------+                 +-------------------+\n | [元组1] (张三,25) |                 | [元组1] (张三,25) |\n | [元组2] (李四,30) | ===(SQL操作)==> | [元组3] (王五,28) |\n | [元组3] (王五,28) |    (选择/投影)    +-------------------+\n +-------------------+                 \n   ▲                                     ▲\n   |                                     |\n 这是一个【集合】                        这依然是一个【集合】\n (List<User>)                          (List<User>)\n```\n\n---\n\n### 4. 🎯 考试复习边界（到什么程度就能拿分？）\n\n对于**“关系数据库基本概念”**这个知识点，作为高级架构师考试，您**不需要**去死磕复杂的数学代数公式，只需要掌握以下**“等价连连看”**即可应对90%的概念题：\n\n✅ **必须记住的等价词（看到A就要想到B）：**\n1.  **关系** = 表 = **集合** (Set)\n2.  **元组** = 行 = **记录** (Record)\n3.  **属性** = 列 = 字段 (Field)\n\n✅ **必须记住的1个核心原则：**\n*   **封闭性原则**：关系代数操作的输入是【集合】，输出必定也是【集合】。（就像Java里对List做Stream操作，结果还是List）。\n\n**复习到此为止！** 只要记住“表就是集合，SQL操作的是集合”，这道题以及类似的变体题您就能稳拿1分。不需要再去深究关系代数的底层数学推导了。\n\n---\n*祝您备考顺利！如果还有其他觉得晦涩难懂的架构师考点，随时发给我，我继续用Java大白话和顾名思义法帮您破解！*"
+    },
+    {
+      "id": 1304,
+      "index": 39,
+      "sort": 32,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "给定关系模式R \\< U ，F \\>， U= {A，B，C，D} ， F = {A→C ，AB→D }，则 R 的候选关键字为（）",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "A",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "B",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "AB",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "C",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "AB"
+          ],
+          "official_analysis": "本题考察的是**关系数据库中候选键的判定**，属于高频考点，需要熟练掌握。\n候选键是指**能唯一标识关系中元组的属性组合**，且是最小的（即不包含冗余属性）。\n根据题意： 属性集 U = {A, B, C, D}，函数依赖集 F = {A → C, AB → D}\n我们通过属性闭包来判断候选键。\n**1. 计算 A⁺：**\nA⁺ = {A}，根据 A → C，A⁺ = {A, C}，无法推出 B 或 D，所以 A 不是候选键。\n**2. 计算 B⁺：**\nB⁺ = {B}，无法推出其他属性，B 不是候选键。\n**3. 计算 AB⁺：**\nAB⁺ = {A, B}，A → C ⇒ AB⁺ = {A, B, C}，AB → D ⇒ AB⁺ = {A, B, C, D}\nAB 的闭包是全属性集 U，说明 AB 是超键，且 A⁺ 和 B⁺ 都不能独立推出全属性，说明 AB 是最小超键，即候选键。\n**4. 计算 C⁺：**\nC⁺ = {C}，不能推出其他属性，C 不是候选键。\n因此，选项 C 正确。"
+        }
+      ],
+      "model_response": "你好！我是您的软考备考指导专家。作为一名有5年经验的Java/SpringBoot开发老兵，您的逻辑思维能力绝对没问题。软考高级（架构师）的很多概念只是**“披着学术外衣的日常开发常识”**。\n\n针对您英语不好、喜欢“顾名思义”的特点，我为您量身定制了这份**【数据库候选键】**的精美记忆笔记。我们将把枯燥的数学符号，转化为您每天都在写的Java实体类（Entity）和数据库表设计。\n\n---\n\n# 📓 架构师备考专属笔记：数据库候选键与闭包推导\n\n## 一、 🧠 顾名思义：把“天书”翻译成“人话”\n*(绝对不用专业名词解释专业名词，全是大白话)*\n\n### 1. 关系模式 R \\< U, F \\>\n*   **字面拆解**：“关系”就是“表格”，“模式”就是“表结构”。\n*   **大白话**：这就是你在数据库里建的一张表（或者Java里的一个`@Entity`类）。\n    *   **U (属性集)**：就是**“表里的所有字段”**（比如：字段A, 字段B, 字段C, 字段D）。\n    *   **F (函数依赖)**：就是**“顺藤摸瓜的线索”**。\n\n### 2. 函数依赖 (A → C)\n*   **字面拆解**：“依赖”就是“靠着你、由你决定”。\n*   **大白话**：**“知道A，就能查出C”**。\n*   **Java秒懂**：就像你写了一个方法 `C getCByA(A a)`。只要传入A，就一定能得到唯一的C。（比如：知道“身份证号A”，就能查出“姓名C”）。\n\n### 3. 闭包 (A⁺)\n*   **字面拆解**：“闭”是闭环、到头了；“包”是打包、全包揽。\n*   **大白话**：**“滚雪球大包揽”**。从A出发，顺着线索（F），把能找到的所有字段全部打包在一起，直到再也找不到新字段为止。\n\n### 4. 候选关键字 / 候选键 (Candidate Key)\n*   **字面拆解**：“候选”就是“有资格竞选老大（主键）”，“键”就是“关键线索”。\n*   **大白话**：能**“找出全表所有字段”**，并且**“团队里没有吃白饭的（最精简）”**的字段组合。\n*   **Java秒懂**：你在Spring Data JPA里写 `findByXxx`，这个`Xxx`必须能唯一确定一条记录，而且你不能传多余的参数。\n\n---\n\n## 二、 🛠️ 核心解题套路：滚雪球找老大\n\n做这种题，就是玩一个**“看谁能把所有人找齐”**的游戏。\n\n**通关条件（成为候选键必须满足两点）：**\n1.  **能找齐所有人**：它的“闭包（滚雪球结果）”必须包含U里的所有字母（A,B,C,D）。\n2.  **没有吃白饭的**：它是最小的组合，随便踢掉其中一个字母，就找不齐所有人了。\n\n---\n\n## 三、 ⚔️ 真题实战推演 (2013年11月 第32题)\n\n**题目情报：**\n*   全员名单 (U) = {A, B, C, D}\n*   线索 (F) = {A → C, AB → D}\n\n**开始滚雪球（求闭包）：**\n\n*   **选项A：只派 A 出发**\n    *   A 自己在队伍里：{A}\n    *   用线索 A → C (知道A就能找到C)：队伍变成 {A, C}\n    *   还有线索吗？AB → D，但队伍里没有B，用不了。\n    *   **结果**：A只能找到 {A, C}，找不齐所有人。**A淘汰！**\n\n*   **选项B：只派 B 出发**\n    *   B 自己在队伍里：{B}\n    *   没有任何线索是从B单独出发的。\n    *   **结果**：B只能找到 {B}。**B淘汰！**\n\n*   **选项C：派 A 和 B 组队出发 (AB)**\n    *   AB 初始队伍：{A, B}\n    *   用线索 A → C (队伍里有A，就能找到C)：队伍变成 {A, B, C}\n    *   用线索 AB → D (队伍里有A和B，就能找到D)：队伍变成 {A, B, C, D}\n    *   **结果**：找齐了所有人！而且刚才试过，单独派A或B都不行，说明A和B都不是吃白饭的（满足最精简）。**AB是候选键，选C！**\n\n*   **选项D：只派 C 出发**\n    *   C 自己在队伍里：{C}\n    *   没有线索。\n    *   **结果**：找不齐。**C淘汰！**\n\n---\n\n## 四、 🖼️ 字符图解：AB的“滚雪球”过程\n\n```text\n[初始队伍]      [线索触发]           [队伍壮大]          [最终结果]\n  (A, B)  ===>  有 A 就能找到 C ===> (A, B, C)\n    ||                                  ||\n    ||                                  ||\n    =========>  有 AB 就能找到 D ===> (A, B, C, D) ===> 找齐了全表字段！\n                                                        (AB就是候选键)\n```\n\n---\n\n## 五、 🎯 考纲要求与复习边界（到什么程度就能拿分？）\n\n作为架构师考生，对于**“关系数据库基本概念”**这个知识点，您**只需要掌握到以下程度即可，千万不要深挖数学理论**：\n\n1.  **会算闭包（滚雪球）**：给你几个字母和几个箭头（A→B），你能顺藤摸瓜把所有能推导出的字母写出来。**（必考，必须会）**\n2.  **会判断候选键**：把选项里的字母代进去“滚雪球”，谁能滚出所有字母，且字母最少，谁就是答案。**（必考，必须会）**\n3.  **知道主属性/非主属性的概念**：\n    *   *主属性*：候选键里的字母（比如这题的 A 和 B）。\n    *   *非主属性*：没选上候选键的字母（比如这题的 C 和 D）。**（知道这个概念即可，偶尔考文字题）**\n\n**🛑 停止复习的边界：**\n不需要去死记硬背“Armstrong公理系统”的数学推导公式（什么自反律、增广律、传递律），架构师考试**极少**考纯理论默写，全都是像这道题一样，给你具体的字母让你推导。**只要会“顺藤摸瓜滚雪球”，这个知识点的分数就稳拿了！**"
+    },
+    {
+      "id": 1339,
+      "index": 40,
+      "sort": 67,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "在数据库的三级模式中，（）是描述局部数据的逻辑结构和特征的。",
+      "difficulty": 0,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "内模式",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "概念模式",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "外模式",
+              "is_correct": true
+            },
+            {
+              "label": "D",
+              "text": "逻辑模式",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "C"
+          ],
+          "correct_texts": [
+            "外模式"
+          ],
+          "official_analysis": "本题考察的是**数据库三级模式结构的基本概念**。\n数据库的三级模式包括：\n- **内模式（Internal Schema）**：也称物理模式，描述数据在物理存储中的结构，如存储方式、文件组织、索引结构等，面向系统。\n- **概念模式（Conceptual Schema）**：也叫模式（Schema），是对**整个数据库中数据的逻辑结构和特征**的描述，所有用户的公共视图，面向数据库管理员。\n- **外模式（External Schema）**：也称**子模式或用户模式**，是对**某一用户或应用所需局部数据的逻辑结构**的描述，不同用户可以有不同的外模式，面向应用和终端用户。\n- **逻辑模式**常常是概念模式的另一种称法，也描述的是**全局逻辑结构**，不是局部的。\n\n因此，正确答案是：**C. 外模式**。"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考记忆顾问。针对您作为5年经验的Java/SpringBoot开发者的背景，我为您量身定制了这份**“顾名思义 + 结合日常开发”**的记忆笔记。\n\n我们完全抛弃死记硬背，用您最熟悉的中文汉字字面意思，结合您天天写的代码来秒杀这道题！\n\n---\n\n# 📒 软考高级架构师·通关记忆笔记\n**【知识模块】** 数据库基本概念 - 三级模式\n**【真题来源】** 2013年11月 题号67\n\n## 💡 一、 核心记忆法：顾名思义（字面拆解）\n\n遇到“模式”这两个字，您就把它当成**“长什么样子的规定”**。数据库为了方便管理，把数据“长什么样”分成了三层，我们直接看名字猜意思：\n\n*   **1. 外模式（答案选项）**\n    *   **顾名思义：** **“外”**就是**“外面”**、**“外部”**。谁在数据库的外面？当然是**用户**和**应用程序**（比如您写的SpringBoot系统）。\n    *   **大白话解释：** 给外面人看的数据长啥样。外面的人不需要看整个数据库，只需要看他关心的**“局部”**数据。\n    *   **Java秒懂：** 就像您写的 `DTO`（数据传输对象）或者 `VO`（视图对象）。数据库里有100个字段，但前端页面（外部）只需要展示3个字段，您就只查这3个字段给他。这就是“局部数据的逻辑结构”。\n\n*   **2. 概念模式（也叫“模式”）**\n    *   **顾名思义：** **“概念”**就是**“整体的蓝图”**。老板问你“这个系统大概是个什么概念？”，他问的是**全局**。\n    *   **大白话解释：** 整个数据库里到底有哪些表，表里有哪些列。这是给数据库管理员（DBA）看的**“全局”**结构。\n    *   **Java秒懂：** 就像您项目里所有的 `@Entity` 实体类加在一起，或者您用Navicat看到的整个数据库的所有表结构。\n\n*   **3. 内模式**\n    *   **顾名思义：** **“内”**就是**“内部”**、**“最底层”**。数据库最内部是什么？是看不见摸不着的硬盘。\n    *   **大白话解释：** 数据在硬盘上到底是怎么存的（存成什么文件，建了什么索引）。\n    *   **Java秒懂：** 就像MySQL底层的 `InnoDB` 引擎，数据在Linux服务器上存成了 `.ibd` 文件，用了B+树结构。这都是最“内部”的事。\n\n---\n\n## 🖼️ 二、 字符图解：三层楼模型\n\n您可以把数据库想象成一栋三层楼，从上往下看：\n\n```text\n【顶层：给外面人看的】 —— 对应您的 SpringBoot Controller层\n       👤 用户A (财务)       👤 用户B (人事)\n          | (只看财务表)        | (只看员工表)\n   +---------------------------------------+\n   |               外 模 式                |  <-- 关键词：局部、用户、外部\n   +---------------------------------------+\n                     |\n【中层：整体蓝图】 —— 对应您的 数据库所有表结构\n   +---------------------------------------+\n   |              概 念 模 式              |  <-- 关键词：全局、整体、所有表\n   +---------------------------------------+\n                     |\n【底层：藏在内部的】 —— 对应 Linux服务器上的硬盘\n   +---------------------------------------+\n   |               内 模 式                |  <-- 关键词：物理、存储、硬盘、索引\n   +---------------------------------------+\n       🖨️ 硬盘 / 物理文件 / B+树索引\n```\n\n---\n\n## 📖 三、 扫盲：不使用专业词汇解释专业词汇\n\n为了防止题目里出现其他词汇干扰您，我们把题干里的词“翻译”成大白话：\n\n*   **逻辑结构：** 就是人脑子里想象的结构。比如“一张有行有列的表格”，这就是逻辑结构。它不是真实存在的，真实存在硬盘上的只有0和1。\n*   **物理存储：** 就是实实在在的硬件。比如数据是存在固态硬盘的哪个扇区，占了几个字节。\n*   **局部数据：** 就是“一部分数据”。比如整个公司有100个表，财务系统只用其中5个表，这5个表就是局部数据。\n\n---\n\n## 🎯 四、 考试通关标准（复习到什么程度？）\n\n对于架构师考试中的“数据库三级模式”，您**绝对不需要**去背诵复杂的定义，也**不需要**知道怎么用SQL去创建它们。\n\n**您只需要做到“连连看”即可拿分：**\n\n在考场上，看到题干里出现以下**【触发词】**，立刻条件反射选对应的答案：\n\n1.  看到 **“局部”** 、**“用户”** 、**“应用程序”** ➡️ 闭眼选 **外模式** （外面的人只看局部）\n2.  看到 **“全局”** 、**“整体”** 、**“所有数据”** ➡️ 闭眼选 **概念模式** （整体的蓝图概念）\n3.  看到 **“物理”** 、**“存储”** 、**“索引”** ➡️ 闭眼选 **内模式** （藏在最内部的硬盘里）\n\n**回到本题：**\n题干问：“描述**局部**数据的...是？”\n触发词是**“局部”**，局部就是给外面特定的人看的，直接秒选 **C. 外模式**！\n\n---\n*💡 顾问寄语：作为Java老兵，您其实每天都在和这三级模式打交道（VO/DTO -> Entity -> MySQL底层）。把软考的文言文翻译成您每天写的代码，高级架构师的理论不过如此！祝您记忆愉快！*"
+    },
+    {
+      "id": 1422,
+      "index": 41,
+      "sort": 26,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "数据库系统采用三级模式结构，其中（）描述了数据库中数据的类型、结构、记录之间的联系、操作及数据完整性和安全性等内容；（）描述了用户使用数据库时所看到的数据视图。",
+      "difficulty": 1,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "外模式",
+              "is_correct": false
+            },
+            {
+              "label": "B",
+              "text": "概念模式",
+              "is_correct": true
+            },
+            {
+              "label": "C",
+              "text": "内模式",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "物理模式",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "B"
+          ],
+          "correct_texts": [
+            "概念模式"
+          ],
+          "official_analysis": "本题考察的是**数据库的三级模式结构（外模式、概念模式、内模式）及其职责分工**。\n**第一空（描述数据类型、结构、关系、完整性和安全性）应选逻辑模式（B）**，也称概念模式，是数据库的核心抽象层，定义了所有逻辑数据结构以及完整性、安全性等逻辑约束。\n**第二空（用户使用数据库时的视图）应选外模式（A）**，即用户子模式，定义了用户能看到的数据子集，并对实际结构做了一定程度的屏蔽。\n**C项“内模式”** 描述的是数据如何在物理设备上存储的细节，与用户无关；\n**D项“物理模式”** 是干扰项。\n![https://oss.cheko.cc/dee6a8536036d62916cf559cfb0a47ec808bccc9187b2f805b98d1d769f76cf2.png#447px #394px](https://oss.cheko.cc/dee6a8536036d62916cf559cfb0a47ec808bccc9187b2f805b98d1d769f76cf2.png)"
+        },
+        {
+          "label": "2",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "外模式",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "概念模式",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "内模式",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "物理模式",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "外模式"
+          ],
+          "official_analysis": "本题考察的是**数据库的三级模式结构（外模式、概念模式、内模式）及其职责分工**。\n**第一空（描述数据类型、结构、关系、完整性和安全性）应选逻辑模式（B）**，也称概念模式，是数据库的核心抽象层，定义了所有逻辑数据结构以及完整性、安全性等逻辑约束。\n**第二空（用户使用数据库时的视图）应选外模式（A）**，即用户子模式，定义了用户能看到的数据子集，并对实际结构做了一定程度的屏蔽。\n**C项“内模式”** 描述的是数据如何在物理设备上存储的细节，与用户无关；\n**D项“物理模式”** 是干扰项。\n![https://oss.cheko.cc/dee6a8536036d62916cf559cfb0a47ec808bccc9187b2f805b98d1d769f76cf2.png#447px #394px](https://oss.cheko.cc/dee6a8536036d62916cf559cfb0a47ec808bccc9187b2f805b98d1d769f76cf2.png)"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。针对您拥有5年Java/SpringBoot开发经验的背景，我将把这些枯燥的数据库理论，直接映射到您每天都在写的代码上。\n\n对于系统架构设计师考试，**“数据库三级模式”**是一个绝对的送分题。我们不需要死记硬背，只要用**“顾名思义”**加上**“代入日常开发”**的方法，1分钟就能永久记住。\n\n下面为您定制了这份精美的专属记忆笔记，请查收：\n\n---\n\n# 📓 软考架构师专属记忆笔记：数据库三级模式\n\n## 💡 一、 核心记忆法：顾名思义 & SpringBoot代入法\n\n我们把数据库系统想象成一个**“饭店”**，结合您的Java开发经验来记：\n\n### 1. 外模式 (External Schema)\n*   **顾名思义**：**“外”** 就是 **“外人/外部”** 看到的模式。外人（用户）不需要知道厨房怎么做菜，只需要看菜单。\n*   **大白话解释**：就是给特定用户看的数据“长什么样”。比如财务只能看到工资列，保安只能看到姓名列。\n*   **Java开发秒懂**：相当于您写的 **`VO类 (View Object)`** 或者给前端的 **`Swagger接口文档`**。前端要什么，你就组装什么给他看，屏蔽了底层的复杂性。\n*   **考试秒杀词**：看到 **“用户”**、**“视图”**、**“局部”** -> 闭眼选 **外模式**。\n\n### 2. 概念模式 (Conceptual Schema) / 也叫 逻辑模式\n*   **顾名思义**：**“概念”** 就是 DBA（数据库管理员）脑子里的 **“全局整体构思”**。它管的是整体的逻辑，所以也叫**逻辑模式**。\n*   **大白话解释**：就是数据库里到底建了几个表？表里有哪些列（数据类型）？哪列不能为空（完整性）？表和表之间怎么连（联系）？\n*   **Java开发秒懂**：相当于您写的 **`Entity类 / PO类`**，以及上面的 `@Table`、`@Column`、`@NotNull` 注解。它定义了整个系统的业务数据结构。\n*   **考试秒杀词**：看到 **“全局”**、**“数据类型/结构”**、**“完整性/安全性”** -> 闭眼选 **概念模式（逻辑模式）**。\n\n### 3. 内模式 (Internal Schema)\n*   **顾名思义**：**“内”** 就是 **“最内部/最底层”** 的模式。机器内部是怎么存数据的。\n*   **大白话解释**：数据在硬盘上到底是存成什么文件？放在哪个盘？有没有建B+树索引？\n*   **Java开发秒懂**：相当于 MySQL 的 **`InnoDB引擎`** 把数据存在了 Linux 服务器的 `/var/lib/mysql` 目录下的 `.ibd` 文件里。这事儿写Java的通常不用管。\n*   **考试秒杀词**：看到 **“物理存储”**、**“存储方式”**、**“底层”** -> 闭眼选 **内模式**。\n\n*(注：题目选项里的“物理模式”是出题人瞎编出来骗人的，标准叫法只有内模式！)*\n\n---\n\n## 🖼️ 二、 字符图解：三层架构一目了然\n\n您可以把这个图想象成从“前端”到“硬盘”的穿透过程：\n\n```text\n[张三的手机App]       [李四的电脑网页]     <-- 外部用户\n       \\                /\n        \\              /\n   【外模式1】      【外模式2】          <-- (VO层) 每个人看到不同的局部视图\n          \\          /\n           \\        /\n        【 概 念 模 式 】                <-- (Entity层) 数据库所有表的全局逻辑总和\n               |\n               |\n          【 内 模 式 】                 <-- (MySQL引擎层) 决定怎么存到硬盘上\n               |\n        [ 物理硬盘 / 文件 ]              <-- 真正的0和1\n```\n\n---\n\n## 📖 三、 题目专业名词“大白话”翻译（绝不用专业词解释专业词）\n\n题目中有一长串吓人的词，其实非常简单：\n\n*   **数据类型**：就是规定这列是填文字（String）还是填数字（Integer）。\n*   **结构**：就是数据长什么样，比如是一张像Excel一样的二维表。\n*   **记录之间的联系**：就是“用户表”和“订单表”怎么对上号（比如通过用户ID关联）。\n*   **数据完整性**：就是定规矩，比如“身份证号不能为空”、“年龄不能是负数”。\n*   **安全性**：就是定权限，比如“谁能看，谁不能看”。\n*   **视图**：不要想成数据库里的View，就把它当成“你看待数据的角度”。就像盲人摸象，摸到腿的以为大象是柱子，这个“柱子”就是他的视图。\n\n---\n\n## 🎯 四、 考到什么程度就可以过关？（复习边界）\n\n对于**系统架构设计师**考试，针对这个知识点，您**绝对不需要**去背诵怎么用SQL语句创建这些模式！\n\n**您只需要达到以下程度即可拿满分：**\n1.  **玩连连看**：能把“关键字”和“模式名称”连上线。\n    *   用户看到的 = 外模式\n    *   全局表结构/类型/约束 = 概念模式\n    *   硬盘怎么存 = 内模式\n2.  **防骗意识**：知道“物理模式”是用来凑数的错误选项。\n\n**回到您的真题：**\n*   第一空：描述“数据类型、结构、联系、完整性” -> 这是全局的表设计 -> 对应 `Entity` -> 选 **概念模式 (B)**。\n*   第二空：描述“用户使用时看到的视图” -> 这是外人看到的 -> 对应 `VO` -> 选 **外模式 (A)**。\n\n---\n*💡 顾问寄语：作为5年经验的开发者，您的工程经验是最大的财富。软考架构师的很多理论，其实就是您平时写的代码的“学术化表达”。保持这种“翻译”思维，架构考试轻松拿下！*"
+    },
+    {
+      "id": 1448,
+      "index": 42,
+      "sort": 52,
+      "knowledge_point": "数据库基本概念",
+      "prompt": "给出关系模式：R(a, b, c, d) 和函数依赖集合 a → cd,c → b，候选键是（）。",
+      "difficulty": 2,
+      "tags": [
+        "第二版教材",
+        "必须掌握"
+      ],
+      "sub_questions": [
+        {
+          "label": "1",
+          "question": "",
+          "correct_answer": "",
+          "options": [
+            {
+              "label": "A",
+              "text": "a",
+              "is_correct": true
+            },
+            {
+              "label": "B",
+              "text": "b",
+              "is_correct": false
+            },
+            {
+              "label": "C",
+              "text": "c",
+              "is_correct": false
+            },
+            {
+              "label": "D",
+              "text": "d",
+              "is_correct": false
+            }
+          ],
+          "correct_letters": [
+            "A"
+          ],
+          "correct_texts": [
+            "a"
+          ],
+          "official_analysis": "本题考察的是**候选键的判断**。\n**方法 1**：利用属性闭包法。通过计算属性闭包可以发现，只有 a 的闭包能覆盖所有属性，因此它是关系 R 的候选键。\n我们先求 **a⁺（a的属性闭包）**： a → c,d ，得到 a⁺ 初始为 {a}，由于 a → c,d，加入 c,d 到闭包，可以得到 a⁺ = {a, c, d}，再看 c → b，c ∈ a⁺，所以可推出 b 也可以加入闭包，最终：**a⁺ = {a, b, c, d} = R 的所有属性**所以，**a 是候选键** 。\n**方法 2**：用有向图的方式直观地表示函数依赖关系。可以看到从 a 出发能够遍历所有节点，所以 a 是候选码。\n![https://oss.cheko.cc/08bbd44b997c4c64a4a22baec31c0d9f63a203270302628e2961af8cdbc71b3a.png#377px #231px](https://oss.cheko.cc/08bbd44b997c4c64a4a22baec31c0d9f63a203270302628e2961af8cdbc71b3a.png)"
+        }
+      ],
+      "model_response": "你好！我是您的专属软考备考顾问。针对您5年Java/SpringBoot开发经验的背景，我将把这些枯燥的数据库理论，转化为您每天都在写的代码和查的数据库表。\n\n针对这道**“求候选键”**的题目，我为您定制了以下这份**【顾名思义·大白话记忆笔记】**，请查收：\n\n---\n\n# 📓 软考架构师通关笔记：数据库“候选键”秒杀法\n\n## 一、 核心名词“顾名思义”大白话翻译\n*(绝对不用专业名词解释专业名词，全是大白话)*\n\n### 1. 关系模式 R(a, b, c, d)\n*   **顾名思义**：“关系”在数据库里就是**“一张二维表”**。“模式”就是**“表结构”**。\n*   **大白话**：这就是一张有4个字段（a, b, c, d）的数据库表。你可以把它当成你SpringBoot项目里的一个 `@Entity` 实体类，里面有4个属性。\n\n### 2. 函数依赖 (a → cd, c → b)\n*   **顾名思义**：“依赖”就是**“靠你决定”**。箭头 `→` 就是**“顺藤摸瓜”**。\n*   **大白话**：只要我知道了左边的值，就一定能查出右边的值。\n    *   `a → cd`：只要给我字段 `a` 的值，我就能确定 `c` 和 `d` 的值。\n    *   `c → b`：只要给我字段 `c` 的值，我就能确定 `b` 的值。\n*   **Java秒懂**：相当于你写了一个方法 `getCAndD(String a)` 和 `getB(String c)`。\n\n### 3. 候选键 (Candidate Key)\n*   **顾名思义**：“候选”就是**“有资格竞选”**，“键”就是**“主键（唯一标识）”**。合起来就是**“主键的候选人”**。\n*   **大白话**：在这张表里，**谁能凭一己之力，顺藤摸瓜把表里所有其他字段都找出来**，谁就是候选键。它就像是这张表的“超级VIP通行证”。\n\n### 4. 属性闭包 (Attribute Closure)\n*   **顾名思义**：“闭”就是**“封闭/包揽”**，“包”就是**“打包/滚雪球”**。\n*   **大白话**：从某一个字段出发，通过“顺藤摸瓜（函数依赖）”，**最多能滚出多大的雪球（找出多少个字段）**。如果这个雪球能把表里所有字段都包进去，那这个出发点就是“候选键”。\n\n---\n\n## 二、 题目秒杀技巧：画图找“源头”\n\n对于这种题，**千万不要去死算闭包**，作为程序员，我们用最直观的**“依赖关系图”**来秒杀。\n\n### 1. 字符图解（顺藤摸瓜图）\n根据题意：`a → cd` (a能找到c和d)， `c → b` (c能找到b)。我们画个图：\n\n```text\n      +----(顺藤摸瓜)----> [ d ]\n      |\n[ a ] +\n      |\n      +----(顺藤摸瓜)----> [ c ] ----(顺藤摸瓜)----> [ b ]\n```\n\n### 2. 解题大白话逻辑\n*   **目标**：我们要找“候选键”（能找到所有人的老大）。\n*   **看图说话**：\n    *   从 `a` 出发，能找到 `d` 和 `c`。\n    *   既然找到了 `c`，顺便就能找到 `b`。\n    *   所以，只要有了 `a`，就能集齐 `a, b, c, d` 召唤神龙！\n*   **结论**：`a` 就是那个能包揽全局的“候选键”。选 **A**。\n\n---\n\n## 三、 Java程序员专属记忆法（联想记忆）\n\n把这道题想象成你日常开发的一个**用户权限查询功能**：\n*   `a` = **用户ID** (userId)\n*   `c` = **部门ID** (deptId)\n*   `d` = **角色ID** (roleId)\n*   `b` = **部门名称** (deptName)\n\n**业务逻辑（函数依赖）：**\n1.  `a → cd`：通过【用户ID】，你可以查到他的【部门ID】和【角色ID】。\n2.  `c → b`：通过【部门ID】，你可以查到【部门名称】。\n\n**找候选键（找主键）：**\n请问，前端传什么参数给你，你就能把这4个信息全查出来？\n显然是传【用户ID】(`a`)！因为有了用户ID，查出部门ID后，再连表查一下就能拿到部门名称。所以 `a` 就是候选键！\n\n---\n\n## 四、 考试掌握程度指南（复习边界）\n\n为了高效备考，您**不需要**去学复杂的数据库范式数学推导，对于“候选键”这个知识点，您**只需要达到以下程度即可拿分**：\n\n1.  **看到题目给的 `X → Y`**：立刻能在草稿纸上画出 `X` 指向 `Y` 的箭头图。\n2.  **找图里的“源头”**：\n    *   **必考技巧**：在画出的图里，**只往外指，没有箭头指向它的节点（也就是入度为0的节点）**，**必定**是候选键的一部分！\n    *   在这道题里，`a` 只有指出去的箭头，没有指进来的箭头，所以 `a` 肯定是候选键。\n3.  **验证雪球**：顺着这个源头节点往下走，看看能不能把所有字母都走遍。能走遍，它就是唯一的候选键。\n\n**复习到此为止，不用再深挖！** 架构师考试的选择题中，这种题属于“送分题”，画个图10秒钟选出答案，把时间留给后面的案例分析题。"
+    }
+  ],
+  "knowledge_points": [
+    {
+      "name": "关系数据库",
+      "related_questions": [
+        "427",
+        "428",
+        "410",
+        "411",
+        "364",
+        "314",
+        "315",
+        "270",
+        "271",
+        "223",
+        "224",
+        "184",
+        "185",
+        "135",
+        "136",
+        "22",
+        "23",
+        "1125",
+        "1206",
+        "1207",
+        "1286",
+        "1303"
+      ],
+      "summary_markdown": "你好！我是您的专属软考备考顾问。针对您5年Java/SpringBoot开发经验的背景，我将这套试卷中所有关于**“关系数据库”**的考点进行了全面梳理。\n\n为了让您学得轻松，我**摒弃了所有枯燥的学术黑话**，全部采用**“Java代码映射”**和**“中文顾名思义”**的方式为您归纳了这份结构化的要点清单。\n\n---\n\n### 🗺️ 架构师专属：关系数据库推荐复习顺序\n建议您按照以下**“从常识到推导”**的顺序进行复习，效率最高：\n1. **数据库基础常识**（完整性约束、安全机制、设计阶段、派生属性）👉 *纯送分题，看字面意思就能选。*\n2. **SQL语法与关系代数**（选择、投影、连接）👉 *把希腊字母翻译成您天天写的SQL和Stream流。*\n3. **函数依赖与候选码**（找源头、滚雪球）👉 *掌握“画箭头”技巧，10秒破题。*\n4. **数据库范式**（1NF ~ BCNF）👉 *记住4个阶梯的“消除目标”。*\n5. **无损分解与Armstrong公理** 👉 *掌握固定套路公式，不纠结数学证明。*\n\n---\n\n### 📑 结构化要点清单\n\n#### 知识点 1：数据库基础常识（约束、安全、设计阶段）\n*   **核心定义/结论**：\n    *   **三大完整性约束**：实体完整性（主键不为空/不重复）、参照完整性（外键必须存在）、用户定义完整性（产品经理定的业务规矩，如性别只能男女）。\n    *   **安全机制（存储过程）**：封装在数据库里的“Java方法”，能更新数据且对外隐藏表结构。\n    *   **设计阶段**：需求分析（纯聊天） $\\rightarrow$ 概念设计（画E-R草图） $\\rightarrow$ **逻辑设计（建表、拆表规范化、合表反规范化）** $\\rightarrow$ 物理设计（存硬盘、建索引）。\n    *   **派生属性**：能通过其他字段算出来的属性（如年龄、总价），**坚决不存库**。\n*   **典型题型与解题要领**：\n    *   *题型*：给场景问属于什么约束/阶段。\n    *   *要领*：看到“反规范化”秒选**逻辑设计**；看到选项里同时有“出生日期”和“年龄”，立刻把“年龄”划掉。\n*   **易错点与注意事项**：\n    *   视图（View）主要用于查询和隐藏结构，通常不能作为第三方更新数据的接口；触发器是被动的，不能主动调用。\n\n#### 知识点 2：SQL语法与关系代数（核心大头）\n*   **核心定义/结论**：\n    *   **操作对象**：关系代数操作的输入和输出永远是**集合**（整张表），而不是单行（元组/记录）。\n    *   **$\\sigma$ (选择)**：相当于 `WHERE`，按条件过滤**行**。\n    *   **$\\pi$ (投影)**：相当于 `SELECT`，挑选出需要的**列**。\n    *   **$\\bowtie$ (自然连接)**：相当于 `INNER JOIN ... USING`，自动找同名字段相等，并**删掉重复的同名列**。\n    *   **HAVING 子句**：必须和 `GROUP BY`（成团）绑定，用于过滤分组后的数据（没组你哈个啥？）。\n*   **典型题型与解题要领**：\n    *   *题型 1：算列数/行数*。自然连接列数 = 表1列数 + 表2列数 - 同名列数。\n    *   *题型 2：代数转SQL*。给两张表的字段从左到右打上数字序号（1,2,3...），自然连接自带“同名序号相等”的条件。\n    *   *题型 3：查询优化*。核心原则：**尽早执行选择（$\\sigma$）**，把过滤条件下推，缩小中间结果。\n*   **易错点与注意事项**：\n    *   **单引号陷阱**：代数式里的数字（如 `2>7`）代表**第2列大于第7列**。如果写成 `2>'7'`，就变成了第2列大于字符串常量'7'，绝对是错的！\n\n#### 知识点 3：函数依赖、候选码与属性闭包\n*   **核心定义/结论**：\n    *   **函数依赖 (A $\\rightarrow$ B)**：知道A就能唯一确定B（就像Map里通过Key找Value）。\n    *   **候选码**：能顺藤摸瓜找出全表所有字段的“最小源头组合”。\n    *   **属性闭包**：从某个字段出发，像滚雪球一样能卷进来的所有字段集合。\n*   **典型题型与解题要领**：\n    *   *题型*：给一组依赖F，求候选码。\n    *   *要领（找源头法）*：把依赖公式箭头**右边**出现过的字母全部划掉。剩下的**从来没在右边出现过**的字母，就是“入度为0”的源头，候选码**必定包含**它们！拿着它们去“滚雪球”验证即可。\n*   **易错点与注意事项**：\n    *   候选码要求是“最小”的。如果 `A` 已经是候选码，那么 `AB` 包含冗余字段，只能叫超码，不能叫候选码。\n\n#### 知识点 4：数据库范式（1NF ~ BCNF）\n*   **核心定义/结论**：\n    *   **1NF**：字段不可再分（原子性）。\n    *   **2NF**：消除非主属性对码的**部分依赖**（不能只靠组合主键的一部分）。\n    *   **3NF**：消除非主属性对码的**传递依赖**（拒绝第三者插足，A$\\rightarrow$B$\\rightarrow$C）。\n    *   **BCNF**：消除主属性对码的依赖（Boss老板也要守规矩）。\n*   **典型题型与解题要领**：\n    *   *题型*：给一段描述，问属于第几范式。\n    *   *要领*：条件反射连连看。看到“部分依赖”秒选 **2NF**；看到“传递依赖”秒选 **3NF**。\n*   **易错点与注意事项**：\n    *   如果一张表只有一个字段做主键（单键），它天然不存在“部分依赖”，所以只要满足1NF，就必定直接满足2NF。\n\n#### 知识点 5：无损分解与保持函数依赖\n*   **核心定义/结论**：\n    *   **保持函数依赖**：把大表拆成小表后，原题给的规矩（A$\\rightarrow$B）在小表里还能完整装下。\n    *   **无损分解**：拆开的小表用 `JOIN` 拼回去，数据行数一模一样，不产生多余的假数据。\n*   **典型题型与解题要领**：\n    *   *题型*：判断拆表方案是否有损、是否保持依赖。\n    *   *要领（无损分解必杀公式）*：\n        1. 找两张小表的**交集**（公共列）。\n        2. 找两张小表各自的**差集**（独有列）。\n        3. 看**交集**能不能推导出其中一个**差集**。能推导就是无损，推不出就是有损。\n*   **易错点与注意事项**：\n    *   “无损”的本质是公共列在某一张小表里充当了“主键”，这样JOIN时才不会发生笛卡尔积爆炸。\n\n#### 知识点 6：Armstrong 公理系统\n*   **核心定义/结论**：\n    *   **自反律**：大包小（X包含Y $\\rightarrow$ X$\\rightarrow$Y）。\n    *   **传递律**：接力棒（X$\\rightarrow$Y, Y$\\rightarrow$Z $\\rightarrow$ X$\\rightarrow$Z）。\n    *   **合并规则**：同因不同果，打包合并（X$\\rightarrow$Y, X$\\rightarrow$Z $\\rightarrow$ X$\\rightarrow$YZ）。\n    *   **分解规则**：大果拆小果（X$\\rightarrow$Y, Z是Y的一部分 $\\rightarrow$ X$\\rightarrow$Z）。\n*   **典型题型与解题要领**：\n    *   *题型*：给一个字母推导公式，问叫什么规则。\n    *   *要领*：**顾名思义法**。看到把结果拆开了就是分解，看到把结果拼一起了就是合并。代入具体的业务字段（如X=身份证，Y=完整用户信息，Z=姓名）去读一遍，瞬间秒懂。\n*   **易错点与注意事项**：\n    *   千万不要当成离散数学题去死记硬背，用Java对象的包含关系（Entity与Field）去理解最快。"
+    },
+    {
+      "name": "特殊数据库系统",
+      "related_questions": [
+        "414",
+        "363",
+        "272",
+        "225",
+        "186",
+        "147",
+        "86"
+      ],
+      "summary_markdown": "你好！针对这5道关于**“特殊数据库系统”**的真题，我为你梳理了结构化的知识点要点清单。结合你5年Java/SpringBoot的开发经验，我将这些理论知识与日常开发概念进行了映射，帮你用“顾名思义”的方法快速掌握。\n\n---\n\n### 知识点一：分布式数据库的“四大透明性” (⭐核心高频)\n\n- **核心定义/结论**：\n  “透明”在计算机里指“看不见、不用管，系统替你干了”。按层级从高到低分为：\n  1. **分片透明**：不知道数据是怎么切块的（类似 `ShardingSphere` 分库分表）。\n  2. **复制透明**：不知道数据有几个备份、怎么同步的（类似 MySQL 主从复制）。\n  3. **位置透明**：不知道数据存放在哪个物理机房/IP地址（类似 `Nacos` 服务发现，只认名字不认IP）。\n  4. **逻辑透明（局部映像透明）**：不知道底层用的是什么数据库软件或方言（类似 `Hibernate/JPA` 屏蔽了底层SQL差异）。\n- **典型题型与解题要领**：\n  - **题型**：概念“连连看”。题干给出一段描述，问属于哪种透明性。\n  - **解题要领（找关键词）**：\n    - 看到“物理位置、存放站点” ➔ 选 **位置透明**\n    - 看到“数据模型、操纵语言” ➔ 选 **逻辑透明**\n    - 看到“划分、片段” ➔ 选 **分片透明**\n    - 看到“副本、冗余、更新同步” ➔ 选 **复制透明**\n- **易错点与注意事项**：\n  - **别名陷阱**：“逻辑透明”在考试中经常被称为**“局部映像透明”**，两者是同一个东西。\n\n---\n\n### 知识点二：分布式数据库的“模式结构” (⭐核心高频)\n\n- **核心定义/结论**：\n  描述分布式数据库架构的分层设计：\n  1. **全局外模式**：给外部不同应用看的局部视图（类似 Java 中的 `VO/DTO`）。\n  2. **全局概念模式**：描述整体逻辑结构，感觉不到数据被拆分（类似 Java 中的完整 `Entity` 实体类）。\n  3. **分片模式**：定义如何将全局数据切分（类似分表规则配置）。\n  4. **分布/分配模式**：定义切好的数据块放在哪个物理节点上（类似多数据源 IP 配置）。\n- **典型题型与解题要领**：\n  - **题型**：概念对应题。\n  - **解题要领（找关键词）**：\n    - 看到“整体逻辑结构、如同没有分布一样” ➔ 选 **全局概念模式**\n    - 看到“不同应用、用户视图” ➔ 选 **全局外模式**\n- **易错点与注意事项**：\n  - 极易混淆“全局外模式”和“全局概念模式”。记住：**外模式是局部的（给外人看的），概念模式是全局完整的（自己脑子里的整体概念）**。\n\n---\n\n### 知识点三：分布式事务的“两阶段提交 (2PC)”\n\n- **核心定义/结论**：\n  为了保证分布式事务的原子性和一致性（要么全成功，要么全失败），分为两个阶段：\n  1. **表决阶段（准备阶段 Prepare）**：协调者问所有节点“能提交吗？”，节点记录日志并回复“同意/中止”。\n  2. **执行阶段（提交阶段 Commit）**：如果全同意，则统一提交；只要有一个中止，则统一回滚。\n- **典型题型与解题要领**：\n  - **题型**：直接问两阶段提交包含哪两个阶段。\n  - **解题要领**：认准 **“表决阶段、执行阶段”**（或准备阶段、提交阶段）。\n- **易错点与注意事项**：\n  - **名称混淆陷阱**：选项中常出现“扩展阶段、收缩阶段”，这是**两阶段锁协议（2PL）**的概念，用来管并发控制的，千万别和两阶段提交（2PC）搞混！\n\n---\n\n### 知识点四：数据仓库的“四大特点”\n\n- **核心定义/结论**：\n  数据仓库（Data Warehouse）是为决策分析服务的，有四个核心特点：\n  1. **面向主题**：按业务分析主题（如销售、客户）组织数据。\n  2. **集成性**：数据来自不同系统，经过了统一清洗和格式转换（ETL）。\n  3. **相对稳定性（非易失性）**：数据一旦进入数仓，主要用于查询，**很少修改和删除**。\n  4. **反映历史变化**：保留了不同时间点的数据快照，用于趋势分析。\n- **典型题型与解题要领**：\n  - **题型**：给出一段描述，问体现了数仓的哪个特点。\n  - **解题要领（找关键词）**：\n    - 看到“长期保留、很少修改和删除” ➔ 选 **相对稳定性**\n    - 看到“统一编码、消除不一致” ➔ 选 **集成性**\n- **易错点与注意事项**：\n  - 容易把“相对稳定性”和“反映历史变化”搞混。记住：**不改不删 = 稳定**；**带时间戳/看趋势 = 历史**。\n\n---\n\n### 知识点五：嵌入式与网络数据库 (EDBMS & NDB)\n\n- **核心定义/结论**：\n  - **嵌入式数据库 (EDBMS)**：运行在小设备（PDA、车载）上。特点：轻量、支持实时处理、**支持多线程并发**、一般只提供本机服务接口。\n  - **基于网络的数据库 (NDB)**：数据在远端服务器。由客户端、通信协议、远程服务器组成。客户端小且可裁剪。\n  - **基于文件的数据库**：数据直接以文件形式存在本地磁盘，程序直接读写。\n- **典型题型与解题要领**：\n  - **题型**：描述正误判断题（选不正确的）。\n  - **解题要领**：\n    - 看到“EDBMS不支持多线程” ➔ **错**（现代SQLite等都支持多线程）。\n    - 看到“NDB直接对本地数据文件读写” ➔ **错**（NDB数据在网络远端，本地读写的是文件数据库）。\n- **易错点与注意事项**：\n  - 不要用“设备性能差”的刻板印象去推断EDBMS不支持多线程；\n  - 严格区分“网络库（异地恋，靠协议通信）”和“文件库（同居，直接读写本地磁盘）”。\n\n---\n\n### 📅 推荐复习顺序（按性价比与关联度排序）\n\n建议按照以下顺序进行复习，从最贴近你日常架构设计的知识点开始：\n\n1. **分布式数据库透明性 & 模式结构**（⭐⭐⭐⭐⭐）\n   - *理由*：考频极高，且与微服务、分库分表、ORM框架等日常开发经验完美契合，最容易通过“顾名思义”拿分。\n2. **分布式两阶段提交 2PC**（⭐⭐⭐⭐）\n   - *理由*：分布式事务是架构师必考核心，不仅上午考选择题，下午案例分析也极大概率考到（如 Seata 框架原理）。\n3. **数据仓库四大特点**（⭐⭐⭐）\n   - *理由*：概念清晰，关键词对应明确，属于“送分题”，看一遍就能记住。\n4. **嵌入式与网络数据库**（⭐⭐）\n   - *理由*：属于边缘扩展知识，不需要深究底层，考前扫一眼“易错点”，考试时用常识和排除法即可应对。"
+    },
+    {
+      "name": "数据库设计",
+      "related_questions": [
+        "316",
+        "82",
+        "21"
+      ],
+      "summary_markdown": "为您将2013年11月系统架构真题中涉及的“数据库设计”相关知识点进行了系统归纳，形成以下结构化的要点清单，方便您高效复习与记忆：\n\n---\n\n### 知识点一：数据库转储（备份）方式\n\n- **知识点名称**：数据库转储机制（状态与范围的组合）\n- **核心定义/结论**：\n  数据库转储（备份）由**“转储状态”**和**“转储范围”**两个维度组合而成，共4种方式：\n  1. **按转储状态（是否停机）**：\n     - **静态转储**：转储期间**禁止**任何事务运行（相当于停机维护，数据一致性高，但可用性差）。\n     - **动态转储**：转储期间**允许**事务并发运行（相当于热备份，不停机，可用性高）。\n  2. **按转储范围（备份多少）**：\n     - **全局转储（海量转储）**：每次转储数据库的**全部**数据。\n     - **增量转储**：只转储自上次转储以来**发生变化**的数据。\n- **典型题型与解题要领**：\n  - **题型**：题干给定特定的业务场景（如“有正在运行的事务”、“需要备份全部数据”），要求选择合适的转储方式。\n  - **解题要领（找关键词秒杀）**：\n    - 看到“有正在运行的事务 / 允许并发 / 不停机” ➡️ 锁定 **动态**。\n    - 看到“不允许存取修改 / 等待事务完成” ➡️ 锁定 **静态**。\n    - 看到“全部数据 / 整个数据库” ➡️ 锁定 **全局**。\n    - 看到“变化的数据 / 更新的部分” ➡️ 锁定 **增量**。\n- **易错点与注意事项**：\n  - **术语替换**：考试中有时会将“全局转储”称为“海量转储”，两者是同义词，看到“海量”直接等同于“全部”即可。\n  - **动态转储的代价**：动态转储虽然不停机，但由于备份期间数据可能被修改，必须结合**日志文件（Log）**才能将数据库恢复到一致性状态。\n\n---\n\n### 知识点二：E-R图集成冲突与解决\n\n- **知识点名称**：局部 E-R 图合并时的“三大冲突”\n- **核心定义/结论**：\n  在将多个局部 E-R 图合并为全局 E-R 图时，常出现以下三种冲突：\n  1. **命名冲突**：名字没起好。包括“同名异义”（同名但代表不同概念）和“异名同义”（不同名但代表同一概念）。\n  2. **属性冲突**：内在特征打架。同一属性的**数据类型、取值范围、单位**不同（如一个是整数，一个是浮点数；一个是公斤，一个是斤）。\n  3. **结构冲突**：层级或长相打架。同一对象在不同图中**抽象级别不同**（如A图作为“实体”，B图作为“属性”），或者同一实体包含的**属性个数/排列顺序不同**。\n- **典型题型与解题要领**：\n  - **题型**：给出两个部门对同一业务的不同设计，第一问判断属于哪种冲突，第二问选择如何消除该冲突。\n  - **解题要领**：\n    - **判别冲突**：只要看到“实体 vs 属性”的降维/升维差异，或者“属性数量不同”，直接选**结构冲突**。\n    - **解决冲突**：针对“实体 vs 属性”的结构冲突，核心口诀是**“大包小，删实体，加属性”**。即保留层级更高的实体，将层级较低的实体删除，并将其转化为高层级实体中的一个区分属性（如：删除“培训师”实体，在“员工”实体中增加“职称”属性）。\n- **易错点与注意事项**：\n  - **属性冲突 vs 结构冲突**：极易混淆！“属性冲突”仅仅是**同一个属性**的类型/单位不同；而把一个概念**当成实体还是当成属性**，属于架构层级的变化，是“结构冲突”。\n  - **实体冲突**：选项中常出现“实体冲突”作为干扰项，标准数据库理论中**没有**这个分类，直接排除。\n\n---\n\n### 💡 推荐复习顺序\n\n建议按照以下顺序进行复习和记忆：\n\n1. **先复习【E-R图集成冲突】**\n   - **理由**：属于数据库设计的核心基础，偏向面向对象建模思想（与Java实体类设计完全一致）。概念直观，容易通过“顾名思义”理解，且考法固定，属于**必拿的送分题**。\n2. **后复习【数据库转储方式】**\n   - **理由**：属于数据库运维与事务管理范畴。虽然概念略显枯燥，但只要掌握了“动/静”与“全局/增量”的**二维矩阵组合**，通过抓取题干关键词即可秒杀，不需要深究底层实现原理。性价比极高。"
+    },
+    {
+      "name": "数据库基本概念",
+      "related_questions": [
+        "20",
+        "1123",
+        "1136",
+        "1183",
+        "1184",
+        "1302",
+        "1304",
+        "1339",
+        "1422",
+        "1448"
+      ],
+      "summary_markdown": "你好！针对您提供的2013年11月系统架构设计师真题中的“数据库基本概念”相关题目，我为您将这些零散的考点进行了系统化归纳。\n\n结合您**5年Java/SpringBoot开发经验**以及**“顾名思义”**的记忆偏好，我为您整理了这份**结构化、去黑话**的要点清单。\n\n---\n\n### 📑 数据库基本概念：结构化要点清单\n\n#### 1. 数据库三级模式（高频送分题）\n*   **核心定义/结论**：\n    *   **外模式（用户模式/子模式）**：外部用户/程序员看到的**局部**视图。（👉 **Java类比**：`VO / DTO`，只给前端看部分字段）。\n    *   **概念模式（模式/逻辑模式）**：**全局**表结构、数据类型、约束。（👉 **Java类比**：`Entity` 实体类，数据库全貌）。\n    *   **内模式（物理模式）**：底层**物理**存储、索引、文件。（👉 **Java类比**：MySQL底层的 `InnoDB` 引擎、B+树、`.ibd` 文件）。\n*   **典型题型与解题要领**：\n    *   **题型**：概念连连看（给一段描述，问属于什么模式）。\n    *   **要领（找关键词）**：\n        *   看到“局部、用户、视图、应用程序” ➡️ 选 **外模式**。\n        *   看到“全局、整体、数据类型、完整性” ➡️ 选 **概念模式**。\n        *   看到“物理、存储、磁盘、索引（如聚簇索引）” ➡️ 选 **内模式**。\n*   **易错点与注意事项**：\n    *   选项中常出现**“物理模式”**或**“逻辑模式”**。记住：标准叫法是“内模式”和“概念模式”。如果题目里没有“概念模式”，选“逻辑模式”也对；但如果有“内模式”，千万别选“物理模式”（通常是凑数的干扰项）。\n\n#### 2. 数据库事务 ACID 特性\n*   **核心定义/结论**：\n    *   **原子性 (Atomicity)**：不可分割，全有或全无。（👉 **顾名思义**：原子不可再分）。\n    *   **一致性 (Consistency)**：执行前后规矩不变，总账要平。（👉 **顾名思义**：前后一致）。\n    *   **隔离性 (Isolation)**：并发执行互不干扰。（👉 **顾名思义**：关在小黑屋各玩各的）。\n    *   **持久性 (Durability)**：提交后落盘生根，停电不丢。（👉 **顾名思义**：永久保存）。\n*   **典型题型与解题要领**：\n    *   **题型**：选出不属于事务特性的选项，或根据描述匹配特性。\n    *   **要领**：死记四个字**“原一隔持”**。\n*   **易错点与注意事项**：\n    *   **“并发性”、“可靠性”、“安全性”** 都是用来形容整个数据库系统的，**绝对不是**单个事务的特性！看到直接排除。\n\n#### 3. 关系代数（笛卡尔积与自然连接）\n*   **核心定义/结论**：\n    *   **笛卡尔积 (×)**：两张表无脑全排列组合。（👉 **Java类比**：双层 `for` 循环）。\n    *   **自然连接 (⨝)**：两张表按同名列拼接，且**自动去重**。（👉 **顾名思义**：“自”动去重，“然”后拼接）。\n*   **典型题型与解题要领**：\n    *   **题型**：计算连接后的**元组数（行数）**或**属性列数（列数）**。\n    *   **要领**：\n        *   求笛卡尔积的**行数**：表1行数 $\\times$ 表2行数（乘法）。\n        *   求自然连接的**列数**：表1列数 $+$ 表2列数 $-$ 重复的同名列数。\n*   **易错点与注意事项**：\n    *   审题一定要看清是问**“元组数（行）”**还是**“属性列数（列）”**。\n    *   区分“等值连接”和“自然连接”：等值连接**不**去重同名列，自然连接**必须**去重同名列。\n\n#### 4. 候选键与属性闭包\n*   **核心定义/结论**：\n    *   **函数依赖 (A → B)**：知道A就能查出B。（👉 **Java类比**：`getB(A)` 方法）。\n    *   **候选键**：能顺藤摸瓜找出全表所有字段，且没有多余字段的最小组合。（👉 **Java类比**：数据库主键）。\n    *   **闭包**：从某个字段出发，能“滚雪球”找出的所有字段集合。\n*   **典型题型与解题要领**：\n    *   **题型**：给定关系模式和依赖集，求候选键。\n    *   **要领（画图找源头法）**：\n        1. 在草稿纸上把 `A → B` 画成箭头图。\n        2. 找**“只有指出去的箭头，没有指进来的箭头”**的字母（入度为0），它**必定**是候选键的一部分。\n        3. 顺着它往下走，看能不能找齐所有字母。\n*   **易错点与注意事项**：\n    *   候选键必须是**“最小”**的。如果 `A` 就能找齐所有人，那 `AB` 就不是候选键（因为 `B` 是多余的）。\n\n#### 5. 数据库范式\n*   **核心定义/结论**：\n    *   **1NF**：列不可分（不能有集合/数组）。\n    *   **2NF**：消除**部分**依赖（联合主键里，不能有字段只依赖一半的主键）。\n    *   **3NF**：消除**传递**依赖（拒绝中间商，A->B->C）。\n    *   **4NF**：消除**多值**依赖（一对多且毫无关系的属性，必须拆表）。\n*   **典型题型与解题要领**：\n    *   **题型**：判断属于第几范式，或某范式消除了什么依赖。\n    *   **要领（口诀）**：单主键=保底2NF；消部分=升2NF；消传递=升3NF；消多值=升4NF。\n*   **易错点与注意事项**：\n    *   如果题目给出 `A->B, B->C`，说明存在传递依赖。既然存在，说明它**还没有**消除传递依赖，所以它**绝对不是3NF**，只能停在2NF。\n\n---\n\n### 📅 推荐复习顺序（按性价比与易懂度排序）\n\n作为有Java开发经验的考生，建议您按照以下顺序复习，从最熟悉的日常开发概念切入，逐步过渡到理论推导：\n\n1.  **数据库事务 ACID 特性** 🌟🌟🌟🌟🌟\n    *   *理由*：天天写 `@Transactional`，秒懂，纯送分题。\n2.  **数据库三级模式** 🌟🌟🌟🌟🌟\n    *   *理由*：直接映射您写的 `VO -> Entity -> MySQL底层`，考频极高，靠“顾名思义”就能拿满分。\n3.  **关系代数（笛卡尔积与自然连接）** 🌟🌟🌟🌟\n    *   *理由*：把数学符号翻译成 `for` 循环和加减乘除，掌握算行数和列数的套路即可。\n4.  **候选键与属性闭包** 🌟🌟🌟\n    *   *理由*：稍微需要动笔画个图，但只要掌握“画图找源头”的技巧，不需要背任何数学公式。\n5.  **数据库范式** 🌟🌟🌟\n    *   *理由*：概念相对抽象，但架构师考试考得不深，记住“消部分2、消传递3、消多值4”的口诀即可应付90%的题。"
+    }
+  ],
+  "generated_at": "2026-05-08 23:32:06"
+}

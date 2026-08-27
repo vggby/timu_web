@@ -1,0 +1,373 @@
+{"time": "23:27:44", "level": "info", "msg": "任务启动 | URL: https://www.cheko.cc/test/select?test_id=531033 | 题型: choice | 模型: gemini-3.1-pro-preview-all"}
+{"time": "23:27:44", "level": "info", "msg": "页面抓取完成 | HTML大小: 185208 字符"}
+{"time": "23:27:44", "level": "info", "msg": "开始解析 HTML 页面..."}
+{"time": "23:27:44", "level": "info", "msg": "题目解析完成 | 题目数: 42 | 知识点数: 4"}
+{"time": "23:27:44", "level": "info", "msg": "LLM 客户端初始化 | model=gemini-3.1-pro-preview-all | base_url=https://api.gptgod.online | concurrency=8"}
+{"time": "23:27:44", "level": "info", "msg": "开始生成题目解析 | 共 42 题 | 并发 8"}
+{"time": "23:27:44", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1161"}
+{"time": "23:27:44", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=3199"}
+{"time": "23:27:44", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=999"}
+{"time": "23:27:44", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1752"}
+{"time": "23:27:44", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1029"}
+{"time": "23:27:44", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=848"}
+{"time": "23:27:44", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2201"}
+{"time": "23:27:44", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=910"}
+{"time": "23:27:44", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:44", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '94256f6786663755e09f31a264de9131'}"}
+{"time": "23:27:44", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:44", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:44", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'cf134cc15b0970a2bb435b371aa60137'}"}
+{"time": "23:27:44", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:44", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:44", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'ec9adf8e2e2550c364eadbb29343f9f7'}"}
+{"time": "23:27:44", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:44", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:44", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '9d1b78b2857ee5634a8c4da6e2ac2b56'}"}
+{"time": "23:27:44", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:44", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:44", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '6380841e1d6dfd4ff9bc112752520e82'}"}
+{"time": "23:27:44", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:44", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:44", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '6f217fbb0e31a30f6835e9f23beb3aff'}"}
+{"time": "23:27:44", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:44", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:44", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '4f3a8c5ad9790ac66413eaf72bf3c6ac'}"}
+{"time": "23:27:44", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:44", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:44", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '6df8ed0eeb4d5dee03c3dbb7848bf9d5'}"}
+{"time": "23:27:44", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:47", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=3199"}
+{"time": "23:27:47", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1029"}
+{"time": "23:27:47", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2201"}
+{"time": "23:27:47", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=910"}
+{"time": "23:27:47", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=848"}
+{"time": "23:27:47", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1752"}
+{"time": "23:27:47", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=999"}
+{"time": "23:27:47", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1161"}
+{"time": "23:27:48", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:48", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'ede367b7c2dd54b8b67ec42ecdbe55f2'}"}
+{"time": "23:27:48", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:48", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:48", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '21f98d12ac019633e2ee5b5c69261f58'}"}
+{"time": "23:27:48", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:48", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:48", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'a7d76ec0cbfee8022dd1206fd3cb4d3c'}"}
+{"time": "23:27:48", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:48", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:48", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '28768c0a5ba040f5eab17a8d7894dad4'}"}
+{"time": "23:27:48", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:48", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:48", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'b06b7b9e51f7548b72ecd897eedc730b'}"}
+{"time": "23:27:48", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:48", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:48", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '4c8b79ff68897b6fe0a3a1ee2c84ffed'}"}
+{"time": "23:27:48", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:48", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:48", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '644cc981497e24408eb5f571ecd40264'}"}
+{"time": "23:27:48", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:48", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:48", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '3141edaac9cee9f31a5e0c39a5d7a40b'}"}
+{"time": "23:27:48", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1029"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2201"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=3199"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=910"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=848"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1161"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=999"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1752"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '9c63100ad8d113b64798af14a3ed498a'}"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "题目 414 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1967"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '63277c57527aa4be6ce54bfead8f22ea'}"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "题目 364 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=967"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'ddf022d66495ce711a88b87ddf2b0f5a'}"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "题目 428 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1941"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '625c4424b5de414aa54cecc5eb1e9613'}"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "题目 314 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1206"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '9e474830d4818995fe0e3e0c8c7ab0c5'}"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "题目 410 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1214"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '20182a637e0b38625e94346bee11e6f3'}"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "题目 411 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2276"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'c7345743a4fafdc0cdfb45325a64a050'}"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "题目 427 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1705"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'b77e842814a5fa100ffbdd8b3f2482dd'}"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "题目 363 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=908"}
+{"time": "23:27:55", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:55", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '37e85606d3548bf47264213dc81a7c10'}"}
+{"time": "23:27:55", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:55", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:55", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'c2332dc7582a6597d9df3cc6093815ec'}"}
+{"time": "23:27:55", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:55", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:55", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '30700f67bf375eefdc7d26065cf4fcda'}"}
+{"time": "23:27:55", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:55", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:55", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'bd99573900278484c17f4962734a64e8'}"}
+{"time": "23:27:55", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:55", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:27:55", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '78caffbd2ead3862ba94f64c31286259'}"}
+{"time": "23:27:55", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:55", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:55", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'b262c498285290d8bf0274b6a2a95d46'}"}
+{"time": "23:27:55", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:55", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:55", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '31f41e048a0881fd262764ba20e6ef72'}"}
+{"time": "23:27:55", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:55", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:55", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '117dc8723d829ff751af70552ad3e536'}"}
+{"time": "23:27:55", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1967"}
+{"time": "23:27:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=967"}
+{"time": "23:27:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1206"}
+{"time": "23:27:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1941"}
+{"time": "23:27:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1705"}
+{"time": "23:27:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1214"}
+{"time": "23:27:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=908"}
+{"time": "23:27:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2276"}
+{"time": "23:27:58", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:58", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'dd8132bd070b60fa382d98f54218df67'}"}
+{"time": "23:27:58", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:59", "level": "info", "msg": "API 响应 ← status=403 | 0.7s | body_len=98"}
+{"time": "23:27:59", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '8275c2cf37178d4ed60017972a9343c2'}"}
+{"time": "23:27:59", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:59", "level": "info", "msg": "API 响应 ← status=403 | 0.7s | body_len=98"}
+{"time": "23:27:59", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '1aa7a25501862410cf9b409e4a473de2'}"}
+{"time": "23:27:59", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:59", "level": "info", "msg": "API 响应 ← status=403 | 0.7s | body_len=98"}
+{"time": "23:27:59", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '23a8afba8cfeaf9231e743b1b9862111'}"}
+{"time": "23:27:59", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:59", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:27:59", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'dc0ffb0f93f02ce3a23bb7785f2598ea'}"}
+{"time": "23:27:59", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:59", "level": "info", "msg": "API 响应 ← status=403 | 0.7s | body_len=98"}
+{"time": "23:27:59", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '1b2863cd63621ff892ce16d547ac1fd0'}"}
+{"time": "23:27:59", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:59", "level": "info", "msg": "API 响应 ← status=403 | 0.7s | body_len=98"}
+{"time": "23:27:59", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '322df1d0558612e3d3e65daada822b3d'}"}
+{"time": "23:27:59", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:27:59", "level": "info", "msg": "API 响应 ← status=403 | 0.7s | body_len=98"}
+{"time": "23:27:59", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '978c9dee7225028df63dc86374f1fd7d'}"}
+{"time": "23:27:59", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:04", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1967"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=967"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1206"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1941"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1214"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1705"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2276"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=908"}
+{"time": "23:28:05", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:05", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '4253211d74fe2a891c900f6d44392b8f'}"}
+{"time": "23:28:05", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "error", "msg": "题目 315 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1080"}
+{"time": "23:28:05", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:28:05", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '51997b34a94175c90911278f2165ce69'}"}
+{"time": "23:28:05", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "error", "msg": "题目 271 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1846"}
+{"time": "23:28:05", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:28:05", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '05fd561ed5d691042c4a29a8ada758f6'}"}
+{"time": "23:28:05", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "error", "msg": "题目 316 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=890"}
+{"time": "23:28:05", "level": "info", "msg": "API 响应 ← status=403 | 0.5s | body_len=98"}
+{"time": "23:28:05", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'a7fde712ddda1fe68b5d311383cc23b9'}"}
+{"time": "23:28:05", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "error", "msg": "题目 272 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=998"}
+{"time": "23:28:05", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:05", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'af8f5d1295fb257174f87db777c6f02b'}"}
+{"time": "23:28:05", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "error", "msg": "题目 270 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2241"}
+{"time": "23:28:05", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:05", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '90bea16a7a3c53e6eef175556db84151'}"}
+{"time": "23:28:05", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "error", "msg": "题目 224 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1113"}
+{"time": "23:28:05", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:05", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '851b9be4accbe61b5543ac1466d65dc3'}"}
+{"time": "23:28:05", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "error", "msg": "题目 223 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1955"}
+{"time": "23:28:05", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:05", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'dbe146c79f2acd5e16a508d0c6ed2427'}"}
+{"time": "23:28:05", "level": "error", "msg": "API 最终失败 (重试3次): 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "error", "msg": "题目 225 生成失败: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:05", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1210"}
+{"time": "23:28:06", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:06", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '209fa12267ca55048ca15a09bddf49bd'}"}
+{"time": "23:28:06", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:06", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:06", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '6e82e19dc4c367f62944dfab4b6e8e90'}"}
+{"time": "23:28:06", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:06", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:06", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '07075e460e22529039f5179fd2c2f1ea'}"}
+{"time": "23:28:06", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:06", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:06", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '2a390ad55c7eb5cb2a07f3ce6638d55d'}"}
+{"time": "23:28:06", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:06", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:06", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '32a3712051f61212ebde0432d8f9bda1'}"}
+{"time": "23:28:06", "level": "info", "msg": "API 响应 ← status=403 | 0.8s | body_len=98"}
+{"time": "23:28:06", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:06", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'cb03ec603266d827f7f02c057dc4fe3f'}"}
+{"time": "23:28:06", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:06", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:06", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '01865723b593332f3d62ffbd323b13e0'}"}
+{"time": "23:28:06", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:06", "level": "info", "msg": "API 响应 ← status=403 | 0.8s | body_len=98"}
+{"time": "23:28:06", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'f7f65799ac719c62ebc580d33bd3eb9c'}"}
+{"time": "23:28:06", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:09", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=890"}
+{"time": "23:28:09", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=998"}
+{"time": "23:28:09", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1846"}
+{"time": "23:28:09", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1113"}
+{"time": "23:28:09", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1210"}
+{"time": "23:28:09", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1080"}
+{"time": "23:28:09", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1955"}
+{"time": "23:28:09", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2241"}
+{"time": "23:28:09", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:09", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:09", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '522edf75ab0da3618b7db9e977808e30'}"}
+{"time": "23:28:09", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:09", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:09", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '07778948280dae0207cfd009db1646df'}"}
+{"time": "23:28:09", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:09", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': 'eb2b35a0a9199d722920071328430f24'}"}
+{"time": "23:28:09", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:09", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:09", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '6e40f97b86d5e5dda1b81b4d0d49f4f4'}"}
+{"time": "23:28:09", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:09", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:09", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '5fd9db9b6921f1847debab7f533f09be'}"}
+{"time": "23:28:09", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:09", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:09", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '4ed6a6ea1f5c42eb3cf8f5e7b079649d'}"}
+{"time": "23:28:09", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:09", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:09", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '8fa227612b23ab6d43fdfc45f7035460'}"}
+{"time": "23:28:09", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:10", "level": "info", "msg": "API 响应 ← status=403 | 0.6s | body_len=98"}
+{"time": "23:28:10", "level": "error", "msg": "API 错误 403: {'code': -31, 'msg': '您设置了apikey限制模型，请不要限制或者添加你想访问的模型', 'trace_id': '1cccffd8ce59525c6b997e03f9e8cf4e'}"}
+{"time": "23:28:10", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 403 Client Error: Forbidden for url: https://api.gptgod.online/v1/chat/completions"}
+{"time": "23:28:15", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=998"}
+{"time": "23:28:15", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=890"}
+{"time": "23:28:15", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1846"}
+{"time": "23:28:15", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1955"}
+{"time": "23:28:15", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1080"}
+{"time": "23:28:15", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1113"}
+{"time": "23:28:15", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1210"}
+{"time": "23:28:16", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2241"}
+{"time": "23:28:49", "level": "info", "msg": "API 响应 ← status=200 | 34.1s | body_len=5508"}
+{"time": "23:28:49", "level": "info", "msg": "API 成功 | 回复 2643 字符"}
+{"time": "23:28:49", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=979"}
+{"time": "23:28:50", "level": "info", "msg": "API 响应 ← status=200 | 34.5s | body_len=5393"}
+{"time": "23:28:50", "level": "info", "msg": "API 成功 | 回复 2249 字符"}
+{"time": "23:28:50", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=858"}
+{"time": "23:28:52", "level": "info", "msg": "API 响应 ← status=200 | 36.2s | body_len=5862"}
+{"time": "23:28:52", "level": "info", "msg": "API 成功 | 回复 2656 字符"}
+{"time": "23:28:52", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=996"}
+{"time": "23:28:54", "level": "info", "msg": "API 响应 ← status=200 | 38.2s | body_len=5510"}
+{"time": "23:28:54", "level": "info", "msg": "API 成功 | 回复 2557 字符"}
+{"time": "23:28:54", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1338"}
+{"time": "23:28:57", "level": "info", "msg": "API 响应 ← status=200 | 41.6s | body_len=5598"}
+{"time": "23:28:57", "level": "info", "msg": "API 成功 | 回复 2549 字符"}
+{"time": "23:28:57", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1230"}
+{"time": "23:28:58", "level": "info", "msg": "API 响应 ← status=200 | 42.5s | body_len=6649"}
+{"time": "23:28:58", "level": "info", "msg": "API 成功 | 回复 3134 字符"}
+{"time": "23:28:58", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1002"}
+{"time": "23:28:59", "level": "info", "msg": "API 响应 ← status=200 | 43.2s | body_len=6181"}
+{"time": "23:28:59", "level": "info", "msg": "API 成功 | 回复 2872 字符"}
+{"time": "23:28:59", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1142"}
+{"time": "23:29:03", "level": "info", "msg": "API 响应 ← status=200 | 46.9s | body_len=6182"}
+{"time": "23:29:03", "level": "info", "msg": "API 成功 | 回复 2990 字符"}
+{"time": "23:29:03", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=946"}
+{"time": "23:29:22", "level": "info", "msg": "API 响应 ← status=200 | 32.3s | body_len=5198"}
+{"time": "23:29:22", "level": "info", "msg": "API 成功 | 回复 1995 字符"}
+{"time": "23:29:22", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=859"}
+{"time": "23:29:32", "level": "info", "msg": "API 响应 ← status=200 | 34.1s | body_len=4737"}
+{"time": "23:29:32", "level": "info", "msg": "API 成功 | 回复 1945 字符"}
+{"time": "23:29:32", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=900"}
+{"time": "23:29:32", "level": "info", "msg": "API 响应 ← status=200 | 38.7s | body_len=5770"}
+{"time": "23:29:32", "level": "info", "msg": "API 成功 | 回复 2948 字符"}
+{"time": "23:29:32", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=965"}
+{"time": "23:29:35", "level": "info", "msg": "API 响应 ← status=200 | 32.3s | body_len=5139"}
+{"time": "23:29:35", "level": "info", "msg": "API 成功 | 回复 2202 字符"}
+{"time": "23:29:35", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1110"}
+{"time": "23:29:35", "level": "info", "msg": "API 响应 ← status=200 | 36.6s | body_len=5745"}
+{"time": "23:29:35", "level": "info", "msg": "API 成功 | 回复 2934 字符"}
+{"time": "23:29:35", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=789"}
+{"time": "23:29:37", "level": "info", "msg": "API 响应 ← status=200 | 45.7s | body_len=6013"}
+{"time": "23:29:37", "level": "info", "msg": "API 成功 | 回复 2844 字符"}
+{"time": "23:29:37", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=991"}
+{"time": "23:29:38", "level": "info", "msg": "API 响应 ← status=200 | 40.7s | body_len=6439"}
+{"time": "23:29:38", "level": "info", "msg": "API 成功 | 回复 2662 字符"}
+{"time": "23:29:38", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1030"}
+{"time": "23:29:50", "level": "info", "msg": "API 响应 ← status=200 | 27.5s | body_len=4904"}
+{"time": "23:29:50", "level": "info", "msg": "API 成功 | 回复 2244 字符"}
+{"time": "23:29:50", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=914"}
+{"time": "23:30:06", "level": "info", "msg": "API 响应 ← status=200 | 33.8s | body_len=5087"}
+{"time": "23:30:06", "level": "info", "msg": "API 成功 | 回复 2771 字符"}
+{"time": "23:30:06", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1556"}
+{"time": "23:30:08", "level": "info", "msg": "API 响应 ← status=200 | 32.9s | body_len=5428"}
+{"time": "23:30:08", "level": "info", "msg": "API 成功 | 回复 2286 字符"}
+{"time": "23:30:08", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1061"}
+{"time": "23:30:09", "level": "info", "msg": "API 响应 ← status=200 | 31.9s | body_len=5667"}
+{"time": "23:30:09", "level": "info", "msg": "API 成功 | 回复 2384 字符"}
+{"time": "23:30:11", "level": "info", "msg": "API 响应 ← status=200 | 39.0s | body_len=4840"}
+{"time": "23:30:11", "level": "info", "msg": "API 成功 | 回复 2014 字符"}
+{"time": "23:30:14", "level": "info", "msg": "API 响应 ← status=200 | 39.0s | body_len=5864"}
+{"time": "23:30:14", "level": "info", "msg": "API 成功 | 回复 2829 字符"}
+{"time": "23:30:22", "level": "info", "msg": "API 响应 ← status=200 | 44.4s | body_len=5616"}
+{"time": "23:30:22", "level": "info", "msg": "API 成功 | 回复 2701 字符"}
+{"time": "23:30:26", "level": "info", "msg": "API 响应 ← status=200 | 36.3s | body_len=5513"}
+{"time": "23:30:26", "level": "info", "msg": "API 成功 | 回复 2596 字符"}
+{"time": "23:30:44", "level": "info", "msg": "API 响应 ← status=200 | 36.0s | body_len=4883"}
+{"time": "23:30:44", "level": "info", "msg": "API 成功 | 回复 2258 字符"}
+{"time": "23:30:57", "level": "info", "msg": "API 响应 ← status=200 | 127.8s | body_len=5217"}
+{"time": "23:30:57", "level": "info", "msg": "API 成功 | 回复 2385 字符"}
+{"time": "23:31:02", "level": "info", "msg": "API 响应 ← status=200 | 56.0s | body_len=5303"}
+{"time": "23:31:02", "level": "info", "msg": "API 成功 | 回复 2629 字符"}
+{"time": "23:31:02", "level": "info", "msg": "题目解析完成 | 成功 26 题"}
+{"time": "23:31:02", "level": "info", "msg": "开始生成知识点总结 | 共 4 个知识点"}
+{"time": "23:31:02", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=51150"}
+{"time": "23:31:02", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=12039"}
+{"time": "23:31:02", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=7167"}
+{"time": "23:31:02", "level": "info", "msg": "API 请求 → https://api.gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=31007"}
+{"time": "23:31:29", "level": "info", "msg": "API 响应 ← status=200 | 26.8s | body_len=4042"}
+{"time": "23:31:29", "level": "info", "msg": "API 成功 | 回复 1871 字符"}
+{"time": "23:31:38", "level": "info", "msg": "API 响应 ← status=200 | 36.1s | body_len=6410"}
+{"time": "23:31:38", "level": "info", "msg": "API 成功 | 回复 3122 字符"}
+{"time": "23:31:50", "level": "info", "msg": "API 响应 ← status=200 | 48.6s | body_len=6344"}
+{"time": "23:31:50", "level": "info", "msg": "API 成功 | 回复 2928 字符"}
+{"time": "23:32:06", "level": "info", "msg": "API 响应 ← status=200 | 64.4s | body_len=8748"}
+{"time": "23:32:06", "level": "info", "msg": "API 成功 | 回复 3538 字符"}
+{"time": "23:32:06", "level": "info", "msg": "知识点总结完成 | 成功 4 个"}
+{"time": "23:32:06", "level": "info", "msg": "网站构建完成 | 题目数: 42 | 知识点: 4"}
+{"time": "23:32:06", "level": "info", "msg": "✅ 任务完成！"}

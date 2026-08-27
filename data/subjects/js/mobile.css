@@ -1,0 +1,167 @@
+/* 移动端适配补丁 */
+
+/* 全局防溢出 */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  overflow-x: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+main {
+  overflow-x: hidden;
+}
+
+/* 图片自适应 */
+img, svg, video, canvas, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Markdown 内容适配 */
+.markdown {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.markdown table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  font-size: 0.85rem;
+}
+.markdown pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.markdown code {
+  word-break: break-all;
+}
+.markdown pre code {
+  word-break: normal;
+}
+.markdown h1 { font-size: 1.3rem; }
+.markdown h2 { font-size: 1.15rem; }
+.markdown h3 { font-size: 1.05rem; }
+.markdown blockquote {
+  margin-left: 0;
+  padding-left: 0.8rem;
+  border-left: 3px solid var(--accent, #2563eb);
+}
+
+/* Mermaid 图表适配 */
+.mermaid {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+.mermaid svg {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* 卡片内容防溢出 */
+.card {
+  overflow: hidden;
+}
+.knowledge-details {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 移动端 <=480px */
+@media (max-width: 480px) {
+  main {
+    padding: 0.6rem 0.5rem 1rem !important;
+  }
+  .card {
+    padding: 0.8rem !important;
+    border-radius: 12px !important;
+  }
+  h1 {
+    font-size: 1.2rem !important;
+  }
+  h2 {
+    font-size: 1.05rem !important;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+  .stat-number {
+    font-size: 1.4rem !important;
+  }
+  .knowledge-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .question-header h3 {
+    font-size: 0.95rem !important;
+  }
+  .question-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .option-label {
+    padding: 0.5rem 0.6rem !important;
+  }
+  .option-text {
+    font-size: 0.9rem;
+  }
+  .badge {
+    font-size: 0.7rem !important;
+  }
+  .controls {
+    gap: 0.5rem !important;
+  }
+  .controls select,
+  .controls input {
+    font-size: 0.85rem !important;
+    padding: 0.5rem 0.6rem !important;
+  }
+  .nav-btn {
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+  }
+  .submit-btn, .show-answer-btn {
+    padding: 0.5rem 0.9rem !important;
+    font-size: 0.85rem !important;
+  }
+  .rich-details {
+    padding: 0.5rem 0.6rem !important;
+  }
+  .markdown table {
+    font-size: 0.78rem;
+  }
+  .markdown th, .markdown td {
+    padding: 0.35rem 0.45rem;
+  }
+  .markdown pre {
+    font-size: 0.8rem;
+    padding: 0.6rem;
+  }
+  .quiz-navigation {
+    flex-wrap: wrap;
+  }
+}
+
+/* 平板 481-720px */
+@media (min-width: 481px) and (max-width: 720px) {
+  main {
+    padding: 0.8rem 0.7rem 1.2rem !important;
+  }
+  .knowledge-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}

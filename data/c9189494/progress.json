@@ -1,0 +1,7 @@
+{
+  "stage": "失败",
+  "current": 0,
+  "total": 1,
+  "message": "模型配置 'gemini-3.1-pro-preview-all' 不存在，可用: ['default', 'claude-sonnet-4-6']",
+  "percent": 0
+}

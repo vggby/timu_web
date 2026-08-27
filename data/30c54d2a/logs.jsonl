@@ -1,0 +1,11 @@
+{"time": "22:39:11", "level": "info", "msg": "任务启动 | URL: https://www.cheko.cc/test/select?test_id=531033 | 题型: choice | 模型: MiniMax-M2.7"}
+{"time": "22:39:11", "level": "info", "msg": "页面抓取完成 | HTML大小: 185208 字符"}
+{"time": "22:39:11", "level": "info", "msg": "开始解析 HTML 页面..."}
+{"time": "22:39:11", "level": "info", "msg": "题目解析完成 | 题目数: 42 | 知识点数: 4"}
+{"time": "22:39:11", "level": "info", "msg": "LLM 客户端初始化 | model=MiniMax-M2.7 | base_url=https://api.minimaxi.com/v1 | concurrency=8"}
+{"time": "22:39:11", "level": "info", "msg": "开始生成题目解析 | 共 42 题 | 并发 8"}
+{"time": "22:39:49", "level": "info", "msg": "题目解析完成 | 成功 0 题"}
+{"time": "22:39:49", "level": "info", "msg": "开始生成知识点总结 | 共 4 个知识点"}
+{"time": "22:39:56", "level": "info", "msg": "知识点总结完成 | 成功 0 个"}
+{"time": "22:39:56", "level": "info", "msg": "网站构建完成 | 题目数: 42 | 知识点: 4"}
+{"time": "22:39:56", "level": "info", "msg": "✅ 任务完成！"}

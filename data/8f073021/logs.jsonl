@@ -1,0 +1,609 @@
+{"time": "23:26:11", "level": "info", "msg": "任务启动 | URL: https://www.cheko.cc/test/select?test_id=531033 | 题型: choice | 模型: gemini-3.1-pro-preview-all"}
+{"time": "23:26:11", "level": "info", "msg": "页面抓取完成 | HTML大小: 185208 字符"}
+{"time": "23:26:11", "level": "info", "msg": "开始解析 HTML 页面..."}
+{"time": "23:26:11", "level": "info", "msg": "题目解析完成 | 题目数: 42 | 知识点数: 4"}
+{"time": "23:26:11", "level": "info", "msg": "LLM 客户端初始化 | model=gemini-3.1-pro-preview-all | base_url=https://gptgod.online | concurrency=8"}
+{"time": "23:26:11", "level": "info", "msg": "开始生成题目解析 | 共 42 题 | 并发 8"}
+{"time": "23:26:11", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1161"}
+{"time": "23:26:11", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=3199"}
+{"time": "23:26:11", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=999"}
+{"time": "23:26:11", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1752"}
+{"time": "23:26:11", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1029"}
+{"time": "23:26:11", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=848"}
+{"time": "23:26:11", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2201"}
+{"time": "23:26:11", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=910"}
+{"time": "23:26:12", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:12", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:12", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:12", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:12", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:12", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:12", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:12", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:12", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:12", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:12", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:12", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:12", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:12", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:12", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:12", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:12", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:12", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:12", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:12", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:12", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:12", "level": "info", "msg": "API 响应 ← status=405 | 0.7s | body_len=157"}
+{"time": "23:26:12", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:12", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:15", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=910"}
+{"time": "23:26:15", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1029"}
+{"time": "23:26:15", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1161"}
+{"time": "23:26:15", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=999"}
+{"time": "23:26:15", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1752"}
+{"time": "23:26:15", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=3199"}
+{"time": "23:26:15", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2201"}
+{"time": "23:26:15", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=848"}
+{"time": "23:26:15", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:26:15", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:15", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:15", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:26:15", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:15", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:21", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=910"}
+{"time": "23:26:21", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=3199"}
+{"time": "23:26:49", "level": "info", "msg": "API 响应 ← status=405 | 34.1s | body_len=157"}
+{"time": "23:26:49", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:49", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "info", "msg": "API 响应 ← status=405 | 34.0s | body_len=157"}
+{"time": "23:26:49", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:49", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "info", "msg": "API 响应 ← status=405 | 34.2s | body_len=157"}
+{"time": "23:26:49", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:49", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "info", "msg": "API 响应 ← status=405 | 34.1s | body_len=157"}
+{"time": "23:26:49", "level": "info", "msg": "API 响应 ← status=405 | 34.1s | body_len=157"}
+{"time": "23:26:49", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:49", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:49", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "info", "msg": "API 响应 ← status=405 | 34.2s | body_len=157"}
+{"time": "23:26:49", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:49", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "info", "msg": "API 响应 ← status=405 | 27.6s | body_len=157"}
+{"time": "23:26:49", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:49", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "error", "msg": "题目 428 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1967"}
+{"time": "23:26:49", "level": "info", "msg": "API 响应 ← status=405 | 27.7s | body_len=157"}
+{"time": "23:26:49", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:49", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "error", "msg": "题目 314 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:49", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=967"}
+{"time": "23:26:50", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:50", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:50", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:50", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:50", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:50", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:53", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=967"}
+{"time": "23:26:53", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1967"}
+{"time": "23:26:53", "level": "info", "msg": "API 响应 ← status=405 | 0.7s | body_len=157"}
+{"time": "23:26:53", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:53", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:53", "level": "info", "msg": "API 响应 ← status=405 | 0.7s | body_len=157"}
+{"time": "23:26:53", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:53", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:55", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=999"}
+{"time": "23:26:55", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=848"}
+{"time": "23:26:55", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1161"}
+{"time": "23:26:55", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1752"}
+{"time": "23:26:55", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2201"}
+{"time": "23:26:55", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1029"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "题目 410 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1941"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "题目 411 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1206"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "题目 414 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "题目 427 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "题目 364 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "error", "msg": "题目 363 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1214"}
+{"time": "23:26:56", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2276"}
+{"time": "23:26:56", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1705"}
+{"time": "23:26:56", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=908"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:56", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:26:56", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:26:56", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:26:59", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1941"}
+{"time": "23:26:59", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1705"}
+{"time": "23:26:59", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=908"}
+{"time": "23:26:59", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1214"}
+{"time": "23:26:59", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1206"}
+{"time": "23:26:59", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2276"}
+{"time": "23:26:59", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1967"}
+{"time": "23:26:59", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=967"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "error", "msg": "题目 315 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1080"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "error", "msg": "题目 316 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1846"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:00", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:00", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:00", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:03", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1080"}
+{"time": "23:27:03", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1846"}
+{"time": "23:27:04", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:04", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:04", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:04", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:04", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:04", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1705"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1941"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1214"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1206"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=908"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2276"}
+{"time": "23:27:06", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:06", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:06", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "error", "msg": "题目 270 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=890"}
+{"time": "23:27:06", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:06", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:06", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "error", "msg": "题目 225 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=998"}
+{"time": "23:27:06", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:06", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:06", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "error", "msg": "题目 224 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2241"}
+{"time": "23:27:06", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:06", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:06", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:06", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:06", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "error", "msg": "题目 272 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "error", "msg": "题目 271 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1113"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1955"}
+{"time": "23:27:06", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:06", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:06", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "error", "msg": "题目 223 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:06", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1210"}
+{"time": "23:27:07", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:07", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:07", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:07", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:07", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:07", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:07", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:07", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:07", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:07", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:07", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:07", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:07", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:07", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:07", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:07", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:07", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:07", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1955"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=890"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=998"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1113"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2241"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1210"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1080"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1846"}
+{"time": "23:27:10", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:10", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:10", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:10", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:10", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:10", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:10", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:10", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:10", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:10", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:10", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:10", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:10", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:10", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:10", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "error", "msg": "题目 184 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=979"}
+{"time": "23:27:10", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:10", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:10", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "error", "msg": "题目 185 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:10", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=858"}
+{"time": "23:27:11", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:11", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:11", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:11", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:11", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:11", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:14", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=979"}
+{"time": "23:27:14", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=858"}
+{"time": "23:27:15", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:15", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:15", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:15", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:15", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:15", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:16", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1955"}
+{"time": "23:27:16", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=890"}
+{"time": "23:27:16", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1113"}
+{"time": "23:27:16", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=998"}
+{"time": "23:27:16", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2241"}
+{"time": "23:27:16", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1210"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "error", "msg": "题目 135 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=996"}
+{"time": "23:27:17", "level": "error", "msg": "题目 147 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1338"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "error", "msg": "题目 136 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1230"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "error", "msg": "题目 82 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1002"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "error", "msg": "题目 86 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1142"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "error", "msg": "题目 186 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=946"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:17", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:17", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:17", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:20", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1338"}
+{"time": "23:27:20", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1142"}
+{"time": "23:27:20", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1002"}
+{"time": "23:27:20", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1230"}
+{"time": "23:27:20", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=946"}
+{"time": "23:27:20", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=996"}
+{"time": "23:27:21", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=979"}
+{"time": "23:27:21", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=858"}
+{"time": "23:27:21", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:21", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:21", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:21", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:21", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:21", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:21", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:21", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:21", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:21", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:21", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:21", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:21", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:21", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:21", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "error", "msg": "题目 20 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=859"}
+{"time": "23:27:21", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:21", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:21", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "error", "msg": "题目 21 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:21", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=900"}
+{"time": "23:27:22", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:22", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:22", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:22", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:22", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:22", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:25", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=859"}
+{"time": "23:27:25", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=900"}
+{"time": "23:27:25", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:25", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:25", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:25", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:25", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:25", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1142"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1002"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1338"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=946"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=996"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1230"}
+{"time": "23:27:27", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:27", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:27", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:27", "level": "error", "msg": "题目 23 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=965"}
+{"time": "23:27:27", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:27", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:27", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:27", "level": "error", "msg": "题目 1136 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1110"}
+{"time": "23:27:27", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:27", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:27", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:27", "level": "error", "msg": "题目 22 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:27", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=789"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "error", "msg": "题目 1125 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=991"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "error", "msg": "题目 1183 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1030"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "error", "msg": "题目 1123 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=914"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:28", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:28", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:28", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:31", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=965"}
+{"time": "23:27:31", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1110"}
+{"time": "23:27:31", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=991"}
+{"time": "23:27:31", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=789"}
+{"time": "23:27:31", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1030"}
+{"time": "23:27:31", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=914"}
+{"time": "23:27:31", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=900"}
+{"time": "23:27:31", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=859"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "error", "msg": "题目 1206 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1556"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "error", "msg": "题目 1184 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1061"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:32", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:32", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:32", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:35", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1556"}
+{"time": "23:27:35", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1061"}
+{"time": "23:27:36", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:36", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:36", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:36", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:36", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:36", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=965"}
+{"time": "23:27:38", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1110"}
+{"time": "23:27:38", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=991"}
+{"time": "23:27:38", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1030"}
+{"time": "23:27:38", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=789"}
+{"time": "23:27:38", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=914"}
+{"time": "23:27:38", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:38", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:38", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "error", "msg": "题目 1286 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:38", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:38", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "error", "msg": "题目 1207 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:38", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:38", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "error", "msg": "题目 1303 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:38", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:38", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:38", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:38", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "error", "msg": "题目 1304 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "error", "msg": "题目 1302 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:38", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:38", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:38", "level": "error", "msg": "题目 1339 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:42", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1556"}
+{"time": "23:27:42", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=1061"}
+{"time": "23:27:42", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:42", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:42", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:42", "level": "error", "msg": "题目 1422 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:42", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:42", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:42", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:42", "level": "error", "msg": "题目 1448 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:42", "level": "info", "msg": "题目解析完成 | 成功 0 题"}
+{"time": "23:27:42", "level": "info", "msg": "开始生成知识点总结 | 共 4 个知识点"}
+{"time": "23:27:42", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=22289"}
+{"time": "23:27:42", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=4031"}
+{"time": "23:27:42", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2496"}
+{"time": "23:27:42", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=6010"}
+{"time": "23:27:43", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:43", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:43", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:43", "level": "info", "msg": "API 响应 ← status=405 | 0.5s | body_len=157"}
+{"time": "23:27:43", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:43", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:43", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:43", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:43", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:43", "level": "info", "msg": "API 响应 ← status=405 | 0.8s | body_len=157"}
+{"time": "23:27:43", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:43", "level": "warn", "msg": "API 第1次失败，3.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:46", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=6010"}
+{"time": "23:27:46", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=4031"}
+{"time": "23:27:46", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2496"}
+{"time": "23:27:46", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=22289"}
+{"time": "23:27:47", "level": "info", "msg": "API 响应 ← status=405 | 0.7s | body_len=157"}
+{"time": "23:27:47", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:47", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:47", "level": "info", "msg": "API 响应 ← status=405 | 0.7s | body_len=157"}
+{"time": "23:27:47", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:47", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:47", "level": "info", "msg": "API 响应 ← status=405 | 0.7s | body_len=157"}
+{"time": "23:27:47", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:47", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:47", "level": "info", "msg": "API 响应 ← status=405 | 0.8s | body_len=157"}
+{"time": "23:27:47", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:47", "level": "warn", "msg": "API 第2次失败，6.0s 后重试: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:53", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=6010"}
+{"time": "23:27:53", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=4031"}
+{"time": "23:27:53", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=2496"}
+{"time": "23:27:53", "level": "info", "msg": "API 请求 → https://gptgod.online/v1/chat/completions | model=gemini-3.1-pro-preview-all | msg_len=22289"}
+{"time": "23:27:53", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:53", "level": "info", "msg": "API 响应 ← status=405 | 0.6s | body_len=157"}
+{"time": "23:27:53", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:53", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:53", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:53", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:53", "level": "error", "msg": "知识点 \"特殊数据库系统\" 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:53", "level": "error", "msg": "知识点 \"数据库基本概念\" 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:53", "level": "info", "msg": "API 响应 ← status=405 | 0.7s | body_len=157"}
+{"time": "23:27:53", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:53", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:53", "level": "error", "msg": "知识点 \"数据库设计\" 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "API 响应 ← status=405 | 0.8s | body_len=157"}
+{"time": "23:27:54", "level": "error", "msg": "API 错误 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx/1.29.4</center>\r\n</body>\r\n</html>\r\n"}
+{"time": "23:27:54", "level": "error", "msg": "API 最终失败 (重试3次): 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "error", "msg": "知识点 \"关系数据库\" 生成失败: 405 Client Error: Method Not Allowed for url: https://gptgod.online/v1/chat/completions"}
+{"time": "23:27:54", "level": "info", "msg": "知识点总结完成 | 成功 0 个"}
+{"time": "23:27:54", "level": "info", "msg": "网站构建完成 | 题目数: 42 | 知识点: 4"}
+{"time": "23:27:54", "level": "info", "msg": "✅ 任务完成！"}

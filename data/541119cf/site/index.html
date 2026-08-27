@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2013年11月系统架构真题</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@13/dist/markdown-it.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --bg: #0a0a0f;
+      --bg-subtle: #111118;
+      --card: #16161f;
+      --card-hover: #1c1c28;
+      --accent: #7c6ff7;
+      --accent-light: #a89cf8;
+      --accent-bg: rgba(124, 111, 247, 0.12);
+      --accent-bg-hover: rgba(124, 111, 247, 0.2);
+      --green: #34d399;
+      --green-bg: rgba(52, 211, 153, 0.12);
+      --green-border: rgba(52, 211, 153, 0.35);
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.12);
+      --red-border: rgba(248, 113, 113, 0.35);
+      --orange: #fbbf24;
+      --text: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+    [data-theme="light"] {
+      --bg: #f0f4f8;
+      --bg-subtle: #e8edf2;
+      --card: #ffffff;
+      --card-hover: #f8f9fc;
+      --accent: #6c5ce7;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108, 92, 231, 0.10);
+      --accent-bg-hover: rgba(108, 92, 231, 0.18);
+      --green: #10b981;
+      --green-bg: rgba(16, 185, 129, 0.10);
+      --green-border: rgba(16, 185, 129, 0.30);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.10);
+      --red-border: rgba(239, 68, 68, 0.30);
+      --orange: #f59e0b;
+      --text: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08);
+      --glass: rgba(0,0,0,0.02);
+      --glass-border: rgba(0,0,0,0.08);
+    }
+    /* ===== Theme toggle button ===== */
+    .theme-toggle {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.15s;
+      font-family: var(--font-sans);
+    }
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.04);
+    }
+    [data-theme="light"] .theme-toggle {
+      background: rgba(0,0,0,0.12);
+      border-color: rgba(0,0,0,0.18);
+      color: #fff;
+    }
+    [data-theme="light"] .theme-toggle:hover {
+      background: rgba(0,0,0,0.20);
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* ===== Header ===== */
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      color: #fff;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .page-header .meta-line {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Controls ===== */
+    .controls-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .controls-bar select,
+    .controls-bar input {
+      flex: 1 1 200px;
+      min-width: 0;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+      -webkit-appearance: none;
+    }
+    .controls-bar select:focus,
+    .controls-bar input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .clear-btn {
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--red-border);
+      background: var(--red-bg);
+      color: var(--red);
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+      white-space: nowrap;
+    }
+    .clear-btn:hover {
+      background: var(--red-bg);
+      border-color: var(--red);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+    .clear-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ===== Stats Ring ===== */
+    .stats-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .stats-card h2 {
+      margin: 0 0 20px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stats-layout {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .ring-container {
+      flex-shrink: 0;
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    .ring-container svg {
+      transform: rotate(-90deg);
+    }
+    .ring-container .ring-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .ring-container .ring-pct {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1.2;
+    }
+    .ring-container .ring-text {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+    .stats-numbers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      flex: 1;
+      min-width: 200px;
+    }
+    .sn-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .sn-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .sn-val.green { color: var(--green); }
+    .sn-val.red { color: var(--red); }
+    .sn-val.accent { color: var(--accent); }
+    .sn-val.orange { color: var(--orange); }
+    .sn-lbl {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .stats-progress {
+      margin-top: 16px;
+    }
+    .stats-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stats-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+    .stats-progress-text {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    /* ===== Knowledge Section ===== */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .knowledge-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--accent-light);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+    .knowledge-card:nth-child(3n+1) { border-left-color: #4f46e5; }
+    .knowledge-card:nth-child(3n+2) { border-left-color: #0ea5e9; }
+    .knowledge-card:nth-child(3n+3) { border-left-color: #8b5cf6; }
+    .knowledge-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .knowledge-card.active {
+      border-left-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(79,70,229,0.2), var(--shadow-md);
+    }
+    .knowledge-card.expanded {
+      grid-column: 1 / -1;
+      transition: grid-column 0s;
+    }
+    .knowledge-card.expanded .knowledge-details {
+      max-height: none;
+    }
+    .knowledge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .knowledge-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-accent {
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+    .kp-count-btn {
+      cursor: pointer;
+      transition: background 0.18s, transform 0.15s;
+      user-select: none;
+    }
+    .kp-count-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.06);
+    }
+    .badge-green {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+    .knowledge-details {
+      margin-top: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+    }
+    .knowledge-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent);
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .knowledge-details summary::before {
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .knowledge-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .knowledge-details .markdown {
+      margin-top: 10px;
+    }
+    .knowledge-details[open] summary {
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    /* ===== Question Cards ===== */
+    .question-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .question-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .question-header h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .question-prompt {
+      margin: 0 0 16px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .sub-question {
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .sub-question h4 {
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .sub-question-text {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Options ===== */
+    ul.options {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+    }
+    .option-item {
+      margin-bottom: 8px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+    .option-item:hover {
+      border-color: var(--accent-light);
+      background: var(--accent-bg);
+      transform: translateX(2px);
+    }
+    .option-label {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      cursor: pointer;
+      gap: 12px;
+    }
+    .option-input {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+    }
+    .option-text {
+      flex: 1;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    .option-item.selected {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+    }
+    .option-item.correct {
+      border-color: var(--green);
+      background: var(--green-bg);
+      animation: correctPulse 0.5s ease;
+    }
+    .option-item.incorrect {
+      border-color: var(--red);
+      background: var(--red-bg);
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+    @keyframes correctPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.01); }
+      100% { transform: scale(1); }
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      60% { transform: scale(1.02); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Toast ===== */
+    #_toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 9999;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
+    #_toast._toast-show {
+      animation: toastIn 0.25s ease forwards;
+    }
+    #_toast._toast-info  { background: var(--accent);  color: #fff; }
+    #_toast._toast-warn  { background: var(--orange);  color: #000; }
+    #_toast._toast-ok    { background: var(--green);   color: #000; }
+    #_toast._toast-err   { background: var(--red);     color: #fff; }
+
+    /* ===== Answer Feedback ===== */
+    .answer-feedback {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: fadeSlideUp 0.3s ease;
+    }
+    .feedback-icon { font-size: 1.1rem; }
+    .feedback-msg { flex: 1; }
+
+    /* ===== Buttons ===== */
+    .question-actions {
+      margin: 16px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 22px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(79,70,229,0.3);
+    }
+    .btn-primary:hover {
+      background: #6d62e0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79,70,229,0.35);
+    }
+    .btn-primary:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-warning {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(245,158,11,0.3);
+    }
+    .btn-warning:hover {
+      background: #e4a320;
+      transform: translateY(-1px);
+    }
+    .btn-success {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(16,185,129,0.3);
+    }
+    .btn-success:hover {
+      background: #2ab77f;
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: var(--card);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+    .btn-outline:hover {
+      background: var(--accent-bg);
+    }
+    .btn-outline:disabled {
+      color: var(--text-muted);
+      border-color: var(--border);
+      background: transparent;
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid transparent;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      background: var(--glass);
+      border-color: var(--border);
+    }
+
+    /* ===== Feedback ===== */
+    .answer-feedback.correct {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-border);
+    }
+    .answer-feedback.incorrect {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+    .correct-answer {
+      background: var(--green-bg);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--green-border);
+      margin: 8px 0;
+      font-size: 0.95rem;
+    }
+
+    /* ===== Quiz Navigation ===== */
+    .quiz-progress-bar {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .qp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .qp-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .qp-count {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .qp-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .qp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .quiz-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .quiz-mode-toggle {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    /* ===== Details / Panels ===== */
+    .rich-details {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-top: 10px;
+    }
+    .rich-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent-light);
+      user-select: none;
+      transition: color 0.2s;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rich-details summary::before {
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .rich-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .rich-details summary:hover {
+      color: var(--accent);
+    }
+    .rich-details[open] summary {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rich-details .markdown {
+      margin-top: 8px;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    .answer-analysis {
+      margin-top: 10px;
+    }
+    /* ===== Markdown ===== */
+    .markdown {
+      line-height: 1.7;
+      color: inherit;
+      font-size: 0.95rem;
+    }
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
+      margin: 1em 0 0.5em;
+      font-weight: 700;
+    }
+    .markdown h1, .md-heading.h2-equiv { font-size: 1.3rem; color: var(--text); }
+    .markdown h2, .md-heading { font-size: 1.15rem; color: var(--text); }
+    .markdown h3 { font-size: 1.05rem; }
+    .md-heading { margin: 1em 0 0.4em; font-weight: 700; }
+    .md-hr { border: none; border-top: 1px solid var(--border); margin: 1em 0; }
+    .markdown p { margin: 0.5em 0; }
+    .markdown ul, .markdown ol { padding-left: 1.5em; margin: 0.5em 0; }
+    .markdown li { margin-bottom: 0.3em; }
+    .markdown table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+    .markdown th, .markdown td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+    }
+    .markdown th {
+      background: var(--accent-bg);
+      font-weight: 600;
+    }
+    .markdown code {
+      background: rgba(99,102,241,0.1);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      font-size: 0.88em;
+    }
+    .markdown pre {
+      background: #0d0d14;
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-size: 0.88rem;
+    }
+    .markdown pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    .markdown img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-xs);
+    }
+    .markdown.empty {
+      color: var(--text-muted);
+    }
+    .mermaid {
+      text-align: center;
+      margin: 1rem 0;
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      border: 1px solid var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* ===== Empty State ===== */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .empty-state-text {
+      font-size: 1rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      main {
+        padding: 16px 12px 48px;
+      }
+      .page-header {
+        padding: 24px 20px;
+        border-radius: var(--radius-sm);
+      }
+      .page-header h1 {
+        font-size: 1.35rem;
+      }
+      .controls-bar {
+        flex-direction: column;
+      }
+      .controls-bar select,
+      .controls-bar input {
+        flex: 1 1 100%;
+      }
+      .stats-layout {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .ring-container {
+        margin: 0 auto;
+      }
+      .stats-numbers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .knowledge-grid {
+        grid-template-columns: 1fr;
+      }
+      .question-card {
+        padding: 18px 16px;
+      }
+      .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .option-label {
+        padding: 14px 16px;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
+      }
+      .quiz-nav {
+        flex-direction: column;
+      }
+      .quiz-nav .btn {
+        width: 100%;
+      }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .knowledge-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌙 暗色</button>
+      <h1>📝 2013年11月系统架构真题</h1>
+      <p class="meta-line">共 1 题 · 生成于 2026-02-25 10:00:58</p>
+    </header>
+
+    <div class="controls-bar">
+      <select id="knowledgeFilter" aria-label="筛选知识点"></select>
+      <input id="searchInput" type="search" placeholder="🔍 搜索题干 / 解析 / AI 笔记" aria-label="搜索题目" />
+      <button class="clear-btn" id="clearProgressBtn" aria-label="清空答题记录">🗑️ 清空记录</button>
+    </div>
+
+    <section class="stats-card" aria-label="答题统计">
+      <h2>📊 答题统计</h2>
+      <div id="statsContainer">
+        <div class="stats-layout">
+          <div class="ring-container">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#2d2d3f" stroke-width="10"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="10"
+                stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round" id="ringProgress"/>
+            </svg>
+            <div class="ring-label">
+              <span class="ring-pct" id="ringPct">0%</span>
+              <span class="ring-text">正确率</span>
+            </div>
+          </div>
+          <div class="stats-numbers">
+            <div class="sn-item"><div class="sn-val accent" id="snTotal">0</div><div class="sn-lbl">总题数</div></div>
+            <div class="sn-item"><div class="sn-val accent" id="snAnswered">0</div><div class="sn-lbl">已答题</div></div>
+            <div class="sn-item"><div class="sn-val green" id="snCorrect">0</div><div class="sn-lbl">答对</div></div>
+            <div class="sn-item"><div class="sn-val red" id="snIncorrect">0</div><div class="sn-lbl">答错</div></div>
+          </div>
+        </div>
+        <div class="stats-progress">
+          <div class="stats-progress-bar"><div class="stats-progress-fill" id="statsProgressFill" style="width:0%"></div></div>
+          <div class="stats-progress-text" id="statsProgressText">进度 0%</div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="知识点总结">
+      <h2 class="section-title">💡 知识点总结</h2>
+      <div id="knowledgeContainer" class="knowledge-grid"><article class='card knowledge-card' style='cursor:pointer' onclick="jumpToKnowledge('系统安全')">
+              <div class='knowledge-header'>
+                <h3>系统安全</h3>
+                <span class='badge badge-accent kp-count-btn' title='点击刷此知识点题库' onclick="event.stopPropagation();jumpToKnowledge('系统安全')">共 1 题 ▶</span>
+              </div>
+              <details class='knowledge-details'><summary>查看大模型总结</summary><div class='markdown'><h2 class="md-heading">系统安全知识点结构化要点清单</h2><hr class="md-hr" /><h3 class="md-heading">一、知识点名称</h3><p><strong>信息系统安全机制设计</strong>（身份认证、数据加密、数据库加密）</p><hr class="md-hr" /><h3 class="md-heading">二、核心定义与结论</h3><p><strong>身份认证机制</strong></p><ul><li>口令认证：用户名+密码，口令在网络传输，服务器端存储，双方共享</li><li>公钥体系认证（PKI）：基于非对称加密，私钥仅存于用户本地，认证过程私钥不上网，安全性远高于口令认证</li><li>核心结论：用户规模小（≤100人）、局域网环境、涉及用户私有数据时，优先选公钥体系</li></ul><p><strong>对称加密分类</strong></p><ul><li>块加密（Block Cipher）：将数据切成固定大小的块逐块处理，适合中小规模数据</li><li>流加密（Stream Cipher）：逐位/逐字节与密钥流异或，适合大规模连续数据</li><li>核心结论：文件达到数百兆级别时，选流加密</li></ul><p><strong>数字信封机制</strong></p><ul><li>本质：非对称加密（保护密钥）+ 对称加密（保护数据）的组合</li><li>加密：生成临时对称密钥 → 用对称密钥加密数据 → 用接收方公钥加密对称密钥</li><li>解密：用私钥解密对称密钥 → 用对称密钥解密数据</li><li>核心结论：解决了&quot;公钥加密慢&quot;与&quot;对称密钥分发难&quot;两个矛盾</li></ul><p><strong>数据库加密方式</strong></p><ul><li>加解密API：应用程序主动调用接口，灵活但需改代码，安全职责分散</li><li>透明加密（TDE）：数据库自动完成，应用层无感知，管理员统一配置</li><li>核心结论：要求&quot;减少应用程序与安全管理负担&quot;时，选透明加密</li></ul><hr class="md-hr" /><h3 class="md-heading">三、典型题型与解题要领</h3><p><strong>题型1：方案选择对比分析题</strong>（如子题1、子题3）</p><p>解题要领：</p><ol><li>先说两种方案各自的优缺点</li><li>逐条对应题目中的需求编号</li><li>得出结论，说明选择理由</li></ol><p>答题模板：</p><p>```</p><p>方案A优点是...，缺点是...</p><p>方案B优点是...，缺点是...</p><p>结合需求（X）...，结合需求（Y）...</p><p>因此选方案B</p><p>```</p><p><strong>题型2：机制描述题</strong>（如子题2的加解密过程）</p><p>解题要领：</p><ol><li>按时间顺序分&quot;加密过程&quot;和&quot;解密过程&quot;两段</li><li>每步说清楚：用什么 → 对什么 → 得到什么</li><li>不要遗漏步骤，尤其是&quot;生成对称密钥&quot;这一步容易漏写</li></ol><p><strong>题型3：加密方式选择题</strong>（如子题2的流/块加密选择）</p><p>解题要领：</p><ol><li>先说选哪种</li><li>找题目中的关键数据（如&quot;数百兆&quot;）作为依据</li><li>解释该数据为何导致另一种方式不适用</li></ol><hr class="md-hr" /><h3 class="md-heading">四、易错点与注意事项</h3><p><strong>关于公钥认证 vs 口令认证</strong></p><ul><li>易错：只说&quot;公钥更安全&quot;，没有结合需求展开</li><li>注意：必须答出三个维度——安全性、私有数据绑定能力、性能可行性（缺一扣分）</li><li>易错：忽略&quot;私钥不在网络上传输&quot;这个关键点，这是公钥体系安全性的核心原因</li></ul><p><strong>关于流加密 vs 块加密</strong></p><ul><li>易错：认为块加密更安全就选块加密，忽略了性能需求</li><li>注意：题目给出&quot;数百兆&quot;是明确的性能信号，必须抓住并引用</li></ul><p><strong>关于数字信封</strong></p><ul><li>易错：描述加密过程时漏掉&quot;生成临时对称密钥&quot;这一步，直接说&quot;用公钥加密数据&quot;</li><li>易错：混淆加密方向——对称密钥用公钥加密（不是私钥），数据用对称密钥加密</li><li>注意：解密顺序是先解密密钥，再解密数据，顺序不能反</li></ul><p><strong>关于透明加密 vs 加解密API</strong></p><ul><li>易错：只说&quot;透明加密更方便&quot;，没有解释两者的定义</li><li>注意：题目要求&quot;用300字以内解释两种方式&quot;，必须先解释再选择，不能跳过解释直接给结论</li><li>易错：认为透明加密不支持分级密钥强度，实际上安全管理员可以按字段配置不同强度</li></ul><hr class="md-hr" /><h3 class="md-heading">五、推荐复习顺序</h3><p>```</p><p>第一步：理解非对称加密基础</p><p>公钥/私钥的关系 → 加密用公钥、签名用私钥 → 私钥不上网</p><p>（这是后续所有知识点的基础）</p><p>第二步：掌握数字信封机制</p><p>为什么需要它 → 加密过程（4步）→ 解密过程（2步）</p><p>（高频考点，必须能完整描述）</p><p>第三步：对比口令认证 vs 公钥认证</p><p>从安全性、数据绑定、性能三个维度对比</p><p>（结合具体场景分析，不要死记结论）</p><p>第四步：对比流加密 vs 块加密</p><p>记住判断依据：数据规模大 → 流加密</p><p>（简单但容易因忽略需求细节而答错）</p><p>第五步：对比透明加密 vs 加解密API</p><p>先理解两者定义，再记选择依据：减少负担 → 透明加密</p><p>（注意答题时必须先解释再选择）</p><p>```</p><hr class="md-hr" /><p><strong>一句话总结这道题的考查逻辑：</strong> 所有子题都是&quot;给你两个方案，结合具体需求说明选哪个、为什么&quot;，答题时永远要回扣需求原文，不能只讲理论。</p></div></details>
+            </article></div>
+    </section>
+
+    <section aria-label="题目列表">
+      <h2 class="section-title">📋 题目列表</h2>
+      <div id="questionsContainer"><article class='card question-card'>
+              <div class='question-header'>
+              <h3>第1题（题号：5）</h3>
+              <span class='badge'>系统安全</span>
+              
+            </div>
+            <p>阅读以下有关软件与信息安全方面的说明，在答题纸上回答问题1至问题3。
+【说明】
+某软件公司拟开发一套信息安全支撑平台，为客户的局域网业务环境提供信息安全保护。该支撑平台的主要需求如下：
+（1）为局域网业务环境提供用户身份鉴别与资源访问授权功能；
+（2）为局域网环境中交换的网络数据提供加密保护；
+（3）为服务器和终端机存储的敏感持久数据提供加密保护；
+（4）保护的主要实体对象包括局域网内交换的网络数据包、文件服务器中的敏感数据文件、数据库服务器中的敏感关系数据和终端机用户存储的敏感数据文件；
+（5）服务器中存储的敏感数据按安全管理员配置的权限访问；
+（6）业务系统生成的单个敏感数据文件可能会达到数百兆的规模；
+（7）终端机用户存储的敏感数据为用户私有；
+（8）局域网业务环境的总用户数在100人以内。</p>
+              <div class='sub-question' data-question-id="q112_0" data-correct-answers="" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  <div class='sub-question-text'><p>在确定该支撑平台所采用的用户身份鉴别机制时，王工提出采用基于口令的简单认证机制，而李工则提出采用基于公钥体系的认证机制。项目组经过讨论，确定采用基于公钥体系的机制，请结合上述需求具体分析采用李工方案的原因。</p></div>
+                  
+                  <div class="question-actions">
+                    <button class="show-answer-btn" onclick="showAnswer('q112_0')" style="display: inline-block;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>参考答案</summary><div class='markdown'><p>（1）基于口令的认证方式实现简单，但由于口令复杂度及管理方面的原因，易受到认证攻击；而在基于公钥体系的认证方式中，由于其密钥机制的复杂性，同时在认证过程中私钥不在网络上传输，因此可以有效防止认证攻击，与基于口令的认证方式相比更为安全。</p><p>（2）按照需求描述，在完成用户身份鉴别后，需依据用户身份进一步对业务数据进行安全保护，且受保护数据中包含用户私有的终端机数据文件，在基于口令的认证方式中，用户口令为用户和认证服务器共享，没有用户独有的直接秘密信息，而在基于公钥的认证方式中，可基于用户私钥对私有数据进行加密保护，实现更加简便。</p><p>（3）基于公钥体系的认证方式协议和计算更加复杂，因此其计算复杂度要高于基于口令的认证方式，但业务环境的总用户数在100人以内，用户规模不大，运行环境又为局域网环境，因此基于公钥体系的认证方式可以满足平台效率要求。</p></div></details>
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>在用户身份鉴别机制的选择上，<strong>安全性与效率的平衡</strong>是关键。<strong>口令认证</strong>的优势在于实现简单、成本低，但缺点十分突出：一方面，用户口令可能过于简单、重复使用或未及时更新，极易遭受<strong>暴力破解、字典攻击、社工攻击</strong>；另一方面，口令在传输或存储过程中若缺乏完善的加密保护，容易被窃取或伪造，从而导致身份冒充。在本案例中，用户数量虽不大，但涉及的安全对象涵盖<strong>网络数据、文件、数据库敏感字段</strong>等，一旦口令被攻破，系统将失去防护意义。</p><p>相比之下，<strong>基于公钥体系的认证机制（PKI）</strong> 依托非对称加密技术，客户端通过持有的私钥和公钥对进行认证，私钥仅保存在用户本地，从未在网络中传输，因此可以避免口令传输的脆弱性。同时，系统能够利用用户的私钥为其生成独有的签名，从而绑定用户身份与私有数据，实现<strong>身份认证与数据保护一体化</strong>。虽然其计算代价较大，但考虑到业务环境为局域网、用户规模仅100人以内，性能开销完全可接受。因此，该系统选择基于公钥体系的认证机制，能够兼顾<strong>高安全性与可行性</strong>，是更加合理的架构决策。</p></div></details>
+                </div>
+<div class='sub-question' data-question-id="q112_1" data-correct-answers="" data-is-multiple="false">
+                  <h4>子题2</h4>
+                  <div class='sub-question-text'><p>针对需求（7），项目组经过讨论，确定了基于数字信封的加密方式，其加密后的文件结构如图5-1所示。请结合需求说明对文件数据进行加密时，应采用对称加密的块加密方式还是流加密方式，为什么？并对该机制中的数据加密与解密过程进行描述。</p><p><img src="https://oss.cheko.cc/271164d42eb745583d872001e162be6a6347200ba2d551bfd887299546beac05.png" alt="#204px #180px" style="max-width: 100%; height: auto;" /></p></div>
+                  
+                  <div class="question-actions">
+                    <button class="show-answer-btn" onclick="showAnswer('q112_1')" style="display: inline-block;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>参考答案</summary><div class='markdown'><p>应采用流加密方式。因为需求中提及&quot;单个敏感数据文件可能会达到数百兆的规模&quot;，文件数据量较大，使用流加密方式可以获得更高的加解密效率。</p><p>数据加密与解密过程如下：其加密过程为：首先生成一个对称密钥，使用用户公钥加密这个对称密钥后存储在文件头，然后用生成的对称密钥加密文件数据存储。其解密过程为：用户首先使用自己的私钥解密被加密的对称密钥，再用该对称密钥解密出数据原文。</p></div></details>
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>在数据加密方式的选择上，核心考虑因素是<strong>性能与安全性</strong>。对称加密通常有两类：<strong>块加密（Block Cipher）</strong>和<strong>流加密（Stream Cipher）</strong>。块加密将数据分成固定大小的块逐一处理，适合中小规模数据的高安全性保护；流加密则将明文与伪随机密钥流逐位或逐字节异或运算，能够快速处理大规模数据文件，效率优势明显。本案例中的文件可能达到<strong>数百兆</strong>，若采用块加密，不仅需要复杂的分组和填充，还可能因文件过大造成<strong>性能下降与存储开销增加</strong>。因此，应采用流加密方式。</p><p><strong>数字信封机制</strong>结合了非对称加密与对称加密的优点。非对称加密（公钥/私钥）安全性高但效率低，适合用于密钥保护；对称加密效率高但密钥分发困难，适合用于大数据加密。在加密过程中，系统先生成一个临时对称密钥，用用户的公钥加密该密钥并放在文件头部，之后利用该对称密钥对文件数据执行流加密，从而实现<strong>高效的数据保护</strong>。在解密过程中，用户使用私钥解密文件头的对称密钥，再用该密钥解密数据正文，恢复原文。此机制确保了<strong>密钥传输的安全性与大数据处理的效率</strong>，完全契合本案例中“文件大、数据敏感”的需求。</p></div></details>
+                </div>
+<div class='sub-question' data-question-id="q112_2" data-correct-answers="" data-is-multiple="false">
+                  <h4>子题3</h4>
+                  <div class='sub-question-text'><p>对数据库服务器中的敏感关系数据进行加密保护时，客户业务系统中的敏感关系数据主要是特定数据库表中的敏感字段值，客户要求对不同程度的敏感字段采用不同强度的密钥进行防护，且加密方式应尽可能减少安全管理与应用程序的负担。目前数据库管理系统提供的基本数据加密方式主要包括加解密API和透明加密两种，请用300字以内的文字对这两种方式进行解释，并结合需求说明应采用哪种加密方式。</p></div>
+                  
+                  <div class="question-actions">
+                    <button class="show-answer-btn" onclick="showAnswer('q112_2')" style="display: inline-block;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>参考答案</summary><div class='markdown'><p>数据库管理系统提供的基本数据加密支持主要有两种方式：一是加解密API，允许应用程序通过调用API自行构建加密基础架构；二是透明加密，由安全管理员选择加密方式和密钥强度，数据库系统自动处理数据的加密和解密。加解密API方式灵活但复杂，透明加密方式简单但灵活性较差。考虑到用户要求减少安全管理与应用程序负担，建议选择透明加密方式。</p></div></details>
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>在数据库加密方案设计中，选择合适的方式关系到<strong>性能、开发成本和安全保障</strong>。<strong>加解密API</strong> 是数据库提供的编程接口，允许应用系统在读写敏感数据时主动调用API完成加密和解密。其优势在于灵活，开发者可以根据业务需求为不同字段定义加密方式和密钥强度。但它的劣势同样明显：需要修改应用程序代码，增加开发与维护成本；并且加密逻辑嵌入在应用层，可能导致<strong>安全职责分散</strong>，不利于集中管理。</p><p><strong>透明加密（Transparent Data Encryption, TDE）</strong> 由数据库管理系统自动完成加解密工作，应用程序看到的依然是明文数据，所有加密逻辑都在数据库内部完成。安全管理员可通过策略配置为不同字段、表或库设置不同强度的加密方式与密钥，而应用层无需做任何改动。这种方式大幅降低了<strong>开发人员负担和安全管理复杂性</strong>。结合本案例的需求：客户要求对不同敏感字段采用不同强度的密钥，并且“尽可能减少安全管理与应用程序负担”。显然，透明加密能够很好满足要求，在提供分级加密能力的同时，也避免了应用系统的大规模改造。因此，本系统应采用透明加密方案，确保在<strong>安全性、易用性和可维护性</strong>之间取得最佳平衡。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📒 系统安全 · 精华笔记</h2><h3 class="md-heading">2013年11月真题·第5题</h3><hr class="md-hr" /><h3 class="md-heading">🔑 核心概念速记表</h3><p>&gt; 原则：<strong>看名字就知道意思</strong>，不用专业词解释专业词</p><table><thead><tr><th style='text-align: left'>概念</th><th style='text-align: left'>白话解释</th><th style='text-align: left'>顾名思义记忆法</th></tr></thead><tbody><tr><td style='text-align: left'>口令认证</td><td style='text-align: left'>就是用户名+密码登录，服务器存着你的密码，登录时比对</td><td style='text-align: left'>&quot;口令&quot; = 嘴巴说出来的暗号，说对了就放行</td></tr><tr><td style='text-align: left'>公钥体系认证</td><td style='text-align: left'>你有一把私钥（只有你有），服务器有你的公钥，用数学方法证明&quot;这个人是本人&quot;</td><td style='text-align: left'>&quot;公钥&quot; = 公开的锁，&quot;私钥&quot; = 只有你有的钥匙</td></tr><tr><td style='text-align: left'>数字信封</td><td style='text-align: left'>先用高效方式锁住数据，再用安全方式锁住那把锁的钥匙，两层保护</td><td style='text-align: left'>像信封：内容装在里面，信封口用蜡封住</td></tr><tr><td style='text-align: left'>块加密</td><td style='text-align: left'>把数据切成一块一块（比如每块128位），一块一块地加密</td><td style='text-align: left'>&quot;块&quot; = 切块处理，像切豆腐</td></tr><tr><td style='text-align: left'>流加密</td><td style='text-align: left'>数据像水流一样边流边加密，不用切块</td><td style='text-align: left'>&quot;流&quot; = 流水处理，像流水线</td></tr><tr><td style='text-align: left'>加解密API</td><td style='text-align: left'>数据库提供工具函数，程序员自己在代码里调用来加密</td><td style='text-align: left'>&quot;API&quot; = 工具箱，程序员自己动手用</td></tr><tr><td style='text-align: left'>透明加密</td><td style='text-align: left'>数据库自动加密，程序员和用户感觉不到，看到的还是正常数据</td><td style='text-align: left'>&quot;透明&quot; = 看不见摸不着，自动在背后干活</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">📌 子题1：为什么选公钥体系，不选口令？</h3><h4 class="md-heading">三个理由（考试答3点）</h4><p>```</p><p>理由1：安全性</p><p>┌─────────────────────────────────────────────────────┐</p><p>│  口令认证                    公钥体系认证             │</p><p>│  ──────────                  ──────────              │</p><p>│  密码在网络上传输  ❌         私钥从不上网  ✅        │</p><p>│  容易被猜、被偷   ❌         数学上极难破解 ✅        │</p><p>│  简单密码=直接完蛋 ❌        复杂度由算法保证 ✅      │</p><p>└─────────────────────────────────────────────────────┘</p><p>理由2：需求匹配（终端机用户私有数据）</p><p>┌─────────────────────────────────────────────────────┐</p><p>│  需求7：终端机用户数据是&quot;用户私有&quot;                   │</p><p>│                                                     │</p><p>│  口令认证：密码是你和服务器共享的，不是你独有的      │</p><p>│           → 无法用密码来&quot;绑定&quot;你的私有数据  ❌      │</p><p>│                                                     │</p><p>│  公钥体系：私钥只有你一个人有                        │</p><p>│           → 可以用私钥加密你的私有文件  ✅           │</p><p>│           → 身份认证 + 数据保护 一步到位             │</p><p>└─────────────────────────────────────────────────────┘</p><p>理由3：性能够用（不用担心太慢）</p><p>┌─────────────────────────────────────────────────────┐</p><p>│  公钥体系确实比口令认证计算量大（慢一点）            │</p><p>│  BUT：                                              │</p><p>│  • 用户总数 ≤ 100人  → 规模很小                     │</p><p>│  • 局域网环境        → 网速快、延迟低                │</p><p>│  结论：慢一点完全可以接受  ✅                        │</p><p>└─────────────────────────────────────────────────────┘</p><p>```</p><h4 class="md-heading">🧠 记忆口诀</h4><p>&gt; <strong>&quot;口令三怕：怕猜、怕偷、怕共享；公钥三好：不上网、能绑身份、百人够用&quot;</strong></p><hr class="md-hr" /><h3 class="md-heading">📌 子题2：流加密 vs 块加密，数字信封怎么用？</h3><h4 class="md-heading">第一问：选流加密，为什么？</h4><p>```</p><p>关键需求：单个文件可能达到数百兆</p><p>块加密                          流加密</p><p>──────                          ──────</p><p>切块 → 每块单独处理             数据像水流，边来边加密</p><p>文件越大，切的块越多            不用切块，直接处理</p><p>数百兆 = 切几百万块  ❌         数百兆 = 流过去就完了  ✅</p><p>效率低、开销大                  效率高、速度快</p><p>结论：文件大 → 选流加密</p><p>```</p><h4 class="md-heading">第二问：数字信封的加密/解密过程</h4><p>```</p><p>【加密过程】</p><p>原始文件数据</p><p>│</p><p>▼</p><p>①生成一个临时对称密钥（随机生成，用完即弃）</p><p>│</p><p>├──→ ②用对称密钥 加密文件数据 ──→ 加密后的数据（存文件体）</p><p>│</p><p>└──→ ③用用户公钥 加密对称密钥 ──→ 加密后的密钥（存文件头）</p><p>最终文件结构：</p><p>┌──────────────────────────────────┐</p><p>│  文件头：被公钥加密的对称密钥    │</p><p>├──────────────────────────────────┤</p><p>│  文件体：被对称密钥加密的数据    │</p><p>└──────────────────────────────────┘</p><p>【解密过程】</p><p>①用户用自己的私钥 → 解密文件头 → 拿到对称密钥</p><p>②用对称密钥 → 解密文件体 → 拿到原始数据</p><p>```</p><h4 class="md-heading">🧠 为什么要这样设计？（理解才能记住）</h4><p>```</p><p>问题：为什么不直接用公钥加密数据？</p><p>答：公钥加密很慢，数百兆数据直接用公钥加密 = 龟速</p><p>解决思路：</p><p>公钥加密  → 安全但慢  → 只用来加密&quot;钥匙&quot;（很小）</p><p>对称加密  → 快但密钥难传递 → 用来加密&quot;数据&quot;（很大）</p><p>两者结合 = 数字信封 = 又快又安全</p><p>```</p><h4 class="md-heading">🧠 记忆口诀</h4><p>&gt; <strong>&quot;信封装信：信（数据）用快锁锁，锁的钥匙用保险箱（公钥）锁&quot;</strong></p><hr class="md-hr" /><h3 class="md-heading">📌 子题3：加解密API vs 透明加密，选哪个？</h3><h4 class="md-heading">两种方式对比</h4><p>```</p><p>加解密API（程序员自己动手型）</p><p>┌────────────────────────────────────────────┐</p><p>│  数据库给你工具函数                         │</p><p>│  程序员在代码里写：encrypt(数据, 密钥)      │</p><p>│                                            │</p><p>│  优点：想怎么加就怎么加，非常灵活           │</p><p>│  缺点：                                    │</p><p>│    • 每个地方都要改代码  ❌                 │</p><p>│    • 加密逻辑散落在各处，难管理  ❌         │</p><p>│    • 程序员负担重  ❌                       │</p><p>└────────────────────────────────────────────┘</p><p>透明加密（数据库自动干活型）</p><p>┌────────────────────────────────────────────┐</p><p>│  安全管理员在数据库里配置：                 │</p><p>│    &quot;这个字段用强密钥，那个字段用弱密钥&quot;     │</p><p>│  数据库自动加密/解密，程序员完全感知不到    │</p><p>│                                            │</p><p>│  优点：                                    │</p><p>│    • 程序代码不用改  ✅                     │</p><p>│    • 统一管理，安全管理员一个地方配置  ✅   │</p><p>│    • 负担小  ✅                             │</p><p>│  缺点：灵活性稍差（但本题不需要那么灵活）   │</p><p>└────────────────────────────────────────────┘</p><p>```</p><h4 class="md-heading">结合需求，选透明加密</h4><p>```</p><p>需求说：</p><p>✓ 不同敏感程度用不同强度密钥  → 透明加密支持按字段配置  ✅</p><p>✓ 尽可能减少安全管理负担      → 透明加密统一配置  ✅</p><p>✓ 尽可能减少应用程序负担      → 透明加密不用改代码  ✅</p><p>结论：选透明加密</p><p>```</p><h4 class="md-heading">🧠 记忆口诀</h4><p>&gt; <strong>&quot;透明 = 看不见 = 自动干活 = 省心省力；API = 工具箱 = 自己动手 = 灵活但累&quot;</strong></p><hr class="md-hr" /><h3 class="md-heading">🎯 考试复习到什么程度就够了</h3><table><thead><tr><th style='text-align: left'>知识点</th><th style='text-align: left'>需要掌握的程度</th></tr></thead><tbody><tr><td style='text-align: left'>口令认证 vs 公钥认证</td><td style='text-align: left'>能说出3个选公钥的理由（安全性、私有数据绑定、性能够用）</td></tr><tr><td style='text-align: left'>块加密 vs 流加密</td><td style='text-align: left'>记住：<strong>大文件选流加密</strong>，理由是效率高</td></tr><tr><td style='text-align: left'>数字信封</td><td style='text-align: left'>能画出或描述加密/解密的完整步骤（4步）</td></tr><tr><td style='text-align: left'>加解密API vs 透明加密</td><td style='text-align: left'>能解释两者区别，并根据&quot;减少负担&quot;的需求选透明加密</td></tr><tr><td style='text-align: left'>公钥/私钥概念</td><td style='text-align: left'>理解：公钥公开、私钥自己留、私钥不上网</td></tr></tbody></table><p>&gt; 这道题是<strong>论述分析题</strong>，不需要背公式，重点是<strong>能用自己的话把理由说清楚</strong>，答题时对应需求编号来写，条理清晰即可得满分。</p><hr class="md-hr" /><h3 class="md-heading">🔁 最终总复习口诀</h3><p>```</p><p>身份认证选公钥：不上网、能绑私有数据、百人够用</p><p>大文件加密选流：像流水，不切块，数百兆也不怕</p><p>数字信封两把锁：数据用对称锁，对称密钥用公钥锁</p><p>数据库加密选透明：自动干活不改代码，管理员一处配置省心省力</p><p>```</p></div></details>
+            </article></div>
+    </section>
+  </main>
+  <script>
+    const DATA = {"meta": {"paper_name": "2013年11月系统架构真题", "subject": 0, "type": 1, "item_count": 1}, "questions": [{"id": 112, "index": 1, "sort": 5, "knowledge_point": "系统安全", "prompt": "阅读以下有关软件与信息安全方面的说明，在答题纸上回答问题1至问题3。\n【说明】\n某软件公司拟开发一套信息安全支撑平台，为客户的局域网业务环境提供信息安全保护。该支撑平台的主要需求如下：\n（1）为局域网业务环境提供用户身份鉴别与资源访问授权功能；\n（2）为局域网环境中交换的网络数据提供加密保护；\n（3）为服务器和终端机存储的敏感持久数据提供加密保护；\n（4）保护的主要实体对象包括局域网内交换的网络数据包、文件服务器中的敏感数据文件、数据库服务器中的敏感关系数据和终端机用户存储的敏感数据文件；\n（5）服务器中存储的敏感数据按安全管理员配置的权限访问；\n（6）业务系统生成的单个敏感数据文件可能会达到数百兆的规模；\n（7）终端机用户存储的敏感数据为用户私有；\n（8）局域网业务环境的总用户数在100人以内。", "difficulty": null, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "question": "在确定该支撑平台所采用的用户身份鉴别机制时，王工提出采用基于口令的简单认证机制，而李工则提出采用基于公钥体系的认证机制。项目组经过讨论，确定采用基于公钥体系的机制，请结合上述需求具体分析采用李工方案的原因。", "correct_answer": "（1）基于口令的认证方式实现简单，但由于口令复杂度及管理方面的原因，易受到认证攻击；而在基于公钥体系的认证方式中，由于其密钥机制的复杂性，同时在认证过程中私钥不在网络上传输，因此可以有效防止认证攻击，与基于口令的认证方式相比更为安全。\n（2）按照需求描述，在完成用户身份鉴别后，需依据用户身份进一步对业务数据进行安全保护，且受保护数据中包含用户私有的终端机数据文件，在基于口令的认证方式中，用户口令为用户和认证服务器共享，没有用户独有的直接秘密信息，而在基于公钥的认证方式中，可基于用户私钥对私有数据进行加密保护，实现更加简便。\n（3）基于公钥体系的认证方式协议和计算更加复杂，因此其计算复杂度要高于基于口令的认证方式，但业务环境的总用户数在100人以内，用户规模不大，运行环境又为局域网环境，因此基于公钥体系的认证方式可以满足平台效率要求。", "options": [], "correct_letters": [], "correct_texts": [], "official_analysis": "在用户身份鉴别机制的选择上，**安全性与效率的平衡**是关键。**口令认证**的优势在于实现简单、成本低，但缺点十分突出：一方面，用户口令可能过于简单、重复使用或未及时更新，极易遭受**暴力破解、字典攻击、社工攻击**；另一方面，口令在传输或存储过程中若缺乏完善的加密保护，容易被窃取或伪造，从而导致身份冒充。在本案例中，用户数量虽不大，但涉及的安全对象涵盖**网络数据、文件、数据库敏感字段**等，一旦口令被攻破，系统将失去防护意义。\n\n相比之下，**基于公钥体系的认证机制（PKI）** 依托非对称加密技术，客户端通过持有的私钥和公钥对进行认证，私钥仅保存在用户本地，从未在网络中传输，因此可以避免口令传输的脆弱性。同时，系统能够利用用户的私钥为其生成独有的签名，从而绑定用户身份与私有数据，实现**身份认证与数据保护一体化**。虽然其计算代价较大，但考虑到业务环境为局域网、用户规模仅100人以内，性能开销完全可接受。因此，该系统选择基于公钥体系的认证机制，能够兼顾**高安全性与可行性**，是更加合理的架构决策。"}, {"label": "2", "question": "针对需求（7），项目组经过讨论，确定了基于数字信封的加密方式，其加密后的文件结构如图5-1所示。请结合需求说明对文件数据进行加密时，应采用对称加密的块加密方式还是流加密方式，为什么？并对该机制中的数据加密与解密过程进行描述。\n![#204px #180px](https://oss.cheko.cc/271164d42eb745583d872001e162be6a6347200ba2d551bfd887299546beac05.png)", "correct_answer": "应采用流加密方式。因为需求中提及\"单个敏感数据文件可能会达到数百兆的规模\"，文件数据量较大，使用流加密方式可以获得更高的加解密效率。\n数据加密与解密过程如下：其加密过程为：首先生成一个对称密钥，使用用户公钥加密这个对称密钥后存储在文件头，然后用生成的对称密钥加密文件数据存储。其解密过程为：用户首先使用自己的私钥解密被加密的对称密钥，再用该对称密钥解密出数据原文。", "options": [], "correct_letters": [], "correct_texts": [], "official_analysis": "在数据加密方式的选择上，核心考虑因素是**性能与安全性**。对称加密通常有两类：**块加密（Block Cipher）**和**流加密（Stream Cipher）**。块加密将数据分成固定大小的块逐一处理，适合中小规模数据的高安全性保护；流加密则将明文与伪随机密钥流逐位或逐字节异或运算，能够快速处理大规模数据文件，效率优势明显。本案例中的文件可能达到**数百兆**，若采用块加密，不仅需要复杂的分组和填充，还可能因文件过大造成**性能下降与存储开销增加**。因此，应采用流加密方式。\n\n**数字信封机制**结合了非对称加密与对称加密的优点。非对称加密（公钥/私钥）安全性高但效率低，适合用于密钥保护；对称加密效率高但密钥分发困难，适合用于大数据加密。在加密过程中，系统先生成一个临时对称密钥，用用户的公钥加密该密钥并放在文件头部，之后利用该对称密钥对文件数据执行流加密，从而实现**高效的数据保护**。在解密过程中，用户使用私钥解密文件头的对称密钥，再用该密钥解密数据正文，恢复原文。此机制确保了**密钥传输的安全性与大数据处理的效率**，完全契合本案例中“文件大、数据敏感”的需求。"}, {"label": "3", "question": "对数据库服务器中的敏感关系数据进行加密保护时，客户业务系统中的敏感关系数据主要是特定数据库表中的敏感字段值，客户要求对不同程度的敏感字段采用不同强度的密钥进行防护，且加密方式应尽可能减少安全管理与应用程序的负担。目前数据库管理系统提供的基本数据加密方式主要包括加解密API和透明加密两种，请用300字以内的文字对这两种方式进行解释，并结合需求说明应采用哪种加密方式。", "correct_answer": "数据库管理系统提供的基本数据加密支持主要有两种方式：一是加解密API，允许应用程序通过调用API自行构建加密基础架构；二是透明加密，由安全管理员选择加密方式和密钥强度，数据库系统自动处理数据的加密和解密。加解密API方式灵活但复杂，透明加密方式简单但灵活性较差。考虑到用户要求减少安全管理与应用程序负担，建议选择透明加密方式。", "options": [], "correct_letters": [], "correct_texts": [], "official_analysis": "在数据库加密方案设计中，选择合适的方式关系到**性能、开发成本和安全保障**。**加解密API** 是数据库提供的编程接口，允许应用系统在读写敏感数据时主动调用API完成加密和解密。其优势在于灵活，开发者可以根据业务需求为不同字段定义加密方式和密钥强度。但它的劣势同样明显：需要修改应用程序代码，增加开发与维护成本；并且加密逻辑嵌入在应用层，可能导致**安全职责分散**，不利于集中管理。\n\n**透明加密（Transparent Data Encryption, TDE）** 由数据库管理系统自动完成加解密工作，应用程序看到的依然是明文数据，所有加密逻辑都在数据库内部完成。安全管理员可通过策略配置为不同字段、表或库设置不同强度的加密方式与密钥，而应用层无需做任何改动。这种方式大幅降低了**开发人员负担和安全管理复杂性**。结合本案例的需求：客户要求对不同敏感字段采用不同强度的密钥，并且“尽可能减少安全管理与应用程序负担”。显然，透明加密能够很好满足要求，在提供分级加密能力的同时，也避免了应用系统的大规模改造。因此，本系统应采用透明加密方案，确保在**安全性、易用性和可维护性**之间取得最佳平衡。"}], "model_response": "# 📒 系统安全 · 精华笔记\n## 2013年11月真题·第5题\n\n---\n\n## 🔑 核心概念速记表\n\n> 原则：**看名字就知道意思**，不用专业词解释专业词\n\n| 概念 | 白话解释 | 顾名思义记忆法 |\n|------|----------|----------------|\n| 口令认证 | 就是用户名+密码登录，服务器存着你的密码，登录时比对 | \"口令\" = 嘴巴说出来的暗号，说对了就放行 |\n| 公钥体系认证 | 你有一把私钥（只有你有），服务器有你的公钥，用数学方法证明\"这个人是本人\" | \"公钥\" = 公开的锁，\"私钥\" = 只有你有的钥匙 |\n| 数字信封 | 先用高效方式锁住数据，再用安全方式锁住那把锁的钥匙，两层保护 | 像信封：内容装在里面，信封口用蜡封住 |\n| 块加密 | 把数据切成一块一块（比如每块128位），一块一块地加密 | \"块\" = 切块处理，像切豆腐 |\n| 流加密 | 数据像水流一样边流边加密，不用切块 | \"流\" = 流水处理，像流水线 |\n| 加解密API | 数据库提供工具函数，程序员自己在代码里调用来加密 | \"API\" = 工具箱，程序员自己动手用 |\n| 透明加密 | 数据库自动加密，程序员和用户感觉不到，看到的还是正常数据 | \"透明\" = 看不见摸不着，自动在背后干活 |\n\n---\n\n## 📌 子题1：为什么选公钥体系，不选口令？\n\n### 三个理由（考试答3点）\n\n```\n理由1：安全性\n┌─────────────────────────────────────────────────────┐\n│  口令认证                    公钥体系认证             │\n│  ──────────                  ──────────              │\n│  密码在网络上传输  ❌         私钥从不上网  ✅        │\n│  容易被猜、被偷   ❌         数学上极难破解 ✅        │\n│  简单密码=直接完蛋 ❌        复杂度由算法保证 ✅      │\n└─────────────────────────────────────────────────────┘\n\n理由2：需求匹配（终端机用户私有数据）\n┌─────────────────────────────────────────────────────┐\n│  需求7：终端机用户数据是\"用户私有\"                   │\n│                                                     │\n│  口令认证：密码是你和服务器共享的，不是你独有的      │\n│           → 无法用密码来\"绑定\"你的私有数据  ❌      │\n│                                                     │\n│  公钥体系：私钥只有你一个人有                        │\n│           → 可以用私钥加密你的私有文件  ✅           │\n│           → 身份认证 + 数据保护 一步到位             │\n└─────────────────────────────────────────────────────┘\n\n理由3：性能够用（不用担心太慢）\n┌─────────────────────────────────────────────────────┐\n│  公钥体系确实比口令认证计算量大（慢一点）            │\n│  BUT：                                              │\n│  • 用户总数 ≤ 100人  → 规模很小                     │\n│  • 局域网环境        → 网速快、延迟低                │\n│  结论：慢一点完全可以接受  ✅                        │\n└─────────────────────────────────────────────────────┘\n```\n\n### 🧠 记忆口诀\n> **\"口令三怕：怕猜、怕偷、怕共享；公钥三好：不上网、能绑身份、百人够用\"**\n\n---\n\n## 📌 子题2：流加密 vs 块加密，数字信封怎么用？\n\n### 第一问：选流加密，为什么？\n\n```\n关键需求：单个文件可能达到数百兆\n\n块加密                          流加密\n──────                          ──────\n切块 → 每块单独处理             数据像水流，边来边加密\n文件越大，切的块越多            不用切块，直接处理\n数百兆 = 切几百万块  ❌         数百兆 = 流过去就完了  ✅\n效率低、开销大                  效率高、速度快\n\n结论：文件大 → 选流加密\n```\n\n### 第二问：数字信封的加密/解密过程\n\n```\n【加密过程】\n                                        \n  原始文件数据                          \n      │                                 \n      ▼                                 \n  ①生成一个临时对称密钥（随机生成，用完即弃）\n      │                                 \n      ├──→ ②用对称密钥 加密文件数据 ──→ 加密后的数据（存文件体）\n      │                                 \n      └──→ ③用用户公钥 加密对称密钥 ──→ 加密后的密钥（存文件头）\n                                        \n  最终文件结构：\n  ┌──────────────────────────────────┐\n  │  文件头：被公钥加密的对称密钥    │\n  ├──────────────────────────────────┤\n  │  文件体：被对称密钥加密的数据    │\n  └──────────────────────────────────┘\n\n【解密过程】\n\n  ①用户用自己的私钥 → 解密文件头 → 拿到对称密钥\n  ②用对称密钥 → 解密文件体 → 拿到原始数据\n```\n\n### 🧠 为什么要这样设计？（理解才能记住）\n\n```\n问题：为什么不直接用公钥加密数据？\n答：公钥加密很慢，数百兆数据直接用公钥加密 = 龟速\n\n解决思路：\n  公钥加密  → 安全但慢  → 只用来加密\"钥匙\"（很小）\n  对称加密  → 快但密钥难传递 → 用来加密\"数据\"（很大）\n  \n  两者结合 = 数字信封 = 又快又安全\n```\n\n### 🧠 记忆口诀\n> **\"信封装信：信（数据）用快锁锁，锁的钥匙用保险箱（公钥）锁\"**\n\n---\n\n## 📌 子题3：加解密API vs 透明加密，选哪个？\n\n### 两种方式对比\n\n```\n加解密API（程序员自己动手型）\n┌────────────────────────────────────────────┐\n│  数据库给你工具函数                         │\n│  程序员在代码里写：encrypt(数据, 密钥)      │\n│                                            │\n│  优点：想怎么加就怎么加，非常灵活           │\n│  缺点：                                    │\n│    • 每个地方都要改代码  ❌                 │\n│    • 加密逻辑散落在各处，难管理  ❌         │\n│    • 程序员负担重  ❌                       │\n└────────────────────────────────────────────┘\n\n透明加密（数据库自动干活型）\n┌────────────────────────────────────────────┐\n│  安全管理员在数据库里配置：                 │\n│    \"这个字段用强密钥，那个字段用弱密钥\"     │\n│  数据库自动加密/解密，程序员完全感知不到    │\n│                                            │\n│  优点：                                    │\n│    • 程序代码不用改  ✅                     │\n│    • 统一管理，安全管理员一个地方配置  ✅   │\n│    • 负担小  ✅                             │\n│  缺点：灵活性稍差（但本题不需要那么灵活）   │\n└────────────────────────────────────────────┘\n```\n\n### 结合需求，选透明加密\n\n```\n需求说：\n  ✓ 不同敏感程度用不同强度密钥  → 透明加密支持按字段配置  ✅\n  ✓ 尽可能减少安全管理负担      → 透明加密统一配置  ✅\n  ✓ 尽可能减少应用程序负担      → 透明加密不用改代码  ✅\n\n结论：选透明加密\n```\n\n### 🧠 记忆口诀\n> **\"透明 = 看不见 = 自动干活 = 省心省力；API = 工具箱 = 自己动手 = 灵活但累\"**\n\n---\n\n## 🎯 考试复习到什么程度就够了\n\n| 知识点 | 需要掌握的程度 |\n|--------|---------------|\n| 口令认证 vs 公钥认证 | 能说出3个选公钥的理由（安全性、私有数据绑定、性能够用） |\n| 块加密 vs 流加密 | 记住：**大文件选流加密**，理由是效率高 |\n| 数字信封 | 能画出或描述加密/解密的完整步骤（4步） |\n| 加解密API vs 透明加密 | 能解释两者区别，并根据\"减少负担\"的需求选透明加密 |\n| 公钥/私钥概念 | 理解：公钥公开、私钥自己留、私钥不上网 |\n\n> 这道题是**论述分析题**，不需要背公式，重点是**能用自己的话把理由说清楚**，答题时对应需求编号来写，条理清晰即可得满分。\n\n---\n\n## 🔁 最终总复习口诀\n\n```\n身份认证选公钥：不上网、能绑私有数据、百人够用\n大文件加密选流：像流水，不切块，数百兆也不怕\n数字信封两把锁：数据用对称锁，对称密钥用公钥锁\n数据库加密选透明：自动干活不改代码，管理员一处配置省心省力\n```"}], "knowledge_points": [{"name": "系统安全", "related_questions": ["112"], "summary_markdown": "# 系统安全知识点结构化要点清单\n\n---\n\n## 一、知识点名称\n\n**信息系统安全机制设计**（身份认证、数据加密、数据库加密）\n\n---\n\n## 二、核心定义与结论\n\n**身份认证机制**\n\n- 口令认证：用户名+密码，口令在网络传输，服务器端存储，双方共享\n- 公钥体系认证（PKI）：基于非对称加密，私钥仅存于用户本地，认证过程私钥不上网，安全性远高于口令认证\n- 核心结论：用户规模小（≤100人）、局域网环境、涉及用户私有数据时，优先选公钥体系\n\n**对称加密分类**\n\n- 块加密（Block Cipher）：将数据切成固定大小的块逐块处理，适合中小规模数据\n- 流加密（Stream Cipher）：逐位/逐字节与密钥流异或，适合大规模连续数据\n- 核心结论：文件达到数百兆级别时，选流加密\n\n**数字信封机制**\n\n- 本质：非对称加密（保护密钥）+ 对称加密（保护数据）的组合\n- 加密：生成临时对称密钥 → 用对称密钥加密数据 → 用接收方公钥加密对称密钥\n- 解密：用私钥解密对称密钥 → 用对称密钥解密数据\n- 核心结论：解决了\"公钥加密慢\"与\"对称密钥分发难\"两个矛盾\n\n**数据库加密方式**\n\n- 加解密API：应用程序主动调用接口，灵活但需改代码，安全职责分散\n- 透明加密（TDE）：数据库自动完成，应用层无感知，管理员统一配置\n- 核心结论：要求\"减少应用程序与安全管理负担\"时，选透明加密\n\n---\n\n## 三、典型题型与解题要领\n\n**题型1：方案选择对比分析题**（如子题1、子题3）\n\n解题要领：\n1. 先说两种方案各自的优缺点\n2. 逐条对应题目中的需求编号\n3. 得出结论，说明选择理由\n\n答题模板：\n```\n方案A优点是...，缺点是...\n方案B优点是...，缺点是...\n结合需求（X）...，结合需求（Y）...\n因此选方案B\n```\n\n**题型2：机制描述题**（如子题2的加解密过程）\n\n解题要领：\n1. 按时间顺序分\"加密过程\"和\"解密过程\"两段\n2. 每步说清楚：用什么 → 对什么 → 得到什么\n3. 不要遗漏步骤，尤其是\"生成对称密钥\"这一步容易漏写\n\n**题型3：加密方式选择题**（如子题2的流/块加密选择）\n\n解题要领：\n1. 先说选哪种\n2. 找题目中的关键数据（如\"数百兆\"）作为依据\n3. 解释该数据为何导致另一种方式不适用\n\n---\n\n## 四、易错点与注意事项\n\n**关于公钥认证 vs 口令认证**\n\n- 易错：只说\"公钥更安全\"，没有结合需求展开\n- 注意：必须答出三个维度——安全性、私有数据绑定能力、性能可行性（缺一扣分）\n- 易错：忽略\"私钥不在网络上传输\"这个关键点，这是公钥体系安全性的核心原因\n\n**关于流加密 vs 块加密**\n\n- 易错：认为块加密更安全就选块加密，忽略了性能需求\n- 注意：题目给出\"数百兆\"是明确的性能信号，必须抓住并引用\n\n**关于数字信封**\n\n- 易错：描述加密过程时漏掉\"生成临时对称密钥\"这一步，直接说\"用公钥加密数据\"\n- 易错：混淆加密方向——对称密钥用公钥加密（不是私钥），数据用对称密钥加密\n- 注意：解密顺序是先解密密钥，再解密数据，顺序不能反\n\n**关于透明加密 vs 加解密API**\n\n- 易错：只说\"透明加密更方便\"，没有解释两者的定义\n- 注意：题目要求\"用300字以内解释两种方式\"，必须先解释再选择，不能跳过解释直接给结论\n- 易错：认为透明加密不支持分级密钥强度，实际上安全管理员可以按字段配置不同强度\n\n---\n\n## 五、推荐复习顺序\n\n```\n第一步：理解非对称加密基础\n  公钥/私钥的关系 → 加密用公钥、签名用私钥 → 私钥不上网\n  （这是后续所有知识点的基础）\n\n第二步：掌握数字信封机制\n  为什么需要它 → 加密过程（4步）→ 解密过程（2步）\n  （高频考点，必须能完整描述）\n\n第三步：对比口令认证 vs 公钥认证\n  从安全性、数据绑定、性能三个维度对比\n  （结合具体场景分析，不要死记结论）\n\n第四步：对比流加密 vs 块加密\n  记住判断依据：数据规模大 → 流加密\n  （简单但容易因忽略需求细节而答错）\n\n第五步：对比透明加密 vs 加解密API\n  先理解两者定义，再记选择依据：减少负担 → 透明加密\n  （注意答题时必须先解释再选择）\n```\n\n---\n\n**一句话总结这道题的考查逻辑：** 所有子题都是\"给你两个方案，结合具体需求说明选哪个、为什么\"，答题时永远要回扣需求原文，不能只讲理论。"}], "generated_at": "2026-02-25 10:00:58"};
+
+    // ===== Theme toggle =====
+    (function() {
+      const THEME_KEY = 'quiz_theme';
+      const root = document.documentElement;
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved) root.setAttribute('data-theme', saved);
+      function updateBtn() {
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        const isLight = root.getAttribute('data-theme') === 'light';
+        btn.textContent = isLight ? '🌙 暗色' : '☀️ 亮色';
+        btn.setAttribute('aria-label', isLight ? '切换到暗色模式' : '切换到亮色模式');
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        updateBtn();
+        document.getElementById('themeToggle').addEventListener('click', () => {
+          const isLight = root.getAttribute('data-theme') === 'light';
+          const next = isLight ? 'dark' : 'light';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem(THEME_KEY, next);
+          updateBtn();
+        });
+      });
+    })();
+
+    function renderBasicMarkdown(raw = '') {
+      if (!raw) return '<p>（尚未生成，稍后重试）</p>';
+      const normalized = raw.split('\r\n').join('\n').split('\r').join('\n');
+      const lines = normalized.split('\n');
+      const htmlParts = [];
+      let inUl = false;
+      let inOl = false;
+      const closeLists = () => {
+        if (inUl) { htmlParts.push('</ul>'); inUl = false; }
+        if (inOl) { htmlParts.push('</ol>'); inOl = false; }
+      };
+      const formatInline = (text) => {
+        const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return escaped
+          .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;" />')
+          .replace(/!(https?:\/\/[^\s<>"'\[\]]+(?:\.[a-zA-Z]{2,}|\/[^\s<>"'\[\]]*)?)/g, '<img src="$1" alt="图片" style="max-width: 100%; height: auto;" />')
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/__(.+?)__/g, '<strong>$1</strong>')
+          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+          .replace(/(?<!_)_(?!_)(.+?)(?<!_)_(?!_)/g, '<em>$1</em>');
+      };
+      const renderTable = (rows) => {
+        if (!rows.length) return '';
+        const splitRow = (row) => row.replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => formatInline(cell.trim()));
+        const headerCells = splitRow(rows[0]);
+        let alignments = Array(headerCells.length).fill('left');
+        let bodyRows = rows.slice(1);
+        if (bodyRows.length) {
+          const alignParts = bodyRows[0].replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
+          const isDivider = alignParts.length === headerCells.length && alignParts.every((cell) => /^:?-{3,}:?$/.test(cell));
+          if (isDivider) {
+            alignments = alignParts.map((cell) => {
+              const left = cell.startsWith(':');
+              const right = cell.endsWith(':');
+              if (left && right) return 'center';
+              if (right) return 'right';
+              return 'left';
+            });
+            bodyRows = bodyRows.slice(1);
+          }
+        }
+        const headerHtml = '<tr>' + headerCells.map((cell, idx) => `<th style="text-align: ${alignments[idx] || 'left'}">${cell}</th>`).join('') + '</tr>';
+        const bodyHtml = bodyRows.map((row) => {
+          const cells = splitRow(row);
+          return '<tr>' + cells.map((cell, idx) => `<td style="text-align: ${alignments[idx] || 'left'}">${cell}</td>`).join('') + '</tr>';
+        }).join('');
+        const filler = '<tr>' + headerCells.map((_, idx) => `<td style="text-align: ${alignments[idx] || 'left'}">&nbsp;</td>`).join('') + '</tr>';
+        return `<table><thead>${headerHtml}</thead><tbody>${bodyHtml || filler}</tbody></table>`;
+      };
+      for (let i = 0; i < lines.length; i += 1) {
+        const trimmed = lines[i].trim();
+        if (!trimmed) { closeLists(); continue; }
+        const headingMatch = trimmed.match(/^(#(1, 4))\s+(.+)$/);
+        if (headingMatch) {
+          closeLists();
+          const level = headingMatch[1].length + 1; // h2-h5 (h1 reserved for page)
+          const tag = 'h' + Math.min(level, 5);
+          htmlParts.push(`<${tag} class="md-heading">${formatInline(headingMatch[2])}</${tag}>`);
+          continue;
+        }
+        if (trimmed === '---' || trimmed === '***' || trimmed === '___') {
+          closeLists();
+          htmlParts.push('<hr class="md-hr" />');
+          continue;
+        }
+        if (/^\|.+\|$/.test(trimmed)) {
+          closeLists();
+          const tableRows = [];
+          let j = i;
+          while (j < lines.length && /^\|.+\|$/.test(lines[j].trim())) {
+            tableRows.push(lines[j].trim());
+            j += 1;
+          }
+          if (tableRows.length) { htmlParts.push(renderTable(tableRows)); }
+          i = j - 1;
+          continue;
+        }
+        if (/^\d+\.\s+/.test(trimmed)) {
+          if (!inOl) { closeLists(); htmlParts.push('<ol>'); inOl = true; }
+          htmlParts.push('<li>' + formatInline(trimmed.replace(/^\d+\.\s+/, '')) + '</li>');
+          continue;
+        }
+        if (/^[-*+]\s+/.test(trimmed)) {
+          if (!inUl) { closeLists(); htmlParts.push('<ul>'); inUl = true; }
+          htmlParts.push('<li>' + formatInline(trimmed.slice(1).trim()) + '</li>');
+          continue;
+        }
+        closeLists();
+        htmlParts.push('<p>' + formatInline(trimmed) + '</p>');
+      }
+      closeLists();
+      const joined = htmlParts.filter(Boolean).join('');
+      return joined || '<p>（尚未生成，稍后重试）</p>';
+    }
+
+    const md = window.markdownit
+      ? window.markdownit({html: true, linkify: true, breaks: true})
+      : { render: (raw = '') => renderBasicMarkdown(raw) };
+    if (md && typeof md.enable === 'function') {
+      md.enable('table');
+      md.enable('strikethrough');
+    }
+
+    const STORAGE_KEY = 'quiz_progress_' + btoa(unescape(encodeURIComponent(document.title))).slice(0, 32);
+
+    const state = {
+      knowledge: 'all',
+      search: '',
+      currentQuestionIndex: 0,
+      quizMode: true,
+      stats: { total: 0, answered: 0, correct: 0, incorrect: 0 },
+      answeredQuestions: {}
+    };
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          currentQuestionIndex: state.currentQuestionIndex,
+          quizMode: state.quizMode,
+          knowledge: state.knowledge,
+          answeredQuestions: state.answeredQuestions,
+          scrollY: window.scrollY
+        }));
+      } catch(e) {}
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const p = JSON.parse(saved);
+        if (typeof p.currentQuestionIndex === 'number') state.currentQuestionIndex = p.currentQuestionIndex;
+        if (typeof p.quizMode === 'boolean') state.quizMode = p.quizMode;
+        if (p.knowledge) state.knowledge = p.knowledge;
+        if (p.answeredQuestions) state.answeredQuestions = p.answeredQuestions;
+        if (typeof p.scrollY === 'number') state._savedScrollY = p.scrollY;
+      } catch(e) {}
+    }
+
+    function restoreAnsweredState(questionId) {
+      const saved = state.answeredQuestions[questionId];
+      if (!saved) return;
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
+      const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      inputs.forEach(input => {
+        if (saved.selected.includes(input.value)) input.checked = true;
+        input.disabled = true;
+        const optionItem = input.closest('.option-item');
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
+      });
+      const feedbackDiv = questionDiv.querySelector('.answer-feedback');
+      if (feedbackDiv) {
+        feedbackDiv.style.display = 'block';
+        feedbackDiv.className = `answer-feedback ${saved.isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackDiv.textContent = saved.isCorrect ? '✓ 回答正确！' : '✗ 回答错误';
+      }
+      const submitBtn = questionDiv.querySelector('.submit-btn');
+      if (submitBtn) submitBtn.style.display = 'none';
+      if (!saved.isCorrect) {
+        const correctAnswerP = questionDiv.querySelector('.correct-answer');
+        if (correctAnswerP) correctAnswerP.style.display = 'block';
+        const analysisDetails = questionDiv.querySelector('.answer-analysis');
+        if (analysisDetails) { analysisDetails.style.display = 'block'; analysisDetails.open = true; }
+      }
+    }
+
+    function renderMarkdownWithMermaid(content) {
+      if (!content) return '<p>（尚未生成，稍后重试）</p>';
+      const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
+      let processed = content.replace(mermaidRegex, (match, graphDef) => `<div class="mermaid">${graphDef.trim()}</div>`);
+      return md.render ? md.render(processed) : renderBasicMarkdown(processed);
+    }
+    function renderKnowledge() {
+      const container = document.getElementById('knowledgeContainer');
+      container.innerHTML = '';
+      DATA.knowledge_points.forEach((kp) => {
+        const name = kp.name;
+        const count = (kp.related_questions || []).length;
+        const summaryMd = typeof kp.summary_markdown === 'object' ? (kp.summary_markdown.response || '') : (kp.summary_markdown || '');
+        const card = document.createElement('article');
+        card.className = 'knowledge-card' + (state.knowledge === name ? ' active' : '');
+        const summaryHTML = summaryMd && summaryMd.trim() ? renderMarkdownWithMermaid(summaryMd) : '<p class="empty-text" style="color:var(--text-muted)">（尚未生成，稍后重试）</p>';
+        const summaryBlock = summaryMd && summaryMd.trim()
+          ? `<details class="knowledge-details"><summary>查看大模型总结</summary><div class="markdown">${summaryHTML}</div></details>`
+          : `<div class="markdown empty">${summaryHTML}</div>`;
+        card.innerHTML = `
+          <div class="knowledge-header">
+            <h3>${name}</h3>
+            <span class="badge badge-accent kp-count-btn" data-kp="${name}" title="点击刷此知识点题库">共 ${count} 题 ▶</span>
+          </div>
+          ${summaryBlock}
+        `;
+        // 整张卡片点击切换知识点
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+          // 如果点击的是 details/summary 展开操作，不干预
+          if (e.target.closest('details') || e.target.closest('summary')) return;
+          jumpToKnowledge(name);
+        });
+        // badge 单独处理（阻止冒泡避免双触发）
+        const badge = card.querySelector('.kp-count-btn');
+        if (badge) {
+          badge.addEventListener('click', (e) => {
+            e.stopPropagation();
+            jumpToKnowledge(name);
+          });
+        }
+        container.append(card);
+      });
+    }
+
+    function jumpToKnowledge(name) {
+      state.knowledge = name;
+      state.currentQuestionIndex = 0;
+      saveState();
+      // 同步下拉框
+      const sel = document.getElementById('knowledgeFilter');
+      if (sel) sel.value = name;
+      renderKnowledge();
+      renderQuestions();
+      // 滚动到题目区
+      const qSection = document.getElementById('questionsContainer');
+      if (qSection) {
+        setTimeout(() => qSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      }
+      showToast(`已切换到：${name}`, 'info');
+    }
+
+    function filterQuestions() {
+      return DATA.questions.filter((q) => {
+        const matchKP = state.knowledge === 'all' || q.knowledge_point === state.knowledge;
+        if (!matchKP) return false;
+        if (!state.search) return true;
+        const haystack = [
+          q.prompt, q.knowledge_point, q.model_response || '',
+          ...(q.sub_questions || []).map((sub) => [sub.official_analysis || '', (sub.options || []).map((o) => o.text).join(' ')].join(' '))
+        ].join(' ').toLowerCase();
+        return haystack.includes(state.search.toLowerCase());
+      });
+    }
+
+    function buildSubQuestionHTML(sub, subIdx, q) {
+      const correctCount = (sub.options || []).filter(o => o.is_correct).length;
+      const isMultiple = correctCount > 1;
+      const inputType = isMultiple ? 'checkbox' : 'radio';
+      const questionId = `q${q.id || q.index}_${subIdx}`;
+      const answers = sub.correct_letters || [];
+      const options = (sub.options || []).map((opt) => {
+        const optionId = `${questionId}_${opt.label}`;
+        return `<li class="option-item"><label for="${optionId}" class="option-label"><input type="${inputType}" id="${optionId}" name="${questionId}" value="${opt.label}" class="option-input" /><span class="option-text">${opt.label}. ${opt.text}</span></label></li>`;
+      }).join('');
+      const subQuestionText = sub.question ? `<div class="sub-question-text">${md.render(sub.question)}</div>` : '';
+      const correctAnswerDetail = sub.correct_answer
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>参考答案</summary><div class="markdown">${md.render(sub.correct_answer)}</div></details>` : '';
+      const answersP = answers.length ? `<p class="correct-answer" style="display:none;"><strong>参考答案：</strong>${answers.join('、')}</p>` : '';
+      const official = sub.official_analysis
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>官方解析</summary><div class="markdown">${md.render(sub.official_analysis)}</div></details>` : '';
+      const hasOptions = sub.options && sub.options.length > 0;
+      const interaction = hasOptions
+        ? `<ul class="options interactive-options">${options}</ul>
+           <div class="question-actions">
+             <button class="btn btn-primary submit-btn" onclick="submitAnswer('${questionId}')">提交答案</button>
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${questionId}')" style="display:none;">查看答案</button>
+           </div>`
+        : `<div class="question-actions">
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${questionId}')" style="display:inline-flex;">查看答案</button>
+           </div>`;
+      return `<div class="sub-question" data-question-id="${questionId}" data-correct-answers="${answers.join(',')}" data-is-multiple="${isMultiple}">
+        <h4>子题${sub.label}</h4>
+        ${subQuestionText}
+        ${interaction}
+        <div class="answer-feedback" style="display:none;"></div>
+        ${answersP}
+        ${correctAnswerDetail}
+        ${official}
+      </div>`;
+    }
+
+    function buildAiNote(q) {
+      const resp = typeof q.model_response === 'object' ? (q.model_response.response || '') : (q.model_response || '');
+      if (resp && resp.trim()) {
+        return `<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown">${renderMarkdownWithMermaid(resp)}</div></details>`;
+      }
+      return '<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown empty">暂无内容</div></details>';
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = '';
+      const results = filterQuestions();
+      if (!results.length) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-text">未找到匹配的题目，试试其他关键词？</div></div>';
+        return;
+      }
+      updateStats(results);
+      if (state.quizMode) {
+        renderSingleQuestion(results);
+      } else {
+        renderAllQuestions(results);
+      }
+      Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
+      updateStats(results);
+    }
+
+    function renderSingleQuestion(questions) {
+      const container = document.getElementById('questionsContainer');
+      const cur = questions[state.currentQuestionIndex];
+      if (!cur) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎉</div><div class="empty-state-text">没有更多题目了</div></div>';
+        return;
+      }
+      const pct = ((state.currentQuestionIndex + 1) / questions.length * 100).toFixed(1);
+      const progressBar = `<div class="quiz-progress-bar">
+        <div class="qp-top">
+          <span class="qp-label">第 ${state.currentQuestionIndex + 1} 题 / 共 ${questions.length} 题</span>
+          <span class="qp-count">${pct}%</span>
+        </div>
+        <div class="qp-bar"><div class="qp-fill" style="width:${pct}%"></div></div>
+      </div>`;
+      const diffBadge = cur.difficulty ? `<span class="badge badge-green">难度 ${cur.difficulty}</span>` : '';
+      const card = document.createElement('div');
+      card.innerHTML = progressBar;
+      const qCard = document.createElement('article');
+      qCard.className = 'question-card';
+      const subs = (cur.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, cur)).join('');
+      const isAnswered = Object.keys(state.answeredQuestions).some(k => k.startsWith(`q${cur.id || cur.index}_`));
+      const nav = `<div class="quiz-nav">
+        <button class="btn btn-outline" onclick="previousQuestion()" ${state.currentQuestionIndex === 0 ? 'disabled' : ''} title="快捷键 ←">← 上一题</button>
+        <button class="btn btn-ghost" onclick="toggleQuizMode()">📋 全部题目</button>
+        <button class="btn btn-outline" onclick="nextQuestion()" ${state.currentQuestionIndex >= questions.length - 1 ? 'disabled' : ''} title="快捷键 →">下一题 →</button>
+      </div>`;
+      qCard.innerHTML = `
+        <div class="question-header">
+          <h3>第${cur.index}题（题号：${cur.sort || cur.index}）</h3>
+          <span class="badge badge-accent">${cur.knowledge_point}</span>
+          ${diffBadge}
+        </div>
+        <p class="question-prompt">${cur.prompt}</p>
+        ${subs}
+        ${nav}
+        ${buildAiNote(cur)}
+      `;
+      card.appendChild(qCard);
+      container.appendChild(card);
+    }
+
+    function renderAllQuestions(results) {
+      const container = document.getElementById('questionsContainer');
+      const toggle = document.createElement('div');
+      toggle.className = 'quiz-mode-toggle';
+      toggle.innerHTML = '<button class="btn btn-success" onclick="toggleQuizMode()">🎯 单题模式</button>';
+      container.appendChild(toggle);
+      results.forEach((q) => {
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        const diffBadge = q.difficulty ? `<span class="badge badge-green">难度 ${q.difficulty}</span>` : '';
+        const subs = (q.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, q)).join('');
+        card.innerHTML = `
+          <div class="question-header">
+            <h3>第${q.index}题（题号：${q.sort || q.index}）</h3>
+            <span class="badge badge-accent">${q.knowledge_point}</span>
+            ${diffBadge}
+          </div>
+          <p class="question-prompt">${q.prompt}</p>
+          ${subs}
+          ${buildAiNote(q)}
+        `;
+        container.appendChild(card);
+      });
+    }
+    function populateFilter() {
+      const select = document.getElementById('knowledgeFilter');
+      const options = ['<option value="all">全部知识点</option>'];
+      DATA.knowledge_points.forEach((kp) => {
+        options.push(`<option value="${kp.name}">${kp.name}（${kp.related_questions.length}）</option>`);
+      });
+      select.innerHTML = options.join('');
+      if (state.knowledge !== 'all') select.value = state.knowledge;
+      select.addEventListener('change', (e) => {
+        state.knowledge = e.target.value;
+        state.currentQuestionIndex = 0;
+        saveState();
+        renderKnowledge();
+        renderQuestions();
+      });
+    }
+
+    function registerSearch() {
+      const input = document.getElementById('searchInput');
+      let timer;
+      input.addEventListener('input', (e) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          state.search = e.target.value.trim();
+          state.currentQuestionIndex = 0;
+          renderQuestions();
+        }, 200);
+      });
+    }
+
+    function initMermaid() {
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'dark',
+          themeVariables: {
+            primaryColor: '#7c6ff7',
+            primaryTextColor: '#e2e8f0',
+            primaryBorderColor: '#a89cf8',
+            lineColor: '#94a3b8',
+            secondaryColor: '#1c1c28',
+            tertiaryColor: '#16161f',
+            background: '#0a0a0f',
+            mainBkg: '#16161f',
+            nodeBorder: '#7c6ff7'
+          }
+        });
+      }
+    }
+
+    function renderMermaidCharts() {
+      if (window.mermaid) {
+        const els = document.querySelectorAll('.mermaid');
+        els.forEach((el, index) => {
+          const def = el.textContent;
+          const id = `mermaid-${Date.now()}-${index}`;
+          el.id = id;
+          mermaid.render(id + '-svg', def).then((result) => {
+            el.innerHTML = result.svg;
+          }).catch(() => {
+            el.innerHTML = '<p style="color:var(--red);">图表渲染失败</p>';
+          });
+        });
+      }
+    }
+
+    function updateStats(questions) {
+      const totalSub = questions.reduce((s, q) => s + (q.sub_questions || []).length, 0);
+      const answered = Object.keys(state.answeredQuestions).length;
+      const correct = Object.values(state.answeredQuestions).filter(a => a.isCorrect).length;
+      const incorrect = answered - correct;
+      state.stats = { total: totalSub, answered, correct, incorrect };
+      renderStatsDisplay();
+    }
+
+    function renderStatsDisplay() {
+      const { total, answered, correct, incorrect } = state.stats;
+      const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+      const progress = total > 0 ? Math.round((answered / total) * 100) : 0;
+      const circumference = 2 * Math.PI * 52;
+      const offset = circumference - (accuracy / 100) * circumference;
+
+      const ring = document.getElementById('ringProgress');
+      if (ring) {
+        ring.style.strokeDasharray = circumference;
+        ring.style.strokeDashoffset = offset;
+        ring.style.transition = 'stroke-dashoffset 0.6s ease';
+      }
+      const ringPct = document.getElementById('ringPct');
+      if (ringPct) ringPct.textContent = accuracy + '%';
+
+      const snTotal = document.getElementById('snTotal');
+      const snAnswered = document.getElementById('snAnswered');
+      const snCorrect = document.getElementById('snCorrect');
+      const snIncorrect = document.getElementById('snIncorrect');
+      if (snTotal) snTotal.textContent = total;
+      if (snAnswered) snAnswered.textContent = answered;
+      if (snCorrect) snCorrect.textContent = correct;
+      if (snIncorrect) snIncorrect.textContent = incorrect;
+
+      const fill = document.getElementById('statsProgressFill');
+      const txt = document.getElementById('statsProgressText');
+      if (fill) fill.style.width = progress + '%';
+      if (txt) txt.textContent = `进度 ${progress}%（${answered}/${total}）`;
+    }
+
+    function submitAnswer(questionId) {
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
+      const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      const selectedAnswers = Array.from(inputs).filter(i => i.checked).map(i => i.value);
+      if (selectedAnswers.length === 0) {
+        showToast('请先选择答案', 'warn');
+        const ul = questionDiv.querySelector('.options');
+        if (ul) { ul.style.animation = 'shake 0.4s ease'; setTimeout(() => ul.style.animation = '', 500); }
+        return;
+      }
+      inputs.forEach(input => input.disabled = true);
+      const isCorrect = correctAnswers.length === selectedAnswers.length &&
+                       correctAnswers.every(a => selectedAnswers.includes(a));
+      const feedbackDiv = questionDiv.querySelector('.answer-feedback');
+      feedbackDiv.style.display = 'block';
+      feedbackDiv.className = `answer-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+      feedbackDiv.innerHTML = isCorrect
+        ? '<span class="feedback-icon">✓</span><span class="feedback-msg">回答正确！继续加油</span>'
+        : '<span class="feedback-icon">✗</span><span class="feedback-msg">回答错误，看看解析吧</span>';
+      inputs.forEach(input => {
+        const optionItem = input.closest('.option-item');
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
+      });
+      const submitBtn = questionDiv.querySelector('.submit-btn');
+      const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
+      submitBtn.style.display = 'none';
+      showAnswerBtn.style.display = 'inline-flex';
+      state.answeredQuestions[questionId] = { selected: selectedAnswers, isCorrect };
+      saveState();
+      if (!isCorrect) showAnswer(questionId);
+      const results = filterQuestions();
+      updateStats(results);
+      // 平滑滚动到反馈区
+      setTimeout(() => {
+        feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+
+    function showAnswer(questionId) {
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswerP = questionDiv.querySelector('.correct-answer');
+      if (correctAnswerP) correctAnswerP.style.display = 'block';
+      const analysisDetailsList = questionDiv.querySelectorAll('.answer-analysis');
+      analysisDetailsList.forEach(d => { d.style.display = 'block'; d.open = true; });
+      const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
+      if (showAnswerBtn) showAnswerBtn.style.display = 'none';
+    }
+
+    function scrollToQuestion() {
+      const el = document.getElementById('questionsContainer') || document.querySelector('.question-card');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function previousQuestion() {
+      if (state.currentQuestionIndex > 0) {
+        state.currentQuestionIndex--;
+        saveState();
+        renderQuestions();
+        scrollToQuestion();
+        animateCardIn();
+      }
+    }
+
+    function nextQuestion() {
+      const questions = filterQuestions();
+      if (state.currentQuestionIndex < questions.length - 1) {
+        state.currentQuestionIndex++;
+        saveState();
+        renderQuestions();
+        scrollToQuestion();
+        animateCardIn();
+      }
+    }
+
+    function animateCardIn() {
+      setTimeout(() => {
+        const card = document.querySelector('.question-card');
+        if (card) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(12px)';
+          card.style.transition = 'none';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          });
+        }
+      }, 10);
+    }
+
+    let _toastTimer;
+    function showToast(msg, type = 'info') {
+      let toast = document.getElementById('_toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = '_toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.className = '_toast-show _toast-' + type;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => { toast.className = ''; }, 2200);
+    }
+
+    function toggleQuizMode() {
+      state.quizMode = !state.quizMode;
+      if (state.quizMode) state.currentQuestionIndex = 0;
+      saveState();
+      renderQuestions();
+    }
+
+    function clearProgress() {
+      if (!confirm('确定要清空所有答题记录吗？此操作不可撤销。')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      state.answeredQuestions = {};
+      state.currentQuestionIndex = 0;
+      state.knowledge = null;
+      const results = filterQuestions();
+      updateStats(results);
+      renderQuestions();
+      showToast('已清空答题记录', 'success');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initMermaid();
+      loadState();
+      populateFilter();
+      registerSearch();
+      renderKnowledge();
+      renderQuestions();
+      // Expand knowledge card to full width when details opens
+      document.getElementById('knowledgeContainer').addEventListener('toggle', (e) => {
+        if (e.target.classList.contains('knowledge-details')) {
+          const card = e.target.closest('.knowledge-card');
+          if (card) card.classList.toggle('expanded', e.target.open);
+        }
+      }, true);
+      Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
+      const results = filterQuestions();
+      updateStats(results);
+      if (state._savedScrollY) {
+        setTimeout(() => window.scrollTo(0, state._savedScrollY), 150);
+      }
+      let scrollTimer = null;
+      window.addEventListener('scroll', () => {
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => saveState(), 300);
+      });
+      window.addEventListener('beforeunload', () => saveState());
+      // 清空记录按钮
+      document.getElementById('clearProgressBtn').addEventListener('click', clearProgress);
+      // 键盘左右键翻页
+      document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (!state.quizMode) return;
+        if (e.key === 'ArrowRight' || e.key === 'l') nextQuestion();
+        if (e.key === 'ArrowLeft'  || e.key === 'h') previousQuestion();
+      });
+      setTimeout(() => renderMermaidCharts(), 100);
+    });
+  </script>
+</body>
+</html>

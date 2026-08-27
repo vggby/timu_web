@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2018年11月系统架构真题</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@13/dist/markdown-it.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --bg: #0a0a0f;
+      --bg-subtle: #111118;
+      --card: #16161f;
+      --card-hover: #1c1c28;
+      --accent: #7c6ff7;
+      --accent-light: #a89cf8;
+      --accent-bg: rgba(124, 111, 247, 0.12);
+      --accent-bg-hover: rgba(124, 111, 247, 0.2);
+      --green: #34d399;
+      --green-bg: rgba(52, 211, 153, 0.12);
+      --green-border: rgba(52, 211, 153, 0.35);
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.12);
+      --red-border: rgba(248, 113, 113, 0.35);
+      --orange: #fbbf24;
+      --text: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+    [data-theme="light"] {
+      --bg: #f0f4f8;
+      --bg-subtle: #e8edf2;
+      --card: #ffffff;
+      --card-hover: #f8f9fc;
+      --accent: #6c5ce7;
+      --accent-light: #a29bfe;
+      --accent-bg: rgba(108, 92, 231, 0.10);
+      --accent-bg-hover: rgba(108, 92, 231, 0.18);
+      --green: #10b981;
+      --green-bg: rgba(16, 185, 129, 0.10);
+      --green-border: rgba(16, 185, 129, 0.30);
+      --red: #ef4444;
+      --red-bg: rgba(239, 68, 68, 0.10);
+      --red-border: rgba(239, 68, 68, 0.30);
+      --orange: #f59e0b;
+      --text: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08);
+      --glass: rgba(0,0,0,0.02);
+      --glass-border: rgba(0,0,0,0.08);
+    }
+    /* ===== Theme toggle button ===== */
+    .theme-toggle {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.15s;
+      font-family: var(--font-sans);
+    }
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.04);
+    }
+    [data-theme="light"] .theme-toggle {
+      background: rgba(0,0,0,0.12);
+      border-color: rgba(0,0,0,0.18);
+      color: #fff;
+    }
+    [data-theme="light"] .theme-toggle:hover {
+      background: rgba(0,0,0,0.20);
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* ===== Header ===== */
+    .page-header {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      color: #fff;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .page-header .meta-line {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Controls ===== */
+    .controls-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .controls-bar select,
+    .controls-bar input {
+      flex: 1 1 200px;
+      min-width: 0;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      font-size: 0.95rem;
+      font-family: var(--font-sans);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-sm);
+      -webkit-appearance: none;
+    }
+    .controls-bar select:focus,
+    .controls-bar input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .clear-btn {
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--red-border);
+      background: var(--red-bg);
+      color: var(--red);
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+      white-space: nowrap;
+    }
+    .clear-btn:hover {
+      background: var(--red-bg);
+      border-color: var(--red);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+    .clear-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ===== Stats Ring ===== */
+    .stats-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .stats-card h2 {
+      margin: 0 0 20px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stats-layout {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .ring-container {
+      flex-shrink: 0;
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    .ring-container svg {
+      transform: rotate(-90deg);
+    }
+    .ring-container .ring-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .ring-container .ring-pct {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1.2;
+    }
+    .ring-container .ring-text {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+    .stats-numbers {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      flex: 1;
+      min-width: 200px;
+    }
+    .sn-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .sn-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .sn-val.green { color: var(--green); }
+    .sn-val.red { color: var(--red); }
+    .sn-val.accent { color: var(--accent); }
+    .sn-val.orange { color: var(--orange); }
+    .sn-lbl {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .stats-progress {
+      margin-top: 16px;
+    }
+    .stats-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stats-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+    .stats-progress-text {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    /* ===== Knowledge Section ===== */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .knowledge-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--accent-light);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+    .knowledge-card:nth-child(3n+1) { border-left-color: #4f46e5; }
+    .knowledge-card:nth-child(3n+2) { border-left-color: #0ea5e9; }
+    .knowledge-card:nth-child(3n+3) { border-left-color: #8b5cf6; }
+    .knowledge-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .knowledge-card.active {
+      border-left-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(79,70,229,0.2), var(--shadow-md);
+    }
+    .knowledge-card.expanded {
+      grid-column: 1 / -1;
+      transition: grid-column 0s;
+    }
+    .knowledge-card.expanded .knowledge-details {
+      max-height: none;
+    }
+    .knowledge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .knowledge-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-accent {
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+    .kp-count-btn {
+      cursor: pointer;
+      transition: background 0.18s, transform 0.15s;
+      user-select: none;
+    }
+    .kp-count-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.06);
+    }
+    .badge-green {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+    .knowledge-details {
+      margin-top: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+    }
+    .knowledge-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent);
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .knowledge-details summary::before {
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .knowledge-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .knowledge-details .markdown {
+      margin-top: 10px;
+    }
+    .knowledge-details[open] summary {
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    /* ===== Question Cards ===== */
+    .question-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .question-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .question-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .question-header h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .question-prompt {
+      margin: 0 0 16px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .sub-question {
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .sub-question h4 {
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .sub-question-text {
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Options ===== */
+    ul.options {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+    }
+    .option-item {
+      margin-bottom: 8px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+    .option-item:hover {
+      border-color: var(--accent-light);
+      background: var(--accent-bg);
+      transform: translateX(2px);
+    }
+    .option-label {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      cursor: pointer;
+      gap: 12px;
+    }
+    .option-input {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+    }
+    .option-text {
+      flex: 1;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    .option-item.selected {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+    }
+    .option-item.correct {
+      border-color: var(--green);
+      background: var(--green-bg);
+      animation: correctPulse 0.5s ease;
+    }
+    .option-item.incorrect {
+      border-color: var(--red);
+      background: var(--red-bg);
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+    @keyframes correctPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.01); }
+      100% { transform: scale(1); }
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      60% { transform: scale(1.02); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Toast ===== */
+    #_toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 9999;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
+    #_toast._toast-show {
+      animation: toastIn 0.25s ease forwards;
+    }
+    #_toast._toast-info  { background: var(--accent);  color: #fff; }
+    #_toast._toast-warn  { background: var(--orange);  color: #000; }
+    #_toast._toast-ok    { background: var(--green);   color: #000; }
+    #_toast._toast-err   { background: var(--red);     color: #fff; }
+
+    /* ===== Answer Feedback ===== */
+    .answer-feedback {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: fadeSlideUp 0.3s ease;
+    }
+    .feedback-icon { font-size: 1.1rem; }
+    .feedback-msg { flex: 1; }
+
+    /* ===== Buttons ===== */
+    .question-actions {
+      margin: 16px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 22px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(79,70,229,0.3);
+    }
+    .btn-primary:hover {
+      background: #6d62e0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79,70,229,0.35);
+    }
+    .btn-primary:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-warning {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(245,158,11,0.3);
+    }
+    .btn-warning:hover {
+      background: #e4a320;
+      transform: translateY(-1px);
+    }
+    .btn-success {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(16,185,129,0.3);
+    }
+    .btn-success:hover {
+      background: #2ab77f;
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: var(--card);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+    .btn-outline:hover {
+      background: var(--accent-bg);
+    }
+    .btn-outline:disabled {
+      color: var(--text-muted);
+      border-color: var(--border);
+      background: transparent;
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid transparent;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      background: var(--glass);
+      border-color: var(--border);
+    }
+
+    /* ===== Feedback ===== */
+    .answer-feedback.correct {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-border);
+    }
+    .answer-feedback.incorrect {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+    .correct-answer {
+      background: var(--green-bg);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--green-border);
+      margin: 8px 0;
+      font-size: 0.95rem;
+    }
+
+    /* ===== Quiz Navigation ===== */
+    .quiz-progress-bar {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .qp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .qp-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .qp-count {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .qp-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .qp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .quiz-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .quiz-mode-toggle {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    /* ===== Details / Panels ===== */
+    .rich-details {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-top: 10px;
+    }
+    .rich-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent-light);
+      user-select: none;
+      transition: color 0.2s;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rich-details summary::before {
+      content: '▶';
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    .rich-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    .rich-details summary:hover {
+      color: var(--accent);
+    }
+    .rich-details[open] summary {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rich-details .markdown {
+      margin-top: 8px;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    .answer-analysis {
+      margin-top: 10px;
+    }
+    /* ===== Markdown ===== */
+    .markdown {
+      line-height: 1.7;
+      color: inherit;
+      font-size: 0.95rem;
+    }
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
+      margin: 1em 0 0.5em;
+      font-weight: 700;
+    }
+    .markdown h1, .md-heading.h2-equiv { font-size: 1.3rem; color: var(--text); }
+    .markdown h2, .md-heading { font-size: 1.15rem; color: var(--text); }
+    .markdown h3 { font-size: 1.05rem; }
+    .md-heading { margin: 1em 0 0.4em; font-weight: 700; }
+    .md-hr { border: none; border-top: 1px solid var(--border); margin: 1em 0; }
+    .markdown p { margin: 0.5em 0; }
+    .markdown ul, .markdown ol { padding-left: 1.5em; margin: 0.5em 0; }
+    .markdown li { margin-bottom: 0.3em; }
+    .markdown table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.9rem;
+    }
+    .markdown th, .markdown td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+    }
+    .markdown th {
+      background: var(--accent-bg);
+      font-weight: 600;
+    }
+    .markdown code {
+      background: rgba(99,102,241,0.1);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      font-size: 0.88em;
+    }
+    .markdown pre {
+      background: #0d0d14;
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      font-size: 0.88rem;
+    }
+    .markdown pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    .markdown img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-xs);
+    }
+    .markdown.empty {
+      color: var(--text-muted);
+    }
+    .mermaid {
+      text-align: center;
+      margin: 1rem 0;
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      border: 1px solid var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* ===== Empty State ===== */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .empty-state-text {
+      font-size: 1rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      main {
+        padding: 16px 12px 48px;
+      }
+      .page-header {
+        padding: 24px 20px;
+        border-radius: var(--radius-sm);
+      }
+      .page-header h1 {
+        font-size: 1.35rem;
+      }
+      .controls-bar {
+        flex-direction: column;
+      }
+      .controls-bar select,
+      .controls-bar input {
+        flex: 1 1 100%;
+      }
+      .stats-layout {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .ring-container {
+        margin: 0 auto;
+      }
+      .stats-numbers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .knowledge-grid {
+        grid-template-columns: 1fr;
+      }
+      .question-card {
+        padding: 18px 16px;
+      }
+      .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .option-label {
+        padding: 14px 16px;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
+      }
+      .quiz-nav {
+        flex-direction: column;
+      }
+      .quiz-nav .btn {
+        width: 100%;
+      }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .knowledge-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">🌙 暗色</button>
+      <h1>📝 2018年11月系统架构真题</h1>
+      <p class="meta-line">共 4 题 · 生成于 2026-02-26 23:26:57</p>
+    </header>
+
+    <div class="controls-bar">
+      <select id="knowledgeFilter" aria-label="筛选知识点"></select>
+      <input id="searchInput" type="search" placeholder="🔍 搜索题干 / 解析 / AI 笔记" aria-label="搜索题目" />
+      <button class="clear-btn" id="clearProgressBtn" aria-label="清空答题记录">🗑️ 清空记录</button>
+    </div>
+
+    <section class="stats-card" aria-label="答题统计">
+      <h2>📊 答题统计</h2>
+      <div id="statsContainer">
+        <div class="stats-layout">
+          <div class="ring-container">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#2d2d3f" stroke-width="10"/>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="var(--accent)" stroke-width="10"
+                stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round" id="ringProgress"/>
+            </svg>
+            <div class="ring-label">
+              <span class="ring-pct" id="ringPct">0%</span>
+              <span class="ring-text">正确率</span>
+            </div>
+          </div>
+          <div class="stats-numbers">
+            <div class="sn-item"><div class="sn-val accent" id="snTotal">0</div><div class="sn-lbl">总题数</div></div>
+            <div class="sn-item"><div class="sn-val accent" id="snAnswered">0</div><div class="sn-lbl">已答题</div></div>
+            <div class="sn-item"><div class="sn-val green" id="snCorrect">0</div><div class="sn-lbl">答对</div></div>
+            <div class="sn-item"><div class="sn-val red" id="snIncorrect">0</div><div class="sn-lbl">答错</div></div>
+          </div>
+        </div>
+        <div class="stats-progress">
+          <div class="stats-progress-bar"><div class="stats-progress-fill" id="statsProgressFill" style="width:0%"></div></div>
+          <div class="stats-progress-text" id="statsProgressText">进度 0%</div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="知识点总结">
+      <h2 class="section-title">💡 知识点总结</h2>
+      <div id="knowledgeContainer" class="knowledge-grid"><article class='card knowledge-card' style='cursor:pointer' onclick="jumpToKnowledge('需求工程')">
+              <div class='knowledge-header'>
+                <h3>需求工程</h3>
+                <span class='badge badge-accent kp-count-btn' title='点击刷此知识点题库' onclick="event.stopPropagation();jumpToKnowledge('需求工程')">共 4 题 ▶</span>
+              </div>
+              <details class='knowledge-details'><summary>查看大模型总结</summary><div class='markdown'><h2 class="md-heading">需求工程 · 结构化知识点清单</h2><hr class="md-hr" /><h3 class="md-heading">知识点名称</h3><p>需求工程（需求开发 + 需求管理）</p><hr class="md-hr" /><h3 class="md-heading">核心定义/结论</h3><p>需求工程分为两大并列模块，不可混淆：</p><p>```</p><p>需求工程</p><p>├── 需求开发（&quot;做出来&quot;）</p><p>│   ├── 需求获取   → 问出来</p><p>│   ├── 需求分析   → 想清楚</p><p>│   ├── 需求建模   → 画出来</p><p>│   └── 需求评审   → 检查对不对</p><p>│</p><p>└── 需求管理（&quot;管起来&quot;）</p><p>├── 变更控制       → 改了要走审批</p><p>├── 版本控制       → 存好每个版本</p><p>├── 需求跟踪       → 跟着需求追到底</p><p>└── 需求状态跟踪   → 随时知道进展</p><p>```</p><p>两个关键概念：</p><ul><li>需求基线：需求文档评审通过后的&quot;冻结版本&quot;，是开发工作的正式起点，相当于打了 git tag</li><li>需求约定：需求基线形成后，客户与开发方之间对功能/非功能需求的正式共识</li></ul><hr class="md-hr" /><h3 class="md-heading">典型题型与解题要领</h3><p>题型1：判断某活动&quot;属于/不属于&quot;需求管理</p><p>解题要领：看到&quot;需求获取、需求建模、需求分析、需求评审&quot;任意一个词出现在选项里，直接排除该选项。这四个词全属于需求开发，不属于需求管理。</p><p>题型2：填空/单选考需求基线和需求约定</p><p>解题要领：</p><ul><li>&quot;评审批准后定义了开发工作的 ___&quot; → 需求基线</li><li>&quot;客户和开发者之间构筑的 ___&quot; → 需求约定</li></ul><p>题型3：考需求跟踪的定义</p><p>解题要领：题干出现&quot;联系文档、依赖关系、追踪、映射、需求与系统元素之间&quot;等词 → 选需求跟踪。需求跟踪的本质是建立需求与架构、代码、测试、文档之间的可追溯关系。</p><hr class="md-hr" /><h3 class="md-heading">易错点与注意事项</h3><ol><li>需求开发 vs 需求管理 最容易混淆</li></ol><ul><li>需求评审属于需求开发，不是需求管理</li><li>文档管理属于配置管理/项目管理，不属于需求管理</li></ul><ol><li>需求管理是三个还是四个活动</li></ol><ul><li>早期教材说三个：变更控制、版本控制、需求跟踪</li><li>完整版是四个：加上需求状态跟踪</li><li>遇到选项只有三个时，选包含&quot;变更控制、版本控制、需求跟踪&quot;的那个</li></ul><ol><li>需求跟踪 ≠ 需求状态跟踪</li></ol><ul><li>需求跟踪：建立需求与其他系统元素的联系（横向追踪）</li><li>需求状态跟踪：追踪单条需求当前处于哪个阶段（纵向状态）</li></ul><ol><li>需求基线是桥梁</li></ol><ul><li>它连接的是需求开发阶段和需求管理阶段，不是两个开发阶段之间的桥梁</li></ul><hr class="md-hr" /><h3 class="md-heading">推荐复习顺序</h3><ol><li>先建立两大模块的框架区分（需求开发 vs 需求管理），这是所有题目的判断基础</li></ol><ol><li>背住需求管理四个活动的口诀：&quot;变版跟状&quot;（变更、版本、跟踪、状态）</li></ol><ol><li>理解需求基线和需求约定的含义，记住它们在流程中的位置</li></ol><ol><li>理解需求跟踪的定义，能识别题干中的关键描述词</li></ol><ol><li>做真题验证，重点练习排除干扰项的能力（尤其是&quot;需求获取/评审&quot;混入需求管理选项的题型）</li></ol></div></details>
+            </article></div>
+    </section>
+
+    <section aria-label="题目列表">
+      <h2 class="section-title">📋 题目列表</h2>
+      <div id="questionsContainer"><article class='card question-card'>
+              <div class='question-header'>
+              <h3>第1题（题号：18）</h3>
+              <span class='badge'>需求工程</span>
+              <span class='badge'>难度：1</span>
+            </div>
+            <p>需求管理是一个对系统需求变更、了解和控制的过程。以下活动中，（）不属于需求管理的主要活动。</p>
+              <div class='sub-question' data-question-id="q237_0" data-correct-answers="A" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q237_0_A" class="option-label">
+                            <input type="radio" id="q237_0_A" name="q237_0" value="A" class="option-input" />
+                            <span class="option-text">A. 文档管理</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q237_0_B" class="option-label">
+                            <input type="radio" id="q237_0_B" name="q237_0" value="B" class="option-input" />
+                            <span class="option-text">B. 需求跟踪</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q237_0_C" class="option-label">
+                            <input type="radio" id="q237_0_C" name="q237_0" value="C" class="option-input" />
+                            <span class="option-text">C. 版本控制</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q237_0_D" class="option-label">
+                            <input type="radio" id="q237_0_D" name="q237_0" value="D" class="option-input" />
+                            <span class="option-text">D. 变更控制</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q237_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q237_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>A</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>需求管理的三大核心活动</strong>。</p><p>需求管理的核心任务是在整个软件开发生命周期中<strong>跟踪、控制和管理需求的变更和状态</strong>，确保系统按需构建并满足用户需求。需求管理主要包括以下三个方面：</p><p><strong>1. 变更控制</strong>：确保对需求变更进行严格的审批、记录与跟踪，防止无序变更，是需求管理的基础机制之一。</p><p><strong>2. 版本控制</strong>：用于识别不同版本的需求文档，记录需求在时间上的演变，支持对不同版本间的比较和回退。</p><p><strong>3. 需求跟踪</strong>：确保每一个需求都能从提出到实现、测试都有迹可循，即“需求的前向与后向可追溯性”。</p><p><strong>A选项文档管理</strong>：尽管文档管理对整个项目来说很重要，但它<strong>并不是</strong>需求管理的核心组成部分，而是配置管理、项目管理中更广泛的一个内容，<strong>正确</strong>。</p><p><strong>B选项需求跟踪</strong>：是需求管理的重要活动之一，错误。</p><p><strong>C选项版本控制</strong>：用于管理需求文档及其变更，属于需求管理内容，错误。</p><p><strong>D选项变更控制</strong>：管理需求变更流程的重要机制，属于需求管理内容，错误。</p><p>因此，选项 <strong>A. 文档管理</strong> 正确。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📒 软考笔记 · 需求管理三大核心活动</h2><hr class="md-hr" /><h3 class="md-heading">🧠 顾名思义记忆法</h3><p>&gt; 需求管理 = 管好&quot;需求&quot;这个东西，让它<strong>变得可控、有迹可查、版本清晰</strong></p><p>把需求管理想象成你在公司管理一个 <strong>Java 项目的需求池</strong>：</p><hr class="md-hr" /><h3 class="md-heading">🔑 三大核心活动（背这三个就够了）</h3><h4 class="md-heading">1. 变更控制 → &quot;变了要管&quot;</h4><p>&gt; 需求变了，不能随便改，要<strong>走审批流程、留记录</strong></p><p>💡 类比：就像你们公司改需求要走 Jira 工单，不能产品经理口头说一句就改代码</p><hr class="md-hr" /><h4 class="md-heading">2. 版本控制 → &quot;版本要留&quot;</h4><p>&gt; 需求文档也像代码一样，<strong>每次改动都要留版本</strong>，能看历史、能回退</p><p>💡 类比：就是需求文档的 Git，v1.0、v1.1、v2.0 都有记录</p><hr class="md-hr" /><h4 class="md-heading">3. 需求跟踪 → &quot;从头跟到尾&quot;</h4><p>&gt; 一个需求从<strong>提出 → 设计 → 开发 → 测试</strong>，每一步都能追溯</p><p>💡 类比：就像快递单号，能查到这个需求现在在哪个环节，有没有被实现</p><hr class="md-hr" /><h3 class="md-heading">❌ 文档管理 为什么不属于需求管理？</h3><p>```</p><p>文档管理 → 属于【配置管理】或【项目管理】的范畴</p><p>↑</p><p>管的是&quot;所有文档&quot;，范围太大</p><p>不是专门针对&quot;需求&quot;的管理活动</p><p>```</p><p>&gt; 顾名思义：<strong>需求管理</strong> = 只管&quot;需求&quot;相关的事</p><p>&gt; 文档管理管的是所有文档（设计文档、会议记录、合同...），不专属于需求</p><hr class="md-hr" /><h3 class="md-heading">🗂️ 字符图总结</h3><p>```</p><p>需求管理</p><p>├── ✅ 变更控制   → 需求变了，要审批+记录</p><p>├── ✅ 版本控制   → 需求文档要有版本历史</p><p>└── ✅ 需求跟踪   → 需求从提出到实现全程追踪</p><p>❌ 文档管理   → 不属于！这是配置管理/项目管理的事</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🎯 考试掌握程度</h3><p>&gt; 标签：<strong>了解即可</strong>（第二版教材）</p><p>只需记住：</p><ul><li>需求管理 = <strong>变更控制 + 版本控制 + 需求跟踪</strong> 这三件事</li><li>文档管理不在其中，因为它范围太广，不专属于需求</li><li>遇到选&quot;不属于需求管理&quot;的题，优先排查<strong>范围过大、不专属于需求</strong>的选项</li></ul><hr class="md-hr" /><h3 class="md-heading">🔁 快速回忆口诀</h3><p>```</p><p>需求管理三件事：</p><p>变了要管（变更控制）</p><p>版本要留（版本控制）</p><p>从头跟到尾（需求跟踪）</p><p>文档管理不在列，它管太宽不专一</p><p>```</p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第2题（题号：16）</h3>
+              <span class='badge'>需求工程</span>
+              <span class='badge'>难度：2</span>
+            </div>
+            <p>软件需求开发的最终文档经过评审批准后，就定义了开发工作的（），它在客户和开发者之间构筑了产品功能需求和非功能需求的一个（）， 是需求开发和需求管理之间的桥梁。</p>
+              <div class='sub-question' data-question-id="q156_0" data-correct-answers="A" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q156_0_A" class="option-label">
+                            <input type="radio" id="q156_0_A" name="q156_0" value="A" class="option-input" />
+                            <span class="option-text">A. 需求基线</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q156_0_B" class="option-label">
+                            <input type="radio" id="q156_0_B" name="q156_0" value="B" class="option-input" />
+                            <span class="option-text">B. 需求标准</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q156_0_C" class="option-label">
+                            <input type="radio" id="q156_0_C" name="q156_0" value="C" class="option-input" />
+                            <span class="option-text">C. 需求用例</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q156_0_D" class="option-label">
+                            <input type="radio" id="q156_0_D" name="q156_0" value="D" class="option-input" />
+                            <span class="option-text">D. 需求分析</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q156_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q156_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>A</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>需求评审通过后的需求基线及其作用</strong>。</p><p>在需求开发阶段，会形成包括项目范围文档、用例文档、软件需求规格说明书（SRS）、以及分析模型在内的一系列成果。这些成果在经过正式的需求评审并获得批准后，会形成需求基线。</p><p><strong>问题1</strong></p><p><strong>A选项 需求基线</strong>：是指经过正式批准的需求集，作为后续设计、开发和测试的基础，是项目范围和需求内容的正式约定，正确。</p><p><strong>B选项 需求标准</strong>：不是正式的需求成果，而是制定需求过程的规则和规范，不符题意，错误。</p><p><strong>C选项 需求用例</strong>：是需求描述的一种形式，不能代表全部需求基线，错误。</p><p><strong>D选项 需求分析</strong>：是需求获取和处理的过程，不是最终文档状态，错误。</p><p>所以选择 A。</p><p><strong>问题2</strong></p><p><strong>A选项 需求用例</strong>：只是需求描述方法的一部分，不代表整体约束关系，错误。</p><p><strong>B选项 需求管理标准</strong>：是管理需求的规范，不是客户与开发方之间的协议，错误。</p><p><strong>C选项 需求约定</strong>：需求基线一旦形成，就意味着客户和开发方对功能与非功能需求的达成一致，这是一种正式约定，正确。</p><p><strong>D选项 需求变更</strong>：是需求基线后续可能的调整行为，不是基线本身的含义，错误。</p><p>所以选择 C。</p></div></details>
+                </div>
+<div class='sub-question' data-question-id="q156_1" data-correct-answers="C" data-is-multiple="false">
+                  <h4>子题2</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q156_1_A" class="option-label">
+                            <input type="radio" id="q156_1_A" name="q156_1" value="A" class="option-input" />
+                            <span class="option-text">A. 需求用例</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q156_1_B" class="option-label">
+                            <input type="radio" id="q156_1_B" name="q156_1" value="B" class="option-input" />
+                            <span class="option-text">B. 需求管理标准</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q156_1_C" class="option-label">
+                            <input type="radio" id="q156_1_C" name="q156_1" value="C" class="option-input" />
+                            <span class="option-text">C. 需求约定</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q156_1_D" class="option-label">
+                            <input type="radio" id="q156_1_D" name="q156_1" value="D" class="option-input" />
+                            <span class="option-text">D. 需求变更</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q156_1')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q156_1')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>C</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>（尚未生成，稍后重试）</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📒 软考笔记 · 需求工程</h2><p><strong>考试</strong>：系统架构设计师（高级）｜<strong>题号</strong>：2018年11月真题 第16题</p><hr class="md-hr" /><h3 class="md-heading">🧠 核心记忆口诀</h3><p>&gt; <strong>&quot;需求评审过，基线来定稿；客户开发方，约定握个手&quot;</strong></p><hr class="md-hr" /><h3 class="md-heading">📌 两个填空答案</h3><p>```</p><p>软件需求开发的最终文档经过评审批准后，</p><p>就定义了开发工作的 → 【需求基线】</p><p>在客户和开发者之间构筑了一个 → 【需求约定】</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🔑 概念拆解（顾名思义版）</h3><h4 class="md-heading">① 需求基线</h4><p>```</p><p>需求 + 基线</p><p>↓</p><p>&quot;基准线&quot;的意思</p><p>就像盖楼前画的地基线</p><p>——过了这条线，大家都要按这个来</p><p>```</p><p><strong>大白话</strong>：需求文档评审通过后，</p><p>盖了章、签了字，从此成为&quot;官方版本&quot;，</p><p>后续设计、开发、测试都以它为准。</p><p>&gt; 💡 类比你的工作：就像 Git 打了一个 <code>tag v1.0</code>，</p><p>&gt; 这个版本冻结了，后续改动要走变更流程。</p><hr class="md-hr" /><h4 class="md-heading">② 需求约定</h4><p>```</p><p>需求 + 约定</p><p>↓</p><p>&quot;约好了、定好了&quot;</p><p>客户说要什么，开发方说能做什么</p><p>双方握手确认 ✅</p><p>```</p><p><strong>大白话</strong>：需求基线形成后，</p><p>它就变成了客户和开发方之间的&quot;君子协议&quot;，</p><p>功能要做什么、不做什么，大家都认可了。</p><p>&gt; 💡 类比你的工作：就像需求评审会开完，</p><p>&gt; 产品经理和你们技术团队都签字确认的需求文档。</p><hr class="md-hr" /><h3 class="md-heading">❌ 干扰选项为什么错（一句话版）</h3><table><thead><tr><th style='text-align: left'>选项</th><th style='text-align: left'>为什么错</th></tr></thead><tbody><tr><td style='text-align: left'>需求标准</td><td style='text-align: left'>是&quot;制定规则的规则&quot;，不是具体成果</td></tr><tr><td style='text-align: left'>需求用例</td><td style='text-align: left'>只是需求的一种写法，不代表全部</td></tr><tr><td style='text-align: left'>需求分析</td><td style='text-align: left'>是&quot;做事的过程&quot;，不是&quot;做完的结果&quot;</td></tr><tr><td style='text-align: left'>需求管理标准</td><td style='text-align: left'>是管理规范，不是双方协议</td></tr><tr><td style='text-align: left'>需求变更</td><td style='text-align: left'>是基线之后才发生的事，是&quot;改&quot;不是&quot;定&quot;</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">🗺️ 知识结构图</h3><p>```</p><p>需求开发阶段</p><p>│</p><p>├── 产出物：需求文档（SRS等）</p><p>│</p><p>▼</p><p>【评审 + 批准】← 这一步是关键！</p><p>│</p><p>▼</p><p>┌─────────────────────────────┐</p><p>│         需求基线             │</p><p>│   （开发工作的&quot;官方起点&quot;）    │</p><p>└──────────┬──────────────────┘</p><p>│</p><p>│  在客户 ←→ 开发方 之间</p><p>▼</p><p>┌─────────────────────────────┐</p><p>│         需求约定             │</p><p>│  （双方对功能/非功能的共识）  │</p><p>└──────────┬──────────────────┘</p><p>│</p><p>▼</p><p>需求管理阶段（变更控制等）</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🎯 考试复习到什么程度就够了</h3><p>&gt; 标签提示：<strong>第二版教材了解即可</strong></p><p>✅ 你只需要记住：</p><ol><li><strong>需求基线</strong> = 评审通过后的&quot;冻结版需求&quot;，是开发的起点</li><li><strong>需求约定</strong> = 客户和开发方之间的&quot;共识协议&quot;</li><li>需求基线是<strong>需求开发 → 需求管理</strong>的桥梁</li></ol><p>❌ 不需要深挖：不用背需求基线的详细管理流程，不会考大题。</p><hr class="md-hr" /><h3 class="md-heading">⚡ 30秒速记版</h3><p>```</p><p>评审通过 → 需求基线（定稿，像git打tag）</p><p>客户+开发方握手 → 需求约定（共识，像签合同）</p><p>```</p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第3题（题号：18）</h3>
+              <span class='badge'>需求工程</span>
+              <span class='badge'>难度：0</span>
+            </div>
+            <p>需求管理的主要活动包括（）</p>
+              <div class='sub-question' data-question-id="q98_0" data-correct-answers="A" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q98_0_A" class="option-label">
+                            <input type="radio" id="q98_0_A" name="q98_0" value="A" class="option-input" />
+                            <span class="option-text">A. 变更控制、版本控制、需求跟踪、需求状态跟踪</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q98_0_B" class="option-label">
+                            <input type="radio" id="q98_0_B" name="q98_0" value="B" class="option-input" />
+                            <span class="option-text">B. 需求获取、变更控制、版本控制、需求跟踪</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q98_0_C" class="option-label">
+                            <input type="radio" id="q98_0_C" name="q98_0" value="C" class="option-input" />
+                            <span class="option-text">C. 需求获取、需求建模、变更控制、版本控制</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q98_0_D" class="option-label">
+                            <input type="radio" id="q98_0_D" name="q98_0" value="D" class="option-input" />
+                            <span class="option-text">D. 需求获取、需求建模、需求评审、需求跟踪</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q98_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q98_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>A</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>需求工程中需求管理的核心活动</strong>。</p><p><strong>A选项 变更控制、版本控制、需求跟踪、需求状态跟踪</strong>：完全符合需求管理的定义，正确。</p><p><strong>B选项 需求获取、变更控制、版本控制、需求跟踪</strong>：需求获取属于需求开发阶段活动，不是需求管理的主要活动，错误。</p><p><strong>C选项 需求获取、需求建模、变更控制、版本控制</strong>：需求获取和需求建模都是需求开发活动，错误。</p><p><strong>D选项 需求获取、需求建模、需求评审、需求跟踪</strong>：这些都是需求开发阶段的活动，不是需求管理的主要组成部分，错误。</p><p>因此选择 A。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📋 需求工程 · 需求管理 精华笔记</h2><hr class="md-hr" /><h3 class="md-heading">🧠 核心考点一句话记住</h3><p>&gt; <strong>需求工程 = 需求开发 + 需求管理</strong></p><p>&gt; 这两个是并列的，千万别混！</p><hr class="md-hr" /><h3 class="md-heading">🗺️ 整体结构图</h3><p>```</p><p>需求工程</p><p>├── 需求开发（&quot;做出来&quot;）</p><p>│   ├── 需求获取</p><p>│   ├── 需求建模</p><p>│   ├── 需求分析</p><p>│   └── 需求评审</p><p>│</p><p>└── 需求管理（&quot;管起来&quot;）</p><p>├── 变更控制</p><p>├── 版本控制</p><p>├── 需求跟踪</p><p>└── 需求状态跟踪</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">💡 顾名思义记忆法</h3><h4 class="md-heading">先搞清楚两个大类的本质区别</h4><table><thead><tr><th style='text-align: left'>大类</th><th style='text-align: left'>白话理解</th><th style='text-align: left'>关键词感觉</th></tr></thead><tbody><tr><td style='text-align: left'>需求<strong>开发</strong></td><td style='text-align: left'>把需求&quot;挖出来、写出来&quot;</td><td style='text-align: left'>创造、产出</td></tr><tr><td style='text-align: left'>需求<strong>管理</strong></td><td style='text-align: left'>把需求&quot;管住、跟住、控住&quot;</td><td style='text-align: left'>控制、追踪</td></tr></tbody></table><hr class="md-hr" /><h4 class="md-heading">需求管理的4个活动（答案A）逐个顾名思义</h4><p>```</p><p>┌─────────────────────────────────────────────────────┐</p><p>│              需求管理 = 管住需求别乱跑               │</p><p>├──────────┬──────────────────────────────────────────┤</p><p>│ 变更控制 │ 需求&quot;变了&quot;要走审批流程，不能随便改       │</p><p>│          │ → 你改需求？先走流程！                   │</p><p>├──────────┼──────────────────────────────────────────┤</p><p>│ 版本控制 │ 需求文档像代码一样存版本，v1.0 v2.0...   │</p><p>│          │ → 就是需求文档的 Git 管理                │</p><p>├──────────┼──────────────────────────────────────────┤</p><p>│ 需求跟踪 │ 跟踪需求有没有被实现，从头跟到尾         │</p><p>│          │ → 这条需求最终有没有变成代码？            │</p><p>├──────────┼──────────────────────────────────────────┤</p><p>│需求状态  │ 每条需求现在处于什么状态                 │</p><p>│  跟踪    │ → 待确认？开发中？已完成？已废弃？        │</p><p>└──────────┴──────────────────────────────────────────┘</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">🪤 干扰项陷阱分析（防止选错）</h3><p>&gt; 出题人最爱把&quot;需求开发&quot;的活动混进来干扰你</p><p><strong>以下这些词 = 需求开发，出现就排除</strong></p><p>```</p><p>❌ 需求获取   → 获取是&quot;挖需求&quot;，是开发阶段</p><p>❌ 需求建模   → 建模是&quot;画图描述需求&quot;，是开发阶段</p><p>❌ 需求分析   → 分析是&quot;理解需求&quot;，是开发阶段</p><p>❌ 需求评审   → 评审是&quot;检查需求对不对&quot;，是开发阶段</p><p>```</p><p><strong>只要选项里出现上面任何一个词，直接排除该选项！</strong></p><hr class="md-hr" /><h3 class="md-heading">🔑 万能口诀</h3><p>```</p><p>需求管理记四个：</p><p>变更  版本  跟踪  状态</p><p>&quot;变版跟状&quot;</p><p>谐音联想：</p><p>&quot;变（变化）版（版本）跟（跟踪）状（状态）&quot;</p><p>→ 想象你在公司管需求文档：</p><p>改了要审批（变更）</p><p>存好每个版本（版本）</p><p>跟着需求走到底（跟踪）</p><p>随时知道进展（状态）</p><p>```</p><hr class="md-hr" /><h3 class="md-heading">✅ 考试掌握程度标准</h3><p>```</p><p>【够用标准 · 不用深挖】</p><p>☑ 能区分&quot;需求开发&quot;和&quot;需求管理&quot;是两回事</p><p>☑ 背住需求管理的4个词：变更控制、版本控制、需求跟踪、需求状态跟踪</p><p>☑ 看到&quot;需求获取/建模/评审&quot;出现在选项里，立刻排除该选项</p><p>☑ 不需要深入理解每个活动的具体操作细节</p><p>```</p><p>&gt; 这道题属于<strong>纯记忆型</strong>，理解了区别之后背住口诀即可，不会出大题。</p><hr class="md-hr" /><h3 class="md-heading">🧪 自测一下</h3><p><strong>问：需求管理的主要活动是哪四个？</strong></p><p>&gt; 盖住上面，默写出来，能写对就过关 ✅</p></div></details>
+            </article>
+<article class='card question-card'>
+              <div class='question-header'>
+              <h3>第4题（题号：19）</h3>
+              <span class='badge'>需求工程</span>
+              <span class='badge'>难度：0</span>
+            </div>
+            <p>（）包括编制每个需求与系统元素之间的联系文档，这些元素包括其它需求、体系结构、设计部件、源代码模块、测试、帮助文件和文档等。</p>
+              <div class='sub-question' data-question-id="q99_0" data-correct-answers="D" data-is-multiple="false">
+                  <h4>子题1</h4>
+                  
+                  
+                  <ul class='options interactive-options'>
+                    <li class="option-item">
+                        <label for="q99_0_A" class="option-label">
+                            <input type="radio" id="q99_0_A" name="q99_0" value="A" class="option-input" />
+                            <span class="option-text">A. 需求描述</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q99_0_B" class="option-label">
+                            <input type="radio" id="q99_0_B" name="q99_0" value="B" class="option-input" />
+                            <span class="option-text">B. 需求分析</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q99_0_C" class="option-label">
+                            <input type="radio" id="q99_0_C" name="q99_0" value="C" class="option-input" />
+                            <span class="option-text">C. 需求获取</span>
+                        </label>
+                    </li>
+                
+
+                    <li class="option-item">
+                        <label for="q99_0_D" class="option-label">
+                            <input type="radio" id="q99_0_D" name="q99_0" value="D" class="option-input" />
+                            <span class="option-text">D. 需求跟踪</span>
+                        </label>
+                    </li>
+                </ul>
+                  <div class="question-actions">
+                    <button class="submit-btn" onclick="submitAnswer('q99_0')">提交答案</button>
+                    <button class="show-answer-btn" onclick="showAnswer('q99_0')" style="display: none;">查看答案</button>
+                  </div>
+                
+                  <div class="answer-feedback" style="display: none;"></div>
+                  <p class='correct-answer' style='display: none;'><strong>参考答案：</strong>D</p>
+                  
+                  <details class='rich-details answer-analysis' style='display: none;'><summary>官方解析</summary><div class='markdown'><p>本题考察的是<strong>需求管理中的需求跟踪概念</strong>。</p><p><strong>A选项 需求描述</strong>：主要是对需求进行文字化、结构化的表达，不涉及与其他系统元素的联系文档，错误。</p><p><strong>B选项 需求分析</strong>：用于分析和澄清需求，确定需求的优先级和可行性，不是直接建立需求与系统元素的映射关系，错误。</p><p><strong>C选项 需求获取</strong>：通过访谈、问卷、观察等方式收集用户需求，不涉及与系统元素的联系文档，错误。</p><p><strong>D选项 需求跟踪</strong>：通过建立需求与其他系统元素（需求、架构、设计、代码、测试、文档等）的依赖关系来确保需求得到正确实现和验证，通常使用需求跟踪矩阵来完成，正确。</p><p>因此选择 D。</p></div></details>
+                </div>
+              <details class='rich-details'><summary>AI 记忆笔记</summary><div class='markdown'><h2 class="md-heading">📚 软考高级·系统架构设计师 备考笔记</h2><h3 class="md-heading">🎯 题目定位</h3><p>&gt; 2018年11月真题 · 第19题 · 需求工程</p><hr class="md-hr" /><h3 class="md-heading">🧠 核心答案速记</h3><p><strong>答案：D · 需求跟踪</strong></p><hr class="md-hr" /><h3 class="md-heading">💡 顾名思义记忆法（中文内核）</h3><h4 class="md-heading">&quot;需求跟踪&quot; = 跟着需求一路追踪到底</h4><p>想象你是一个<strong>侦探</strong>，拿到一份&quot;需求清单&quot;后，你要一路追踪：</p><p>```</p><p>需求清单</p><p>↓ 追踪到</p><p>系统架构设计</p><p>↓ 追踪到</p><p>代码模块</p><p>↓ 追踪到</p><p>测试用例</p><p>↓ 追踪到</p><p>帮助文档</p><p>```</p><p><strong>&quot;跟踪&quot;两个字就说明了一切：跟着需求走，追踪它去了哪里、被谁实现了</strong></p><hr class="md-hr" /><h3 class="md-heading">📖 四个选项·白话解释</h3><p>&gt; ⚠️ 以下解释完全不用专业名词解释专业名词</p><table><thead><tr><th style='text-align: left'>选项</th><th style='text-align: left'>名称</th><th style='text-align: left'>白话是干什么的</th><th style='text-align: left'>为什么不选</th></tr></thead><tbody><tr><td style='text-align: left'>A</td><td style='text-align: left'>需求描述</td><td style='text-align: left'><strong>把需求写清楚</strong>，就像写说明书，把要做什么用文字说明白</td><td style='text-align: left'>只是&quot;写清楚&quot;，没有去追踪联系</td></tr><tr><td style='text-align: left'>B</td><td style='text-align: left'>需求分析</td><td style='text-align: left'><strong>把需求想清楚</strong>，分析哪些能做、哪些优先做、哪些有问题</td><td style='text-align: left'>只是&quot;想清楚&quot;，没有去追踪联系</td></tr><tr><td style='text-align: left'>C</td><td style='text-align: left'>需求获取</td><td style='text-align: left'><strong>把需求问出来</strong>，去找用户聊天、发问卷、观察用户行为，收集他们想要什么</td><td style='text-align: left'>只是&quot;问出来&quot;，还没开始追踪</td></tr><tr><td style='text-align: left'>D</td><td style='text-align: left'>需求跟踪</td><td style='text-align: left'><strong>把需求和所有相关东西建立联系档案</strong>，记录这个需求被哪段代码实现、被哪个测试验证、在哪个文档里有说明</td><td style='text-align: left'>✅ 正确答案</td></tr></tbody></table><hr class="md-hr" /><h3 class="md-heading">🗺️ 需求工程全流程·顺序记忆</h3><p>```</p><p>第一步：需求获取</p><p>└─ 【问】去问用户要什么</p><p>↓</p><p>第二步：需求分析</p><p>└─ 【想】分析这些需求合不合理、能不能做</p><p>↓</p><p>第三步：需求描述</p><p>└─ 【写】把确认好的需求写成文档</p><p>↓</p><p>第四步：需求跟踪</p><p>└─ 【追】追踪需求有没有被正确实现</p><p>```</p><p><strong>口诀：问 → 想 → 写 → 追</strong></p><hr class="md-hr" /><h3 class="md-heading">🔑 需求跟踪·核心要点</h3><p><strong>需求跟踪矩阵</strong>（考试高频词）</p><p>白话理解：就是一张<strong>大表格</strong></p><p>```</p><p>┌──────────┬──────┬──────┬──────┬──────┐</p><p>│  需求编号 │ 架构 │ 代码 │ 测试 │ 文档 │</p><p>├──────────┼──────┼──────┼──────┼──────┤</p><p>│  需求001  │ 模块A│ 类B  │ 用例C│ 第3章│</p><p>│  需求002  │ 模块D│ 类E  │ 用例F│ 第5章│</p><p>└──────────┴──────┴──────┴──────┴──────┘</p><p>```</p><p>这张表就是在<strong>追踪</strong>每个需求的&quot;下落&quot;</p><hr class="md-hr" /><h3 class="md-heading">✅ 复习到什么程度可以考试</h3><p><strong>这道题只需要记住一件事：</strong></p><p>&gt; 需求跟踪 = 建立需求与其他所有东西（代码、测试、文档、架构）之间的<strong>联系档案</strong></p><p><strong>判断标准：</strong></p><ul><li>看到题目里出现 <strong>&quot;联系文档&quot;、&quot;依赖关系&quot;、&quot;追踪&quot;、&quot;映射&quot;</strong> 这类词 → 选需求跟踪</li><li>能区分四个选项各自干什么 → 足够应试</li></ul><p><strong>不需要深入研究</strong>需求跟踪矩阵的具体格式，认识概念即可。</p><hr class="md-hr" /><p>&gt; 🏷️ 标签：<strong>第二版教材必须掌握</strong> · 高频考点</p></div></details>
+            </article></div>
+    </section>
+  </main>
+  <script>
+    const DATA = {"meta": {"paper_name": "2018年11月系统架构真题", "subject": 0, "type": 0, "item_count": 4}, "questions": [{"id": 237, "index": 1, "sort": 18, "knowledge_point": "需求工程", "prompt": "需求管理是一个对系统需求变更、了解和控制的过程。以下活动中，（）不属于需求管理的主要活动。", "difficulty": 1, "tags": ["第二版教材", "了解即可"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "文档管理", "is_correct": true}, {"label": "B", "text": "需求跟踪", "is_correct": false}, {"label": "C", "text": "版本控制", "is_correct": false}, {"label": "D", "text": "变更控制", "is_correct": false}], "correct_letters": ["A"], "correct_texts": ["文档管理"], "official_analysis": "本题考察的是**需求管理的三大核心活动**。\n需求管理的核心任务是在整个软件开发生命周期中**跟踪、控制和管理需求的变更和状态**，确保系统按需构建并满足用户需求。需求管理主要包括以下三个方面：\n**1. 变更控制**：确保对需求变更进行严格的审批、记录与跟踪，防止无序变更，是需求管理的基础机制之一。\n**2. 版本控制**：用于识别不同版本的需求文档，记录需求在时间上的演变，支持对不同版本间的比较和回退。\n**3. 需求跟踪**：确保每一个需求都能从提出到实现、测试都有迹可循，即“需求的前向与后向可追溯性”。\n**A选项文档管理**：尽管文档管理对整个项目来说很重要，但它**并不是**需求管理的核心组成部分，而是配置管理、项目管理中更广泛的一个内容，**正确**。\n**B选项需求跟踪**：是需求管理的重要活动之一，错误。\n**C选项版本控制**：用于管理需求文档及其变更，属于需求管理内容，错误。\n**D选项变更控制**：管理需求变更流程的重要机制，属于需求管理内容，错误。\n因此，选项 **A. 文档管理** 正确。"}], "model_response": "# 📒 软考笔记 · 需求管理三大核心活动\n\n---\n\n## 🧠 顾名思义记忆法\n\n> 需求管理 = 管好\"需求\"这个东西，让它**变得可控、有迹可查、版本清晰**\n\n把需求管理想象成你在公司管理一个 **Java 项目的需求池**：\n\n---\n\n## 🔑 三大核心活动（背这三个就够了）\n\n### 1. 变更控制 → \"变了要管\"\n> 需求变了，不能随便改，要**走审批流程、留记录**\n\n💡 类比：就像你们公司改需求要走 Jira 工单，不能产品经理口头说一句就改代码\n\n---\n\n### 2. 版本控制 → \"版本要留\"\n> 需求文档也像代码一样，**每次改动都要留版本**，能看历史、能回退\n\n💡 类比：就是需求文档的 Git，v1.0、v1.1、v2.0 都有记录\n\n---\n\n### 3. 需求跟踪 → \"从头跟到尾\"\n> 一个需求从**提出 → 设计 → 开发 → 测试**，每一步都能追溯\n\n💡 类比：就像快递单号，能查到这个需求现在在哪个环节，有没有被实现\n\n---\n\n## ❌ 文档管理 为什么不属于需求管理？\n\n```\n文档管理 → 属于【配置管理】或【项目管理】的范畴\n                ↑\n         管的是\"所有文档\"，范围太大\n         不是专门针对\"需求\"的管理活动\n```\n\n> 顾名思义：**需求管理** = 只管\"需求\"相关的事\n> 文档管理管的是所有文档（设计文档、会议记录、合同...），不专属于需求\n\n---\n\n## 🗂️ 字符图总结\n\n```\n需求管理\n├── ✅ 变更控制   → 需求变了，要审批+记录\n├── ✅ 版本控制   → 需求文档要有版本历史\n└── ✅ 需求跟踪   → 需求从提出到实现全程追踪\n\n❌ 文档管理   → 不属于！这是配置管理/项目管理的事\n```\n\n---\n\n## 🎯 考试掌握程度\n\n> 标签：**了解即可**（第二版教材）\n\n只需记住：\n\n- 需求管理 = **变更控制 + 版本控制 + 需求跟踪** 这三件事\n- 文档管理不在其中，因为它范围太广，不专属于需求\n- 遇到选\"不属于需求管理\"的题，优先排查**范围过大、不专属于需求**的选项\n\n---\n\n## 🔁 快速回忆口诀\n\n```\n需求管理三件事：\n变了要管（变更控制）\n版本要留（版本控制）\n从头跟到尾（需求跟踪）\n\n文档管理不在列，它管太宽不专一\n```"}, {"id": 156, "index": 2, "sort": 16, "knowledge_point": "需求工程", "prompt": "软件需求开发的最终文档经过评审批准后，就定义了开发工作的（），它在客户和开发者之间构筑了产品功能需求和非功能需求的一个（）， 是需求开发和需求管理之间的桥梁。", "difficulty": 2, "tags": ["第二版教材", "了解即可"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "需求基线", "is_correct": true}, {"label": "B", "text": "需求标准", "is_correct": false}, {"label": "C", "text": "需求用例", "is_correct": false}, {"label": "D", "text": "需求分析", "is_correct": false}], "correct_letters": ["A"], "correct_texts": ["需求基线"], "official_analysis": "本题考察的是**需求评审通过后的需求基线及其作用**。\n在需求开发阶段，会形成包括项目范围文档、用例文档、软件需求规格说明书（SRS）、以及分析模型在内的一系列成果。这些成果在经过正式的需求评审并获得批准后，会形成需求基线。\n**问题1**\n**A选项 需求基线**：是指经过正式批准的需求集，作为后续设计、开发和测试的基础，是项目范围和需求内容的正式约定，正确。\n**B选项 需求标准**：不是正式的需求成果，而是制定需求过程的规则和规范，不符题意，错误。\n**C选项 需求用例**：是需求描述的一种形式，不能代表全部需求基线，错误。\n**D选项 需求分析**：是需求获取和处理的过程，不是最终文档状态，错误。\n所以选择 A。\n\n**问题2**\n**A选项 需求用例**：只是需求描述方法的一部分，不代表整体约束关系，错误。\n**B选项 需求管理标准**：是管理需求的规范，不是客户与开发方之间的协议，错误。\n**C选项 需求约定**：需求基线一旦形成，就意味着客户和开发方对功能与非功能需求的达成一致，这是一种正式约定，正确。\n**D选项 需求变更**：是需求基线后续可能的调整行为，不是基线本身的含义，错误。\n所以选择 C。"}, {"label": "2", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "需求用例", "is_correct": false}, {"label": "B", "text": "需求管理标准", "is_correct": false}, {"label": "C", "text": "需求约定", "is_correct": true}, {"label": "D", "text": "需求变更", "is_correct": false}], "correct_letters": ["C"], "correct_texts": ["需求约定"], "official_analysis": ""}], "model_response": "# 📒 软考笔记 · 需求工程\n\n**考试**：系统架构设计师（高级）｜**题号**：2018年11月真题 第16题\n\n---\n\n## 🧠 核心记忆口诀\n\n> **\"需求评审过，基线来定稿；客户开发方，约定握个手\"**\n\n---\n\n## 📌 两个填空答案\n\n```\n软件需求开发的最终文档经过评审批准后，\n就定义了开发工作的 → 【需求基线】\n在客户和开发者之间构筑了一个 → 【需求约定】\n```\n\n---\n\n## 🔑 概念拆解（顾名思义版）\n\n### ① 需求基线\n```\n需求 + 基线\n         ↓\n    \"基准线\"的意思\n    就像盖楼前画的地基线\n    ——过了这条线，大家都要按这个来\n```\n**大白话**：需求文档评审通过后，\n盖了章、签了字，从此成为\"官方版本\"，\n后续设计、开发、测试都以它为准。\n\n> 💡 类比你的工作：就像 Git 打了一个 `tag v1.0`，\n> 这个版本冻结了，后续改动要走变更流程。\n\n---\n\n### ② 需求约定\n```\n需求 + 约定\n         ↓\n    \"约好了、定好了\"\n    客户说要什么，开发方说能做什么\n    双方握手确认 ✅\n```\n**大白话**：需求基线形成后，\n它就变成了客户和开发方之间的\"君子协议\"，\n功能要做什么、不做什么，大家都认可了。\n\n> 💡 类比你的工作：就像需求评审会开完，\n> 产品经理和你们技术团队都签字确认的需求文档。\n\n---\n\n## ❌ 干扰选项为什么错（一句话版）\n\n| 选项 | 为什么错 |\n|------|----------|\n| 需求标准 | 是\"制定规则的规则\"，不是具体成果 |\n| 需求用例 | 只是需求的一种写法，不代表全部 |\n| 需求分析 | 是\"做事的过程\"，不是\"做完的结果\" |\n| 需求管理标准 | 是管理规范，不是双方协议 |\n| 需求变更 | 是基线之后才发生的事，是\"改\"不是\"定\" |\n\n---\n\n## 🗺️ 知识结构图\n\n```\n需求开发阶段\n    │\n    ├── 产出物：需求文档（SRS等）\n    │\n    ▼\n【评审 + 批准】← 这一步是关键！\n    │\n    ▼\n┌─────────────────────────────┐\n│         需求基线             │\n│   （开发工作的\"官方起点\"）    │\n└──────────┬──────────────────┘\n           │\n           │  在客户 ←→ 开发方 之间\n           ▼\n┌─────────────────────────────┐\n│         需求约定             │\n│  （双方对功能/非功能的共识）  │\n└──────────┬──────────────────┘\n           │\n           ▼\n    需求管理阶段（变更控制等）\n```\n\n---\n\n## 🎯 考试复习到什么程度就够了\n\n> 标签提示：**第二版教材了解即可**\n\n✅ 你只需要记住：\n\n1. **需求基线** = 评审通过后的\"冻结版需求\"，是开发的起点\n2. **需求约定** = 客户和开发方之间的\"共识协议\"\n3. 需求基线是**需求开发 → 需求管理**的桥梁\n\n❌ 不需要深挖：不用背需求基线的详细管理流程，不会考大题。\n\n---\n\n## ⚡ 30秒速记版\n\n```\n评审通过 → 需求基线（定稿，像git打tag）\n客户+开发方握手 → 需求约定（共识，像签合同）\n```"}, {"id": 98, "index": 3, "sort": 18, "knowledge_point": "需求工程", "prompt": "需求管理的主要活动包括（）", "difficulty": 0, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "变更控制、版本控制、需求跟踪、需求状态跟踪", "is_correct": true}, {"label": "B", "text": "需求获取、变更控制、版本控制、需求跟踪", "is_correct": false}, {"label": "C", "text": "需求获取、需求建模、变更控制、版本控制", "is_correct": false}, {"label": "D", "text": "需求获取、需求建模、需求评审、需求跟踪", "is_correct": false}], "correct_letters": ["A"], "correct_texts": ["变更控制、版本控制、需求跟踪、需求状态跟踪"], "official_analysis": "本题考察的是**需求工程中需求管理的核心活动**。\n**A选项 变更控制、版本控制、需求跟踪、需求状态跟踪**：完全符合需求管理的定义，正确。\n**B选项 需求获取、变更控制、版本控制、需求跟踪**：需求获取属于需求开发阶段活动，不是需求管理的主要活动，错误。\n**C选项 需求获取、需求建模、变更控制、版本控制**：需求获取和需求建模都是需求开发活动，错误。\n**D选项 需求获取、需求建模、需求评审、需求跟踪**：这些都是需求开发阶段的活动，不是需求管理的主要组成部分，错误。\n因此选择 A。"}], "model_response": "# 📋 需求工程 · 需求管理 精华笔记\n\n---\n\n## 🧠 核心考点一句话记住\n\n> **需求工程 = 需求开发 + 需求管理**\n> 这两个是并列的，千万别混！\n\n---\n\n## 🗺️ 整体结构图\n\n```\n需求工程\n├── 需求开发（\"做出来\"）\n│   ├── 需求获取\n│   ├── 需求建模\n│   ├── 需求分析\n│   └── 需求评审\n│\n└── 需求管理（\"管起来\"）\n    ├── 变更控制\n    ├── 版本控制\n    ├── 需求跟踪\n    └── 需求状态跟踪\n```\n\n---\n\n## 💡 顾名思义记忆法\n\n### 先搞清楚两个大类的本质区别\n\n| 大类 | 白话理解 | 关键词感觉 |\n|------|----------|------------|\n| 需求**开发** | 把需求\"挖出来、写出来\" | 创造、产出 |\n| 需求**管理** | 把需求\"管住、跟住、控住\" | 控制、追踪 |\n\n---\n\n### 需求管理的4个活动（答案A）逐个顾名思义\n\n```\n┌─────────────────────────────────────────────────────┐\n│              需求管理 = 管住需求别乱跑               │\n├──────────┬──────────────────────────────────────────┤\n│ 变更控制 │ 需求\"变了\"要走审批流程，不能随便改       │\n│          │ → 你改需求？先走流程！                   │\n├──────────┼──────────────────────────────────────────┤\n│ 版本控制 │ 需求文档像代码一样存版本，v1.0 v2.0...   │\n│          │ → 就是需求文档的 Git 管理                │\n├──────────┼──────────────────────────────────────────┤\n│ 需求跟踪 │ 跟踪需求有没有被实现，从头跟到尾         │\n│          │ → 这条需求最终有没有变成代码？            │\n├──────────┼──────────────────────────────────────────┤\n│需求状态  │ 每条需求现在处于什么状态                 │\n│  跟踪    │ → 待确认？开发中？已完成？已废弃？        │\n└──────────┴──────────────────────────────────────────┘\n```\n\n---\n\n## 🪤 干扰项陷阱分析（防止选错）\n\n> 出题人最爱把\"需求开发\"的活动混进来干扰你\n\n**以下这些词 = 需求开发，出现就排除**\n\n```\n❌ 需求获取   → 获取是\"挖需求\"，是开发阶段\n❌ 需求建模   → 建模是\"画图描述需求\"，是开发阶段  \n❌ 需求分析   → 分析是\"理解需求\"，是开发阶段\n❌ 需求评审   → 评审是\"检查需求对不对\"，是开发阶段\n```\n\n**只要选项里出现上面任何一个词，直接排除该选项！**\n\n---\n\n## 🔑 万能口诀\n\n```\n需求管理记四个：\n变更  版本  跟踪  状态\n\"变版跟状\"\n\n谐音联想：\n\"变（变化）版（版本）跟（跟踪）状（状态）\"\n→ 想象你在公司管需求文档：\n  改了要审批（变更）\n  存好每个版本（版本）  \n  跟着需求走到底（跟踪）\n  随时知道进展（状态）\n```\n\n---\n\n## ✅ 考试掌握程度标准\n\n```\n【够用标准 · 不用深挖】\n\n☑ 能区分\"需求开发\"和\"需求管理\"是两回事\n☑ 背住需求管理的4个词：变更控制、版本控制、需求跟踪、需求状态跟踪\n☑ 看到\"需求获取/建模/评审\"出现在选项里，立刻排除该选项\n☑ 不需要深入理解每个活动的具体操作细节\n```\n\n> 这道题属于**纯记忆型**，理解了区别之后背住口诀即可，不会出大题。\n\n---\n\n## 🧪 自测一下\n\n**问：需求管理的主要活动是哪四个？**\n\n> 盖住上面，默写出来，能写对就过关 ✅"}, {"id": 99, "index": 4, "sort": 19, "knowledge_point": "需求工程", "prompt": "（）包括编制每个需求与系统元素之间的联系文档，这些元素包括其它需求、体系结构、设计部件、源代码模块、测试、帮助文件和文档等。", "difficulty": 0, "tags": ["第二版教材", "必须掌握"], "sub_questions": [{"label": "1", "question": "", "correct_answer": "", "options": [{"label": "A", "text": "需求描述", "is_correct": false}, {"label": "B", "text": "需求分析", "is_correct": false}, {"label": "C", "text": "需求获取", "is_correct": false}, {"label": "D", "text": "需求跟踪", "is_correct": true}], "correct_letters": ["D"], "correct_texts": ["需求跟踪"], "official_analysis": "本题考察的是**需求管理中的需求跟踪概念**。\n**A选项 需求描述**：主要是对需求进行文字化、结构化的表达，不涉及与其他系统元素的联系文档，错误。\n**B选项 需求分析**：用于分析和澄清需求，确定需求的优先级和可行性，不是直接建立需求与系统元素的映射关系，错误。\n**C选项 需求获取**：通过访谈、问卷、观察等方式收集用户需求，不涉及与系统元素的联系文档，错误。\n**D选项 需求跟踪**：通过建立需求与其他系统元素（需求、架构、设计、代码、测试、文档等）的依赖关系来确保需求得到正确实现和验证，通常使用需求跟踪矩阵来完成，正确。\n因此选择 D。"}], "model_response": "# 📚 软考高级·系统架构设计师 备考笔记\n\n## 🎯 题目定位\n> 2018年11月真题 · 第19题 · 需求工程\n\n---\n\n## 🧠 核心答案速记\n\n**答案：D · 需求跟踪**\n\n---\n\n## 💡 顾名思义记忆法（中文内核）\n\n### \"需求跟踪\" = 跟着需求一路追踪到底\n\n想象你是一个**侦探**，拿到一份\"需求清单\"后，你要一路追踪：\n\n```\n需求清单\n   ↓ 追踪到\n系统架构设计\n   ↓ 追踪到\n代码模块\n   ↓ 追踪到\n测试用例\n   ↓ 追踪到\n帮助文档\n```\n\n**\"跟踪\"两个字就说明了一切：跟着需求走，追踪它去了哪里、被谁实现了**\n\n---\n\n## 📖 四个选项·白话解释\n\n> ⚠️ 以下解释完全不用专业名词解释专业名词\n\n| 选项 | 名称 | 白话是干什么的 | 为什么不选 |\n|------|------|----------------|------------|\n| A | 需求描述 | **把需求写清楚**，就像写说明书，把要做什么用文字说明白 | 只是\"写清楚\"，没有去追踪联系 |\n| B | 需求分析 | **把需求想清楚**，分析哪些能做、哪些优先做、哪些有问题 | 只是\"想清楚\"，没有去追踪联系 |\n| C | 需求获取 | **把需求问出来**，去找用户聊天、发问卷、观察用户行为，收集他们想要什么 | 只是\"问出来\"，还没开始追踪 |\n| D | 需求跟踪 | **把需求和所有相关东西建立联系档案**，记录这个需求被哪段代码实现、被哪个测试验证、在哪个文档里有说明 | ✅ 正确答案 |\n\n---\n\n## 🗺️ 需求工程全流程·顺序记忆\n\n```\n第一步：需求获取\n    └─ 【问】去问用户要什么\n         ↓\n第二步：需求分析\n    └─ 【想】分析这些需求合不合理、能不能做\n         ↓\n第三步：需求描述\n    └─ 【写】把确认好的需求写成文档\n         ↓\n第四步：需求跟踪\n    └─ 【追】追踪需求有没有被正确实现\n```\n\n**口诀：问 → 想 → 写 → 追**\n\n---\n\n## 🔑 需求跟踪·核心要点\n\n**需求跟踪矩阵**（考试高频词）\n\n白话理解：就是一张**大表格**\n\n```\n┌──────────┬──────┬──────┬──────┬──────┐\n│  需求编号 │ 架构 │ 代码 │ 测试 │ 文档 │\n├──────────┼──────┼──────┼──────┼──────┤\n│  需求001  │ 模块A│ 类B  │ 用例C│ 第3章│\n│  需求002  │ 模块D│ 类E  │ 用例F│ 第5章│\n└──────────┴──────┴──────┴──────┴──────┘\n```\n\n这张表就是在**追踪**每个需求的\"下落\"\n\n---\n\n## ✅ 复习到什么程度可以考试\n\n**这道题只需要记住一件事：**\n\n> 需求跟踪 = 建立需求与其他所有东西（代码、测试、文档、架构）之间的**联系档案**\n\n**判断标准：**\n- 看到题目里出现 **\"联系文档\"、\"依赖关系\"、\"追踪\"、\"映射\"** 这类词 → 选需求跟踪\n- 能区分四个选项各自干什么 → 足够应试\n\n**不需要深入研究**需求跟踪矩阵的具体格式，认识概念即可。\n\n---\n\n> 🏷️ 标签：**第二版教材必须掌握** · 高频考点"}], "knowledge_points": [{"name": "需求工程", "related_questions": ["237", "156", "98", "99"], "summary_markdown": "# 需求工程 · 结构化知识点清单\n\n---\n\n## 知识点名称\n\n需求工程（需求开发 + 需求管理）\n\n---\n\n## 核心定义/结论\n\n需求工程分为两大并列模块，不可混淆：\n\n```\n需求工程\n├── 需求开发（\"做出来\"）\n│   ├── 需求获取   → 问出来\n│   ├── 需求分析   → 想清楚\n│   ├── 需求建模   → 画出来\n│   └── 需求评审   → 检查对不对\n│\n└── 需求管理（\"管起来\"）\n    ├── 变更控制       → 改了要走审批\n    ├── 版本控制       → 存好每个版本\n    ├── 需求跟踪       → 跟着需求追到底\n    └── 需求状态跟踪   → 随时知道进展\n```\n\n两个关键概念：\n- 需求基线：需求文档评审通过后的\"冻结版本\"，是开发工作的正式起点，相当于打了 git tag\n- 需求约定：需求基线形成后，客户与开发方之间对功能/非功能需求的正式共识\n\n---\n\n## 典型题型与解题要领\n\n题型1：判断某活动\"属于/不属于\"需求管理\n\n解题要领：看到\"需求获取、需求建模、需求分析、需求评审\"任意一个词出现在选项里，直接排除该选项。这四个词全属于需求开发，不属于需求管理。\n\n题型2：填空/单选考需求基线和需求约定\n\n解题要领：\n- \"评审批准后定义了开发工作的 ___\" → 需求基线\n- \"客户和开发者之间构筑的 ___\" → 需求约定\n\n题型3：考需求跟踪的定义\n\n解题要领：题干出现\"联系文档、依赖关系、追踪、映射、需求与系统元素之间\"等词 → 选需求跟踪。需求跟踪的本质是建立需求与架构、代码、测试、文档之间的可追溯关系。\n\n---\n\n## 易错点与注意事项\n\n1. 需求开发 vs 需求管理 最容易混淆\n   - 需求评审属于需求开发，不是需求管理\n   - 文档管理属于配置管理/项目管理，不属于需求管理\n\n2. 需求管理是三个还是四个活动\n   - 早期教材说三个：变更控制、版本控制、需求跟踪\n   - 完整版是四个：加上需求状态跟踪\n   - 遇到选项只有三个时，选包含\"变更控制、版本控制、需求跟踪\"的那个\n\n3. 需求跟踪 ≠ 需求状态跟踪\n   - 需求跟踪：建立需求与其他系统元素的联系（横向追踪）\n   - 需求状态跟踪：追踪单条需求当前处于哪个阶段（纵向状态）\n\n4. 需求基线是桥梁\n   - 它连接的是需求开发阶段和需求管理阶段，不是两个开发阶段之间的桥梁\n\n---\n\n## 推荐复习顺序\n\n1. 先建立两大模块的框架区分（需求开发 vs 需求管理），这是所有题目的判断基础\n\n2. 背住需求管理四个活动的口诀：\"变版跟状\"（变更、版本、跟踪、状态）\n\n3. 理解需求基线和需求约定的含义，记住它们在流程中的位置\n\n4. 理解需求跟踪的定义，能识别题干中的关键描述词\n\n5. 做真题验证，重点练习排除干扰项的能力（尤其是\"需求获取/评审\"混入需求管理选项的题型）"}], "generated_at": "2026-02-26 23:26:57"};
+
+    // ===== Theme toggle =====
+    (function() {
+      const THEME_KEY = 'quiz_theme';
+      const root = document.documentElement;
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved) root.setAttribute('data-theme', saved);
+      function updateBtn() {
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        const isLight = root.getAttribute('data-theme') === 'light';
+        btn.textContent = isLight ? '🌙 暗色' : '☀️ 亮色';
+        btn.setAttribute('aria-label', isLight ? '切换到暗色模式' : '切换到亮色模式');
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        updateBtn();
+        document.getElementById('themeToggle').addEventListener('click', () => {
+          const isLight = root.getAttribute('data-theme') === 'light';
+          const next = isLight ? 'dark' : 'light';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem(THEME_KEY, next);
+          updateBtn();
+        });
+      });
+    })();
+
+    function renderBasicMarkdown(raw = '') {
+      if (!raw) return '<p>（尚未生成，稍后重试）</p>';
+      const normalized = raw.split('\r\n').join('\n').split('\r').join('\n');
+      const lines = normalized.split('\n');
+      const htmlParts = [];
+      let inUl = false;
+      let inOl = false;
+      const closeLists = () => {
+        if (inUl) { htmlParts.push('</ul>'); inUl = false; }
+        if (inOl) { htmlParts.push('</ol>'); inOl = false; }
+      };
+      const formatInline = (text) => {
+        const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return escaped
+          .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;" />')
+          .replace(/!(https?:\/\/[^\s<>"'\[\]]+(?:\.[a-zA-Z]{2,}|\/[^\s<>"'\[\]]*)?)/g, '<img src="$1" alt="图片" style="max-width: 100%; height: auto;" />')
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/__(.+?)__/g, '<strong>$1</strong>')
+          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          .replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+          .replace(/(?<!_)_(?!_)(.+?)(?<!_)_(?!_)/g, '<em>$1</em>');
+      };
+      const renderTable = (rows) => {
+        if (!rows.length) return '';
+        const splitRow = (row) => row.replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => formatInline(cell.trim()));
+        const headerCells = splitRow(rows[0]);
+        let alignments = Array(headerCells.length).fill('left');
+        let bodyRows = rows.slice(1);
+        if (bodyRows.length) {
+          const alignParts = bodyRows[0].replace(/^\|/, '').replace(/\|$/, '').split('|').map((cell) => cell.trim());
+          const isDivider = alignParts.length === headerCells.length && alignParts.every((cell) => /^:?-{3,}:?$/.test(cell));
+          if (isDivider) {
+            alignments = alignParts.map((cell) => {
+              const left = cell.startsWith(':');
+              const right = cell.endsWith(':');
+              if (left && right) return 'center';
+              if (right) return 'right';
+              return 'left';
+            });
+            bodyRows = bodyRows.slice(1);
+          }
+        }
+        const headerHtml = '<tr>' + headerCells.map((cell, idx) => `<th style="text-align: ${alignments[idx] || 'left'}">${cell}</th>`).join('') + '</tr>';
+        const bodyHtml = bodyRows.map((row) => {
+          const cells = splitRow(row);
+          return '<tr>' + cells.map((cell, idx) => `<td style="text-align: ${alignments[idx] || 'left'}">${cell}</td>`).join('') + '</tr>';
+        }).join('');
+        const filler = '<tr>' + headerCells.map((_, idx) => `<td style="text-align: ${alignments[idx] || 'left'}">&nbsp;</td>`).join('') + '</tr>';
+        return `<table><thead>${headerHtml}</thead><tbody>${bodyHtml || filler}</tbody></table>`;
+      };
+      for (let i = 0; i < lines.length; i += 1) {
+        const trimmed = lines[i].trim();
+        if (!trimmed) { closeLists(); continue; }
+        const headingMatch = trimmed.match(/^(#(1, 4))\s+(.+)$/);
+        if (headingMatch) {
+          closeLists();
+          const level = headingMatch[1].length + 1; // h2-h5 (h1 reserved for page)
+          const tag = 'h' + Math.min(level, 5);
+          htmlParts.push(`<${tag} class="md-heading">${formatInline(headingMatch[2])}</${tag}>`);
+          continue;
+        }
+        if (trimmed === '---' || trimmed === '***' || trimmed === '___') {
+          closeLists();
+          htmlParts.push('<hr class="md-hr" />');
+          continue;
+        }
+        if (/^\|.+\|$/.test(trimmed)) {
+          closeLists();
+          const tableRows = [];
+          let j = i;
+          while (j < lines.length && /^\|.+\|$/.test(lines[j].trim())) {
+            tableRows.push(lines[j].trim());
+            j += 1;
+          }
+          if (tableRows.length) { htmlParts.push(renderTable(tableRows)); }
+          i = j - 1;
+          continue;
+        }
+        if (/^\d+\.\s+/.test(trimmed)) {
+          if (!inOl) { closeLists(); htmlParts.push('<ol>'); inOl = true; }
+          htmlParts.push('<li>' + formatInline(trimmed.replace(/^\d+\.\s+/, '')) + '</li>');
+          continue;
+        }
+        if (/^[-*+]\s+/.test(trimmed)) {
+          if (!inUl) { closeLists(); htmlParts.push('<ul>'); inUl = true; }
+          htmlParts.push('<li>' + formatInline(trimmed.slice(1).trim()) + '</li>');
+          continue;
+        }
+        closeLists();
+        htmlParts.push('<p>' + formatInline(trimmed) + '</p>');
+      }
+      closeLists();
+      const joined = htmlParts.filter(Boolean).join('');
+      return joined || '<p>（尚未生成，稍后重试）</p>';
+    }
+
+    const md = window.markdownit
+      ? window.markdownit({html: true, linkify: true, breaks: true})
+      : { render: (raw = '') => renderBasicMarkdown(raw) };
+    if (md && typeof md.enable === 'function') {
+      md.enable('table');
+      md.enable('strikethrough');
+    }
+
+    const STORAGE_KEY = 'quiz_progress_' + btoa(unescape(encodeURIComponent(document.title))).slice(0, 32);
+
+    const state = {
+      knowledge: 'all',
+      search: '',
+      currentQuestionIndex: 0,
+      quizMode: true,
+      stats: { total: 0, answered: 0, correct: 0, incorrect: 0 },
+      answeredQuestions: {}
+    };
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          currentQuestionIndex: state.currentQuestionIndex,
+          quizMode: state.quizMode,
+          knowledge: state.knowledge,
+          answeredQuestions: state.answeredQuestions,
+          scrollY: window.scrollY
+        }));
+      } catch(e) {}
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const p = JSON.parse(saved);
+        if (typeof p.currentQuestionIndex === 'number') state.currentQuestionIndex = p.currentQuestionIndex;
+        if (typeof p.quizMode === 'boolean') state.quizMode = p.quizMode;
+        if (p.knowledge) state.knowledge = p.knowledge;
+        if (p.answeredQuestions) state.answeredQuestions = p.answeredQuestions;
+        if (typeof p.scrollY === 'number') state._savedScrollY = p.scrollY;
+      } catch(e) {}
+    }
+
+    function restoreAnsweredState(questionId) {
+      const saved = state.answeredQuestions[questionId];
+      if (!saved) return;
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
+      const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      inputs.forEach(input => {
+        if (saved.selected.includes(input.value)) input.checked = true;
+        input.disabled = true;
+        const optionItem = input.closest('.option-item');
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
+      });
+      const feedbackDiv = questionDiv.querySelector('.answer-feedback');
+      if (feedbackDiv) {
+        feedbackDiv.style.display = 'block';
+        feedbackDiv.className = `answer-feedback ${saved.isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackDiv.textContent = saved.isCorrect ? '✓ 回答正确！' : '✗ 回答错误';
+      }
+      const submitBtn = questionDiv.querySelector('.submit-btn');
+      if (submitBtn) submitBtn.style.display = 'none';
+      if (!saved.isCorrect) {
+        const correctAnswerP = questionDiv.querySelector('.correct-answer');
+        if (correctAnswerP) correctAnswerP.style.display = 'block';
+        const analysisDetails = questionDiv.querySelector('.answer-analysis');
+        if (analysisDetails) { analysisDetails.style.display = 'block'; analysisDetails.open = true; }
+      }
+    }
+
+    function renderMarkdownWithMermaid(content) {
+      if (!content) return '<p>（尚未生成，稍后重试）</p>';
+      const mermaidRegex = /```mermaid\n([\s\S]*?)\n```/g;
+      let processed = content.replace(mermaidRegex, (match, graphDef) => `<div class="mermaid">${graphDef.trim()}</div>`);
+      return md.render ? md.render(processed) : renderBasicMarkdown(processed);
+    }
+    function renderKnowledge() {
+      const container = document.getElementById('knowledgeContainer');
+      container.innerHTML = '';
+      DATA.knowledge_points.forEach((kp) => {
+        const name = kp.name;
+        const count = (kp.related_questions || []).length;
+        const summaryMd = typeof kp.summary_markdown === 'object' ? (kp.summary_markdown.response || '') : (kp.summary_markdown || '');
+        const card = document.createElement('article');
+        card.className = 'knowledge-card' + (state.knowledge === name ? ' active' : '');
+        const summaryHTML = summaryMd && summaryMd.trim() ? renderMarkdownWithMermaid(summaryMd) : '<p class="empty-text" style="color:var(--text-muted)">（尚未生成，稍后重试）</p>';
+        const summaryBlock = summaryMd && summaryMd.trim()
+          ? `<details class="knowledge-details"><summary>查看大模型总结</summary><div class="markdown">${summaryHTML}</div></details>`
+          : `<div class="markdown empty">${summaryHTML}</div>`;
+        card.innerHTML = `
+          <div class="knowledge-header">
+            <h3>${name}</h3>
+            <span class="badge badge-accent kp-count-btn" data-kp="${name}" title="点击刷此知识点题库">共 ${count} 题 ▶</span>
+          </div>
+          ${summaryBlock}
+        `;
+        // 整张卡片点击切换知识点
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+          // 如果点击的是 details/summary 展开操作，不干预
+          if (e.target.closest('details') || e.target.closest('summary')) return;
+          jumpToKnowledge(name);
+        });
+        // badge 单独处理（阻止冒泡避免双触发）
+        const badge = card.querySelector('.kp-count-btn');
+        if (badge) {
+          badge.addEventListener('click', (e) => {
+            e.stopPropagation();
+            jumpToKnowledge(name);
+          });
+        }
+        container.append(card);
+      });
+    }
+
+    function jumpToKnowledge(name) {
+      state.knowledge = name;
+      state.currentQuestionIndex = 0;
+      saveState();
+      // 同步下拉框
+      const sel = document.getElementById('knowledgeFilter');
+      if (sel) sel.value = name;
+      renderKnowledge();
+      renderQuestions();
+      // 滚动到题目区
+      const qSection = document.getElementById('questionsContainer');
+      if (qSection) {
+        setTimeout(() => qSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      }
+      showToast(`已切换到：${name}`, 'info');
+    }
+
+    function filterQuestions() {
+      return DATA.questions.filter((q) => {
+        const matchKP = state.knowledge === 'all' || q.knowledge_point === state.knowledge;
+        if (!matchKP) return false;
+        if (!state.search) return true;
+        const haystack = [
+          q.prompt, q.knowledge_point, q.model_response || '',
+          ...(q.sub_questions || []).map((sub) => [sub.official_analysis || '', (sub.options || []).map((o) => o.text).join(' ')].join(' '))
+        ].join(' ').toLowerCase();
+        return haystack.includes(state.search.toLowerCase());
+      });
+    }
+
+    function buildSubQuestionHTML(sub, subIdx, q) {
+      const correctCount = (sub.options || []).filter(o => o.is_correct).length;
+      const isMultiple = correctCount > 1;
+      const inputType = isMultiple ? 'checkbox' : 'radio';
+      const questionId = `q${q.id || q.index}_${subIdx}`;
+      const answers = sub.correct_letters || [];
+      const options = (sub.options || []).map((opt) => {
+        const optionId = `${questionId}_${opt.label}`;
+        return `<li class="option-item"><label for="${optionId}" class="option-label"><input type="${inputType}" id="${optionId}" name="${questionId}" value="${opt.label}" class="option-input" /><span class="option-text">${opt.label}. ${opt.text}</span></label></li>`;
+      }).join('');
+      const subQuestionText = sub.question ? `<div class="sub-question-text">${md.render(sub.question)}</div>` : '';
+      const correctAnswerDetail = sub.correct_answer
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>参考答案</summary><div class="markdown">${md.render(sub.correct_answer)}</div></details>` : '';
+      const answersP = answers.length ? `<p class="correct-answer" style="display:none;"><strong>参考答案：</strong>${answers.join('、')}</p>` : '';
+      const official = sub.official_analysis
+        ? `<details class="rich-details answer-analysis" style="display:none;"><summary>官方解析</summary><div class="markdown">${md.render(sub.official_analysis)}</div></details>` : '';
+      const hasOptions = sub.options && sub.options.length > 0;
+      const interaction = hasOptions
+        ? `<ul class="options interactive-options">${options}</ul>
+           <div class="question-actions">
+             <button class="btn btn-primary submit-btn" onclick="submitAnswer('${questionId}')">提交答案</button>
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${questionId}')" style="display:none;">查看答案</button>
+           </div>`
+        : `<div class="question-actions">
+             <button class="btn btn-warning show-answer-btn" onclick="showAnswer('${questionId}')" style="display:inline-flex;">查看答案</button>
+           </div>`;
+      return `<div class="sub-question" data-question-id="${questionId}" data-correct-answers="${answers.join(',')}" data-is-multiple="${isMultiple}">
+        <h4>子题${sub.label}</h4>
+        ${subQuestionText}
+        ${interaction}
+        <div class="answer-feedback" style="display:none;"></div>
+        ${answersP}
+        ${correctAnswerDetail}
+        ${official}
+      </div>`;
+    }
+
+    function buildAiNote(q) {
+      const resp = typeof q.model_response === 'object' ? (q.model_response.response || '') : (q.model_response || '');
+      if (resp && resp.trim()) {
+        return `<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown">${renderMarkdownWithMermaid(resp)}</div></details>`;
+      }
+      return '<details class="rich-details"><summary>AI 记忆笔记</summary><div class="markdown empty">暂无内容</div></details>';
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById('questionsContainer');
+      container.innerHTML = '';
+      const results = filterQuestions();
+      if (!results.length) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-text">未找到匹配的题目，试试其他关键词？</div></div>';
+        return;
+      }
+      updateStats(results);
+      if (state.quizMode) {
+        renderSingleQuestion(results);
+      } else {
+        renderAllQuestions(results);
+      }
+      Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
+      updateStats(results);
+    }
+
+    function renderSingleQuestion(questions) {
+      const container = document.getElementById('questionsContainer');
+      const cur = questions[state.currentQuestionIndex];
+      if (!cur) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎉</div><div class="empty-state-text">没有更多题目了</div></div>';
+        return;
+      }
+      const pct = ((state.currentQuestionIndex + 1) / questions.length * 100).toFixed(1);
+      const progressBar = `<div class="quiz-progress-bar">
+        <div class="qp-top">
+          <span class="qp-label">第 ${state.currentQuestionIndex + 1} 题 / 共 ${questions.length} 题</span>
+          <span class="qp-count">${pct}%</span>
+        </div>
+        <div class="qp-bar"><div class="qp-fill" style="width:${pct}%"></div></div>
+      </div>`;
+      const diffBadge = cur.difficulty ? `<span class="badge badge-green">难度 ${cur.difficulty}</span>` : '';
+      const card = document.createElement('div');
+      card.innerHTML = progressBar;
+      const qCard = document.createElement('article');
+      qCard.className = 'question-card';
+      const subs = (cur.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, cur)).join('');
+      const isAnswered = Object.keys(state.answeredQuestions).some(k => k.startsWith(`q${cur.id || cur.index}_`));
+      const nav = `<div class="quiz-nav">
+        <button class="btn btn-outline" onclick="previousQuestion()" ${state.currentQuestionIndex === 0 ? 'disabled' : ''} title="快捷键 ←">← 上一题</button>
+        <button class="btn btn-ghost" onclick="toggleQuizMode()">📋 全部题目</button>
+        <button class="btn btn-outline" onclick="nextQuestion()" ${state.currentQuestionIndex >= questions.length - 1 ? 'disabled' : ''} title="快捷键 →">下一题 →</button>
+      </div>`;
+      qCard.innerHTML = `
+        <div class="question-header">
+          <h3>第${cur.index}题（题号：${cur.sort || cur.index}）</h3>
+          <span class="badge badge-accent">${cur.knowledge_point}</span>
+          ${diffBadge}
+        </div>
+        <p class="question-prompt">${cur.prompt}</p>
+        ${subs}
+        ${nav}
+        ${buildAiNote(cur)}
+      `;
+      card.appendChild(qCard);
+      container.appendChild(card);
+    }
+
+    function renderAllQuestions(results) {
+      const container = document.getElementById('questionsContainer');
+      const toggle = document.createElement('div');
+      toggle.className = 'quiz-mode-toggle';
+      toggle.innerHTML = '<button class="btn btn-success" onclick="toggleQuizMode()">🎯 单题模式</button>';
+      container.appendChild(toggle);
+      results.forEach((q) => {
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        const diffBadge = q.difficulty ? `<span class="badge badge-green">难度 ${q.difficulty}</span>` : '';
+        const subs = (q.sub_questions || []).map((sub, idx) => buildSubQuestionHTML(sub, idx, q)).join('');
+        card.innerHTML = `
+          <div class="question-header">
+            <h3>第${q.index}题（题号：${q.sort || q.index}）</h3>
+            <span class="badge badge-accent">${q.knowledge_point}</span>
+            ${diffBadge}
+          </div>
+          <p class="question-prompt">${q.prompt}</p>
+          ${subs}
+          ${buildAiNote(q)}
+        `;
+        container.appendChild(card);
+      });
+    }
+    function populateFilter() {
+      const select = document.getElementById('knowledgeFilter');
+      const options = ['<option value="all">全部知识点</option>'];
+      DATA.knowledge_points.forEach((kp) => {
+        options.push(`<option value="${kp.name}">${kp.name}（${kp.related_questions.length}）</option>`);
+      });
+      select.innerHTML = options.join('');
+      if (state.knowledge !== 'all') select.value = state.knowledge;
+      select.addEventListener('change', (e) => {
+        state.knowledge = e.target.value;
+        state.currentQuestionIndex = 0;
+        saveState();
+        renderKnowledge();
+        renderQuestions();
+      });
+    }
+
+    function registerSearch() {
+      const input = document.getElementById('searchInput');
+      let timer;
+      input.addEventListener('input', (e) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          state.search = e.target.value.trim();
+          state.currentQuestionIndex = 0;
+          renderQuestions();
+        }, 200);
+      });
+    }
+
+    function initMermaid() {
+      if (window.mermaid) {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'dark',
+          themeVariables: {
+            primaryColor: '#7c6ff7',
+            primaryTextColor: '#e2e8f0',
+            primaryBorderColor: '#a89cf8',
+            lineColor: '#94a3b8',
+            secondaryColor: '#1c1c28',
+            tertiaryColor: '#16161f',
+            background: '#0a0a0f',
+            mainBkg: '#16161f',
+            nodeBorder: '#7c6ff7'
+          }
+        });
+      }
+    }
+
+    function renderMermaidCharts() {
+      if (window.mermaid) {
+        const els = document.querySelectorAll('.mermaid');
+        els.forEach((el, index) => {
+          const def = el.textContent;
+          const id = `mermaid-${Date.now()}-${index}`;
+          el.id = id;
+          mermaid.render(id + '-svg', def).then((result) => {
+            el.innerHTML = result.svg;
+          }).catch(() => {
+            el.innerHTML = '<p style="color:var(--red);">图表渲染失败</p>';
+          });
+        });
+      }
+    }
+
+    function updateStats(questions) {
+      const totalSub = questions.reduce((s, q) => s + (q.sub_questions || []).length, 0);
+      const answered = Object.keys(state.answeredQuestions).length;
+      const correct = Object.values(state.answeredQuestions).filter(a => a.isCorrect).length;
+      const incorrect = answered - correct;
+      state.stats = { total: totalSub, answered, correct, incorrect };
+      renderStatsDisplay();
+    }
+
+    function renderStatsDisplay() {
+      const { total, answered, correct, incorrect } = state.stats;
+      const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+      const progress = total > 0 ? Math.round((answered / total) * 100) : 0;
+      const circumference = 2 * Math.PI * 52;
+      const offset = circumference - (accuracy / 100) * circumference;
+
+      const ring = document.getElementById('ringProgress');
+      if (ring) {
+        ring.style.strokeDasharray = circumference;
+        ring.style.strokeDashoffset = offset;
+        ring.style.transition = 'stroke-dashoffset 0.6s ease';
+      }
+      const ringPct = document.getElementById('ringPct');
+      if (ringPct) ringPct.textContent = accuracy + '%';
+
+      const snTotal = document.getElementById('snTotal');
+      const snAnswered = document.getElementById('snAnswered');
+      const snCorrect = document.getElementById('snCorrect');
+      const snIncorrect = document.getElementById('snIncorrect');
+      if (snTotal) snTotal.textContent = total;
+      if (snAnswered) snAnswered.textContent = answered;
+      if (snCorrect) snCorrect.textContent = correct;
+      if (snIncorrect) snIncorrect.textContent = incorrect;
+
+      const fill = document.getElementById('statsProgressFill');
+      const txt = document.getElementById('statsProgressText');
+      if (fill) fill.style.width = progress + '%';
+      if (txt) txt.textContent = `进度 ${progress}%（${answered}/${total}）`;
+    }
+
+    function submitAnswer(questionId) {
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswers = questionDiv.dataset.correctAnswers.split(',').filter(Boolean);
+      const inputs = questionDiv.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+      const selectedAnswers = Array.from(inputs).filter(i => i.checked).map(i => i.value);
+      if (selectedAnswers.length === 0) {
+        showToast('请先选择答案', 'warn');
+        const ul = questionDiv.querySelector('.options');
+        if (ul) { ul.style.animation = 'shake 0.4s ease'; setTimeout(() => ul.style.animation = '', 500); }
+        return;
+      }
+      inputs.forEach(input => input.disabled = true);
+      const isCorrect = correctAnswers.length === selectedAnswers.length &&
+                       correctAnswers.every(a => selectedAnswers.includes(a));
+      const feedbackDiv = questionDiv.querySelector('.answer-feedback');
+      feedbackDiv.style.display = 'block';
+      feedbackDiv.className = `answer-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+      feedbackDiv.innerHTML = isCorrect
+        ? '<span class="feedback-icon">✓</span><span class="feedback-msg">回答正确！继续加油</span>'
+        : '<span class="feedback-icon">✗</span><span class="feedback-msg">回答错误，看看解析吧</span>';
+      inputs.forEach(input => {
+        const optionItem = input.closest('.option-item');
+        if (input.checked) optionItem.classList.add('selected');
+        if (correctAnswers.includes(input.value)) optionItem.classList.add('correct');
+        else if (input.checked) optionItem.classList.add('incorrect');
+      });
+      const submitBtn = questionDiv.querySelector('.submit-btn');
+      const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
+      submitBtn.style.display = 'none';
+      showAnswerBtn.style.display = 'inline-flex';
+      state.answeredQuestions[questionId] = { selected: selectedAnswers, isCorrect };
+      saveState();
+      if (!isCorrect) showAnswer(questionId);
+      const results = filterQuestions();
+      updateStats(results);
+      // 平滑滚动到反馈区
+      setTimeout(() => {
+        feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+
+    function showAnswer(questionId) {
+      const questionDiv = document.querySelector(`[data-question-id="${questionId}"]`);
+      if (!questionDiv) return;
+      const correctAnswerP = questionDiv.querySelector('.correct-answer');
+      if (correctAnswerP) correctAnswerP.style.display = 'block';
+      const analysisDetailsList = questionDiv.querySelectorAll('.answer-analysis');
+      analysisDetailsList.forEach(d => { d.style.display = 'block'; d.open = true; });
+      const showAnswerBtn = questionDiv.querySelector('.show-answer-btn');
+      if (showAnswerBtn) showAnswerBtn.style.display = 'none';
+    }
+
+    function scrollToQuestion() {
+      const el = document.getElementById('questionsContainer') || document.querySelector('.question-card');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function previousQuestion() {
+      if (state.currentQuestionIndex > 0) {
+        state.currentQuestionIndex--;
+        saveState();
+        renderQuestions();
+        scrollToQuestion();
+        animateCardIn();
+      }
+    }
+
+    function nextQuestion() {
+      const questions = filterQuestions();
+      if (state.currentQuestionIndex < questions.length - 1) {
+        state.currentQuestionIndex++;
+        saveState();
+        renderQuestions();
+        scrollToQuestion();
+        animateCardIn();
+      }
+    }
+
+    function animateCardIn() {
+      setTimeout(() => {
+        const card = document.querySelector('.question-card');
+        if (card) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(12px)';
+          card.style.transition = 'none';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            });
+          });
+        }
+      }, 10);
+    }
+
+    let _toastTimer;
+    function showToast(msg, type = 'info') {
+      let toast = document.getElementById('_toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = '_toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.className = '_toast-show _toast-' + type;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => { toast.className = ''; }, 2200);
+    }
+
+    function toggleQuizMode() {
+      state.quizMode = !state.quizMode;
+      if (state.quizMode) state.currentQuestionIndex = 0;
+      saveState();
+      renderQuestions();
+    }
+
+    function clearProgress() {
+      if (!confirm('确定要清空所有答题记录吗？此操作不可撤销。')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      state.answeredQuestions = {};
+      state.currentQuestionIndex = 0;
+      state.knowledge = null;
+      const results = filterQuestions();
+      updateStats(results);
+      renderQuestions();
+      showToast('已清空答题记录', 'success');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initMermaid();
+      loadState();
+      populateFilter();
+      registerSearch();
+      renderKnowledge();
+      renderQuestions();
+      // Expand knowledge card to full width when details opens
+      document.getElementById('knowledgeContainer').addEventListener('toggle', (e) => {
+        if (e.target.classList.contains('knowledge-details')) {
+          const card = e.target.closest('.knowledge-card');
+          if (card) card.classList.toggle('expanded', e.target.open);
+        }
+      }, true);
+      Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
+      const results = filterQuestions();
+      updateStats(results);
+      if (state._savedScrollY) {
+        setTimeout(() => window.scrollTo(0, state._savedScrollY), 150);
+      }
+      let scrollTimer = null;
+      window.addEventListener('scroll', () => {
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => saveState(), 300);
+      });
+      window.addEventListener('beforeunload', () => saveState());
+      // 清空记录按钮
+      document.getElementById('clearProgressBtn').addEventListener('click', clearProgress);
+      // 键盘左右键翻页
+      document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (!state.quizMode) return;
+        if (e.key === 'ArrowRight' || e.key === 'l') nextQuestion();
+        if (e.key === 'ArrowLeft'  || e.key === 'h') previousQuestion();
+      });
+      setTimeout(() => renderMermaidCharts(), 100);
+    });
+  </script>
+</body>
+</html>

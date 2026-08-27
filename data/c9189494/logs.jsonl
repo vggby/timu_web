@@ -1,0 +1,6 @@
+{"time": "20:09:10", "level": "info", "msg": "任务启动 | URL: https://www.cheko.cc/test/select?test_id=927836 | 题型: choice | 模型: gemini-3.1-pro-preview-all"}
+{"time": "20:09:10", "level": "info", "msg": "页面抓取完成 | HTML大小: 651018 字符"}
+{"time": "20:09:10", "level": "info", "msg": "开始解析 HTML 页面..."}
+{"time": "20:09:10", "level": "info", "msg": "题目解析完成 | 题目数: 176 | 知识点数: 10"}
+{"time": "20:09:10", "level": "error", "msg": "❌ 任务失败: 模型配置 'gemini-3.1-pro-preview-all' 不存在，可用: ['default', 'claude-sonnet-4-6']"}
+{"time": "20:09:10", "level": "error", "msg": "Traceback (most recent call last):\n  File \"/root/projects/timu_web/app.py\", line 82, in run_task\n    build_quiz_site(\n  File \"/root/projects/timu_web/lib/builder.py\", line 2612, in build_quiz_site\n    raise RuntimeError(f\"模型配置 '{model_config_name}' 不存在，可用: {list(models_config.keys())}\")\nRuntimeError: 模型配置 'gemini-3.1-pro-preview-all' 不存在，可用: ['default', 'claude-sonnet-4-6']\n"}
