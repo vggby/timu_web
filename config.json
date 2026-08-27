@@ -1,0 +1,40 @@
+{
+  "headers": {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "zh-CN,zh;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Authorization": "Bearer 323fd3b4c6a94c9bb8350aa4a42f32df",
+    "Cookie": "_ga=GA1.1.853936764.1747013310; cheko_ssr_config={\"lightMode\":0,\"testMode\":1,\"fontSize\":1}; cheko_ssr_subject=0; cheko_ssr_type=0; _ga_VSPD5TLPEN=GS2.1.s1771824430$o3$g1$t1771824521$j53$l0$h0; Hm_lvt_ed8f4a389ec5b50ec55bccfd289b20c2=1770970961,1771825021; HMACCOUNT=FC7F7E1E3DB71081; cheko_ssr_cookie=323fd3b4c6a94c9bb8350aa4a42f32df; Hm_lpvt_ed8f4a389ec5b50ec55bccfd289b20c2=1771848578; _ga_V06EHXQF8W=GS2.1.s1771848510$o117$g1$t1771848604$j27$l0$h0"
+  },
+  "cookie": "_ga=GA1.1.853936764.1747013310; cheko_ssr_config={\"lightMode\":0,\"testMode\":1,\"fontSize\":1}; cheko_ssr_subject=0; cheko_ssr_type=0; _ga_VSPD5TLPEN=GS2.1.s1771824430$o3$g1$t1771824521$j53$l0$h0; Hm_lvt_ed8f4a389ec5b50ec55bccfd289b20c2=1770970961,1771825021; HMACCOUNT=FC7F7E1E3DB71081; cheko_ssr_cookie=323fd3b4c6a94c9bb8350aa4a42f32df; Hm_lpvt_ed8f4a389ec5b50ec55bccfd289b20c2=1771848578; _ga_V06EHXQF8W=GS2.1.s1771848510$o117$g1$t1771848604$j27$l0$h0",
+  "llm": {
+    "base_url": "https://new.gptgod.cloud",
+    "api_key": "sk-jajaVYF3EciTGcyXlUKrHWmI5Y3ob9EmajjrHOIzC21romgJ",
+    "model": "gemini-3.1-pro-preview",
+    "temperature": 0.2,
+    "timeout": 60,
+    "max_retries": 3,
+    "retry_wait": 1.0,
+    "concurrency": 8
+  },
+  "models": {
+    "default": {
+      "base_url": "https://new.gptgod.cloud",
+      "api_key": "sk-jajaVYF3EciTGcyXlUKrHWmI5Y3ob9EmajjrHOIzC21romgJ",
+      "model": "gemini-3.1-pro-preview"
+    },
+    "claude-sonnet-4-6": {
+      "base_url": "https://yunyi.rdzhvip.com/claude",
+      "api_key": "4W29394D-KBY6-5GDU-6RKQ-4RPTU003HMCC",
+      "model": "claude-sonnet-4-6"
+    }
+  },
+  "prompts": {
+    "question": ".\\prompts\\question.md",
+    "knowledge": ".\\prompts\\knowledge.md"
+  },
+  "defaults": {
+    "output_dir": ".\\site_output"
+  }
+}
