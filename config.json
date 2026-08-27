@@ -13,9 +13,9 @@
     "api_key": "sk-jajaVYF3EciTGcyXlUKrHWmI5Y3ob9EmajjrHOIzC21romgJ",
     "model": "gemini-3.1-pro-preview",
     "temperature": 0.2,
-    "timeout": 60,
-    "max_retries": 3,
-    "retry_wait": 1.0,
+    "timeout": 180,
+    "max_retries": 2,
+    "retry_wait": 3.0,
     "concurrency": 8
   },
   "models": {
