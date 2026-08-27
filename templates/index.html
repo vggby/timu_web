@@ -1091,9 +1091,14 @@
                         </select>
                     </div>
                     <div class="select-wrap">
-                        <select id="modelConfig">
+                        <select id="modelConfig" onchange="onModelChange(this)">
                             <option value="">🤖 默认模型</option>
                         </select>
+                    </div>
+                    <div id="customModelPanel" style="display:none; gap:8px; flex:1; flex-wrap:wrap;">
+                        <input type="text" id="customBaseUrl" placeholder="Base URL (如 https://api.openai.com/v1)" style="flex:2; min-width:200px; padding:12px 14px; font-size:0.85rem; background:var(--bg-tertiary); border:1px solid var(--border); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit;" />
+                        <input type="text" id="customModelName" placeholder="模型名 (如 gpt-4o)" style="flex:1; min-width:120px; padding:12px 14px; font-size:0.85rem; background:var(--bg-tertiary); border:1px solid var(--border); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit;" />
+                        <input type="password" id="customApiKey" placeholder="API Key" style="flex:1; min-width:120px; padding:12px 14px; font-size:0.85rem; background:var(--bg-tertiary); border:1px solid var(--border); border-radius:var(--radius-md); color:var(--text-primary); font-family:inherit;" />
                     </div>
                     <div class="btn-row" style="flex:1; justify-content:flex-end;">
                         <button class="btn btn-primary" id="generateBtn" onclick="generate()">
@@ -1107,6 +1112,13 @@
                     <div class="status-spinner"></div>
                     <span id="statusText">处理中...</span>
                     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+                </div>
+                <div id="logPanel" style="display:none; margin-top:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <span style="font-size:0.8rem; color:var(--text-muted);">📋 实时日志</span>
+                        <button onclick="toggleLogExpand()" style="background:none; border:1px solid var(--border); border-radius:4px; color:var(--text-secondary); padding:2px 8px; font-size:0.7rem; cursor:pointer; font-family:inherit;" id="logExpandBtn">展开</button>
+                    </div>
+                    <div id="logContent" style="background:var(--bg-tertiary); border:1px solid var(--border); border-radius:var(--radius-md); padding:12px; max-height:160px; overflow-y:auto; font-family:'Courier New',monospace; font-size:0.75rem; line-height:1.6; color:var(--text-secondary); transition:max-height 0.3s ease;"></div>
                 </div>
             </section>
 
@@ -1249,8 +1261,22 @@
                     select.appendChild(opt);
                 });
             }
+            // Add custom option
+            const customOpt = document.createElement('option');
+            customOpt.value = '__custom__';
+            customOpt.textContent = '✏️ 自定义模型...';
+            select.appendChild(customOpt);
         } catch (e) {
             console.error('加载模型失败:', e);
+        }
+    }
+
+    function onModelChange(select) {
+        const panel = document.getElementById('customModelPanel');
+        if (select.value === '__custom__') {
+            panel.style.display = 'flex';
+        } else {
+            panel.style.display = 'none';
         }
     }
     </script>
@@ -1318,6 +1344,10 @@
             let actionsHtml = '<div class="card-actions">';
             if (isCompleted) {
                 actionsHtml += `<a class="btn-open" href="data/${task.id}/site/index.html" target="_blank" onclick="event.stopPropagation()">📖 打开题库</a>`;
+                actionsHtml += `<button class="btn-retry" onclick="event.stopPropagation(); retryTask('${task.id}')" style="background:none; border:1px solid var(--warning); border-radius:4px; color:var(--warning); padding:4px 10px; font-size:0.75rem; cursor:pointer; font-family:inherit; margin-left:6px;">🔄 重试失败项</button>`;
+            }
+            if (isFailed) {
+                actionsHtml += `<button class="btn-retry" onclick="event.stopPropagation(); retryTask('${task.id}')" style="background:none; border:1px solid var(--error); border-radius:4px; color:var(--error); padding:4px 10px; font-size:0.75rem; cursor:pointer; font-family:inherit; margin-left:6px;">🔄 重试</button>`;
             }
             actionsHtml += `<button class="btn-detail" onclick="event.stopPropagation(); viewTask('${task.id}')">详情</button>`;
             actionsHtml += '</div>';
@@ -1365,6 +1395,51 @@
 
     function hideStatus() {
         document.getElementById('statusBar').className = 'status-bar';
+        document.getElementById('logPanel').style.display = 'none';
+        document.getElementById('logContent').innerHTML = '';
+    }
+
+    let _logTaskId = null;
+    let _logOffset = 0;
+    let _logExpanded = false;
+
+    function toggleLogExpand() {
+        const el = document.getElementById('logContent');
+        const btn = document.getElementById('logExpandBtn');
+        _logExpanded = !_logExpanded;
+        el.style.maxHeight = _logExpanded ? '400px' : '160px';
+        btn.textContent = _logExpanded ? '收起' : '展开';
+    }
+
+    async function pollLogs(taskId) {
+        _logTaskId = taskId;
+        _logOffset = 0;
+        document.getElementById('logPanel').style.display = 'block';
+        document.getElementById('logContent').innerHTML = '';
+        fetchLogs();
+    }
+
+    async function fetchLogs() {
+        if (!_logTaskId) return;
+        try {
+            const res = await fetch(`/api/task/${_logTaskId}/logs?after=${_logOffset}`);
+            const data = await res.json();
+            const el = document.getElementById('logContent');
+            for (const entry of data.logs) {
+                const color = entry.level === 'error' ? 'var(--error)' :
+                              entry.level === 'warn' ? 'var(--warning)' : 'var(--text-secondary)';
+                const icon = entry.level === 'error' ? '❌' : entry.level === 'warn' ? '⚠️' : '›';
+                el.innerHTML += `<div style="color:${color}"><span style="color:var(--text-muted)">${entry.time}</span> ${icon} ${escapeHtml(entry.msg)}</div>`;
+            }
+            _logOffset = data.total;
+            el.scrollTop = el.scrollHeight;
+            // Keep polling if task is still running
+            const taskRes = await fetch(`/api/task/${_logTaskId}`);
+            const task = await taskRes.json();
+            if (task.status === 'building' || task.status === 'processing') {
+                setTimeout(fetchLogs, 2000);
+            }
+        } catch(e) {}
     }
 
     async function pollTask(taskId, btn) {
@@ -1420,6 +1495,22 @@
         const btn = document.getElementById('generateBtn');
         if (!url) { showStatus('请输入 URL', 'error'); return; }
 
+        // Build request body
+        const body = {url, question_type: questionType, model_config: modelConfig};
+
+        // If custom model selected, validate and add
+        if (modelConfig === '__custom__') {
+            const baseUrl = document.getElementById('customBaseUrl').value.trim();
+            const modelName = document.getElementById('customModelName').value.trim();
+            const apiKey = document.getElementById('customApiKey').value.trim();
+            if (!baseUrl || !modelName || !apiKey) {
+                showStatus('请填写完整的自定义模型信息（Base URL、模型名、API Key）', 'error');
+                return;
+            }
+            body.custom_model = {base_url: baseUrl, model: modelName, api_key: apiKey};
+            body.model_config = modelName;
+        }
+
         btn.disabled = true;
         btn.classList.add('is-loading');
         showStatus('正在抓取页面...', 'loading');
@@ -1428,13 +1519,14 @@
             const res = await fetch('/api/generate', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({url, question_type: questionType, model_config: modelConfig})
+                body: JSON.stringify(body)
             });
             const data = await res.json();
             if (data.success) {
                 document.getElementById('urlInput').value = '';
                 showStatus('AI 正在生成解析...', 'loading');
                 pollTask(data.task_id, btn);
+                pollLogs(data.task_id);
             } else {
                 showStatus(data.error || '生成失败', 'error');
                 btn.disabled = false;
@@ -1470,6 +1562,24 @@
     </script>
     <script>
     // ===== MODAL & VIEW TASK =====
+    async function retryTask(taskId) {
+        if (!confirm('确定要重试失败项吗？已有的成功结果会保留。')) return;
+        try {
+            const res = await fetch(`/api/task/${taskId}/retry`, {method: 'POST'});
+            const data = await res.json();
+            if (data.success) {
+                showStatus('正在重试失败项...', 'loading');
+                pollTask(data.task_id, null);
+                pollLogs(data.task_id);
+                loadTasks();
+            } else {
+                showStatus(data.error || '重试失败', 'error');
+            }
+        } catch(e) {
+            showStatus('重试请求失败: ' + e.message, 'error');
+        }
+    }
+
     async function viewTask(taskId) {
         currentTaskId = taskId;
         try {

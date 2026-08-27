@@ -206,6 +206,42 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     data_json = json.dumps(site_data, ensure_ascii=False)
     data_json = data_json.replace('</', '<\/')
 
+    def format_inline(text: str) -> str:
+        # First extract images and protect them before escaping
+        img_placeholders = []
+        def replace_img(m):
+            idx = len(img_placeholders)
+            img_placeholders.append(m.group(0))
+            return f'__IMG_PLACEHOLDER_{idx}__'
+
+        # Protect markdown images: ![alt](url)
+        text = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', replace_img, text)
+        # Protect bare image URLs after !
+        text = re.sub(r'!(https?://[^\s<>"\'\[\]]+(?:\.[a-zA-Z]{2,}|/[^\s<>"\'\[\]]*)?)', replace_img, text)
+
+        escaped = html_escape(text)
+
+        # Now restore images as proper HTML
+        for idx, orig in enumerate(img_placeholders):
+            placeholder = f'__IMG_PLACEHOLDER_{idx}__'
+            # Check if it's ![alt](url) format
+            m = re.match(r'!\[([^\]]*)\]\(([^)]+)\)', orig)
+            if m:
+                alt, url = html_escape(m.group(1)), html_escape(m.group(2))
+                img_html = f'<img src="{url}" alt="{alt}" style="max-width: 100%; height: auto;" />'
+            else:
+                # bare !url format
+                m2 = re.match(r'!(https?://\S+)', orig)
+                url = html_escape(m2.group(1)) if m2 else ''
+                img_html = f'<img src="{url}" alt="图片" style="max-width: 100%; height: auto;" />' if url else ''
+            escaped = escaped.replace(placeholder, img_html)
+
+        escaped = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', escaped)
+        escaped = re.sub(r'__(.+?)__', r'<strong>\1</strong>', escaped)
+        escaped = re.sub(r'`([^`]+)`', r'<code>\1</code>', escaped)
+        escaped = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank">\1</a>', escaped)
+        return escaped
+
     def render_markdown_basic(raw: str) -> str:
         if not raw:
             return '<p>（尚未生成，稍后重试）</p>'
@@ -223,17 +259,6 @@ def generate_html(site_data: dict, output_path: Path) -> None:
             if in_ol:
                 html_parts.append('</ol>')
                 in_ol = False
-
-        def format_inline(text: str) -> str:
-            escaped = html_escape(text)
-            escaped = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', r'<img src="\2" alt="\1" style="max-width: 100%; height: auto;" />', escaped)
-            escaped = re.sub(r'!(https?://[^\s<>"\'\[\]]+(?:\.[a-zA-Z]{2,}|/[^\s<>"\'\[\]]*)?)', r'<img src="\1" alt="图片" style="max-width: 100%; height: auto;" />', escaped)
-            escaped = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', escaped)
-            escaped = re.sub(r'__(.+?)__', r'<strong>\1</strong>', escaped)
-            escaped = re.sub(r'`([^`]+)`', r'<code>\1</code>', escaped)
-            escaped = re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'<em>\1</em>', escaped)
-            escaped = re.sub(r'(?<!_)_(?!_)(.+?)(?<!_)_(?!_)', r'<em>\1</em>', escaped)
-            return escaped
 
         def render_table(table_lines: List[str]) -> str:
             if not table_lines:
@@ -364,7 +389,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
     question_cards = []
     for q in site_data.get('questions', []):
         knowledge_point = html_escape(q.get('knowledge_point') or '未分类')
-        prompt = html_escape(q.get('prompt') or '')
+        prompt = format_inline(q.get('prompt') or '')
         difficulty = q.get('difficulty')
         badge_difficulty = (
             f"<span class='badge'>难度：{difficulty}</span>" if difficulty not in (None, '') else ''
@@ -375,6 +400,7 @@ def generate_html(site_data: dict, output_path: Path) -> None:
               <h3>第{q.get('index')}题（题号：{q.get('sort') or q.get('index')}）</h3>
               <span class='badge'>{knowledge_point}</span>
               {badge_difficulty}
+              <button class='ai-chat-btn' onclick="openAiChat({q.get('index')})">🤖 AI对话</button>
             </div>
             <p>{prompt}</p>
             """.strip()
@@ -475,6 +501,24 @@ def generate_html(site_data: dict, output_path: Path) -> None:
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@13/dist/markdown-it.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script>
+    function renderAllMath() {{
+      if (typeof renderMathInElement === 'function') {{
+        renderMathInElement(document.body, {{
+          delimiters: [
+            {{left: '$$', right: '$$', display: true}},
+            {{left: '$', right: '$', display: false}},
+            {{left: '\\\\(', right: '\\\\)', display: false}},
+            {{left: '\\\\[', right: '\\\\]', display: true}}
+          ],
+          throwOnError: false
+        }});
+      }}
+    }}
+  </script>
   <style>
     *, *::before, *::after {{ box-sizing: border-box; }}
     :root {{
@@ -1379,6 +1423,117 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         grid-template-columns: repeat(2, 1fr);
       }}
     }}
+
+    /* ===== AI Chat Dialog ===== */
+    .ai-chat-btn {{
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 6px 14px; font-size: 13px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff; border: none; border-radius: 6px;
+      cursor: pointer; transition: opacity .2s, transform .1s;
+      float: right; margin-top: 4px;
+    }}
+    .ai-chat-btn:hover {{ opacity: .9; }}
+    .ai-chat-btn:active {{ transform: scale(.97); }}
+    .ai-chat-overlay {{
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.45); justify-content: center; align-items: center;
+    }}
+    .ai-chat-overlay.open {{ display: flex; }}
+    .ai-chat-panel {{
+      width: 520px; max-width: 94vw; height: 680px; max-height: 88vh;
+      background: var(--bg); border-radius: 14px; display: flex; flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3); overflow: hidden;
+    }}
+    .ai-chat-header {{
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+    }}
+    .ai-chat-header h3 {{ margin: 0; font-size: 15px; font-weight: 600; }}
+    .ai-chat-header .chat-actions {{ display: flex; gap: 8px; }}
+    .ai-chat-header button {{
+      background: rgba(255,255,255,.2); border: none; color: #fff;
+      border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 13px;
+    }}
+    .ai-chat-header button:hover {{ background: rgba(255,255,255,.35); }}
+    .ai-chat-messages {{
+      flex: 1; overflow-y: auto; padding: 14px 16px;
+      display: flex; flex-direction: column; gap: 10px;
+    }}
+    .chat-msg {{
+      max-width: 88%; padding: 10px 14px; border-radius: 12px;
+      font-size: 14px; line-height: 1.6; word-break: break-word;
+    }}
+    .chat-msg.user {{
+      align-self: flex-end; background: #667eea; color: #fff;
+      border-bottom-right-radius: 4px;
+    }}
+    .chat-msg.assistant {{
+      align-self: flex-start; background: var(--card); border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+    }}
+    .chat-msg.system {{
+      align-self: center; background: transparent; color: var(--muted);
+      font-size: 12px; text-align: center; padding: 4px 0;
+    }}
+    .chat-msg.assistant code {{ background: var(--bg-code); padding: 1px 5px; border-radius: 4px; font-size: 13px; }}
+    .chat-msg.assistant pre {{
+      background: var(--bg-code); padding: 10px; border-radius: 8px;
+      overflow-x: auto; margin: 6px 0;
+    }}
+    .chat-msg.assistant pre code {{ padding: 0; background: none; }}
+    .ai-chat-input {{
+      display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border);
+    }}
+    .ai-chat-input textarea {{
+      flex: 1; border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 12px; font-size: 14px; resize: none;
+      background: var(--card); color: var(--fg);
+      min-height: 40px; max-height: 120px; font-family: inherit;
+    }}
+    .ai-chat-input textarea:focus {{ outline: none; border-color: #667eea; }}
+    .ai-chat-input button {{
+      padding: 8px 18px; background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff; border: none; border-radius: 8px; cursor: pointer;
+      font-size: 14px; font-weight: 500; white-space: nowrap;
+    }}
+    .ai-chat-input button:disabled {{ opacity: .5; cursor: not-allowed; }}
+
+    /* Chat settings modal */
+    .chat-settings-overlay {{
+      display: none; position: fixed; inset: 0; z-index: 10001;
+      background: rgba(0,0,0,.5); justify-content: center; align-items: center;
+    }}
+    .chat-settings-overlay.open {{ display: flex; }}
+    .chat-settings-box {{
+      width: 400px; max-width: 90vw; background: var(--card);
+      border-radius: 12px; padding: 24px; box-shadow: 0 12px 40px rgba(0,0,0,.3);
+    }}
+    .chat-settings-box h3 {{ margin: 0 0 16px; font-size: 16px; }}
+    .chat-settings-box label {{ display: block; font-size: 13px; font-weight: 500; margin-bottom: 4px; color: var(--muted); }}
+    .chat-settings-box input {{
+      width: 100%; padding: 8px 12px; border: 1px solid var(--border);
+      border-radius: 8px; font-size: 14px; margin-bottom: 12px;
+      background: var(--bg); color: var(--fg);
+    }}
+    .chat-settings-box input:focus {{ outline: none; border-color: #667eea; }}
+    .chat-settings-box .settings-actions {{ display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }}
+    .chat-settings-box .settings-actions button {{
+      padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;
+    }}
+    .chat-settings-box .btn-save {{ background: #667eea; color: #fff; }}
+    .chat-settings-box .btn-cancel {{ background: var(--border); color: var(--fg); }}
+
+    .typing-indicator {{ display: inline-flex; gap: 4px; padding: 4px 0; }}
+    .typing-indicator span {{
+      width: 6px; height: 6px; background: var(--muted); border-radius: 50%;
+      animation: typing .8s infinite alternate;
+    }}
+    .typing-indicator span:nth-child(2) {{ animation-delay: .2s; }}
+    .typing-indicator span:nth-child(3) {{ animation-delay: .4s; }}
+    @keyframes typing {{ to {{ opacity: .3; transform: translateY(-3px); }} }}
   </style>
 </head>
 <body>
@@ -1460,6 +1615,14 @@ def generate_html(site_data: dict, output_path: Path) -> None:
         }});
       }});
     }})();
+
+    function formatPrompt(text) {{
+      if (!text) return '';
+      const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return escaped
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;" />')
+        .replace(/!(https?:\/\/[^\s<>"\'\\[\]]+)/g, '<img src="$1" alt="图片" style="max-width: 100%; height: auto;" />');
+    }}
 
     function renderBasicMarkdown(raw = '') {{
       if (!raw) return '<p>（尚未生成，稍后重试）</p>';
@@ -1768,6 +1931,8 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       }}
       Object.keys(state.answeredQuestions).forEach(qId => restoreAnsweredState(qId));
       updateStats(results);
+      // Re-render math formulas after DOM update
+      setTimeout(renderAllMath, 100);
     }}
 
     function renderSingleQuestion(questions) {{
@@ -1802,8 +1967,9 @@ def generate_html(site_data: dict, output_path: Path) -> None:
           <h3>第${{cur.index}}题（题号：${{cur.sort || cur.index}}）</h3>
           <span class="badge badge-accent">${{cur.knowledge_point}}</span>
           ${{diffBadge}}
+          <button class="ai-chat-btn" onclick="openAiChat(${{cur.index}})">🤖 AI对话</button>
         </div>
-        <p class="question-prompt">${{cur.prompt}}</p>
+        <p class="question-prompt">${{formatPrompt(cur.prompt)}}</p>
         ${{subs}}
         ${{nav}}
         ${{buildAiNote(cur)}}
@@ -1828,8 +1994,9 @@ def generate_html(site_data: dict, output_path: Path) -> None:
             <h3>第${{q.index}}题（题号：${{q.sort || q.index}}）</h3>
             <span class="badge badge-accent">${{q.knowledge_point}}</span>
             ${{diffBadge}}
+            <button class="ai-chat-btn" onclick="openAiChat(${{q.index}})">🤖 AI对话</button>
           </div>
-          <p class="question-prompt">${{q.prompt}}</p>
+          <p class="question-prompt">${{formatPrompt(q.prompt)}}</p>
           ${{subs}}
           ${{buildAiNote(q)}}
         `;
@@ -2067,6 +2234,8 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       registerSearch();
       renderKnowledge();
       renderQuestions();
+      // Render math formulas after initial load
+      setTimeout(renderAllMath, 500);
       // Expand knowledge card to full width when details opens
       document.getElementById('knowledgeContainer').addEventListener('toggle', (e) => {{
         if (e.target.classList.contains('knowledge-details')) {{
@@ -2095,11 +2264,262 @@ def generate_html(site_data: dict, output_path: Path) -> None:
       }});
       setTimeout(() => renderMermaidCharts(), 100);
     }});
+
+    // ===== AI Chat System =====
+    const CHAT_SETTINGS_KEY = 'ai_chat_llm_settings';
+
+    function getChatSettings() {{
+      try {{
+        return JSON.parse(localStorage.getItem(CHAT_SETTINGS_KEY)) || {{}};
+      }} catch {{ return {{}}; }}
+    }}
+    function saveChatSettings(s) {{
+      localStorage.setItem(CHAT_SETTINGS_KEY, JSON.stringify(s));
+    }}
+
+    // Chat state
+    const chatState = {{
+      messages: [],   // {{role, content}}
+      questionCtx: '',
+      loading: false
+    }};
+
+    function buildQuestionContext(q) {{
+      let ctx = '【题目】\\n' + (q.prompt || '') + '\\n\\n';
+      if (q.sub_questions && q.sub_questions.length) {{
+        q.sub_questions.forEach((sub, i) => {{
+          if (sub.question) ctx += '【子题' + sub.label + '】' + sub.question + '\\n';
+          if (sub.options && sub.options.length) {{
+            sub.options.forEach(opt => {{
+              ctx += opt.label + '. ' + opt.text + (opt.is_correct ? ' ✅' : '') + '\\n';
+            }});
+          }}
+          if (sub.correct_letters && sub.correct_letters.length)
+            ctx += '正确答案：' + sub.correct_letters.join(', ') + '\\n';
+          if (sub.correct_answer) ctx += '参考答案：' + sub.correct_answer + '\\n';
+          ctx += '\\n';
+        }});
+      }}
+      // Append existing AI analysis
+      const resp = typeof q.model_response === 'object' ? (q.model_response.response || '') : (q.model_response || '');
+      if (resp && resp.trim()) {{
+        ctx += '【已有的AI解析/笔记】\\n' + resp.trim() + '\\n';
+      }}
+      return ctx;
+    }}
+
+    function findQuestionByIdx(idx) {{
+      return DATA.questions.find(q => q.index === idx || q.id === idx);
+    }}
+
+    function openAiChat(qIndex) {{
+      const q = findQuestionByIdx(qIndex);
+      if (!q) return;
+      chatState.messages = [];
+      chatState.questionCtx = buildQuestionContext(q);
+      chatState.loading = false;
+
+      const overlay = document.getElementById('aiChatOverlay');
+      const msgs = document.getElementById('aiChatMessages');
+      const title = document.getElementById('aiChatTitle');
+      title.textContent = 'AI 对话 · 第' + q.index + '题';
+      msgs.innerHTML = '';
+      overlay.classList.add('open');
+
+      // System message with context
+      chatState.messages.push({{
+        role: 'system',
+        content: '你是一个耐心的软考备考辅导老师。学生会问你关于具体题目的疑问，请用通俗易懂的方式讲解。以下是对话相关的题目信息：\\n\\n' + chatState.questionCtx
+      }});
+
+      appendChatMsg('assistant', '你好！我看到了这道题的内容。有什么不理解的地方，直接问我吧 👋');
+      document.getElementById('aiChatInput').focus();
+    }}
+
+    function closeAiChat() {{
+      document.getElementById('aiChatOverlay').classList.remove('open');
+    }}
+
+    function appendChatMsg(role, content) {{
+      const msgs = document.getElementById('aiChatMessages');
+      const div = document.createElement('div');
+      div.className = 'chat-msg ' + role;
+      // Simple markdown rendering for assistant messages
+      if (role === 'assistant') {{
+        div.innerHTML = renderSimpleMd(content);
+      }} else {{
+        div.textContent = content;
+      }}
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }}
+
+    function renderSimpleMd(text) {{
+      return text
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/```([\\s\\S]*?)```/g, '<pre><code>$1</code></pre>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>')
+        .replace(/\\n/g, '<br>');
+    }}
+
+    function showTyping() {{
+      const msgs = document.getElementById('aiChatMessages');
+      const div = document.createElement('div');
+      div.className = 'chat-msg assistant';
+      div.id = 'typingIndicator';
+      div.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }}
+
+    function hideTyping() {{
+      const el = document.getElementById('typingIndicator');
+      if (el) el.remove();
+    }}
+
+    async function sendChatMessage() {{
+      const input = document.getElementById('aiChatInput');
+      const text = input.value.trim();
+      if (!text || chatState.loading) return;
+
+      const settings = getChatSettings();
+      if (!settings.baseUrl || !settings.model || !settings.apiKey) {{
+        openChatSettings();
+        return;
+      }}
+
+      chatState.messages.push({{ role: 'user', content: text }});
+      appendChatMsg('user', text);
+      input.value = '';
+      input.style.height = 'auto';
+      chatState.loading = true;
+      document.getElementById('aiChatSendBtn').disabled = true;
+      showTyping();
+
+      try {{
+        const apiUrl = settings.baseUrl.replace(/\\/+$/, '') + '/v1/chat/completions';
+        const res = await fetch(apiUrl, {{
+          method: 'POST',
+          headers: {{
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + settings.apiKey
+          }},
+          body: JSON.stringify({{
+            model: settings.model,
+            messages: chatState.messages,
+            stream: false
+          }})
+        }});
+
+        if (!res.ok) {{
+          const err = await res.text();
+          throw new Error('API错误 (' + res.status + '): ' + err.substring(0, 200));
+        }}
+
+        const data = await res.json();
+        const reply = data.choices?.[0]?.message?.content || '（无回复内容）';
+        chatState.messages.push({{ role: 'assistant', content: reply }});
+        hideTyping();
+        appendChatMsg('assistant', reply);
+      }} catch(e) {{
+        hideTyping();
+        appendChatMsg('assistant', '❌ ' + e.message);
+      }} finally {{
+        chatState.loading = false;
+        document.getElementById('aiChatSendBtn').disabled = false;
+        input.focus();
+      }}
+    }}
+
+    function openChatSettings() {{
+      const s = getChatSettings();
+      document.getElementById('chatSettingBaseUrl').value = s.baseUrl || '';
+      document.getElementById('chatSettingModel').value = s.model || '';
+      document.getElementById('chatSettingApiKey').value = s.apiKey || '';
+      document.getElementById('chatSettingsOverlay').classList.add('open');
+    }}
+
+    function closeChatSettings() {{
+      document.getElementById('chatSettingsOverlay').classList.remove('open');
+    }}
+
+    function saveAndCloseChatSettings() {{
+      saveChatSettings({{
+        baseUrl: document.getElementById('chatSettingBaseUrl').value.trim(),
+        model: document.getElementById('chatSettingModel').value.trim(),
+        apiKey: document.getElementById('chatSettingApiKey').value.trim()
+      }});
+      closeChatSettings();
+    }}
   </script>
+
+  <!-- AI Chat Overlay -->
+  <div class="ai-chat-overlay" id="aiChatOverlay">
+    <div class="ai-chat-panel">
+      <div class="ai-chat-header">
+        <h3 id="aiChatTitle">AI 对话</h3>
+        <div class="chat-actions">
+          <button onclick="openChatSettings()">⚙️ 配置</button>
+          <button onclick="closeAiChat()">✕ 关闭</button>
+        </div>
+      </div>
+      <div class="ai-chat-messages" id="aiChatMessages"></div>
+      <div class="ai-chat-input">
+        <textarea id="aiChatInput" rows="1" placeholder="输入你的问题..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){{event.preventDefault();sendChatMessage();}}"></textarea>
+        <button id="aiChatSendBtn" onclick="sendChatMessage()">发送</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Settings Overlay -->
+  <div class="chat-settings-overlay" id="chatSettingsOverlay">
+    <div class="chat-settings-box">
+      <h3>⚙️ AI 对话模型配置</h3>
+      <label>Base URL</label>
+      <input type="text" id="chatSettingBaseUrl" placeholder="https://api.example.com" />
+      <label>模型名称</label>
+      <input type="text" id="chatSettingModel" placeholder="gpt-4o / claude-sonnet-4-20250514" />
+      <label>API Key</label>
+      <input type="password" id="chatSettingApiKey" placeholder="sk-..." />
+      <div class="settings-actions">
+        <button class="btn-cancel" onclick="closeChatSettings()">取消</button>
+        <button class="btn-save" onclick="saveAndCloseChatSettings()">保存</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
 """
 
+
+    # Post-process: ensure any remaining ![alt](url) in HTML body (not in <script>) are converted to <img>
+    def _fix_md_images_in_body(html_text: str) -> str:
+        """Replace markdown images in HTML body only, preserving them in <script> blocks."""
+        parts = []
+        last_end = 0
+        for m in re.finditer(r'<script[^>]*>.*?</script>', html_text, re.DOTALL):
+            # Fix HTML body part before this script
+            body_chunk = html_text[last_end:m.start()]
+            body_chunk = re.sub(
+                r'!\[([^\]]*)\]\(([^)]+)\)',
+                r'<img src="\2" alt="\1" style="max-width: 100%; height: auto;" />',
+                body_chunk
+            )
+            parts.append(body_chunk)
+            parts.append(m.group(0))  # Keep script block as-is
+            last_end = m.end()
+        # Fix remaining body after last script
+        tail = html_text[last_end:]
+        tail = re.sub(
+            r'!\[([^\]]*)\]\(([^)]+)\)',
+            r'<img src="\2" alt="\1" style="max-width: 100%; height: auto;" />',
+            tail
+        )
+        parts.append(tail)
+        return ''.join(parts)
+
+    html = _fix_md_images_in_body(html)
 
     # Write HTML, fixing \r\n normalization issue
     html_bytes = html.encode('utf-8')
@@ -2115,7 +2535,9 @@ def build_quiz_site(
     config: dict,
     question_type: str = 'choice',
     model_config_name: Optional[str] = None,
+    custom_model: Optional[Dict] = None,
     progress_callback: Optional[Callable] = None,
+    log_callback: Optional[Callable] = None,
 ) -> None:
     """
     构建刷题网站的主入口函数。
@@ -2137,11 +2559,19 @@ def build_quiz_site(
         if progress_callback:
             progress_callback(stage, current, total, message)
 
+    def log(level, message):
+        if log_callback:
+            log_callback(level, message)
+
     report('初始化', 0, 100, '正在解析题目...')
+    log('info', '开始解析 HTML 页面...')
 
     # 提取题目
     next_data = extract_next_data(html_content)
     meta, questions, knowledge_map = extract_questions(next_data)
+    log('info', f'题目解析完成 | 题目数: {len(questions)} | 知识点数: {len(knowledge_map)}')
+    if len(questions) == 0:
+        log('warn', '未提取到任何题目，请检查 URL 是否正确')
 
     # 加载提示词模板
     project_dir = Path(__file__).resolve().parent.parent
@@ -2160,7 +2590,22 @@ def build_quiz_site(
     # 初始化 LLM 客户端
     llm_config = config.get("llm", {})
 
-    if model_config_name:
+    if custom_model:
+        # 用户自定义模型（前端直接传入）
+        api_key = custom_model.get("api_key") or llm_config.get("api_key") or os.getenv("YOURAPI_API_KEY")
+        if not api_key:
+            raise RuntimeError("请提供 API Key")
+        client = LLMClient(
+            api_key=api_key,
+            model=custom_model.get("model", "gpt-4o"),
+            temperature=llm_config.get("temperature", 0.2),
+            max_retries=llm_config.get("max_retries", 3),
+            retry_wait=llm_config.get("retry_wait", 1.0),
+            timeout=llm_config.get("timeout", 60.0),
+            base_url=custom_model.get("base_url"),
+            log_callback=log,
+        )
+    elif model_config_name:
         models_config = config.get("models", {})
         selected_model = models_config.get(model_config_name)
         if not selected_model:
@@ -2176,6 +2621,7 @@ def build_quiz_site(
             retry_wait=llm_config.get("retry_wait", 1.0),
             timeout=llm_config.get("timeout", 60.0),
             base_url=selected_model.get("base_url"),
+            log_callback=log,
         )
     else:
         api_key = llm_config.get("api_key") or os.getenv("YOURAPI_API_KEY")
@@ -2189,9 +2635,11 @@ def build_quiz_site(
             retry_wait=llm_config.get("retry_wait", 1.0),
             timeout=llm_config.get("timeout", 60.0),
             base_url=llm_config.get("base_url"),
+            log_callback=log,
         )
 
     concurrency = llm_config.get("concurrency", 3)
+    log('info', f'LLM 客户端初始化 | model={client.model} | base_url={client.base_url} | concurrency={concurrency}')
 
     # 加载缓存
     question_responses_path = output_path / "llm_question_responses.json"
@@ -2208,10 +2656,11 @@ def build_quiz_site(
     _SAVE_EVERY = 5
 
     report('生成题目解析', 0, len(questions), f'AI 解析题目中... 0/{len(questions)}')
+    log('info', f'开始生成题目解析 | 共 {len(questions)} 题 | 并发 {concurrency}')
 
     def process_question(question):
         key = question_key(question)
-        if key in question_responses:
+        if key in question_responses and question_responses[key]:
             return key, question_responses[key], False
         prompt = build_question_prompt(question_template, meta, question)
         question_prompts[key] = prompt
@@ -2219,6 +2668,7 @@ def build_quiz_site(
             response = client.chat([{"role": "user", "content": prompt}])
             return key, response, True
         except Exception as e:
+            log('error', f'题目 {key} 生成失败: {e}')
             return key, "", True
 
     q_done = [0]
@@ -2239,19 +2689,22 @@ def build_quiz_site(
 
     save_json(question_responses_path, question_responses)
     save_json(question_prompts_path, question_prompts)
+    log('info', f'题目解析完成 | 成功 {sum(1 for v in question_responses.values() if v)} 题')
 
     # 处理知识点
     report('生成知识点总结', 0, len(knowledge_map),
            f'AI 总结知识点中... 0/{len(knowledge_map)}')
+    log('info', f'开始生成知识点总结 | 共 {len(knowledge_map)} 个知识点')
 
     def process_knowledge(kp_name, kp_questions):
-        if kp_name in knowledge_responses:
+        if kp_name in knowledge_responses and knowledge_responses[kp_name]:
             return kp_name, knowledge_responses[kp_name], False
         prompt = build_knowledge_prompt(knowledge_template, kp_name, meta, kp_questions, question_responses)
         try:
             response = client.chat([{"role": "user", "content": prompt}])
             return kp_name, response, True
         except Exception as e:
+            log('error', f'知识点 "{kp_name}" 生成失败: {e}')
             return kp_name, "", True
 
     kp_done = [0]
@@ -2270,6 +2723,7 @@ def build_quiz_site(
     save_json(question_responses_path, question_responses)
     save_json(knowledge_responses_path, knowledge_responses)
     save_json(question_prompts_path, question_prompts)
+    log('info', f'知识点总结完成 | 成功 {sum(1 for v in knowledge_responses.values() if v)} 个')
 
     # 构建网站数据
     for question in questions:
@@ -2302,5 +2756,6 @@ def build_quiz_site(
 
     save_json(data_path, site_data)
     generate_html(site_data, html_path)
+    log('info', f'网站构建完成 | 题目数: {len(questions)} | 知识点: {len(knowledge_points)}')
 
     report('完成', 1, 1, '生成完成！')
